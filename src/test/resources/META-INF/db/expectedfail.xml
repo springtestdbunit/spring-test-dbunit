@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<SampleEntity id="1" value="existing1" />
+	<SampleEntity id="2" value="existing2" />
+	<SampleEntity id="3" value="nonexisting" />
+</dataset>

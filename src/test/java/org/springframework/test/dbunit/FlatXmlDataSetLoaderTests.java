@@ -43,13 +43,13 @@ public class FlatXmlDataSetLoaderTests {
 
 	@Test
 	public void shouldLoadFromRelativeFile() throws Exception {
-		IDataSet dataset = loader.loadDataSet(testContext, "test.xml");
+		IDataSet dataset = loader.loadDataSet(testContext.getTestClass(), "test.xml");
 		assertEquals("Sample", dataset.getTableNames()[0]);
 	}
 
 	@Test
 	public void shouldReturnNullOnMissingFile() throws Exception {
-		IDataSet dataset = loader.loadDataSet(testContext, "doesnotexist.xml");
+		IDataSet dataset = loader.loadDataSet(testContext.getTestClass(), "doesnotexist.xml");
 		assertNull(dataset);
 	}
 }

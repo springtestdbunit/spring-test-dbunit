@@ -16,7 +16,6 @@
 package org.springframework.test.dbunit;
 
 import org.dbunit.dataset.IDataSet;
-import org.springframework.test.context.TestContext;
 
 /**
  * Strategy interface for {@link #loadDataSet loading} a {@link IDataSet dataset}.
@@ -32,10 +31,10 @@ public interface DataSetLoader {
 	/**
 	 * Load and return {@link IDataSet dataset} from the specified. If the dataset cannot be found <tt>null</tt> may be
 	 * returned.
-	 * @param testContext The test context that triggered the load
+	 * @param testClass The class under test
 	 * @param location The location to load
 	 * @return a {@link IDataSet dataset} or <tt>null</tt>
 	 * @throws Exception If the {@link IDataSet dataset} cannot be loaded
 	 */
-	public IDataSet loadDataSet(TestContext testContext, String location) throws Exception;
+	public IDataSet loadDataSet(Class<?> testClass, String location) throws Exception;
 }

@@ -43,12 +43,12 @@ public abstract class AbstractDataSetLoader implements DataSetLoader {
 	 * If no resource can be found then <tt>null</tt> will be returned.
 	 * 
 	 * @see #createDataSet(Resource)
-	 * @see org.springframework.test.dbunit.DataSetLoader#loadDataSet(org.springframework.test.context.TestContext,
+	 * @see org.springframework.test.dbunit.DataSetLoader#loadDataSet(Class, String)
 	 * java.lang.String)
 	 */
-	public IDataSet loadDataSet(TestContext testContext, String location) throws Exception {
-		ResourceLoader resourceLoader = getResourceLoader(testContext);
-		String[] resourceLocations = getResourceLocations(testContext, location);
+	public IDataSet loadDataSet(Class<?> testClass, String location) throws Exception {
+		ResourceLoader resourceLoader = getResourceLoader(testClass);
+		String[] resourceLocations = getResourceLocations(testClass, location);
 		for (String resourceLocation : resourceLocations) {
 			Resource resource = resourceLoader.getResource(resourceLocation);
 			if (resource.exists()) {
@@ -60,21 +60,21 @@ public abstract class AbstractDataSetLoader implements DataSetLoader {
 
 	/**
 	 * Gets the {@link ResourceLoader} that will be used to load the dataset {@link Resource}s.
-	 * @param testContext The test context
+	 * @param testClass The class under test
 	 * @return a resource loader
 	 */
-	protected ResourceLoader getResourceLoader(TestContext testContext) {
-		return new ClassRelativeResourceLoader(testContext.getTestClass());
+	protected ResourceLoader getResourceLoader(Class<?> testClass) {
+		return new ClassRelativeResourceLoader(testClass);
 	}
 
 	/**
 	 * Get the resource locations that should be considered when attempting to load a dataset from the specified
 	 * location.
-	 * @param testContext The test context
+	 * @param testClass The class under test
 	 * @param location The source location
 	 * @return an array of potential resource locations
 	 */
-	protected String[] getResourceLocations(TestContext testContext, String location) {
+	protected String[] getResourceLocations(Class<?> testClass, String location) {
 		return new String[] { location };
 	}
 

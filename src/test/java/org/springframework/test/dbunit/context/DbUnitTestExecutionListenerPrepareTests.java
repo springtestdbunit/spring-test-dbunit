@@ -33,7 +33,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextLoader;
-import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.dbunit.DataSetLoader;
 import org.springframework.test.dbunit.ExtendedTestContextManager;
@@ -164,7 +163,7 @@ public class DbUnitTestExecutionListenerPrepareTests {
 	}
 
 	public abstract static class AbstractCustomDataSetLoader implements DataSetLoader {
-		public IDataSet loadDataSet(TestContext testContext, String location) throws Exception {
+		public IDataSet loadDataSet(Class<?> testClass, String location) throws Exception {
 			return null;
 		}
 	}

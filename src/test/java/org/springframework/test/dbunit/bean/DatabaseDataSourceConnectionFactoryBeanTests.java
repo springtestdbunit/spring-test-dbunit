@@ -34,7 +34,7 @@ import org.junit.Test;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 
 /**
- * Test case for {@link DatabaseDataSourceConnectionFactoryBean}.
+ * Tests for {@link DatabaseDataSourceConnectionFactoryBean}.
  * 
  * @author Phillip Webb
  */
@@ -117,8 +117,8 @@ public class DatabaseDataSourceConnectionFactoryBeanTests {
 		factoryBean.setDataSource(dataSource);
 		DatabaseDataSourceConnection dataSourceConnection = factoryBean.getObject();
 		Connection connection = dataSourceConnection.getConnection();
-		assertTrue(connection.toString() + " is not transaction aware", connection.toString().startsWith(
-				"Transaction-aware proxy"));
+		assertTrue(connection.toString() + " is not transaction aware",
+				connection.toString().startsWith("Transaction-aware proxy"));
 	}
 
 	@Test
@@ -127,8 +127,10 @@ public class DatabaseDataSourceConnectionFactoryBeanTests {
 		factoryBean.setDataSource(dataSource);
 		DatabaseDataSourceConnection dataSourceConnection = factoryBean.getObject();
 		Connection connection = dataSourceConnection.getConnection();
-		assertTrue(connection.toString() + " is not transaction aware", connection.toString().startsWith(
-				"Transaction-aware proxy for target Connection  from DataSource [Mock for DataSource"));
+		assertTrue(
+				connection.toString() + " is not transaction aware",
+				connection.toString().startsWith(
+						"Transaction-aware proxy for target Connection  from DataSource [Mock for DataSource"));
 	}
 
 	@Test

@@ -23,7 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.springframework.core.io.ClassRelativeResourceLoader;
-import org.springframework.test.dbunit.context.DbUnitTestExecutionListener;
+import org.springframework.test.dbunit.DbUnitTestExecutionListener;
 
 /**
  * Test annotation which indicates how to put a database into a know state before tests are run. This annotation can be

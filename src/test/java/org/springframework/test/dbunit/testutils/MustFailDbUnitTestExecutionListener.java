@@ -13,39 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.test.dbunit.entity;
+package org.springframework.test.dbunit.testutils;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import org.springframework.core.style.ToStringCreator;
+import org.junit.Assert;
+import org.springframework.test.context.TestContext;
+import org.springframework.test.dbunit.TransactionDbUnitTestExecutionListener;
 
 /**
- * A sample entity for use with tests.
+ * An extension of {@link TransactionDbUnitTestExecutionListener} that ensures that a test method has failed.
  * 
  * @author Phillip Webb
  */
-@Entity
-public class SampleEntity {
+public class MustFailDbUnitTestExecutionListener extends TransactionDbUnitTestExecutionListener {
 
-	@Id
-	@GeneratedValue
-	private int id;
-
-	@Column
-	private String value;
-
-	public String getValue() {
-		return value;
+	public void afterTestMethod(TestContext testContext) throws Exception {
+		Throwable ex = null;
+		try {
+			super.afterTestMethod(testContext);
+		} catch (Throwable e) {
+			ex = e;
+		}
+		Assert.assertNotNull("Test did not fail", ex);
 	}
 
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	public String toString() {
-		return new ToStringCreator(this).append("id", id).append("value", value).toString();
-	}
 }

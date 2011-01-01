@@ -161,8 +161,8 @@ public class DatabaseConfigBeanTests {
 		DatabaseConfig appliedConfig = new DatabaseConfig();
 		configBean.apply(appliedConfig);
 
-		assertEquals("Did not replace " + propertyName + " value", newValue, appliedConfig
-				.getProperty(databaseConfigProperty));
+		assertEquals("Did not replace " + propertyName + " value", newValue,
+				appliedConfig.getProperty(databaseConfigProperty));
 
 	}
 }

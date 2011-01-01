@@ -22,7 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.springframework.test.dbunit.context.DbUnitTestExecutionListener;
+import org.springframework.test.dbunit.DbUnitTestExecutionListener;
 
 /**
  * Test annotation that can be used to assert that a database is in given state after tests have run.
@@ -34,12 +34,12 @@ import org.springframework.test.dbunit.context.DbUnitTestExecutionListener;
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target( { ElementType.TYPE, ElementType.METHOD })
+@Target({ ElementType.TYPE, ElementType.METHOD })
 public @interface ExpectedDatabase {
 
 	/**
 	 * Provides the location of the dataset that will be used to test the database.
-	 * @return The dataset locatios
+	 * @return The dataset locations
 	 * @see DbUnitConfiguration#dataSetLoader()
 	 */
 	String value();

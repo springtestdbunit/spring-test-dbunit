@@ -22,7 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.springframework.test.dbunit.context.DbUnitTestExecutionListener;
+import org.springframework.test.dbunit.DbUnitTestExecutionListener;
 
 /**
  * Test annotation which indicates how to put a database into a know state after tests have run. This annotation can be
@@ -38,7 +38,7 @@ import org.springframework.test.dbunit.context.DbUnitTestExecutionListener;
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target( { ElementType.TYPE, ElementType.METHOD })
+@Target({ ElementType.TYPE, ElementType.METHOD })
 public @interface DatabaseTearDown {
 
 	/**

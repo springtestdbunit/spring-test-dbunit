@@ -15,37 +15,26 @@
  */
 package org.springframework.test.dbunit.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import org.springframework.core.style.ToStringCreator;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * A sample entity for use with tests.
+ * Test the initial state of the database to ensure that import.sql has run.
  * 
  * @author Phillip Webb
  */
-@Entity
-public class SampleEntity {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("/META-INF/dbunit-context.xml")
+public class HibernateImportTest {
 
-	@Id
-	@GeneratedValue
-	private int id;
+	@Autowired
+	private EntityAssert entityAssert;
 
-	@Column
-	private String value;
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	public String toString() {
-		return new ToStringCreator(this).append("id", id).append("value", value).toString();
+	@Test
+	public void shouldHaveUpdatedData() throws Exception {
+		entityAssert.assertValues("existing1", "existing2");
 	}
 }

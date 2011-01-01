@@ -13,39 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.test.dbunit.entity;
+package org.springframework.test.dbunit;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import static org.junit.Assert.assertEquals;
 
-import org.springframework.core.style.ToStringCreator;
+import org.junit.Test;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 /**
- * A sample entity for use with tests.
+ * Tests for {@link TransactionDbUnitTestExecutionListener}.
  * 
  * @author Phillip Webb
  */
-@Entity
-public class SampleEntity {
+public class TransactionDbUnitTestExecutionListenerTests {
 
-	@Id
-	@GeneratedValue
-	private int id;
-
-	@Column
-	private String value;
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	public String toString() {
-		return new ToStringCreator(this).append("id", id).append("value", value).toString();
+	@Test
+	public void shouldRunTransactionsBeforeDbUnit() throws Exception {
+		Class<?>[] chain = new TransactionDbUnitTestExecutionListener().getChain();
+		assertEquals(TransactionalTestExecutionListener.class, chain[0]);
+		assertEquals(DbUnitTestExecutionListener.class, chain[1]);
 	}
 }

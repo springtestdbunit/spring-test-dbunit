@@ -26,9 +26,9 @@ import javax.sql.DataSource;
 
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
-import org.springframework.test.dbunit.DataSetLoader;
-import org.springframework.test.dbunit.FlatXmlDataSetLoader;
-import org.springframework.test.dbunit.context.DbUnitTestExecutionListener;
+import org.springframework.test.dbunit.DbUnitTestExecutionListener;
+import org.springframework.test.dbunit.dataset.DataSetLoader;
+import org.springframework.test.dbunit.dataset.FlatXmlDataSetLoader;
 
 /**
  * Annotation that can be used to configure {@link DbUnitTestExecutionListener}.

@@ -40,6 +40,15 @@ public class DatabaseDataSourceConnectionFactoryBean implements FactoryBean<Data
 	private String schema;
 	private DatabaseConfigBean databaseConfig;
 
+	public DatabaseDataSourceConnectionFactoryBean() {
+		super();
+	}
+
+	public DatabaseDataSourceConnectionFactoryBean(DataSource dataSource) {
+		super();
+		this.dataSource = dataSource;
+	}
+
 	public DatabaseDataSourceConnection getObject() throws Exception {
 		Assert.notNull(dataSource, "The dataSource is required");
 		DatabaseDataSourceConnection dataSourceConntection = new DatabaseDataSourceConnection(
@@ -116,5 +125,14 @@ public class DatabaseDataSourceConnectionFactoryBean implements FactoryBean<Data
 	 */
 	public void setTransactionAware(boolean transactionAware) {
 		this.transactionAware = transactionAware;
+	}
+
+	// FIXME DC + test
+	public static IDatabaseConnection newConnection(DataSource dataSource) {
+		try {
+			return (new DatabaseDataSourceConnectionFactoryBean(dataSource)).getObject();
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
 	}
 }

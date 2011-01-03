@@ -127,7 +127,12 @@ public class DatabaseDataSourceConnectionFactoryBean implements FactoryBean<Data
 		this.transactionAware = transactionAware;
 	}
 
-	// FIXME DC + test
+	/**
+	 * Convenience method that can be used to construct a transaction aware {@link IDatabaseConnection} from a
+	 * {@link DataSource}.
+	 * @param dataSource The data source
+	 * @return A {@link IDatabaseConnection}
+	 */
 	public static IDatabaseConnection newConnection(DataSource dataSource) {
 		try {
 			return (new DatabaseDataSourceConnectionFactoryBean(dataSource)).getObject();

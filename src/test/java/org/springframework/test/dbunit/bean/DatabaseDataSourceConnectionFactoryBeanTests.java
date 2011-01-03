@@ -29,6 +29,7 @@ import java.sql.Connection;
 import javax.sql.DataSource;
 
 import org.dbunit.database.DatabaseDataSourceConnection;
+import org.dbunit.database.IDatabaseConnection;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
@@ -143,5 +144,16 @@ public class DatabaseDataSourceConnectionFactoryBeanTests {
 		DatabaseDataSourceConnection dataSourceConnection = factoryBean.getObject();
 		Connection actual = dataSourceConnection.getConnection();
 		assertSame(connection, actual);
+	}
+
+	@Test
+	public void shouldSupportNewConnection() throws Exception {
+		DataSource dataSource = mock(DataSource.class);
+		Connection connection = mock(Connection.class);
+		given(dataSource.getConnection()).willReturn(connection);
+		IDatabaseConnection databaseConnection = DatabaseDataSourceConnectionFactoryBean.newConnection(dataSource);
+		assertNotNull(databaseConnection);
+		databaseConnection.getConnection().createStatement();
+		verify(dataSource).getConnection();
 	}
 }

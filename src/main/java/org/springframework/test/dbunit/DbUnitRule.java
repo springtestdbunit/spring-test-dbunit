@@ -125,7 +125,9 @@ public class DbUnitRule implements MethodRule {
 				} else if (hasField(DataSource.class)) {
 					connection = DatabaseDataSourceConnectionFactoryBean.newConnection(getField(DataSource.class));
 				} else {
-					// FIXME
+					throw new IllegalStateException(
+							"Unable to locate database connection for DbUnitRule.  Ensure that a DataSource or IDatabaseConnection "
+									+ "is available as a private member of your test");
 				}
 			}
 			return connection;
@@ -206,10 +208,11 @@ public class DbUnitRule implements MethodRule {
 				try {
 					return (T) fields.iterator().next().get(obj);
 				} catch (Exception e) {
-					throw new IllegalStateException(e); // FIXME
+					throw new IllegalStateException("Unable to read field of type " + type + " from " + testClass, e);
 				}
 			}
-			throw new RuntimeException(); // FIXME
+			throw new IllegalStateException("Unable to read a single value from multiple fields of type " + type
+					+ " from " + testClass);
 		}
 	}
 }

@@ -71,7 +71,7 @@ public class DbUnitRule implements MethodRule {
 	 * @param dataSource The data source
 	 */
 	public void setDataSource(DataSource dataSource) {
-		DatabaseDataSourceConnectionFactoryBean.newConnection(dataSource);
+		this.connection = DatabaseDataSourceConnectionFactoryBean.newConnection(dataSource);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class DbUnitRule implements MethodRule {
 		return fields;
 	}
 
-	private class DbUnitTestContextAdapter implements DbUnitTestContext {
+	protected class DbUnitTestContextAdapter implements DbUnitTestContext {
 
 		private FrameworkMethod method;
 		private Object target;

@@ -145,7 +145,7 @@ public class DbUnitRule implements MethodRule {
 		}
 
 		public Class<?> getTestClass() {
-			return method.getMethod().getDeclaringClass();
+			return target.getClass();
 		}
 
 		public Method getTestMethod() {
@@ -208,11 +208,12 @@ public class DbUnitRule implements MethodRule {
 				try {
 					return (T) fields.iterator().next().get(obj);
 				} catch (Exception e) {
-					throw new IllegalStateException("Unable to read field of type " + type + " from " + testClass, e);
+					throw new IllegalStateException("Unable to read field of type " + type.getName() + " from "
+							+ testClass, e);
 				}
 			}
-			throw new IllegalStateException("Unable to read a single value from multiple fields of type " + type
-					+ " from " + testClass);
+			throw new IllegalStateException("Unable to read a single value from multiple fields of type "
+					+ type.getName() + " from " + testClass);
 		}
 	}
 }

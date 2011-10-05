@@ -74,9 +74,13 @@ class DbUnitRunner {
 	 * @throws Exception
 	 */
 	public void afterTestMethod(DbUnitTestContext testContext) throws Exception {
-		verifyExpected(testContext, getAnnotations(testContext, ExpectedDatabase.class));
-		Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
-		setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
+		try {
+			verifyExpected(testContext, getAnnotations(testContext, ExpectedDatabase.class));
+			Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
+			setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
+		} finally {
+			testContext.getConnection().close();
+		}
 	}
 
 	private <T extends Annotation> Collection<T> getAnnotations(DbUnitTestContext testContext, Class<T> annotationType) {

@@ -33,6 +33,7 @@ import org.springframework.test.dbunit.annotation.DatabaseSetup;
 import org.springframework.test.dbunit.annotation.DatabaseTearDown;
 import org.springframework.test.dbunit.annotation.ExpectedDatabase;
 import org.springframework.test.dbunit.dataset.DataSetLoader;
+import org.springframework.test.dbunit.helper.AssertionHelper;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -106,7 +107,12 @@ class DbUnitRunner {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
 				}
-				Assertion.assertEquals(expectedDataSet, actualDataSet);
+				
+				if ( annotation.strict() ) {
+					Assertion.assertEquals(expectedDataSet, actualDataSet);
+				} else {
+					AssertionHelper.assertEqualsNonStrict(expectedDataSet, actualDataSet);
+				}
 			}
 		}
 	}

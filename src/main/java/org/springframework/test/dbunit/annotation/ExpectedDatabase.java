@@ -44,4 +44,13 @@ public @interface ExpectedDatabase {
 	 */
 	String value();
 
+	/**
+	 * If set to false will ignore unspecified tables and columns in expected data set when comparing to actual.
+	 * <p>
+	 * Note: expected row order must match order in actual data set.
+	 * 
+	 * @return if data set compare must be strict
+	 * @author Mario Zagar
+	 */
+	boolean strict() default true;
 }

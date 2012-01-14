@@ -112,7 +112,6 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 	}
 
 	private void prepareDatabaseConnection(TestContext testContext, String databaseConnectionBeanName) throws Exception {
-
 		Object databaseConnection = testContext.getApplicationContext().getBean(databaseConnectionBeanName);
 		if (databaseConnection instanceof DataSource) {
 			databaseConnection = DatabaseDataSourceConnectionFactoryBean.newConnection((DataSource) databaseConnection);
@@ -160,6 +159,10 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 		public Method getTestMethod() {
 			return testContext.getTestMethod();
+		}
+		
+		public Throwable getTestException() {
+			return testContext.getTestException();
 		}
 	}
 }

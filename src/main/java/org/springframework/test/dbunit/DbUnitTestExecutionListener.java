@@ -134,6 +134,13 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 	}
 
 	public void afterTestMethod(TestContext testContext) throws Exception {
+		
+		Throwable testException = testContext.getTestException();
+		
+		if ( testException != null ) {
+			throw new RuntimeException(testException);
+		}
+		
 		runner.afterTestMethod(new DbUnitTestContextAdapter(testContext));
 	}
 

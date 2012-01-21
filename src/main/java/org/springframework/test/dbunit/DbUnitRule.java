@@ -61,7 +61,7 @@ public class DbUnitRule implements MethodRule {
 	private DataSetLoader dataSetLoader;
 
 	public Statement apply(Statement base, FrameworkMethod method, Object target) {
-		DbUnitTestContext context = new DbUnitTestContextAdapter(method, target);
+		DbUnitTestContextAdapter context = new DbUnitTestContextAdapter(method, target);
 		return new DbUnitStatement(context, base);
 	}
 
@@ -104,6 +104,7 @@ public class DbUnitRule implements MethodRule {
 
 		private FrameworkMethod method;
 		private Object target;
+		private Throwable testException;
 
 		public DbUnitTestContextAdapter(FrameworkMethod method, Object target) {
 			this.method = method;
@@ -151,14 +152,22 @@ public class DbUnitRule implements MethodRule {
 		public Method getTestMethod() {
 			return method.getMethod();
 		}
+
+		public Throwable getTestException() {
+			return testException;
+		}
+		
+		public void setTestException(Throwable e) {
+			this.testException = e;
+		}
 	}
 
 	private class DbUnitStatement extends Statement {
 
 		private Statement nextStatement;
-		private DbUnitTestContext testContext;
+		private DbUnitTestContextAdapter testContext;
 
-		public DbUnitStatement(DbUnitTestContext testContext, Statement nextStatement) {
+		public DbUnitStatement(DbUnitTestContextAdapter testContext, Statement nextStatement) {
 			this.testContext = testContext;
 			this.nextStatement = nextStatement;
 		}
@@ -166,7 +175,11 @@ public class DbUnitRule implements MethodRule {
 		@Override
 		public void evaluate() throws Throwable {
 			runner.beforeTestMethod(testContext);
-			nextStatement.evaluate();
+			try {
+				nextStatement.evaluate();
+			} catch (Throwable e) {
+				testContext.setTestException(e);
+			}
 			runner.afterTestMethod(testContext);
 		}
 	}

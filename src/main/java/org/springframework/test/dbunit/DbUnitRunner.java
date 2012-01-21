@@ -78,7 +78,16 @@ class DbUnitRunner {
 		try {
 			verifyExpected(testContext, getAnnotations(testContext, ExpectedDatabase.class));
 			Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
-			setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
+			try {
+				setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
+			} catch (RuntimeException e) {
+				if (testContext.getTestException() == null) {
+					throw e;
+				}
+				if (logger.isWarnEnabled()) {
+					logger.warn("Unable to throw database cleanup exception due to existing test error", e);
+				}
+			}
 		} finally {
 			testContext.getConnection().close();
 		}
@@ -99,6 +108,13 @@ class DbUnitRunner {
 
 	private void verifyExpected(DbUnitTestContext testContext, Collection<ExpectedDatabase> annotations)
 			throws Exception {
+		if (testContext.getTestException() != null) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("Skipping @DatabaseTest expectation due to test exception "
+						+ testContext.getTestException().getClass());
+			}
+			return;
+		}
 		IDatabaseConnection connection = testContext.getConnection();
 		IDataSet actualDataSet = connection.createDataSet();
 		for (ExpectedDatabase annotation : annotations) {

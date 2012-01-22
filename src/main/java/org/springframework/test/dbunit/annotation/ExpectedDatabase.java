@@ -44,4 +44,12 @@ public @interface ExpectedDatabase {
 	 */
 	String value();
 
+	/**
+	 * Database assertion mode to use. Default is {@link DatabaseAssertionMode#DEFAULT}.
+	 * <p>
+	 * @return Database assertion mode to use.
+	 * @author Mario Zagar
+	 */
+	DatabaseAssertionMode assertionMode() default DatabaseAssertionMode.DEFAULT;
+
 }

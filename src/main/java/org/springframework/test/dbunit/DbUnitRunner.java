@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.dbunit.Assertion;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -32,8 +31,9 @@ import org.springframework.test.dbunit.annotation.DatabaseOperation;
 import org.springframework.test.dbunit.annotation.DatabaseSetup;
 import org.springframework.test.dbunit.annotation.DatabaseTearDown;
 import org.springframework.test.dbunit.annotation.ExpectedDatabase;
+import org.springframework.test.dbunit.assertion.DatabaseAssertion;
+import org.springframework.test.dbunit.assertion.DatabaseAssertionFactory;
 import org.springframework.test.dbunit.dataset.DataSetLoader;
-import org.springframework.test.dbunit.helper.AssertionHelper;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -124,11 +124,8 @@ class DbUnitRunner {
 					logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
 				}
 				
-				if ( annotation.strict() ) {
-					Assertion.assertEquals(expectedDataSet, actualDataSet);
-				} else {
-					AssertionHelper.assertEqualsNonStrict(expectedDataSet, actualDataSet);
-				}
+				DatabaseAssertion assertion = DatabaseAssertionFactory.createDatabaseAssertion(annotation.assertionMode());
+				assertion.assertEquals(expectedDataSet, actualDataSet);
 			}
 		}
 	}

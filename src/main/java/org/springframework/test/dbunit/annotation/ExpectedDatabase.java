@@ -45,12 +45,11 @@ public @interface ExpectedDatabase {
 	String value();
 
 	/**
-	 * If set to false will ignore unspecified tables and columns in expected data set when comparing to actual.
+	 * Database assertion mode to use. Default is {@link DatabaseAssertionMode#DEFAULT}.
 	 * <p>
-	 * Note: expected row order must match order in actual data set.
-	 * 
-	 * @return if data set compare must be strict
+	 * @return Database assertion mode to use.
 	 * @author Mario Zagar
 	 */
-	boolean strict() default true;
+	DatabaseAssertionMode assertionMode() default DatabaseAssertionMode.DEFAULT;
+
 }

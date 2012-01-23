@@ -15,6 +15,8 @@
  */
 package org.springframework.test.dbunit.dbunitrule.expected;
 
+import javax.sql.DataSource;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,24 +27,25 @@ import org.springframework.test.dbunit.DbUnitRule;
 import org.springframework.test.dbunit.annotation.ExpectedDatabase;
 import org.springframework.test.dbunit.assertion.DatabaseAssertionMode;
 import org.springframework.test.dbunit.entity.EntityAssert;
-import org.springframework.test.dbunit.testutils.MustFailDbUnitRule;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/dbunit-context.xml")
-@ExpectedDatabase(value = "/META-INF/db/expected_nonstrict.xm", assertionMode = DatabaseAssertionMode.NON_STRICT)
+@ExpectedDatabase(value = "/META-INF/db/expected_nonstrict.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 @Transactional
 public class ExpectedNonStrictOnClassTest {
 
 	@Rule
-	public DbUnitRule dbUnit = new MustFailDbUnitRule();
+	public DbUnitRule dbUnit = new DbUnitRule();
+
+	@Autowired
+	DataSource dataSource;
 
 	@Autowired
 	private EntityAssert entityAssert;
 
 	@Test
-	public void test_nonstrict_does_not_throw_dbunit_exception_though_expected_table_does_not_specify_all_columns()
-			throws Exception {
+	public void shouldNotFailEvenThoughExpectedTableDoesNotSpecifyAllColumns() throws Exception {
 		this.entityAssert.assertValues("existing1", "existing2");
 	}
 }

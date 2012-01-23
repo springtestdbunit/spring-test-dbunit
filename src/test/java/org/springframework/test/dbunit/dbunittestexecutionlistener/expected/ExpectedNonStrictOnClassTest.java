@@ -39,8 +39,7 @@ public class ExpectedNonStrictOnClassTest {
 	private EntityAssert entityAssert;
 
 	@Test
-	public void test_nonstrict_does_not_throw_dbunit_exception_though_expected_table_does_not_specify_all_columns()
-			throws Exception {
-		entityAssert.assertValues("existing1", "existing2");
+	public void shouldNotFailEvenThoughExpectedTableDoesNotSpecifyAllColumns() throws Exception {
+		this.entityAssert.assertValues("existing1", "existing2");
 	}
 }

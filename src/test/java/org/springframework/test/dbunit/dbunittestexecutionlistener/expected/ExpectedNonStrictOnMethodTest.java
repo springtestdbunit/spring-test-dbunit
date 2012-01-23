@@ -39,7 +39,7 @@ public class ExpectedNonStrictOnMethodTest {
 
 	@Test
 	@ExpectedDatabase(value = "/META-INF/db/expected_nonstrict.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
-	public void test_nonstrict_does_not_throw_dbunit_exception_though_expected_table_does_not_specify_all_columns() {
-		entityAssert.assertValues("existing1", "existing2");
+	public void shouldNotFailEvenThoughExpectedTableDoesNotSpecifyAllColumns() {
+		this.entityAssert.assertValues("existing1", "existing2");
 	}
 }

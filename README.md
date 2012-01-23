@@ -1,4 +1,4 @@
-Copyright 2010 Phillip Webb
+Copyright 2010 the original author or authors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -105,9 +105,11 @@ Expected results
 
 The @ExpectedDatabase annotation can be used to verify the contents of database once a test has completed.  You would typically use this annotation when a test performs an insert, update or delete.  You can apply the annotation on a single test method or a class.  When applied at the class level verification occurs after each test method.
 
-The @ExpectedDatabase annotation takes a single attribute that references the DataSet file used to verify results.  Here is a typical example:
+The @ExpectedDatabase annotation takes a value attribute that references the DataSet file used to verify results.  Here is a typical example:
 
 @ExpectedDatabase("expectedData.xml")
+
+The @ExpectedDatabase annotation supports two different modes.  DatabaseAssertionMode.DEFAULT operates as any standard DbUnit test, performing a complete compare of the expected and actual datasets.  DatabaseAssertionMode.NON_STRICT will ignore tables and column names which are not specified in the expected dataset but exist in the actual datasets.  This can be useful during integration tests performed on live databases containing multiple tables that have many columns, so one must not specify all of them, but only the 'interesting' ones.
 
 Note:  If you are using this annotation in conjunction with a @Transactional test you may need to use an alternative configuration.  See the section on below.
 

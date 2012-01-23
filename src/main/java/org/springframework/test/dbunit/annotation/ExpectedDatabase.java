@@ -23,6 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.springframework.test.dbunit.DbUnitTestExecutionListener;
+import org.springframework.test.dbunit.assertion.DatabaseAssertionMode;
 
 /**
  * Test annotation that can be used to assert that a database is in given state after tests have run.
@@ -30,6 +31,7 @@ import org.springframework.test.dbunit.DbUnitTestExecutionListener;
  * @see DbUnitTestExecutionListener
  * 
  * @author Phillip Webb
+ * @author Mario Zagar
  */
 @Documented
 @Inherited
@@ -44,4 +46,9 @@ public @interface ExpectedDatabase {
 	 */
 	String value();
 
+	/**
+	 * Database assertion mode to use. Default is {@link DatabaseAssertionMode#DEFAULT}.
+	 * @return Database assertion mode to use.
+	 */
+	DatabaseAssertionMode assertionMode() default DatabaseAssertionMode.DEFAULT;
 }

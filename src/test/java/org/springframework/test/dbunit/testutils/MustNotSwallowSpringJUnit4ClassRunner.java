@@ -25,10 +25,10 @@ public class MustNotSwallowSpringJUnit4ClassRunner extends SpringJUnit4ClassRunn
 		config.setTarget(notifier);
 		config.addAdvice(new org.aopalliance.intercept.MethodInterceptor() {
 			public Object invoke(MethodInvocation invocation) throws Throwable {
-				if("fireTestFailure".equals(invocation.getMethod().getName())) {
+				if ("fireTestFailure".equals(invocation.getMethod().getName())) {
 					Failure failure = (Failure) invocation.getArguments()[0];
-					if(failure.getException() instanceof NotSwallowedException) {
-						//We expect this
+					if (failure.getException() instanceof NotSwallowedException) {
+						// We expect this
 						return null;
 					}
 				}

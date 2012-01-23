@@ -160,7 +160,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		public Method getTestMethod() {
 			return testContext.getTestMethod();
 		}
-		
+
 		public Throwable getTestException() {
 			return testContext.getTestException();
 		}

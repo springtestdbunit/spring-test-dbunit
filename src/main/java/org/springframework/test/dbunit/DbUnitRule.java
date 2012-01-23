@@ -156,7 +156,7 @@ public class DbUnitRule implements MethodRule {
 		public Throwable getTestException() {
 			return testException;
 		}
-		
+
 		public void setTestException(Throwable e) {
 			this.testException = e;
 		}

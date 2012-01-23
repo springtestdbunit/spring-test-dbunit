@@ -51,10 +51,10 @@ interface DbUnitTestContext {
 	 * @return The method under test
 	 */
 	Method getTestMethod();
-	
+
 	/**
 	 * Returns any exception that was thrown during the test or <tt>null</tt> if no test exception occurred.
 	 * @return the test exception or <tt>null</tt>
 	 */
-	Throwable getTestException();	
+	Throwable getTestException();
 }

@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/dbunit-context.xml")
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
 @Transactional
 public class ExpectedNonStrictOnMethodTest {
 
@@ -38,7 +38,7 @@ public class ExpectedNonStrictOnMethodTest {
 	private EntityAssert entityAssert;
 
 	@Test
-	@ExpectedDatabase(value="/META-INF/db/expected_nonstrict.xml", assertionMode=DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value = "/META-INF/db/expected_nonstrict.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	public void test_nonstrict_does_not_throw_dbunit_exception_though_expected_table_does_not_specify_all_columns() {
 		entityAssert.assertValues("existing1", "existing2");
 	}

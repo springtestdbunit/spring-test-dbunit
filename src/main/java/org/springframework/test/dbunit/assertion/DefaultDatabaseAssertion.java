@@ -27,7 +27,7 @@ import org.dbunit.dataset.IDataSet;
 class DefaultDatabaseAssertion implements DatabaseAssertion {
 
 	/**
-	 *  Uses DbUnit {@link Assertion#assertEquals(IDataSet, IDataSet)}.
+	 * Uses DbUnit {@link Assertion#assertEquals(IDataSet, IDataSet)}.
 	 */
 	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException {
 		Assertion.assertEquals(expectedDataSet, actualDataSet);

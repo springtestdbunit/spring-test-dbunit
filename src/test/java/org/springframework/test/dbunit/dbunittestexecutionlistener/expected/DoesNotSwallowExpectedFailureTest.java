@@ -22,5 +22,5 @@ public class DoesNotSwallowExpectedFailureTest {
 	public void test() throws Exception {
 		throw new NotSwallowedException();
 	}
-	
+
 }

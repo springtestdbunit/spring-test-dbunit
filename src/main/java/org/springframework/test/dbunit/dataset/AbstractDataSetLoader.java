@@ -19,12 +19,11 @@ import org.dbunit.dataset.IDataSet;
 import org.springframework.core.io.ClassRelativeResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.test.context.TestContext;
 
 /**
  * Abstract data set loader, which provides a basis for concrete implementations of the {@link DataSetLoader} strategy.
- * Provides a <em>Template Method</em> based approach for {@link # loadDataSet(TestContext, String) loading} data using
- * a Spring {@link #getResourceLoader resource loader}.
+ * Provides a <em>Template Method</em> based approach for {@link # loadDataSet(Class, String) loading} data using a
+ * Spring {@link #getResourceLoader resource loader}.
  * 
  * @author Phillip Webb
  * 

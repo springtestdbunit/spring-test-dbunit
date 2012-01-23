@@ -37,13 +37,11 @@ class NonStrictDatabaseAssertion implements DatabaseAssertion {
 
 	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException {
 		if (expectedDataSet != actualDataSet) {
-			for (String tableName :  expectedDataSet.getTableNames()) {
+			for (String tableName : expectedDataSet.getTableNames()) {
 				ITable expected = expectedDataSet.getTable(tableName);
 				ITable actual = actualDataSet.getTable(tableName);
-				String[] ignoredColumns = getColumnsToIgnore(expected.getTableMetaData(),
-						actual.getTableMetaData());
-				Assertion.assertEqualsIgnoreCols(expected, actual,
-						ignoredColumns);
+				String[] ignoredColumns = getColumnsToIgnore(expected.getTableMetaData(), actual.getTableMetaData());
+				Assertion.assertEqualsIgnoreCols(expected, actual, ignoredColumns);
 			}
 		}
 	}

@@ -12,11 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration("/META-INF/dbunit-context.xml")
 @Transactional
 public class DoesNotSwallowExpectedFailureTest {
-	
+
 	@Test
 	@ExpectedDatabase("/META-INF/db/expectedfail.xml")
 	public void test() throws Exception {
 		throw new NotSwallowedException();
 	}
-	
+
 }

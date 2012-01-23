@@ -23,13 +23,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.dbunit.DbUnitRule;
 import org.springframework.test.dbunit.annotation.ExpectedDatabase;
+import org.springframework.test.dbunit.assertion.DatabaseAssertionMode;
 import org.springframework.test.dbunit.entity.EntityAssert;
 import org.springframework.test.dbunit.testutils.MustFailDbUnitRule;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/dbunit-context.xml")
-@ExpectedDatabase("/META-INF/db/expectedfail.xml")
+@ExpectedDatabase(value = "/META-INF/db/expected_nonstrict.xm", assertionMode = DatabaseAssertionMode.NON_STRICT)
 @Transactional
 public class ExpectedNonStrictOnClassTest {
 

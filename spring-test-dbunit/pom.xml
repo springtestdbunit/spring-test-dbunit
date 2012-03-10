@@ -34,11 +34,11 @@
 					<additionalConfig>
 						<file>
 							<name>.settings/org.eclipse.jdt.ui.prefs</name>
-							<location>eclipse/org.eclipse.jdt.ui.prefs</location>
+							<location>../eclipse/org.eclipse.jdt.ui.prefs</location>
 						</file>
 						<file>
 							<name>.settings/org.eclipse.jdt.core.prefs</name>
-							<location>eclipse/org.eclipse.jdt.core.prefs</location>
+							<location>../eclipse/org.eclipse.jdt.core.prefs</location>
 						</file>
 					</additionalConfig>
 				</configuration>

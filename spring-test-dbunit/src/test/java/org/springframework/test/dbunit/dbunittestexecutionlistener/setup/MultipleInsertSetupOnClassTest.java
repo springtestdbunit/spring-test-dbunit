@@ -40,6 +40,6 @@ public class MultipleInsertSetupOnClassTest {
 
 	@Test
 	public void test() throws Exception {
-		entityAssert.assertValues("fromDbUnit", "fromDbUnit2");
+		this.entityAssert.assertValues("fromDbUnit", "fromDbUnit2");
 	}
 }

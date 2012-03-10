@@ -17,16 +17,16 @@ public class PersonService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Person> find(String name) {
-		Query query = entityManager.createNamedQuery("Person.find");
-		query.setParameter("name", "%"+name+"%");
+		Query query = this.entityManager.createNamedQuery("Person.find");
+		query.setParameter("name", "%" + name + "%");
 		return query.getResultList();
 	}
-	
+
 	public void remove(int personId) {
-		Person person = entityManager.find(Person.class, personId);
-		entityManager.remove(person);
+		Person person = this.entityManager.find(Person.class, personId);
+		this.entityManager.remove(person);
 	}
 }

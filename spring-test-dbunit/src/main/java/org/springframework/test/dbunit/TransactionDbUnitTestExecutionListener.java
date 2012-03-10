@@ -38,6 +38,7 @@ public class TransactionDbUnitTestExecutionListener extends TestExecutionListene
 	private static final Class<?>[] CHAIN = { TransactionalTestExecutionListener.class,
 			DbUnitTestExecutionListener.class };
 
+	@Override
 	protected Class<?>[] getChain() {
 		return CHAIN;
 	}

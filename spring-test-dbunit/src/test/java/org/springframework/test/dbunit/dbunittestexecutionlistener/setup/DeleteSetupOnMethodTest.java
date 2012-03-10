@@ -40,6 +40,6 @@ public class DeleteSetupOnMethodTest {
 	@Test
 	@DatabaseSetup(type = DatabaseOperation.DELETE, value = "/META-INF/db/delete.xml")
 	public void test() throws Exception {
-		entityAssert.assertValues("existing2");
+		this.entityAssert.assertValues("existing2");
 	}
 }

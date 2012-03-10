@@ -38,14 +38,15 @@ public class SampleEntity {
 	private String value;
 
 	public String getValue() {
-		return value;
+		return this.value;
 	}
 
 	public void setValue(String value) {
 		this.value = value;
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringCreator(this).append("id", id).append("value", value).toString();
+		return new ToStringCreator(this).append("id", this.id).append("value", this.value).toString();
 	}
 }

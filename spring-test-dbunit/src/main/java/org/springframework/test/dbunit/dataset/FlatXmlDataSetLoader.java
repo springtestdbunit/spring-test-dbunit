@@ -29,6 +29,7 @@ import org.springframework.core.io.Resource;
  */
 public class FlatXmlDataSetLoader extends AbstractDataSetLoader {
 
+	@Override
 	protected IDataSet createDataSet(Resource resource) throws Exception {
 		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
 		InputStream inputStream = resource.getInputStream();

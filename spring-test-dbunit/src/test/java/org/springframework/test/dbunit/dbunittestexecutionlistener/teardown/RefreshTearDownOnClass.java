@@ -41,11 +41,11 @@ public class RefreshTearDownOnClass {
 
 	@Test
 	public void test() throws Exception {
-		entityAssert.assertValues("existing1", "existing2");
+		this.entityAssert.assertValues("existing1", "existing2");
 	}
 
 	public void afterTest() throws Exception {
-		entityAssert.assertValues("addedFromDbUnit", "existing2", "replacedFromDbUnit");
+		this.entityAssert.assertValues("addedFromDbUnit", "existing2", "replacedFromDbUnit");
 	}
 
 }

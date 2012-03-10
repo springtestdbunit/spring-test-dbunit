@@ -52,11 +52,11 @@ public class InsertTearDownOnClass {
 
 	@Test
 	public void test() throws Exception {
-		entityAssert.assertValues("existing1", "existing2");
+		this.entityAssert.assertValues("existing1", "existing2");
 	}
 
 	public void afterTest() throws Exception {
-		entityAssert.assertValues("existing1", "existing2", "fromDbUnit");
+		this.entityAssert.assertValues("existing1", "existing2", "fromDbUnit");
 	}
 
 }

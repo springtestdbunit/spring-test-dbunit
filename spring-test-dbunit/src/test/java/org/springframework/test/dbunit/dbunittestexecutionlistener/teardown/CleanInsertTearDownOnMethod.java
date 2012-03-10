@@ -41,11 +41,11 @@ public class CleanInsertTearDownOnMethod {
 	@Test
 	@DatabaseTearDown(type = DatabaseOperation.CLEAN_INSERT, value = "/META-INF/db/insert.xml")
 	public void test() throws Exception {
-		entityAssert.assertValues("existing1", "existing2");
+		this.entityAssert.assertValues("existing1", "existing2");
 	}
 
 	public void afterTest() throws Exception {
-		entityAssert.assertValues("fromDbUnit");
+		this.entityAssert.assertValues("fromDbUnit");
 	}
 
 }

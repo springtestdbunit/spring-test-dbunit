@@ -21,9 +21,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.springframework.test.context.TestContext;
-import org.springframework.test.context.TestExecutionListener;
-
 /**
  * A {@link TestExecutionListener} implementation that works by chaining together other {@link TestExecutionListener}s
  * and ensures that methods are called in the correct order. The {@link #prepareTestInstance}, {@link #beforeTestClass}
@@ -41,9 +38,9 @@ public abstract class TestExecutionListenerChain implements TestExecutionListene
 	private List<TestExecutionListener> reverseChain;
 
 	public TestExecutionListenerChain() {
-		chain = createChain();
-		reverseChain = new ArrayList<TestExecutionListener>(chain);
-		Collections.reverse(reverseChain);
+		this.chain = createChain();
+		this.reverseChain = new ArrayList<TestExecutionListener>(this.chain);
+		Collections.reverse(this.reverseChain);
 	}
 
 	/**
@@ -111,11 +108,11 @@ public abstract class TestExecutionListenerChain implements TestExecutionListene
 	}
 
 	private void forwards(Call call) throws Exception {
-		runChain(chain.iterator(), call);
+		runChain(this.chain.iterator(), call);
 	}
 
 	private void backwards(Call call) throws Exception {
-		runChain(reverseChain.iterator(), call);
+		runChain(this.reverseChain.iterator(), call);
 	}
 
 	private void runChain(Iterator<TestExecutionListener> iterator, Call call) throws Exception {

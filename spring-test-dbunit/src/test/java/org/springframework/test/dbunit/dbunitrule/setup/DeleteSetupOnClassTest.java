@@ -46,6 +46,6 @@ public class DeleteSetupOnClassTest {
 
 	@Test
 	public void test() throws Exception {
-		entityAssert.assertValues("existing2");
+		this.entityAssert.assertValues("existing2");
 	}
 }

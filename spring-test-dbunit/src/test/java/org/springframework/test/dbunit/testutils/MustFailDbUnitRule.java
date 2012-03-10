@@ -27,6 +27,7 @@ import org.springframework.test.dbunit.DbUnitRule;
  */
 public class MustFailDbUnitRule extends DbUnitRule {
 
+	@Override
 	public Statement apply(Statement base, FrameworkMethod method, Object target) {
 		final Statement statement = super.apply(base, method, target);
 		return new Statement() {

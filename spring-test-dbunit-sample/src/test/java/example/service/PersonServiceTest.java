@@ -19,8 +19,7 @@ import example.entity.Person;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
-		DbUnitTestExecutionListener.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
 public class PersonServiceTest {
 
 	@Autowired
@@ -29,7 +28,7 @@ public class PersonServiceTest {
 	@Test
 	@DatabaseSetup("sampleData.xml")
 	public void testFind() throws Exception {
-		List<Person> personList = personService.find("hil");
+		List<Person> personList = this.personService.find("hil");
 		assertEquals(1, personList.size());
 		assertEquals("Phillip", personList.get(0).getFirstName());
 	}
@@ -38,7 +37,7 @@ public class PersonServiceTest {
 	@DatabaseSetup("sampleData.xml")
 	@ExpectedDatabase("expectedData.xml")
 	public void testRemove() throws Exception {
-		personService.remove(1);
+		this.personService.remove(1);
 	}
 
 }

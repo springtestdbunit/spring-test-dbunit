@@ -52,11 +52,11 @@ public class DeleteTearDownOnMethod {
 	@Test
 	@DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = "/META-INF/db/delete.xml")
 	public void test() throws Exception {
-		entityAssert.assertValues("existing1", "existing2");
+		this.entityAssert.assertValues("existing1", "existing2");
 	}
 
 	public void afterTest() throws Exception {
-		entityAssert.assertValues();
+		this.entityAssert.assertValues();
 	}
 
 }

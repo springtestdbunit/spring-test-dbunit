@@ -26,6 +26,7 @@ import org.springframework.test.dbunit.TransactionDbUnitTestExecutionListener;
  */
 public class MustFailDbUnitTestExecutionListener extends TransactionDbUnitTestExecutionListener {
 
+	@Override
 	public void afterTestMethod(TestContext testContext) throws Exception {
 		Throwable ex = null;
 		try {

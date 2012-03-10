@@ -30,6 +30,7 @@ public class AfterTearDownDbUnitTestExecutionListener extends TestExecutionListe
 	private static final Class<?> CHAIN[] = { TransactionalTestExecutionListener.class,
 			CallAfterTestMethodExecutionListener.class, DbUnitTestExecutionListener.class };
 
+	@Override
 	protected Class<?>[] getChain() {
 		return CHAIN;
 	}

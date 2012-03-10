@@ -46,6 +46,6 @@ public class InsertSetupOnMethodTest {
 	@Test
 	@DatabaseSetup(type = DatabaseOperation.INSERT, value = "/META-INF/db/insert.xml")
 	public void test() throws Exception {
-		entityAssert.assertValues("existing1", "existing2", "fromDbUnit");
+		this.entityAssert.assertValues("existing1", "existing2", "fromDbUnit");
 	}
 }

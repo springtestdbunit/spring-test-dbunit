@@ -40,6 +40,6 @@ public class InsertSetupOnClassTest {
 
 	@Test
 	public void test() throws Exception {
-		entityAssert.assertValues("existing1", "existing2", "fromDbUnit");
+		this.entityAssert.assertValues("existing1", "existing2", "fromDbUnit");
 	}
 }

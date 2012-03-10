@@ -48,6 +48,6 @@ public enum DatabaseAssertionMode {
 	}
 
 	public DatabaseAssertion getDatabaseAssertion() {
-		return databaseAssertion;
+		return this.databaseAssertion;
 	}
 }

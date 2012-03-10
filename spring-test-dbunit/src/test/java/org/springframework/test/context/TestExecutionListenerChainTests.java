@@ -47,29 +47,32 @@ public class TestExecutionListenerChainTests {
 
 	@Before
 	public void setup() {
-		l1 = mock(TestExecutionListener.class);
-		l2 = mock(TestExecutionListener.class);
-		ordered = inOrder(l1, l2);
-		chain = new TestExecutionListenerChain() {
+		this.l1 = mock(TestExecutionListener.class);
+		this.l2 = mock(TestExecutionListener.class);
+		this.ordered = inOrder(this.l1, this.l2);
+		this.chain = new TestExecutionListenerChain() {
+			@Override
 			protected Class<?>[] getChain() {
 				return null;
 			}
 
+			@Override
 			protected List<TestExecutionListener> createChain() {
-				return Arrays.asList(l1, l2);
+				return Arrays.asList(TestExecutionListenerChainTests.this.l1, TestExecutionListenerChainTests.this.l2);
 			};
 		};
-		testContext = mock(TestContext.class);
+		this.testContext = mock(TestContext.class);
 	}
 
 	@Test
 	public void shouldCreateChainFromClasses() throws Exception {
-		chain = new TestExecutionListenerChain() {
+		this.chain = new TestExecutionListenerChain() {
+			@Override
 			protected Class<?>[] getChain() {
 				return new Class<?>[] { TestListener1.class, TestListener2.class };
 			};
 		};
-		List<TestExecutionListener> list = chain.createChain();
+		List<TestExecutionListener> list = this.chain.createChain();
 		assertEquals(2, list.size());
 		assertTrue(list.get(0) instanceof TestListener1);
 		assertTrue(list.get(1) instanceof TestListener2);
@@ -78,7 +81,8 @@ public class TestExecutionListenerChainTests {
 	@Test
 	public void shouldNotCreateWithIllegalConstructor() throws Exception {
 		try {
-			chain = new TestExecutionListenerChain() {
+			this.chain = new TestExecutionListenerChain() {
+				@Override
 				protected Class<?>[] getChain() {
 					return new Class<?>[] { InvalidTestListener.class };
 				};
@@ -92,53 +96,53 @@ public class TestExecutionListenerChainTests {
 
 	@Test
 	public void shouldChainBeforeTestClass() throws Exception {
-		chain.beforeTestClass(testContext);
-		ordered.verify(l1).beforeTestClass(testContext);
-		ordered.verify(l2).beforeTestClass(testContext);
+		this.chain.beforeTestClass(this.testContext);
+		this.ordered.verify(this.l1).beforeTestClass(this.testContext);
+		this.ordered.verify(this.l2).beforeTestClass(this.testContext);
 	}
 
 	@Test
 	public void shouldChainPrepareTestInstance() throws Exception {
-		chain.prepareTestInstance(testContext);
-		ordered.verify(l1).prepareTestInstance(testContext);
-		ordered.verify(l2).prepareTestInstance(testContext);
+		this.chain.prepareTestInstance(this.testContext);
+		this.ordered.verify(this.l1).prepareTestInstance(this.testContext);
+		this.ordered.verify(this.l2).prepareTestInstance(this.testContext);
 	}
 
 	@Test
 	public void shouldChainBeforeTestMethod() throws Exception {
-		chain.beforeTestMethod(testContext);
-		ordered.verify(l1).beforeTestMethod(testContext);
-		ordered.verify(l2).beforeTestMethod(testContext);
+		this.chain.beforeTestMethod(this.testContext);
+		this.ordered.verify(this.l1).beforeTestMethod(this.testContext);
+		this.ordered.verify(this.l2).beforeTestMethod(this.testContext);
 	}
 
 	@Test
 	public void shouldChainAfterTestMethod() throws Exception {
-		chain.afterTestMethod(testContext);
-		ordered.verify(l2).afterTestMethod(testContext);
-		ordered.verify(l1).afterTestMethod(testContext);
+		this.chain.afterTestMethod(this.testContext);
+		this.ordered.verify(this.l2).afterTestMethod(this.testContext);
+		this.ordered.verify(this.l1).afterTestMethod(this.testContext);
 	}
 
 	@Test(expected = Exception.class)
 	public void shouldChainAfterTestMethodEvenOnException() throws Exception {
-		doThrow(new IOError(null)).when(l2).afterTestMethod(testContext);
-		chain.afterTestMethod(testContext);
-		ordered.verify(l2).afterTestMethod(testContext);
-		ordered.verify(l1).afterTestMethod(testContext);
+		doThrow(new IOError(null)).when(this.l2).afterTestMethod(this.testContext);
+		this.chain.afterTestMethod(this.testContext);
+		this.ordered.verify(this.l2).afterTestMethod(this.testContext);
+		this.ordered.verify(this.l1).afterTestMethod(this.testContext);
 	}
 
 	@Test
 	public void shouldChainAfterTestClass() throws Exception {
-		chain.afterTestClass(testContext);
-		ordered.verify(l2).afterTestClass(testContext);
-		ordered.verify(l1).afterTestClass(testContext);
+		this.chain.afterTestClass(this.testContext);
+		this.ordered.verify(this.l2).afterTestClass(this.testContext);
+		this.ordered.verify(this.l1).afterTestClass(this.testContext);
 	}
 
 	@Test(expected = IOException.class)
 	public void shouldChainAfterTestClassEvenOnException() throws Exception {
-		doThrow(new IOException()).when(l2).afterTestClass(testContext);
-		chain.afterTestClass(testContext);
-		ordered.verify(l2).afterTestClass(testContext);
-		ordered.verify(l1).afterTestClass(testContext);
+		doThrow(new IOException()).when(this.l2).afterTestClass(this.testContext);
+		this.chain.afterTestClass(this.testContext);
+		this.ordered.verify(this.l2).afterTestClass(this.testContext);
+		this.ordered.verify(this.l1).afterTestClass(this.testContext);
 	}
 
 	public static class TestListener1 extends AbstractTestExecutionListener {

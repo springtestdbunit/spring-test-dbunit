@@ -46,6 +46,6 @@ public class RefereshSetupOnMethodTest {
 	@Test
 	@DatabaseSetup(type = DatabaseOperation.REFRESH, value = "/META-INF/db/refresh.xml")
 	public void test() throws Exception {
-		entityAssert.assertValues("existing2", "addedFromDbUnit", "replacedFromDbUnit");
+		this.entityAssert.assertValues("existing2", "addedFromDbUnit", "replacedFromDbUnit");
 	}
 }

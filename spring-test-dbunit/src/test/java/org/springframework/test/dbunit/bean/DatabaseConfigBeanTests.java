@@ -56,18 +56,18 @@ public class DatabaseConfigBeanTests {
 	@Before
 	public void setup() {
 		this.configBean = new DatabaseConfigBean();
-		this.configBeanWrapper = new BeanWrapperImpl(configBean);
+		this.configBeanWrapper = new BeanWrapperImpl(this.configBean);
 	}
 
 	@Test
 	public void shouldAllowSetOfNonMandatoryFieldToNull() throws Exception {
-		configBean.setPrimaryKeyFilter(null);
+		this.configBean.setPrimaryKeyFilter(null);
 	}
 
 	@Test
 	public void shouldFailWhenSetingMandatoryFieldToNull() throws Exception {
 		try {
-			configBean.setDatatypeFactory(null);
+			this.configBean.setDatatypeFactory(null);
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("dataTypeFactory cannot be null", e.getMessage());
@@ -146,10 +146,10 @@ public class DatabaseConfigBeanTests {
 	}
 
 	private void doTest(String propertyName, String databaseConfigProperty, Object newValue) {
-		Object initialValue = configBeanWrapper.getPropertyValue(propertyName);
-		Object expectedInitialValue = defaultConfig.getProperty(databaseConfigProperty);
+		Object initialValue = this.configBeanWrapper.getPropertyValue(propertyName);
+		Object expectedInitialValue = this.defaultConfig.getProperty(databaseConfigProperty);
 
-		if (initialValue != null && CLASS_COMPARE_ONLY.contains(initialValue.getClass())) {
+		if ((initialValue != null) && CLASS_COMPARE_ONLY.contains(initialValue.getClass())) {
 			assertEquals("Initial value is not as expected", initialValue.getClass(), expectedInitialValue.getClass());
 
 		} else {
@@ -157,9 +157,9 @@ public class DatabaseConfigBeanTests {
 		}
 
 		assertFalse("Unable to test if new value is same as intial value", newValue.equals(initialValue));
-		configBeanWrapper.setPropertyValue(propertyName, newValue);
+		this.configBeanWrapper.setPropertyValue(propertyName, newValue);
 		DatabaseConfig appliedConfig = new DatabaseConfig();
-		configBean.apply(appliedConfig);
+		this.configBean.apply(appliedConfig);
 
 		assertEquals("Did not replace " + propertyName + " value", newValue,
 				appliedConfig.getProperty(databaseConfigProperty));

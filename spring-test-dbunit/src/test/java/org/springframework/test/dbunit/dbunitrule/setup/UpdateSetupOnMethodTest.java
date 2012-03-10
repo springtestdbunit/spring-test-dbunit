@@ -46,6 +46,6 @@ public class UpdateSetupOnMethodTest {
 	@Test
 	@DatabaseSetup(type = DatabaseOperation.UPDATE, value = "/META-INF/db/update.xml")
 	public void test() throws Exception {
-		entityAssert.assertValues("existing2", "fromDbUnit");
+		this.entityAssert.assertValues("existing2", "fromDbUnit");
 	}
 }

@@ -29,6 +29,7 @@ import org.springframework.util.ReflectionUtils;
  */
 public class CallAfterTestMethodExecutionListener extends AbstractTestExecutionListener {
 
+	@Override
 	public void afterTestMethod(TestContext testContext) throws Exception {
 		Method method = testContext.getTestClass().getMethod("afterTest");
 		ReflectionUtils.invokeMethod(method, testContext.getTestInstance());

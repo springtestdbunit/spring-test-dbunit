@@ -70,6 +70,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 	private static DbUnitRunner runner = new DbUnitRunner();
 
+	@Override
 	public void prepareTestInstance(TestContext testContext) throws Exception {
 
 		if (logger.isDebugEnabled()) {
@@ -129,10 +130,12 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		}
 	}
 
+	@Override
 	public void beforeTestMethod(TestContext testContext) throws Exception {
 		runner.beforeTestMethod(new DbUnitTestContextAdapter(testContext));
 	}
 
+	@Override
 	public void afterTestMethod(TestContext testContext) throws Exception {
 		runner.afterTestMethod(new DbUnitTestContextAdapter(testContext));
 	}
@@ -146,23 +149,23 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		}
 
 		public IDatabaseConnection getConnection() {
-			return (IDatabaseConnection) testContext.getAttribute(CONNECTION_ATTRIBUTE);
+			return (IDatabaseConnection) this.testContext.getAttribute(CONNECTION_ATTRIBUTE);
 		}
 
 		public DataSetLoader getDataSetLoader() {
-			return (DataSetLoader) testContext.getAttribute(DATA_SET_LOADER_ATTRIBUTE);
+			return (DataSetLoader) this.testContext.getAttribute(DATA_SET_LOADER_ATTRIBUTE);
 		}
 
 		public Class<?> getTestClass() {
-			return testContext.getTestClass();
+			return this.testContext.getTestClass();
 		}
 
 		public Method getTestMethod() {
-			return testContext.getTestMethod();
+			return this.testContext.getTestMethod();
 		}
 
 		public Throwable getTestException() {
-			return testContext.getTestException();
+			return this.testContext.getTestException();
 		}
 	}
 }

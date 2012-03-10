@@ -14,17 +14,17 @@ public class Person {
 	private int id;
 
 	private String title;
-	
+
 	private String firstName;
-	
+
 	private String lastName;
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
-	
+
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 
 	public void setTitle(String title) {
@@ -32,7 +32,7 @@ public class Person {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return this.firstName;
 	}
 
 	public void setFirstName(String firstName) {
@@ -40,7 +40,7 @@ public class Person {
 	}
 
 	public String getLastName() {
-		return lastName;
+		return this.lastName;
 	}
 
 	public void setLastName(String lastName) {

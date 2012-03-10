@@ -150,8 +150,8 @@ public class DbUnitRuleTest {
 		private DataSource dataSource;
 
 		public WithDataSource(Connection connection) throws SQLException {
-			dataSource = mock(DataSource.class);
-			when(dataSource.getConnection()).thenReturn(connection);
+			this.dataSource = mock(DataSource.class);
+			when(this.dataSource.getConnection()).thenReturn(connection);
 		}
 	}
 

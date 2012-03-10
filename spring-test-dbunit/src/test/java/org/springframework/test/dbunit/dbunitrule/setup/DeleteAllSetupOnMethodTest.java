@@ -46,6 +46,6 @@ public class DeleteAllSetupOnMethodTest {
 	@Test
 	@DatabaseSetup(type = DatabaseOperation.DELETE_ALL, value = "/META-INF/db/delete.xml")
 	public void test() throws Exception {
-		entityAssert.assertValues();
+		this.entityAssert.assertValues();
 	}
 }

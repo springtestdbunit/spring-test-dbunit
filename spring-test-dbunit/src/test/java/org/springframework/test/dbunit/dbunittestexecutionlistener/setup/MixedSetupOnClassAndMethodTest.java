@@ -41,12 +41,12 @@ public class MixedSetupOnClassAndMethodTest {
 	@Test
 	@DatabaseSetup("/META-INF/db/insert2.xml")
 	public void testInsert() throws Exception {
-		entityAssert.assertValues("fromDbUnit", "fromDbUnit2");
+		this.entityAssert.assertValues("fromDbUnit", "fromDbUnit2");
 	}
 
 	@Test
 	@DatabaseSetup(type = DatabaseOperation.REFRESH, value = "/META-INF/db/refresh.xml")
 	public void testRefresh() throws Exception {
-		entityAssert.assertValues("addedFromDbUnit", "replacedFromDbUnit");
+		this.entityAssert.assertValues("addedFromDbUnit", "replacedFromDbUnit");
 	}
 }

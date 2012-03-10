@@ -38,7 +38,7 @@ public class ExtendedTestContextManager extends TestContextManager {
 	}
 
 	public void prepareTestInstance() throws Exception {
-		prepareTestInstance(testInstance);
+		prepareTestInstance(this.testInstance);
 	}
 
 	public Object getTestContextAttribute(String name) {

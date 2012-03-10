@@ -46,6 +46,6 @@ public class ExpectedFailureOnMethodTest {
 	@Test
 	@ExpectedDatabase("/META-INF/db/expectedfail.xml")
 	public void test() throws Exception {
-		entityAssert.assertValues("existing1", "existing2");
+		this.entityAssert.assertValues("existing1", "existing2");
 	}
 }

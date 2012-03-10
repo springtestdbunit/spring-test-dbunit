@@ -40,6 +40,6 @@ public class DeleteAllSetupOnClassTest {
 
 	@Test
 	public void test() throws Exception {
-		entityAssert.assertValues();
+		this.entityAssert.assertValues();
 	}
 }

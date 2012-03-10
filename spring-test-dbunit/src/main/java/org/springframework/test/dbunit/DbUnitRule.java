@@ -116,45 +116,46 @@ public class DbUnitRule implements MethodRule {
 		}
 
 		private <T> T getField(Class<T> type) {
-			return getTestClassFields(getTestClass()).get(type, target);
+			return getTestClassFields(getTestClass()).get(type, this.target);
 		}
 
 		public IDatabaseConnection getConnection() {
-			if (connection == null) {
+			if (DbUnitRule.this.connection == null) {
 				if (hasField(IDatabaseConnection.class)) {
-					connection = getField(IDatabaseConnection.class);
+					DbUnitRule.this.connection = getField(IDatabaseConnection.class);
 				} else if (hasField(DataSource.class)) {
-					connection = DatabaseDataSourceConnectionFactoryBean.newConnection(getField(DataSource.class));
+					DbUnitRule.this.connection = DatabaseDataSourceConnectionFactoryBean
+							.newConnection(getField(DataSource.class));
 				} else {
 					throw new IllegalStateException(
 							"Unable to locate database connection for DbUnitRule.  Ensure that a DataSource or IDatabaseConnection "
 									+ "is available as a private member of your test");
 				}
 			}
-			return connection;
+			return DbUnitRule.this.connection;
 		}
 
 		public DataSetLoader getDataSetLoader() {
-			if (dataSetLoader == null) {
+			if (DbUnitRule.this.dataSetLoader == null) {
 				if (hasField(DataSetLoader.class)) {
-					dataSetLoader = getField(DataSetLoader.class);
+					DbUnitRule.this.dataSetLoader = getField(DataSetLoader.class);
 				} else {
-					dataSetLoader = new FlatXmlDataSetLoader();
+					DbUnitRule.this.dataSetLoader = new FlatXmlDataSetLoader();
 				}
 			}
-			return dataSetLoader;
+			return DbUnitRule.this.dataSetLoader;
 		}
 
 		public Class<?> getTestClass() {
-			return target.getClass();
+			return this.target.getClass();
 		}
 
 		public Method getTestMethod() {
-			return method.getMethod();
+			return this.method.getMethod();
 		}
 
 		public Throwable getTestException() {
-			return testException;
+			return this.testException;
 		}
 
 		public void setTestException(Throwable e) {
@@ -174,13 +175,13 @@ public class DbUnitRule implements MethodRule {
 
 		@Override
 		public void evaluate() throws Throwable {
-			runner.beforeTestMethod(testContext);
+			runner.beforeTestMethod(this.testContext);
 			try {
-				nextStatement.evaluate();
+				this.nextStatement.evaluate();
 			} catch (Throwable e) {
-				testContext.setTestException(e);
+				this.testContext.setTestException(e);
 			}
-			runner.afterTestMethod(testContext);
+			runner.afterTestMethod(this.testContext);
 		}
 	}
 
@@ -195,11 +196,11 @@ public class DbUnitRule implements MethodRule {
 		}
 
 		private Set<Field> getFields(final Class<?> type) {
-			if (fieldMap.containsKey(type)) {
-				return fieldMap.get(type);
+			if (this.fieldMap.containsKey(type)) {
+				return this.fieldMap.get(type);
 			}
 			final Set<Field> fields = new HashSet<Field>();
-			ReflectionUtils.doWithFields(testClass, new ReflectionUtils.FieldCallback() {
+			ReflectionUtils.doWithFields(this.testClass, new ReflectionUtils.FieldCallback() {
 				public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
 					if (type.isAssignableFrom(field.getType())) {
 						field.setAccessible(true);
@@ -207,7 +208,7 @@ public class DbUnitRule implements MethodRule {
 					}
 				}
 			});
-			fieldMap.put(type, fields);
+			this.fieldMap.put(type, fields);
 			return fields;
 		}
 
@@ -222,11 +223,11 @@ public class DbUnitRule implements MethodRule {
 					return (T) fields.iterator().next().get(obj);
 				} catch (Exception e) {
 					throw new IllegalStateException("Unable to read field of type " + type.getName() + " from "
-							+ testClass, e);
+							+ this.testClass, e);
 				}
 			}
 			throw new IllegalStateException("Unable to read a single value from multiple fields of type "
-					+ type.getName() + " from " + testClass);
+					+ type.getName() + " from " + this.testClass);
 		}
 	}
 }

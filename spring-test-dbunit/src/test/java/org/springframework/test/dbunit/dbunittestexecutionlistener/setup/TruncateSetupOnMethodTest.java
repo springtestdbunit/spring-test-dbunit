@@ -40,6 +40,6 @@ public class TruncateSetupOnMethodTest {
 	@Test
 	@DatabaseSetup(type = DatabaseOperation.TRUNCATE_TABLE, value = "/META-INF/db/delete.xml")
 	public void test() throws Exception {
-		entityAssert.assertValues();
+		this.entityAssert.assertValues();
 	}
 }

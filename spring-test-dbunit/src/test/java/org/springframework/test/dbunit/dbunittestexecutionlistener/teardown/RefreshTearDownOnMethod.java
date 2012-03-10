@@ -41,11 +41,11 @@ public class RefreshTearDownOnMethod {
 	@Test
 	@DatabaseTearDown(type = DatabaseOperation.REFRESH, value = "/META-INF/db/refresh.xml")
 	public void test() throws Exception {
-		entityAssert.assertValues("existing1", "existing2");
+		this.entityAssert.assertValues("existing1", "existing2");
 	}
 
 	public void afterTest() throws Exception {
-		entityAssert.assertValues("addedFromDbUnit", "existing2", "replacedFromDbUnit");
+		this.entityAssert.assertValues("addedFromDbUnit", "existing2", "replacedFromDbUnit");
 	}
 
 }

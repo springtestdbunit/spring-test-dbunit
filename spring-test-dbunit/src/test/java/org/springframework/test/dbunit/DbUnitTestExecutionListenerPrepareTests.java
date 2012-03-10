@@ -56,20 +56,20 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		this.applicationContext = mock(ApplicationContext.class);
 		this.databaseConnection = mock(IDatabaseConnection.class);
 		this.dataSource = mock(DataSource.class);
-		DbUnitTestExecutionListenerPrepareTests.applicationContextThreadLocal.set(applicationContext);
+		DbUnitTestExecutionListenerPrepareTests.applicationContextThreadLocal.set(this.applicationContext);
 	}
 
 	private void addBean(String beanName, Object bean) {
-		given(applicationContext.containsBean(beanName)).willReturn(true);
-		given(applicationContext.getBean(beanName)).willReturn(bean);
+		given(this.applicationContext.containsBean(beanName)).willReturn(true);
+		given(this.applicationContext.getBean(beanName)).willReturn(bean);
 	}
 
 	@Test
 	public void shouldUseSensibleDefaultsOnClassWithNoDbUnitConfiguration() throws Exception {
-		addBean("dbUnitDatabaseConnection", databaseConnection);
+		addBean("dbUnitDatabaseConnection", this.databaseConnection);
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(NoDbUnitConfiguration.class);
 		testContextManager.prepareTestInstance();
-		assertSame(databaseConnection,
+		assertSame(this.databaseConnection,
 				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.CONNECTION_ATTRIBUTE));
 		assertEquals(FlatXmlDataSetLoader.class,
 				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE)
@@ -87,18 +87,18 @@ public class DbUnitTestExecutionListenerPrepareTests {
 	}
 
 	private void testCommonBeanNames(Class<?> testClass) throws Exception {
-		addBean("dataSource", dataSource);
+		addBean("dataSource", this.dataSource);
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(testClass);
 		testContextManager.prepareTestInstance();
-		verify(applicationContext).containsBean("dbUnitDatabaseConnection");
-		verify(applicationContext).containsBean("dataSource");
-		verify(applicationContext).getBean("dataSource");
-		verifyNoMoreInteractions(applicationContext);
+		verify(this.applicationContext).containsBean("dbUnitDatabaseConnection");
+		verify(this.applicationContext).containsBean("dataSource");
+		verify(this.applicationContext).getBean("dataSource");
+		verifyNoMoreInteractions(this.applicationContext);
 	}
 
 	@Test
 	public void shouldConvertDatasetDatabaseConnection() throws Exception {
-		addBean("dataSource", dataSource);
+		addBean("dataSource", this.dataSource);
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(NoDbUnitConfiguration.class);
 		testContextManager.prepareTestInstance();
 		Object connection = testContextManager
@@ -130,11 +130,11 @@ public class DbUnitTestExecutionListenerPrepareTests {
 
 	@Test
 	public void shouldSupportAllDbUnitConfigurationAttributes() throws Exception {
-		addBean("customBean", databaseConnection);
+		addBean("customBean", this.databaseConnection);
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(CustomConfiguration.class);
 		testContextManager.prepareTestInstance();
-		verify(applicationContext).getBean("customBean");
-		assertSame(databaseConnection,
+		verify(this.applicationContext).getBean("customBean");
+		assertSame(this.databaseConnection,
 				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.CONNECTION_ATTRIBUTE));
 		assertEquals(CustomDataSetLoader.class,
 				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE)
@@ -143,7 +143,7 @@ public class DbUnitTestExecutionListenerPrepareTests {
 
 	@Test
 	public void shouldFailIfDatasetLoaderCannotBeCreated() throws Exception {
-		addBean("dbUnitDatabaseConnection", databaseConnection);
+		addBean("dbUnitDatabaseConnection", this.databaseConnection);
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(NonCreatableDataSetLoader.class);
 		try {
 			testContextManager.prepareTestInstance();

@@ -19,9 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.dbunit.database.DatabaseConfig;
+import org.dbunit.database.DatabaseConfig.ConfigProperty;
 import org.dbunit.database.IMetadataHandler;
 import org.dbunit.database.IResultSetTableFactory;
-import org.dbunit.database.DatabaseConfig.ConfigProperty;
 import org.dbunit.database.statement.IStatementFactory;
 import org.dbunit.dataset.datatype.IDataTypeFactory;
 import org.dbunit.dataset.filter.IColumnFilter;
@@ -338,8 +338,9 @@ public class DatabaseConfigBean {
 		for (ConfigProperty configProperty : DatabaseConfig.ALL_PROPERTIES) {
 			String name = configProperty.getProperty();
 			Object value = this.databaseConfig.getProperty(name);
-			if ((configProperty.isNullable()) || ((!configProperty.isNullable()) && (value != null)))
+			if ((configProperty.isNullable()) || ((!configProperty.isNullable()) && (value != null))) {
 				databaseConfig.setProperty(name, value);
+			}
 		}
 	}
 }

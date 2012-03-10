@@ -40,6 +40,6 @@ public class CleanInsertSetupOnMethodTest {
 
 	@Test
 	public void test() throws Exception {
-		entityAssert.assertValues("fromDbUnit");
+		this.entityAssert.assertValues("fromDbUnit");
 	}
 }

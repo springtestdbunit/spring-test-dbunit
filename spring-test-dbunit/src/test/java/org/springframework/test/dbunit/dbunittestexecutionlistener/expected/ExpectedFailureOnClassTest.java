@@ -39,6 +39,6 @@ public class ExpectedFailureOnClassTest {
 
 	@Test
 	public void test() throws Exception {
-		entityAssert.assertValues("existing1", "existing2");
+		this.entityAssert.assertValues("existing1", "existing2");
 	}
 }

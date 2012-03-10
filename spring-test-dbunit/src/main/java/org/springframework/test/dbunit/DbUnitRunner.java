@@ -164,7 +164,7 @@ class DbUnitRunner {
 
 	private org.dbunit.operation.DatabaseOperation getDbUnitDatabaseOperation(DatabaseOperation operation,
 			DatabaseOperation lastOperation) {
-		if (operation == DatabaseOperation.CLEAN_INSERT && lastOperation == DatabaseOperation.CLEAN_INSERT) {
+		if ((operation == DatabaseOperation.CLEAN_INSERT) && (lastOperation == DatabaseOperation.CLEAN_INSERT)) {
 			operation = DatabaseOperation.INSERT;
 		}
 		org.dbunit.operation.DatabaseOperation databaseOperation = OPERATION_LOOKUP.get(operation);
@@ -179,7 +179,7 @@ class DbUnitRunner {
 		private String[] value;
 
 		public AnnotationAttributes(Annotation annotation) {
-			Assert.state(annotation instanceof DatabaseSetup || annotation instanceof DatabaseTearDown,
+			Assert.state((annotation instanceof DatabaseSetup) || (annotation instanceof DatabaseTearDown),
 					"Only DatabaseSetup and DatabaseTearDown annotations are supported");
 			Map<String, Object> attributes = AnnotationUtils.getAnnotationAttributes(annotation);
 			this.type = (DatabaseOperation) attributes.get("type");
@@ -187,11 +187,11 @@ class DbUnitRunner {
 		}
 
 		public DatabaseOperation getType() {
-			return type;
+			return this.type;
 		}
 
 		public String[] getValue() {
-			return value;
+			return this.value;
 		}
 
 		public static <T extends Annotation> Collection<AnnotationAttributes> get(Collection<T> annotations) {

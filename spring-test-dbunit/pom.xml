@@ -4,6 +4,25 @@
 	<groupId>org.github.springtestdbunit</groupId>
 	<artifactId>spring-test-dbunit</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<name>Spring Test DBUnit</name>
+	<description>Integration between the Spring testing framework and DBUnit</description>
+	<url>https://springtestdbunit.github.com/spring-test-dbunit</url>
+	<issueManagement>
+		<url>https://github.com/springtestdbunit/spring-test-dbunit/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/springtestdbunit/spring-test-dbunit</url>
+		<connection>scm:git:git://github.com/springtestdbunit/spring-test-dbunit.git</connection>
+		<developerConnection>scm:git:git@github.com:springtestdbunit/spring-test-dbunit.git</developerConnection>
+	</scm>
 	<properties>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<hibernate.core.version>3.5.6-Final</hibernate.core.version>
@@ -11,9 +30,11 @@
 	<developers>
 		<developer>
 			<name>Phillip Webb</name>
+			<url>https://github.com/philwebb</url>
 		</developer>
 		<developer>
 			<name>Mario Zagar</name>
+			<url>https://github.com/mzagar</url>
 		</developer>
 	</developers>
 	<build>

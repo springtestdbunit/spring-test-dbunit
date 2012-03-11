@@ -43,7 +43,8 @@
 		</breadcrumbs>
 		
 		<menu name="Overview">
-			<item name="Introduction" href="/index.html" />
+			<item name="Spring-Test DBUnit" href="/index.html" />
+			<item name="Frequently Asked Questions" href="/faq.html"/>
 		</menu>
 		<menu ref="parent" />
 		<menu ref="reports" />

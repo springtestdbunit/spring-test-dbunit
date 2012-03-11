@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.7230392156862745" branch-rate="0.6347826086956522" lines-covered="295" lines-valid="408" branches-covered="73" branches-valid="115" complexity="1.6910569105691058" version="1.9.4.1" timestamp="1331491031506">
+<coverage line-rate="0.7230392156862745" branch-rate="0.6347826086956522" lines-covered="295" lines-valid="408" branches-covered="73" branches-valid="115" complexity="1.6910569105691058" version="1.9.4.1" timestamp="1331494209469">
 	<sources>
 		<source>/Users/pwebb/projects/spring/springtestdbunit/code/spring-test-dbunit/src/main/java</source>
 		<source>--source</source>

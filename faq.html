@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Project Distribution Management</title>
+    <title>Frequently Asked Questions</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -58,7 +58,7 @@
                     <a href="https://github.com/springtestdbunit/spring-test-dbunit" class="externalLink" title="spring-test-dbunit">spring-test-dbunit</a>
         <li class="divider ">/</li>
       </li>
-    <li class="">Project Distribution Management</li>
+    <li class=""></li>
       
                 
                     
@@ -92,52 +92,14 @@
                           <a href="index.html" title="Spring-Test DBUnit">Spring-Test DBUnit</a>
             </li>
                   <li class="none">
-                          <a href="faq.html" title="Frequently Asked Questions">Frequently Asked Questions</a>
-            </li>
+            <strong>Frequently Asked Questions</strong>
+          </li>
           </ul>
                                  <h5>Project Documentation</h5>
                   <ul>
-                                                                                                                                                                                                                                                                                    <li class="expanded">
+                                                                                                                                                                                                                                                                          <li class="collapsed">
                           <a href="project-info.html" title="Project Information">Project Information</a>
-                    <ul>
-                      <li class="none">
-            <strong>Distribution Management</strong>
-          </li>
-                      <li class="none">
-                          <a href="index.html" title="About">About</a>
-            </li>
-                      <li class="none">
-                          <a href="dependencies.html" title="Dependencies">Dependencies</a>
-            </li>
-                      <li class="none">
-                          <a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a>
-            </li>
-                      <li class="none">
-                          <a href="plugins.html" title="Project Plugins">Project Plugins</a>
-            </li>
-                      <li class="none">
-                          <a href="integration.html" title="Continuous Integration">Continuous Integration</a>
-            </li>
-                      <li class="none">
-                          <a href="license.html" title="Project License">Project License</a>
-            </li>
-                      <li class="none">
-                          <a href="mail-lists.html" title="Mailing Lists">Mailing Lists</a>
-            </li>
-                      <li class="none">
-                          <a href="team-list.html" title="Project Team">Project Team</a>
-            </li>
-                      <li class="none">
-                          <a href="source-repository.html" title="Source Repository">Source Repository</a>
-            </li>
-                      <li class="none">
-                          <a href="plugin-management.html" title="Plugin Management">Plugin Management</a>
-            </li>
-                      <li class="none">
-                          <a href="project-summary.html" title="Project Summary">Project Summary</a>
-            </li>
-              </ul>
-        </li>
+                  </li>
                                                                                                                                                                                                   <li class="collapsed">
                           <a href="project-reports.html" title="Project Reports">Project Reports</a>
                   </li>
@@ -157,7 +119,14 @@
       <div id="bodyColumn" class="content">
         <div id="contentBox">
                               
-          <div class="section"><h2>Overview<a name="Overview"></a></h2><a name="Overview"></a><p>No distribution management is defined for this project.</p></div>
+          <h1>Frequently Asked Questions</h1><h2>Is there an easy way to specify the Oracle database schema name to use?</h2><p>You will need to use a custom dbUnitDatabaseConnection bean if you want to specify a schema. Something like:</p>
+<pre><code>&lt;bean id=&quot;dbUnitDatabaseConnection&quot; class=&quot;org.springframework.test.dbunit.bean.DatabaseDataSourceConnectionFactoryBean&quot;&gt;
+    &lt;property name=&quot;schema&quot; ref=&quot;myschema&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p>This specified schema will be passed to the org.dbunit.database.DatabaseConnection <a href="http://www.dbunit.org/apidocs/org/dbunit/database/DatabaseConnection.html#DatabaseConnection%28java.sql.Connection,%20java.lang.String%29">constructor</a>.</p><h2>Is this project in a Maven repository?</h2><p>Not as yet, there is an open issue for this here <a href="https://github.com/springtestdbunit/spring-test-dbunit/issues/8">https://github.com/springtestdbunit/spring-test-dbunit/issues/8</a></p><h2>Is there a way to clear out the Database when tests are complete?</h2><p>The recommendation from DBUnit is that you have a good database setup and don&rsquo;t cleanup (see <a href="http://www.dbunit.org/bestpractices.html#nocleanup)">http://www.dbunit.org/bestpractices.html#nocleanup)</a>. That being said there are occasions where you might want to cleanup your database after every test.</p><p>There are a couple of strategies that you can use:</p><p>1) Use the Spring TransactionalTestExecutionListener and rollback after each test. See the section on Transactions in the project <a href="index.html">readme</a>. This approach can work work for many tests, however, sometimes you may not want to rollback transactions to be sure that no exceptions would have been raised on the commit. For more information about Spring testing with JDBC see the <a href="http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/html/testing.html#integration-testing-support-jdbc">Spring Reference Documentation</a>.</p><p>2) Use the @DatabaseTearDown annotation on the test class and provide a reset DBUnit XML file. Creating a reset script can often be difficult if you have foreign key constraints (see <a href="http://www.andrewspencer.net/2011/solve-foreign-key-problems-in-dbunit-test-data/)">http://www.andrewspencer.net/2011/solve-foreign-key-problems-in-dbunit-test-data/)</a>. Any empty table element tells DBUnit to delete all data, so a reset script is generally a list of tables in the order that they can be deleted without causing foreign key constraints, e.g.:</p>
+<pre><code>&lt;address/&gt;
+&lt;custom/&gt;
+</code></pre>
                   </div>
       </div>
     </div>

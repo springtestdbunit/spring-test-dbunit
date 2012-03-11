@@ -302,13 +302,17 @@ public class DatabaseConfigBean {
 	}
 
 	/**
-	 * Get a property from the underlying data config.
+	 * Get a property from the underlying database config.
 	 * @param propertyName The name of the attribute
 	 * @param dataConfigPropertyName The data config property name
 	 * @return the value of the property
 	 */
 	private Object getProperty(String propertyName, String dataConfigPropertyName) {
-		return this.databaseConfig.getProperty(dataConfigPropertyName);
+		try {
+			return this.databaseConfig.getProperty(dataConfigPropertyName);
+		} catch (RuntimeException e) {
+			throw new IllegalArgumentException("Unable to get " + propertyName, e);
+		}
 	}
 
 	/**

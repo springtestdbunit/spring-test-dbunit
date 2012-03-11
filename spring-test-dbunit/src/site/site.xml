@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/DECORATION/1.1.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd"
-	name="Spring Test DBUnit">
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd">
 
+	<custom>
+		<fluidoSkin>
+			<gitHub>
+				<projectId>springtestdbunit/spring-test-dbunit</projectId>
+				<ribbonOrientation>right</ribbonOrientation>
+				<ribbonColor>black</ribbonColor>
+			</gitHub>
+		</fluidoSkin>
+	</custom>
+
+	<publishDate position="none" />
+	<version position="right" />
 
 	<bannerLeft>
 		<name>${project.name}</name>
@@ -20,8 +31,19 @@
 	</skin>
 
 	<body>
+		<links>
+			<item name="Spring Framework" href="http://www.springsource.org/get-started" />
+			<item name="DBUnit" href="http://www.dbunit.org/" />
+			<item name="JUnit" href="http://www.junit.org/" />
+		</links>
+		
+		<breadcrumbs>
+			<item name="GitHub" href="http://www.github.com"/>
+			<item name="spring-test-dbunit" href="https://github.com/springtestdbunit/spring-test-dbunit"/>
+		</breadcrumbs>
+		
 		<menu name="Overview">
-			<item name="Introduction" href="index.html"/>
+			<item name="Introduction" href="/index.html" />
 		</menu>
 		<menu ref="parent" />
 		<menu ref="reports" />

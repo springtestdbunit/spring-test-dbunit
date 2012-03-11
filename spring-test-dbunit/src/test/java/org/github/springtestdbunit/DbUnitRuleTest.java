@@ -15,10 +15,10 @@ import javax.sql.DataSource;
 
 import org.dbunit.database.IDatabaseConnection;
 import org.github.springtestdbunit.DbUnitRule.DbUnitTestContextAdapter;
+import org.github.springtestdbunit.dataset.DataSetLoader;
+import org.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
 import org.junit.Test;
 import org.junit.runners.model.FrameworkMethod;
-import org.springframework.test.dbunit.dataset.DataSetLoader;
-import org.springframework.test.dbunit.dataset.FlatXmlDataSetLoader;
 
 public class DbUnitRuleTest {
 

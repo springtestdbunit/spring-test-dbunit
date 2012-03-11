@@ -28,16 +28,16 @@ import javax.sql.DataSource;
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
+import org.github.springtestdbunit.annotation.DbUnitConfiguration;
+import org.github.springtestdbunit.dataset.DataSetLoader;
+import org.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
+import org.github.springtestdbunit.testutils.ExtendedTestContextManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextLoader;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.dbunit.annotation.DbUnitConfiguration;
-import org.springframework.test.dbunit.dataset.DataSetLoader;
-import org.springframework.test.dbunit.dataset.FlatXmlDataSetLoader;
-import org.springframework.test.dbunit.testutils.ExtendedTestContextManager;
 
 /**
  * Tests for {@link DbUnitTestExecutionListener} prepare method.

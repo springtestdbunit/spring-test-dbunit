@@ -26,15 +26,15 @@ import javax.sql.DataSource;
 
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
+import org.github.springtestdbunit.annotation.DatabaseSetup;
+import org.github.springtestdbunit.annotation.DatabaseTearDown;
+import org.github.springtestdbunit.annotation.ExpectedDatabase;
+import org.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
+import org.github.springtestdbunit.dataset.DataSetLoader;
+import org.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
-import org.springframework.test.dbunit.annotation.DatabaseSetup;
-import org.springframework.test.dbunit.annotation.DatabaseTearDown;
-import org.springframework.test.dbunit.annotation.ExpectedDatabase;
-import org.springframework.test.dbunit.bean.DatabaseDataSourceConnectionFactoryBean;
-import org.springframework.test.dbunit.dataset.DataSetLoader;
-import org.springframework.test.dbunit.dataset.FlatXmlDataSetLoader;
 import org.springframework.util.ReflectionUtils;
 
 /**

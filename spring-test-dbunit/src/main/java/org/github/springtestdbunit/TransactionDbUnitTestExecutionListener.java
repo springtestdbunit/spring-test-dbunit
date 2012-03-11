@@ -15,10 +15,10 @@
  */
 package org.github.springtestdbunit;
 
+import org.github.springtestdbunit.annotation.DatabaseSetup;
+import org.github.springtestdbunit.annotation.DatabaseTearDown;
+import org.github.springtestdbunit.annotation.ExpectedDatabase;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.test.dbunit.annotation.DatabaseSetup;
-import org.springframework.test.dbunit.annotation.DatabaseTearDown;
-import org.springframework.test.dbunit.annotation.ExpectedDatabase;
 
 /**
  * <code>TestExecutionListener</code> which provides support for {@link DatabaseSetup &#064;DatabaseSetup},

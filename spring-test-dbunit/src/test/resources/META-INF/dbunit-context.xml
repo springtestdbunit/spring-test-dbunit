@@ -10,7 +10,7 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="entityAssert" class="org.springframework.test.dbunit.entity.EntityAssert"/>
+	<bean id="entityAssert" class="org.github.springtestdbunit.entity.EntityAssert"/>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

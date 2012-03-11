@@ -5,6 +5,8 @@ import static junit.framework.Assert.assertEquals;
 import java.util.List;
 
 import org.github.springtestdbunit.DbUnitTestExecutionListener;
+import org.github.springtestdbunit.annotation.DatabaseSetup;
+import org.github.springtestdbunit.annotation.ExpectedDatabase;
 import org.github.springtestdbunit.sample.entity.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.dbunit.annotation.DatabaseSetup;
-import org.springframework.test.dbunit.annotation.ExpectedDatabase;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

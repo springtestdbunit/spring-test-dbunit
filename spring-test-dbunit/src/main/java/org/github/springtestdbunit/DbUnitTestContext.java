@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
 
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
-import org.springframework.test.dbunit.dataset.DataSetLoader;
+import org.github.springtestdbunit.dataset.DataSetLoader;
 
 /**
  * Provides context for the {@link DbUnitRunner}.

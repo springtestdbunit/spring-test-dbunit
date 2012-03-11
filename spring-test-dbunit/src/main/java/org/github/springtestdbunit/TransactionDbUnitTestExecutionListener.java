@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.github.philwebb.springtestdbunit;
+package org.github.springtestdbunit;
 
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.dbunit.annotation.DatabaseSetup;

@@ -26,7 +26,7 @@ import javax.sql.DataSource;
 
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
-import org.github.philwebb.springtestdbunit.DbUnitTestExecutionListener;
+import org.github.springtestdbunit.DbUnitTestExecutionListener;
 import org.springframework.test.dbunit.dataset.DataSetLoader;
 import org.springframework.test.dbunit.dataset.FlatXmlDataSetLoader;
 

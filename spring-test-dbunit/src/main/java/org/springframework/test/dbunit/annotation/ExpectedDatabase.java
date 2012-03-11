@@ -22,7 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.github.philwebb.springtestdbunit.DbUnitTestExecutionListener;
+import org.github.springtestdbunit.DbUnitTestExecutionListener;
 import org.springframework.test.dbunit.assertion.DatabaseAssertionMode;
 
 /**

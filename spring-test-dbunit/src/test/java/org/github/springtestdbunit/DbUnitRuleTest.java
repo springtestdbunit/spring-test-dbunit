@@ -1,4 +1,4 @@
-package org.github.philwebb.springtestdbunit;
+package org.github.springtestdbunit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.dbunit.database.IDatabaseConnection;
-import org.github.philwebb.springtestdbunit.DbUnitRule.DbUnitTestContextAdapter;
+import org.github.springtestdbunit.DbUnitRule.DbUnitTestContextAdapter;
 import org.junit.Test;
 import org.junit.runners.model.FrameworkMethod;
 import org.springframework.test.dbunit.dataset.DataSetLoader;
@@ -115,7 +115,7 @@ public class DbUnitRuleTest {
 		} catch (IllegalStateException e) {
 			assertEquals(
 					"Unable to read a single value from multiple fields of "
-							+ "type javax.sql.DataSource from class org.github.philwebb.springtestdbunit.DbUnitRuleTest$WithMultipleDataSource",
+							+ "type javax.sql.DataSource from class org.github.springtestdbunit.DbUnitRuleTest$WithMultipleDataSource",
 					e.getMessage());
 		}
 

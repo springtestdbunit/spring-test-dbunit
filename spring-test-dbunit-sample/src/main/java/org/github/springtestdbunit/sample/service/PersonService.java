@@ -1,4 +1,4 @@
-package example.service;
+package org.github.springtestdbunit.sample.service;
 
 import java.util.List;
 
@@ -6,10 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.github.springtestdbunit.sample.entity.Person;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import example.entity.Person;
 
 @Service
 @Transactional

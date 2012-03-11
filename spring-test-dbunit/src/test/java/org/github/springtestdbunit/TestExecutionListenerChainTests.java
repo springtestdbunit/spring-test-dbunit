@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.github.philwebb.springtestdbunit;
+package org.github.springtestdbunit;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -91,7 +91,7 @@ public class TestExecutionListenerChainTests {
 			};
 			fail();
 		} catch (IllegalStateException e) {
-			assertEquals("Unable to create chain for classes [class org.github.philwebb.springtestdbunit."
+			assertEquals("Unable to create chain for classes [class org.github.springtestdbunit."
 					+ "TestExecutionListenerChainTests$InvalidTestListener]", e.getMessage());
 		}
 	}

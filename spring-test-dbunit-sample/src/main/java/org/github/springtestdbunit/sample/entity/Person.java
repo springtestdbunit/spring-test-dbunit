@@ -1,4 +1,4 @@
-package example.entity;
+package org.github.springtestdbunit.sample.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

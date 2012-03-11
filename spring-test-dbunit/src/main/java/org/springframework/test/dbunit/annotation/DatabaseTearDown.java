@@ -22,7 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.github.philwebb.springtestdbunit.DbUnitTestExecutionListener;
+import org.github.springtestdbunit.DbUnitTestExecutionListener;
 
 /**
  * Test annotation which indicates how to put a database into a know state after tests have run. This annotation can be

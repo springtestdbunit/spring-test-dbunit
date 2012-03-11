@@ -1,9 +1,11 @@
-package org.github.philwebb.springtestdbunit.sample.service;
+package org.github.springtestdbunit.sample.service;
 
 import static junit.framework.Assert.assertEquals;
 
 import java.util.List;
 
+import org.github.springtestdbunit.DbUnitTestExecutionListener;
+import org.github.springtestdbunit.sample.entity.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.dbunit.DbUnitTestExecutionListener;
 import org.springframework.test.dbunit.annotation.DatabaseSetup;
 import org.springframework.test.dbunit.annotation.ExpectedDatabase;
 
-import example.entity.Person;
-import example.service.PersonService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration

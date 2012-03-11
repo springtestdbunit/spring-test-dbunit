@@ -17,7 +17,7 @@ package org.springframework.test.dbunit.dbunitrule.teardown;
 
 import javax.sql.DataSource;
 
-import org.github.philwebb.springtestdbunit.DbUnitRule;
+import org.github.springtestdbunit.DbUnitRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;

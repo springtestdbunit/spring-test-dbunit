@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.github.philwebb.springtestdbunit;
+package org.github.springtestdbunit;
 
 import static org.junit.Assert.assertEquals;
 
-import org.github.philwebb.springtestdbunit.DbUnitTestExecutionListener;
-import org.github.philwebb.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import org.github.springtestdbunit.DbUnitTestExecutionListener;
+import org.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import org.junit.Test;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 

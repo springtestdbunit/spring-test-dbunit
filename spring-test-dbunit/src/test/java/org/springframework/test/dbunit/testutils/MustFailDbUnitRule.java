@@ -15,7 +15,7 @@
  */
 package org.springframework.test.dbunit.testutils;
 
-import org.github.philwebb.springtestdbunit.DbUnitRule;
+import org.github.springtestdbunit.DbUnitRule;
 import org.junit.Assert;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;

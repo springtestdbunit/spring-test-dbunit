@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.github.philwebb.springtestdbunit;
+package org.github.springtestdbunit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -149,7 +149,7 @@ public class DbUnitTestExecutionListenerPrepareTests {
 			testContextManager.prepareTestInstance();
 		} catch (IllegalArgumentException e) {
 			assertEquals("Unable to create data set loader instance for class "
-					+ "org.github.philwebb.springtestdbunit.DbUnitTestExecutionListenerPrepareTests$"
+					+ "org.github.springtestdbunit.DbUnitTestExecutionListenerPrepareTests$"
 					+ "AbstractCustomDataSetLoader", e.getMessage());
 		}
 	}

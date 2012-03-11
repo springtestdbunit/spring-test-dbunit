@@ -15,7 +15,7 @@
  */
 package org.springframework.test.dbunit.dbunittestexecutionlistener.expected;
 
-import org.github.philwebb.springtestdbunit.DbUnitTestExecutionListener;
+import org.github.springtestdbunit.DbUnitTestExecutionListener;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

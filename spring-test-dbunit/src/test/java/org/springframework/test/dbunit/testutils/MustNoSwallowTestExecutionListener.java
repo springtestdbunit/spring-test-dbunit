@@ -15,7 +15,7 @@
  */
 package org.springframework.test.dbunit.testutils;
 
-import org.github.philwebb.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import org.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import org.junit.Assert;
 import org.springframework.test.context.TestContext;
 

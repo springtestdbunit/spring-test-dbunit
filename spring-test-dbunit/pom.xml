@@ -71,7 +71,8 @@
 									token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Spring-Test DBUnit&lt;/title&gt;" />
 								<replace file="${project.build.directory}/site/faq.html"
 									token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Frequently Asked Questions&lt;/title&gt;" />
-									
+								<replace file="${project.build.directory}/site/sample.html"
+									token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Quick Start Example&lt;/title&gt;" />
 							</tasks>
 						</configuration>
 					</execution>

@@ -44,6 +44,7 @@
 		
 		<menu name="Overview">
 			<item name="Spring-Test DBUnit" href="/index.html" />
+			<item name="Quick Start Example" href="/sample.html"/>
 			<item name="Frequently Asked Questions" href="/faq.html"/>
 		</menu>
 		<menu ref="parent" />

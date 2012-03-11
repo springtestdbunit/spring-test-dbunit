@@ -161,11 +161,11 @@ Custom IDatabaseConnections
 
 In some situations you may need to create an IDatabaseConnection with a specific DBUnit configuration.  Unfortunately, the standard DBUnit DatabaseConfig class cannot be easily using with Spring.  In order to overcome this limitation, the DatabaseConfigBean provides an alternative method to configure a connection; with  standard getter/setter access provided for all configuration options.  The  DatabaseDataSourceConnectionFactoryBean accepts a configuration property and should be used to construct the final connection.  Here is a typical example:
  
-    <bean id="dbUnitDatabaseConfig" class="org.springframework.test.dbunit.bean.DatabaseConfigBean">
+    <bean id="dbUnitDatabaseConfig" class="org.github.philwebb.springtestdbunit.bean.DatabaseConfigBean">
     	<property name="skipOracleRecyclebinTables" value="true"/>
     </bean>
 	
-    <bean id="dbUnitDatabaseConnection" class="org.springframework.test.dbunit.bean.DatabaseDataSourceConnectionFactoryBean">
+    <bean id="dbUnitDatabaseConnection" class="org.github.philwebb.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean">
     	<property name="databaseConfig" ref="dbUnitDatabaseConfig"/>
     </bean>
 

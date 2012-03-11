@@ -1,5 +1,5 @@
 /**
- * DBUnit tests using {@link org.springframework.test.dbunit.DbUnitRule}.
+ * DBUnit tests using {@link org.github.philwebb.springtestdbunit.DbUnitRule}.
  */
 package org.springframework.test.dbunit.dbunitrule;
 

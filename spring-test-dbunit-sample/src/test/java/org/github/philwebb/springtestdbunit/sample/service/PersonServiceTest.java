@@ -1,4 +1,4 @@
-package example.service;
+package org.github.philwebb.springtestdbunit.sample.service;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -16,6 +16,7 @@ import org.springframework.test.dbunit.annotation.DatabaseSetup;
 import org.springframework.test.dbunit.annotation.ExpectedDatabase;
 
 import example.entity.Person;
+import example.service.PersonService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration

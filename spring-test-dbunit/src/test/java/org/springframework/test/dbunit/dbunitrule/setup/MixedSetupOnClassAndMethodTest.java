@@ -17,13 +17,13 @@ package org.springframework.test.dbunit.dbunitrule.setup;
 
 import javax.sql.DataSource;
 
+import org.github.philwebb.springtestdbunit.DbUnitRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.dbunit.DbUnitRule;
 import org.springframework.test.dbunit.annotation.DatabaseOperation;
 import org.springframework.test.dbunit.annotation.DatabaseSetup;
 import org.springframework.test.dbunit.entity.EntityAssert;

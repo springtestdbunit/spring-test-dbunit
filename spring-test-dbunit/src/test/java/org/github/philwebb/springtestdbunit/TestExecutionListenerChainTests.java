@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.test.dbunit;
+package org.github.philwebb.springtestdbunit;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -33,7 +33,6 @@ import org.mockito.InOrder;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
-import org.springframework.test.dbunit.TestExecutionListenerChain;
 
 /**
  * Tests for {@link TestExecutionListenerChain}.
@@ -92,7 +91,7 @@ public class TestExecutionListenerChainTests {
 			};
 			fail();
 		} catch (IllegalStateException e) {
-			assertEquals("Unable to create chain for classes [class org.springframework.test.context."
+			assertEquals("Unable to create chain for classes [class org.github.philwebb.springtestdbunit."
 					+ "TestExecutionListenerChainTests$InvalidTestListener]", e.getMessage());
 		}
 	}

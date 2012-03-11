@@ -15,10 +15,10 @@
  */
 package org.springframework.test.dbunit.testutils;
 
+import org.github.philwebb.springtestdbunit.DbUnitRule;
 import org.junit.Assert;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
-import org.springframework.test.dbunit.DbUnitRule;
 
 /**
  * An extension of {@link DbUnitRule} that ensures that a test method has failed.

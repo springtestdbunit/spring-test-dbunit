@@ -15,9 +15,9 @@
  */
 package org.springframework.test.dbunit.testutils;
 
+import org.github.philwebb.springtestdbunit.DbUnitTestExecutionListener;
+import org.github.philwebb.springtestdbunit.TestExecutionListenerChain;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.test.dbunit.DbUnitTestExecutionListener;
-import org.springframework.test.dbunit.TestExecutionListenerChain;
 
 /**
  * A {@link TestExecutionListenerChain} that triggers a {@link CallAfterTestMethodExecutionListener} as well as

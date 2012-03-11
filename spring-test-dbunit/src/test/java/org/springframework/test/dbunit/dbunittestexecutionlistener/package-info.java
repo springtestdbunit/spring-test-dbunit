@@ -1,5 +1,5 @@
 /**
- * DBUnit tests using {@link org.springframework.test.dbunit.DbUnitTestExecutionListener}.
+ * DBUnit tests using {@link org.github.philwebb.springtestdbunit.DbUnitTestExecutionListener}.
  */
 package org.springframework.test.dbunit.dbunittestexecutionlistener;
 

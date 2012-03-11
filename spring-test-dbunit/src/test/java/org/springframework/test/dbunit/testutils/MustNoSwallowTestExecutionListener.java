@@ -15,9 +15,9 @@
  */
 package org.springframework.test.dbunit.testutils;
 
+import org.github.philwebb.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import org.junit.Assert;
 import org.springframework.test.context.TestContext;
-import org.springframework.test.dbunit.TransactionDbUnitTestExecutionListener;
 
 /**
  * An extension of {@link TransactionDbUnitTestExecutionListener} that ensures that a test method does not swallow

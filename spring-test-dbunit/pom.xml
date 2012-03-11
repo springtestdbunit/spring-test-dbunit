@@ -59,6 +59,19 @@
 							</tasks>
 						</configuration>
 					</execution>
+					<execution>
+						<id>fix-page-titles</id>
+						<phase>site</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<replace file="${project.build.directory}/site/index.html"
+									token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Introduction&lt;/title&gt;" />
+							</tasks>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>

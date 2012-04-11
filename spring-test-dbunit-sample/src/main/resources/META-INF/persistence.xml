@@ -5,7 +5,7 @@
 	<persistence-unit name="pagingDatabase"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>org.github.springtestdbunit.sample.entity.Person</class>
+		<class>com.github.springtestdbunit.sample.entity.Person</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />

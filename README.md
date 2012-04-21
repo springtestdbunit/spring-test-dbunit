@@ -39,7 +39,9 @@ Once you have configured the DbUnitTestExecutionListener and provided the bean t
 Configuration using a JUnit @Rule
 =================================
 
-NOTE: This section should be followed when configuring DBUnit tests to run using a JUnit 4.7+ @Rule.   See above if you want to configure DBUnit tests using a Spring TestExecutionListener.
+NOTE: JUnit @Rule configuration is not currently working with Spring 3.1 (https://jira.springsource.org/browse/SPR-9232), until this issue is resolved please use the TestExecutionListener.
+
+This section should be followed when configuring DBUnit tests to run using a JUnit 4.7+ @Rule.   See above if you want to configure DBUnit tests using a Spring TestExecutionListener.
 
 To have JUnit process DBUnit annotation you must configure your tests to use the DbUnitRule @Rule.  To do this you need to use the JUnit @Rule annotation in conjunction with the DbUnitRule class.
 

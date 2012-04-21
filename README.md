@@ -156,6 +156,8 @@ In some situations you may need to create an IDatabaseConnection with a specific
     	<property name="databaseConfig" ref="dbUnitDatabaseConfig"/>
     </bean>
 
+NOTE: In most circumstances the username and password properties should not be set on the DatabaseDataSourceConnectionFactoryBean.  These properties will cause DBUnit to start a new transaction and may cause unexpected behaviour.
+
 
 Writing a DataSet Loader
 ========================

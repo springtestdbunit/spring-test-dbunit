@@ -1,5 +1,5 @@
-org.github.springtestdbunit
-org.github.springtestdbunit.annotation
-org.github.springtestdbunit.assertion
-org.github.springtestdbunit.bean
-org.github.springtestdbunit.dataset
+com.github.springtestdbunit
+com.github.springtestdbunit.annotation
+com.github.springtestdbunit.assertion
+com.github.springtestdbunit.bean
+com.github.springtestdbunit.dataset

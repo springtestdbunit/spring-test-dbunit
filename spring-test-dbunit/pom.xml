@@ -7,7 +7,7 @@
 	</parent>
 	<groupId>com.github.springtestdbunit</groupId>
 	<artifactId>spring-test-dbunit</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Spring Test DBUnit</name>
 	<description>Integration between the Spring testing framework and DBUnit</description>

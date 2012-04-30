@@ -107,7 +107,6 @@ Transactions
 
 If you have configured DBUnit tests to run using the are DbUnitTestExecutionListener and are also using the TransactionalTestExecutionListener you may experience problems with transactions not being started before your data is setup, or being rolled back before expected results can be verified.  In order to support @Transactional tests with DBUnit you should use the TransactionDbUnitTestExecutionListener class.  
 
-Note:  TransactionDbUnitTestExecutionListener provides both DBUnit and Transactional support.  When using TransactionDbUnitTestExecutionListener you must not use the TransactionalTestExecutionListener or DbUnitTestExecutionListener classes.  
 
 Here are the annotations for a typical JUnit 4 test:
 
@@ -116,7 +115,7 @@ Here are the annotations for a typical JUnit 4 test:
     @Transactional
     @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
     		DirtiesContextTestExecutionListener.class,
-    		TransactionalDbUnitTestExecutionListener.class })
+    		TransactionDbUnitTestExecutionListener.class })
 
 Transactions start before @DatabaseSetup and end after @DatabaseTearDown and @ExpectedDatabase.
 

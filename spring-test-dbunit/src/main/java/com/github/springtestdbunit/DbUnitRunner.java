@@ -1,12 +1,12 @@
 /*
- * Copyright 2010 the original author or authors
- * 
+ * Copyright 2010-2012 the original author or authors
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,7 +18,6 @@ package com.github.springtestdbunit;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,18 +46,6 @@ import com.github.springtestdbunit.dataset.DataSetLoader;
 class DbUnitRunner {
 
 	private static final Log logger = LogFactory.getLog(DbUnitTestExecutionListener.class);
-
-	private static Map<DatabaseOperation, org.dbunit.operation.DatabaseOperation> OPERATION_LOOKUP;
-	static {
-		OPERATION_LOOKUP = new HashMap<DatabaseOperation, org.dbunit.operation.DatabaseOperation>();
-		OPERATION_LOOKUP.put(DatabaseOperation.UPDATE, org.dbunit.operation.DatabaseOperation.UPDATE);
-		OPERATION_LOOKUP.put(DatabaseOperation.INSERT, org.dbunit.operation.DatabaseOperation.INSERT);
-		OPERATION_LOOKUP.put(DatabaseOperation.REFRESH, org.dbunit.operation.DatabaseOperation.REFRESH);
-		OPERATION_LOOKUP.put(DatabaseOperation.DELETE, org.dbunit.operation.DatabaseOperation.DELETE);
-		OPERATION_LOOKUP.put(DatabaseOperation.DELETE_ALL, org.dbunit.operation.DatabaseOperation.DELETE_ALL);
-		OPERATION_LOOKUP.put(DatabaseOperation.TRUNCATE_TABLE, org.dbunit.operation.DatabaseOperation.TRUNCATE_TABLE);
-		OPERATION_LOOKUP.put(DatabaseOperation.CLEAN_INSERT, org.dbunit.operation.DatabaseOperation.CLEAN_INSERT);
-	}
 
 	/**
 	 * Called before a test method is executed to perform any database setup.
@@ -148,8 +135,8 @@ class DbUnitRunner {
 		for (AnnotationAttributes annotation : annotations) {
 			for (String dataSetLocation : annotation.getValue()) {
 				DatabaseOperation operation = annotation.getType();
-				org.dbunit.operation.DatabaseOperation dbUnitDatabaseOperation = getDbUnitDatabaseOperation(operation,
-						lastOperation);
+				org.dbunit.operation.DatabaseOperation dbUnitDatabaseOperation = getDbUnitDatabaseOperation(
+						testContext, operation, lastOperation);
 				IDataSet dataSet = loadDataset(testContext, dataSetLocation);
 				if (dataSet != null) {
 					if (logger.isDebugEnabled()) {
@@ -163,12 +150,13 @@ class DbUnitRunner {
 		}
 	}
 
-	private org.dbunit.operation.DatabaseOperation getDbUnitDatabaseOperation(DatabaseOperation operation,
-			DatabaseOperation lastOperation) {
+	private org.dbunit.operation.DatabaseOperation getDbUnitDatabaseOperation(DbUnitTestContext testContext,
+			DatabaseOperation operation, DatabaseOperation lastOperation) {
 		if ((operation == DatabaseOperation.CLEAN_INSERT) && (lastOperation == DatabaseOperation.CLEAN_INSERT)) {
 			operation = DatabaseOperation.INSERT;
 		}
-		org.dbunit.operation.DatabaseOperation databaseOperation = OPERATION_LOOKUP.get(operation);
+		org.dbunit.operation.DatabaseOperation databaseOperation = testContext.getDatbaseOperationLookup().get(
+				operation);
 		Assert.state(databaseOperation != null, "The databse operation " + operation + " is not supported");
 		return databaseOperation;
 	}

@@ -1,12 +1,12 @@
 /*
- * Copyright 2010 the original author or authors
- * 
+ * Copyright 2010-2012 the original author or authors
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,6 +30,8 @@ import org.dbunit.dataset.IDataSet;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.dataset.DataSetLoader;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
+import com.github.springtestdbunit.operation.DatabaseOperationLookup;
+import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
 
 /**
  * Annotation that can be used to configure {@link DbUnitTestExecutionListener}.
@@ -56,5 +58,12 @@ public @interface DbUnitConfiguration {
 	 * @return the data set loader class
 	 */
 	Class<? extends DataSetLoader> dataSetLoader() default FlatXmlDataSetLoader.class;
+
+	/**
+	 * Returns the class that will be used to lookup DBUnit databse operations. The specific class must implement
+	 * {@link DatabaseOperationLookup} and must have a default constructor.
+	 * @return the database operation lookup
+	 */
+	Class<? extends DatabaseOperationLookup> databaseOperationLookup() default DefaultDatabaseOperationLookup.class;
 
 }

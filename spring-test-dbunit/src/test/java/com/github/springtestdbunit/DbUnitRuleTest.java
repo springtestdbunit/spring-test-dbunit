@@ -1,3 +1,18 @@
+/*
+ * Copyright 2010-2012 the original author or authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.github.springtestdbunit;
 
 import static org.junit.Assert.assertEquals;
@@ -20,6 +35,8 @@ import org.junit.runners.model.FrameworkMethod;
 import com.github.springtestdbunit.DbUnitRule.DbUnitTestContextAdapter;
 import com.github.springtestdbunit.dataset.DataSetLoader;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
+import com.github.springtestdbunit.operation.DatabaseOperationLookup;
+import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
 
 public class DbUnitRuleTest {
 
@@ -67,6 +84,17 @@ public class DbUnitRuleTest {
 		rule.setDataSetLoader(dataSetLoader);
 		DbUnitTestContextAdapter dbUnitTestContextAdapter = rule.new DbUnitTestContextAdapter(method, target);
 		assertSame(dataSetLoader, dbUnitTestContextAdapter.getDataSetLoader());
+	}
+
+	@Test
+	public void shouldUseSetDatabseOperationLookup() throws Exception {
+		DatabaseOperationLookup lookup = mock(DatabaseOperationLookup.class);
+		Blank target = new Blank();
+		FrameworkMethod method = new FrameworkMethod(target.getClass().getMethod("test"));
+		DbUnitRule rule = new DbUnitRule();
+		rule.setDatabaseOperationLookup(lookup);
+		DbUnitTestContextAdapter dbUnitTestContextAdapter = rule.new DbUnitTestContextAdapter(method, target);
+		assertSame(lookup, dbUnitTestContextAdapter.getDatbaseOperationLookup());
 	}
 
 	@Test
@@ -132,6 +160,15 @@ public class DbUnitRuleTest {
 	}
 
 	@Test
+	public void shouldFindDatabaseOperationLookupFromTestCase() throws Exception {
+		WithDatabaseOperationLookup target = new WithDatabaseOperationLookup();
+		FrameworkMethod method = new FrameworkMethod(target.getClass().getMethod("test"));
+		DbUnitTestContextAdapter dbUnitTestContextAdapter = new DbUnitRule().new DbUnitTestContextAdapter(method,
+				target);
+		assertSame(target.lookup, dbUnitTestContextAdapter.getDatbaseOperationLookup());
+	}
+
+	@Test
 	public void shouldUseXmlDataSetLoaderIfNotSet() throws Exception {
 		Blank target = new Blank();
 		FrameworkMethod method = new FrameworkMethod(target.getClass().getMethod("test"));
@@ -140,6 +177,17 @@ public class DbUnitRuleTest {
 		DataSetLoader loader = dbUnitTestContextAdapter.getDataSetLoader();
 		assertNotNull(loader);
 		assertEquals(FlatXmlDataSetLoader.class, loader.getClass());
+	}
+
+	@Test
+	public void shouldUseDefaultDatabaseOperationLookupIfNotSet() throws Exception {
+		Blank target = new Blank();
+		FrameworkMethod method = new FrameworkMethod(target.getClass().getMethod("test"));
+		DbUnitTestContextAdapter dbUnitTestContextAdapter = new DbUnitRule().new DbUnitTestContextAdapter(method,
+				target);
+		DatabaseOperationLookup lookup = dbUnitTestContextAdapter.getDatbaseOperationLookup();
+		assertNotNull(lookup);
+		assertEquals(DefaultDatabaseOperationLookup.class, lookup.getClass());
 	}
 
 	static class Blank {
@@ -174,5 +222,9 @@ public class DbUnitRuleTest {
 
 	static class WithDataSetLoader extends Blank {
 		private DataSetLoader loader = mock(DataSetLoader.class);
+	}
+
+	static class WithDatabaseOperationLookup extends Blank {
+		private DatabaseOperationLookup lookup = mock(DatabaseOperationLookup.class);
 	}
 }

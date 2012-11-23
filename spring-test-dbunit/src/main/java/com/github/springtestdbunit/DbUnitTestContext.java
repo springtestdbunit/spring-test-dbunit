@@ -1,12 +1,12 @@
 /*
- * Copyright 2010 the original author or authors
- * 
+ * Copyright 2010-2012 the original author or authors
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,6 +21,7 @@ import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 
 import com.github.springtestdbunit.dataset.DataSetLoader;
+import com.github.springtestdbunit.operation.DatabaseOperationLookup;
 
 /**
  * Provides context for the {@link DbUnitRunner}.
@@ -40,6 +41,12 @@ interface DbUnitTestContext {
 	 * @return The dataset loader
 	 */
 	DataSetLoader getDataSetLoader();
+
+	/**
+	 * Returns the {@link DatabaseOperationLookup} that should be used to lookup database operations.
+	 * @return the database operation lookup
+	 */
+	DatabaseOperationLookup getDatbaseOperationLookup();
 
 	/**
 	 * Returns the class that is under test.

@@ -1,12 +1,12 @@
 /*
- * Copyright 2010 the original author or authors
- * 
+ * Copyright 2010-2012 the original author or authors
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,6 +37,8 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
 import com.github.springtestdbunit.dataset.DataSetLoader;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
+import com.github.springtestdbunit.operation.DatabaseOperationLookup;
+import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
 
 /**
  * JUnit <code>&#064;Rule</code> which provides support for {@link DatabaseSetup &#064;DatabaseSetup},
@@ -48,6 +50,10 @@ import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
  * <p>
  * Datasets are loaded using the {@link FlatXmlDataSetLoader} unless a loader is located from a field of the test class
  * or specifically {@link #setDataSetLoader configured}.
+ * <p>
+ * Database operations are are lookup up using a {@link DefaultDatabaseOperationLookup} unless a
+ * {@link DatabaseOperationLookup} is located from a field of the test class or specifically
+ * {@link #setDatabaseOperationLookup configured}.
  * 
  * @author Phillip Webb
  */
@@ -60,6 +66,8 @@ public class DbUnitRule implements MethodRule {
 	private IDatabaseConnection connection;
 
 	private DataSetLoader dataSetLoader;
+
+	private DatabaseOperationLookup databaseOperationLookup;
 
 	public Statement apply(Statement base, FrameworkMethod method, Object target) {
 		DbUnitTestContextAdapter context = new DbUnitTestContextAdapter(method, target);
@@ -90,6 +98,14 @@ public class DbUnitRule implements MethodRule {
 	 */
 	public void setDataSetLoader(DataSetLoader dataSetLoader) {
 		this.dataSetLoader = dataSetLoader;
+	}
+
+	/**
+	 * Set the {@link DatabaseOperationLookup} that will be used to lookup DBUnit databsae operations.
+	 * @param databaseOperationLookup the database operation lookup
+	 */
+	public void setDatabaseOperationLookup(DatabaseOperationLookup databaseOperationLookup) {
+		this.databaseOperationLookup = databaseOperationLookup;
 	}
 
 	private static TestClassFields getTestClassFields(Class<?> testClass) {
@@ -145,6 +161,17 @@ public class DbUnitRule implements MethodRule {
 				}
 			}
 			return DbUnitRule.this.dataSetLoader;
+		}
+
+		public DatabaseOperationLookup getDatbaseOperationLookup() {
+			if (DbUnitRule.this.databaseOperationLookup == null) {
+				if (hasField(DatabaseOperationLookup.class)) {
+					DbUnitRule.this.databaseOperationLookup = getField(DatabaseOperationLookup.class);
+				} else {
+					DbUnitRule.this.databaseOperationLookup = new DefaultDatabaseOperationLookup();
+				}
+			}
+			return DbUnitRule.this.databaseOperationLookup;
 		}
 
 		public Class<?> getTestClass() {

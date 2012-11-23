@@ -1,12 +1,12 @@
 /*
- * Copyright 2010 the original author or authors
- * 
+ * Copyright 2010-2012 the original author or authors
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,9 +35,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextLoader;
 import org.springframework.test.context.TestExecutionListeners;
 
+import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import com.github.springtestdbunit.dataset.DataSetLoader;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
+import com.github.springtestdbunit.operation.DatabaseOperationLookup;
+import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
 import com.github.springtestdbunit.testutils.ExtendedTestContextManager;
 
 /**
@@ -75,6 +78,10 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		assertEquals(FlatXmlDataSetLoader.class,
 				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE)
 						.getClass());
+		assertEquals(
+				DefaultDatabaseOperationLookup.class,
+				testContextManager.getTestContextAttribute(
+						DbUnitTestExecutionListener.DATABASE_OPERATION_LOOKUP_ATTRIBUTE).getClass());
 	}
 
 	@Test
@@ -140,6 +147,10 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		assertEquals(CustomDataSetLoader.class,
 				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE)
 						.getClass());
+		assertEquals(
+				CustomDatabaseOperationLookup.class,
+				testContextManager.getTestContextAttribute(
+						DbUnitTestExecutionListener.DATABASE_OPERATION_LOOKUP_ATTRIBUTE).getClass());
 	}
 
 	@Test
@@ -153,6 +164,11 @@ public class DbUnitTestExecutionListenerPrepareTests {
 					+ "com.github.springtestdbunit.DbUnitTestExecutionListenerPrepareTests$"
 					+ "AbstractCustomDataSetLoader", e.getMessage());
 		}
+	}
+
+	@Test
+	public void shouldSupportCustomLookup() throws Exception {
+
 	}
 
 	private static class LocalApplicationContextLoader implements ContextLoader {
@@ -174,6 +190,12 @@ public class DbUnitTestExecutionListenerPrepareTests {
 	public static class CustomDataSetLoader extends AbstractCustomDataSetLoader {
 	}
 
+	public static class CustomDatabaseOperationLookup implements DatabaseOperationLookup {
+		public org.dbunit.operation.DatabaseOperation get(DatabaseOperation operation) {
+			return null;
+		}
+	}
+
 	@ContextConfiguration(loader = LocalApplicationContextLoader.class)
 	@TestExecutionListeners(DbUnitTestExecutionListener.class)
 	private static class NoDbUnitConfiguration {
@@ -189,7 +211,7 @@ public class DbUnitTestExecutionListenerPrepareTests {
 
 	@ContextConfiguration(loader = LocalApplicationContextLoader.class)
 	@TestExecutionListeners(DbUnitTestExecutionListener.class)
-	@DbUnitConfiguration(databaseConnection = "customBean", dataSetLoader = CustomDataSetLoader.class)
+	@DbUnitConfiguration(databaseConnection = "customBean", dataSetLoader = CustomDataSetLoader.class, databaseOperationLookup = CustomDatabaseOperationLookup.class)
 	private static class CustomConfiguration {
 
 	}

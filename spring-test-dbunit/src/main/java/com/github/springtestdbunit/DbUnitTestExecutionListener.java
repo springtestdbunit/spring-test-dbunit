@@ -1,12 +1,12 @@
 /*
- * Copyright 2010 the original author or authors
- * 
+ * Copyright 2010-2012 the original author or authors
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,6 +37,8 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
 import com.github.springtestdbunit.dataset.DataSetLoader;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
+import com.github.springtestdbunit.operation.DatabaseOperationLookup;
+import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
 
 /**
  * <code>TestExecutionListener</code> which provides support for {@link DatabaseSetup &#064;DatabaseSetup},
@@ -47,8 +49,8 @@ import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
  * {@link DataSource} . A custom bean name can also be specified using the
  * {@link DbUnitConfiguration#databaseConnection() &#064;DbUnitConfiguration} annotation.
  * <p>
- * Datasets are loaded using the {@link FlatXmlDataSetLoader} unless otherwise
- * {@link DbUnitConfiguration#dataSetLoader() configured}.
+ * Datasets are loaded using the {@link FlatXmlDataSetLoader} and DBUnit database operation lookups are performed using
+ * the {@link DefaultDatabaseOperationLookup} unless otherwise {@link DbUnitConfiguration#dataSetLoader() configured}.
  * <p>
  * If you are running this listener in combination with the {@link TransactionalTestExecutionListener} then consider
  * using {@link TransactionDbUnitTestExecutionListener} instead.
@@ -69,6 +71,9 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 	protected static final String DATA_SET_LOADER_ATTRIBUTE = Conventions.getQualifiedAttributeName(
 			DbUnitTestExecutionListener.class, "dataSetLoader");
 
+	protected static final String DATABASE_OPERATION_LOOKUP_ATTRIBUTE = Conventions.getQualifiedAttributeName(
+			DbUnitTestExecutionListener.class, "databseOperationLookup");
+
 	private static DbUnitRunner runner = new DbUnitRunner();
 
 	@Override
@@ -80,6 +85,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 		String databaseConnectionBeanName = null;
 		Class<? extends DataSetLoader> dataSetLoaderClass = FlatXmlDataSetLoader.class;
+		Class<? extends DatabaseOperationLookup> databaseOperationLookupClass = DefaultDatabaseOperationLookup.class;
 
 		DbUnitConfiguration configuration = testContext.getTestClass().getAnnotation(DbUnitConfiguration.class);
 		if (configuration != null) {
@@ -88,6 +94,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			}
 			databaseConnectionBeanName = configuration.databaseConnection();
 			dataSetLoaderClass = configuration.dataSetLoader();
+			databaseOperationLookupClass = configuration.databaseOperationLookup();
 		}
 
 		if (!StringUtils.hasLength(databaseConnectionBeanName)) {
@@ -100,6 +107,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		}
 		prepareDatabaseConnection(testContext, databaseConnectionBeanName);
 		prepareDataSetLoader(testContext, dataSetLoaderClass);
+		prepareDatabaseOperationLookup(testContext, databaseOperationLookupClass);
 	}
 
 	private String getDatabaseConnectionUsingCommonBeanNames(TestContext testContext) {
@@ -122,12 +130,21 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		testContext.setAttribute(CONNECTION_ATTRIBUTE, databaseConnection);
 	}
 
-	private void prepareDataSetLoader(TestContext testContext, Class<? extends DataSetLoader> dataSetLoaderClass)
-			throws Exception {
+	private void prepareDataSetLoader(TestContext testContext, Class<? extends DataSetLoader> dataSetLoaderClass) {
 		try {
 			testContext.setAttribute(DATA_SET_LOADER_ATTRIBUTE, dataSetLoaderClass.newInstance());
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Unable to create data set loader instance for " + dataSetLoaderClass, e);
+		}
+	}
+
+	private void prepareDatabaseOperationLookup(TestContext testContext,
+			Class<? extends DatabaseOperationLookup> databaseOperationLookupClass) {
+		try {
+			testContext.setAttribute(DATABASE_OPERATION_LOOKUP_ATTRIBUTE, databaseOperationLookupClass.newInstance());
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Unable to create database operation lookup instance for "
+					+ databaseOperationLookupClass, e);
 		}
 	}
 
@@ -155,6 +172,10 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 		public DataSetLoader getDataSetLoader() {
 			return (DataSetLoader) this.testContext.getAttribute(DATA_SET_LOADER_ATTRIBUTE);
+		}
+
+		public DatabaseOperationLookup getDatbaseOperationLookup() {
+			return (DatabaseOperationLookup) this.testContext.getAttribute(DATABASE_OPERATION_LOOKUP_ATTRIBUTE);
 		}
 
 		public Class<?> getTestClass() {

@@ -131,13 +131,15 @@ The databaseConnection attribute allows you to specify a specific bean name from
 
 The dataSetLoader attribute allows you to specify a custom loader that will be used when reading datasets (see below).
 
+The databaseOperationLookup attribute allows you to specify a custom lookup strategy for DBUnit database operations (see below).
+
 
 Advanced configuration of the DbUnitRule
 ========================================
 
 NOTE: This section only applies when you are using the DBUnitRule JUnit @Rule.  See above if you are using the DbUnitTestExecutionListener.
 
-The DBUnitRule JUnit rule will inspect private fields of your test class in order to configure itself.  If your test includes either a DataSource field or an IDatabaseConnection then this will be used to obtain a database connection.  You can also include a DataSetLoader field if you want to use a custom loader when reading datasets (see below).
+The DBUnitRule JUnit rule will inspect private fields of your test class in order to configure itself.  If your test includes either a DataSource field or an IDatabaseConnection then this will be used to obtain a database connection.  You can also include a DataSetLoader field if you want to use a custom loader when reading datasets and a custom DatabaseOperationLookup (see below).
 
 If you need more fine-grain control you can also call the setter methods directly on the rule.
 
@@ -145,7 +147,7 @@ If you need more fine-grain control you can also call the setter methods directl
 Custom IDatabaseConnections
 ===========================
 
-In some situations you may need to create an IDatabaseConnection with a specific DBUnit configuration.  Unfortunately, the standard DBUnit DatabaseConfig class cannot be easily using with Spring.  In order to overcome this limitation, the DatabaseConfigBean provides an alternative method to configure a connection; with  standard getter/setter access provided for all configuration options.  The  DatabaseDataSourceConnectionFactoryBean accepts a configuration property and should be used to construct the final connection.  Here is a typical example:
+In some situations you may need to create an IDatabaseConnection with a specific DBUnit configuration.  Unfortunately, the standard DBUnit DatabaseConfig class cannot be easily using with Spring.  In order to overcome this limitation, the DatabaseConfigBean provides an alternative method to configure a connection; with  standard getter/setter access provided for all configuration options.  The DatabaseDataSourceConnectionFactoryBean accepts a configuration property and should be used to construct the final connection.  Here is a typical example:
  
     <bean id="dbUnitDatabaseConfig" class="com.github.springtestdbunit.bean.DatabaseConfigBean">
     	<property name="skipOracleRecyclebinTables" value="true"/>
@@ -173,5 +175,9 @@ Here is an example loader that reads data from a CSV formatted file.
 
 See above for details of how to configure a test class to use the loader.
 
+Customer DBUnit Database Operations
+===================================
 
+In some situations you may need to use custom DBUnit DatabaseOperation classes.  For example, DBUnit includes org.dbunit.ext.mssql.InsertIdentityOperation for use with Microsoft SQL Server. The DatabaseOperationLookup interface can be used to create your own lookup strategy if you need support custom operations.  A MicrosoftSqlDatabaseOperationLookup class is provided to support the aforementioned MSSQL operations.
 
+See above for details of how to configure a test class to use the custom lookup.

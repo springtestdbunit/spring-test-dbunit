@@ -3,3 +3,4 @@ com.github.springtestdbunit.annotation
 com.github.springtestdbunit.assertion
 com.github.springtestdbunit.bean
 com.github.springtestdbunit.dataset
+com.github.springtestdbunit.operation

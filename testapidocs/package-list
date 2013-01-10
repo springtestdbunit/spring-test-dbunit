@@ -10,4 +10,5 @@ com.github.springtestdbunit.dbunittestexecutionlistener.expected
 com.github.springtestdbunit.dbunittestexecutionlistener.setup
 com.github.springtestdbunit.dbunittestexecutionlistener.teardown
 com.github.springtestdbunit.entity
+com.github.springtestdbunit.operation
 com.github.springtestdbunit.testutils

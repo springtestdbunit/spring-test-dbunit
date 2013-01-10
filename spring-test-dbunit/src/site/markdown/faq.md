@@ -10,7 +10,7 @@ You will need to use a custom dbUnitDatabaseConnection bean if you want to speci
 This specified schema will be passed to the org.dbunit.database.DatabaseConnection [constructor](http://www.dbunit.org/apidocs/org/dbunit/database/DatabaseConnection.html#DatabaseConnection%28java.sql.Connection,%20java.lang.String%29).
 
 ## Is this project in a Maven repository?
-Not as yet, there is an open issue for this here https://github.com/springtestdbunit/spring-test-dbunit/issues/8
+Yes it is. see http://mvnrepository.com/artifact/com.github.springtestdbunit/spring-test-dbunit for details.
 
 ## Is there a way to clear out the Database when tests are complete?
 The recommendation from DBUnit is that you have a good database setup and don't cleanup (see http://www.dbunit.org/bestpractices.html#nocleanup).  That being said there are occasions where you might want to cleanup your database after every test.

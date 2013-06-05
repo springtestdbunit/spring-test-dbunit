@@ -16,10 +16,8 @@
 package com.github.springtestdbunit;
 
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -106,7 +104,7 @@ class DbUnitRunner {
 		IDatabaseConnection connection = testContext.getConnection();
 		IDataSet actualDataSet = connection.createDataSet();
 		for (ExpectedDatabase annotation : annotations) {
-			IDataSet expectedDataSet = loadDataset(testContext, annotation.value());
+			IDataSet expectedDataSet = loadDataset(testContext, annotation.value(), annotation.replaceSequenceIds());
 			if (expectedDataSet != null) {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
@@ -117,16 +115,106 @@ class DbUnitRunner {
 		}
 	}
 
-	private IDataSet loadDataset(DbUnitTestContext testContext, String dataSetLocation) throws Exception {
+	private IDataSet loadDataset(DbUnitTestContext testContext, String dataSetLocation, boolean replaceSequenceIds) throws Exception {
 		DataSetLoader dataSetLoader = testContext.getDataSetLoader();
 		if (StringUtils.hasLength(dataSetLocation)) {
 			IDataSet dataSet = dataSetLoader.loadDataSet(testContext.getTestClass(), dataSetLocation);
 			Assert.notNull(dataSet,
 					"Unable to load dataset from \"" + dataSetLocation + "\" using " + dataSetLoader.getClass());
-			return dataSet;
+
+            if (replaceSequenceIds) {
+                replaceSequences(dataSet, testContext.getConnection());
+            }
+
+            return dataSet;
 		}
 		return null;
 	}
+
+    private IDataSet loadDataset(DbUnitTestContext testContext, String dataSetLocation) throws Exception {
+        return loadDataset(testContext, dataSetLocation, false);
+    }
+
+    /**
+     * Replaces the sequences names with the sequences values in a DataSet containing the expression "${...}" as a value
+     * name.
+     * @see com.github.springtestdbunit.annotation.ExpectedDatabase#replaceSequenceIds()
+     *
+     * @param dataSet the dataSet in which we will replace the sequences values.
+     * @param databaseConnection the connection to the database needed to query the sequences values.
+     * @throws Exception
+     */
+    private void replaceSequences(IDataSet dataSet, IDatabaseConnection databaseConnection) throws Exception {
+        ITableIterator iter = dataSet.iterator();
+
+        // We iterate on the table names
+        while (iter.next()) {
+            ITable table = iter.getTable();
+            Column[] cols = table.getTableMetaData().getColumns();
+
+            // We use this Map the count the number of times a sequence name is used in order to retroactively assign
+            // an ID based on the sequence value.
+            Map<String, ArrayList<TableValue>> sequences = new HashMap<String, ArrayList<TableValue>>();
+
+            // We iterate on the lines and columns
+            for (int i = 0; i < table.getRowCount(); i++) {
+                for (Column column : cols) {
+
+                    // We verify that the value is not null
+                    Object o = table.getValue(i, column.getColumnName());
+                    if (o != null) {
+
+                        // We look for the expression "${...}" in the value
+                        String value = o.toString();
+                        if (value.startsWith("${") && value.endsWith("}")) {
+
+                            // We retrieve the sequence name
+                            String key = value.substring(2, value.length() - 1);
+
+                            // if the map does not contain the list corresponding to the key we create it
+                            if (sequences.containsKey(key) == false) {
+                                sequences.put(key, new ArrayList<TableValue>());
+                            }
+
+                            // we stock the data of the element we just found
+                            List<TableValue> liste = sequences.get(key);
+                            TableValue e = new TableValue(i, column.getColumnName());
+                            liste.add(e);
+                        }
+                    }
+                }
+            }
+
+            // we iterate the sequence names and we replace them in the dataset with the index
+            // that it should have according to number of times we found it in the dataset
+            for (String seq : sequences.keySet()) {
+                List<TableValue> liste = sequences.get(seq);
+                long nextVal = getNextSequenceValue(seq, databaseConnection);
+                long idValue = nextVal - liste.size();
+
+                for (TableValue e : liste) {
+                    DefaultTable dt = (DefaultTable) table;
+                    dt.setValue(e.getRow(), e.getColumnName(), idValue);
+                    idValue++;
+                }
+            }
+        }
+    }
+
+    /**
+     * Retrieves the next value in a SQL Sequence.
+     *
+     * @param sequenceName
+     * @param databaseConnection
+     * @return
+     * @throws Exception
+     */
+    private long getNextSequenceValue(String sequenceName, IDatabaseConnection databaseConnection) throws Exception {
+        Statement st = databaseConnection.getConnection().createStatement();
+        ResultSet rs = st.executeQuery("SELECT " + sequenceName + ".nextval FROM dual");
+        rs.next();
+        return rs.getLong(1);
+    }
 
 	private void setupOrTeardown(DbUnitTestContext testContext, boolean isSetup,
 			Collection<AnnotationAttributes> annotations) throws Exception {
@@ -191,4 +279,33 @@ class DbUnitRunner {
 			return annotationAttributes;
 		}
 	}
+
+    /**
+     * Utility class to stock the row and columnName of the elements in the DataSet in which there is an
+     * Oracle Sequence to replace.
+     *
+     * @author cachavezley
+     */
+    private class TableValue {
+        private final int row;
+        private final String columnName;
+
+        private TableValue(int row, String columnName) {
+            this.row = row;
+            this.columnName = columnName;
+        }
+
+        private int getRow() {
+            return this.row;
+        }
+
+        private String getColumnName() {
+            return this.columnName;
+        }
+
+        @Override
+        public String toString() {
+            return "TableValue [row=" + this.row + ", columnName=" + this.columnName + "]";
+        }
+    }
 }

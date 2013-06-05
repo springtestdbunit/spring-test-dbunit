@@ -51,4 +51,27 @@ public @interface ExpectedDatabase {
 	 * @return Database assertion mode to use.
 	 */
 	DatabaseAssertionMode assertionMode() default DatabaseAssertionMode.DEFAULT;
+
+    /**
+     * Flag used to indicate that we want to change the sequence names in an XML file for their values in the database.
+     * <p>
+     *
+     * This allows us to use, for example, an xml file for the dataset that looks like this : <br>
+     * <code>
+     * <dataset>
+     * <MYTABLE ID="${SEQ_MYTABLE}" FOO="Hello" />
+     * <MYTABLE ID="${SEQ_MYTABLE}" FOO="World" />
+     * <OTHERTABLE ID="${SEQ_OTHERTABLE}" BAR="Hello" />
+     * <OTHERTABLE ID="${SEQ_OTHERTABLE}" BAR="World" />
+     * </dataset>
+     * </code>
+     *
+     * The {@link org.dbunit.dataset.IDataSet} however will contain the real ids. Each sequence in the database is only accessed once (to
+     * know its current value), and the rest of the values are calculated based on that value and the number of times
+     * the sequence name is declared in the xml file.
+     *
+     * @return <code>true</code> if we want to change the sequence names for their values in the database,
+     * <code>false</code> otherwise
+     */
+    boolean replaceSequenceIds() default false;
 }

@@ -208,8 +208,10 @@ public class DbUnitRule implements MethodRule {
 				this.nextStatement.evaluate();
 			} catch (Throwable e) {
 				this.testContext.setTestException(e);
+				throw e;
+			} finally {
+				runner.afterTestMethod(this.testContext);
 			}
-			runner.afterTestMethod(this.testContext);
 		}
 	}
 

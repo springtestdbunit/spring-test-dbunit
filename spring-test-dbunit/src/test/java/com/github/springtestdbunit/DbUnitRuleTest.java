@@ -18,6 +18,7 @@ package com.github.springtestdbunit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,13 +31,16 @@ import javax.sql.DataSource;
 
 import org.dbunit.database.IDatabaseConnection;
 import org.junit.Test;
+import org.junit.internal.runners.statements.Fail;
 import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
 
 import com.github.springtestdbunit.DbUnitRule.DbUnitTestContextAdapter;
 import com.github.springtestdbunit.dataset.DataSetLoader;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
 import com.github.springtestdbunit.operation.DatabaseOperationLookup;
 import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
+import com.github.springtestdbunit.testutils.NotSwallowedException;
 
 public class DbUnitRuleTest {
 
@@ -188,6 +192,25 @@ public class DbUnitRuleTest {
 		DatabaseOperationLookup lookup = dbUnitTestContextAdapter.getDatbaseOperationLookup();
 		assertNotNull(lookup);
 		assertEquals(DefaultDatabaseOperationLookup.class, lookup.getClass());
+	}
+
+	// Issue : https://github.com/springtestdbunit/spring-test-dbunit/issues/26
+	@Test
+	public void shouldPropagateExceptionThrownInFailingTest() throws Throwable {
+		final NotSwallowedException cause = new NotSwallowedException();
+		final Statement base = new Fail(cause);
+		final DbUnitRule rule = new DbUnitRule();
+		// only to satisfy apply signature
+		final Connection conn = mock(Connection.class);
+		final WithDataSource dummyTarget = new WithDataSource(conn);
+		final FrameworkMethod dummyMethod = new FrameworkMethod(dummyTarget.getClass().getMethod("test"));
+		final Statement decorated = rule.apply(base, dummyMethod, dummyTarget);
+		try {
+			decorated.evaluate();
+			fail("rule swallowed a test exception");
+		} catch (final NotSwallowedException actual) {
+			assertSame("rule modified the test failure cause", cause, actual);
+		}
 	}
 
 	static class Blank {

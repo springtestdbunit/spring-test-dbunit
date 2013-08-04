@@ -16,6 +16,9 @@
 package com.github.springtestdbunit;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -46,31 +49,25 @@ class DbUnitRunner {
 
 	/**
 	 * Called before a test method is executed to perform any database setup.
-	 * 
 	 * @param testContext The test context
 	 * @throws Exception
 	 */
 	public void beforeTestMethod(DbUnitTestContext testContext) throws Exception {
-		DatabaseSetup annotation = getLastAnnotation(testContext, DatabaseSetup.class);
-		if (annotation != null) {
-			setupOrTeardown(testContext, true, AnnotationAttributes.get(annotation));
-		}
+		Collection<DatabaseSetup> annotations = getAnnotations(testContext, DatabaseSetup.class);
+		setupOrTeardown(testContext, true, AnnotationAttributes.get(annotations));
 	}
 
 	/**
 	 * Called after a test method is executed to perform any database teardown and to check expected results.
-	 * 
 	 * @param testContext The test context
 	 * @throws Exception
 	 */
 	public void afterTestMethod(DbUnitTestContext testContext) throws Exception {
 		try {
-			verifyExpected(testContext, getLastAnnotation(testContext, ExpectedDatabase.class));
-			DatabaseTearDown annotation = getLastAnnotation(testContext, DatabaseTearDown.class);
+			verifyExpected(testContext, getAnnotations(testContext, ExpectedDatabase.class));
+			Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
 			try {
-				if (annotation != null) {
-					setupOrTeardown(testContext, false, AnnotationAttributes.get(annotation));
-				}
+				setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
 			} catch (RuntimeException e) {
 				if (testContext.getTestException() == null) {
 					throw e;
@@ -84,15 +81,21 @@ class DbUnitRunner {
 		}
 	}
 
-	private <T extends Annotation> T getLastAnnotation(DbUnitTestContext testContext, Class<T> annotationType) {
-		T foundAnnotation = AnnotationUtils.findAnnotation(testContext.getTestMethod(), annotationType);
-		if (foundAnnotation == null) {
-			foundAnnotation = AnnotationUtils.findAnnotation(testContext.getTestClass(), annotationType);
-		}
-		return foundAnnotation;
+	private <T extends Annotation> Collection<T> getAnnotations(DbUnitTestContext testContext, Class<T> annotationType) {
+		List<T> annotations = new ArrayList<T>();
+		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestClass(), annotationType));
+		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestMethod(), annotationType));
+		return annotations;
 	}
 
-	private void verifyExpected(DbUnitTestContext testContext, ExpectedDatabase annotation) throws Exception {
+	private <T extends Annotation> void addAnnotationToList(List<T> annotations, T annotation) {
+		if (annotation != null) {
+			annotations.add(annotation);
+		}
+	}
+
+	private void verifyExpected(DbUnitTestContext testContext, Collection<ExpectedDatabase> annotations)
+			throws Exception {
 		if (testContext.getTestException() != null) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Skipping @DatabaseTest expectation due to test exception "
@@ -102,13 +105,15 @@ class DbUnitRunner {
 		}
 		IDatabaseConnection connection = testContext.getConnection();
 		IDataSet actualDataSet = connection.createDataSet();
-		IDataSet expectedDataSet = loadDataset(testContext, annotation.value());
-		if (expectedDataSet != null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
+		for (ExpectedDatabase annotation : annotations) {
+			IDataSet expectedDataSet = loadDataset(testContext, annotation.value());
+			if (expectedDataSet != null) {
+				if (logger.isDebugEnabled()) {
+					logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
+				}
+				DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
+				assertion.assertEquals(expectedDataSet, actualDataSet);
 			}
-			DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
-			assertion.assertEquals(expectedDataSet, actualDataSet);
 		}
 	}
 
@@ -123,22 +128,24 @@ class DbUnitRunner {
 		return null;
 	}
 
-	private void setupOrTeardown(DbUnitTestContext testContext, boolean isSetup, AnnotationAttributes annotation)
-			throws Exception {
+	private void setupOrTeardown(DbUnitTestContext testContext, boolean isSetup,
+			Collection<AnnotationAttributes> annotations) throws Exception {
 		IDatabaseConnection connection = testContext.getConnection();
 		DatabaseOperation lastOperation = null;
-		for (String dataSetLocation : annotation.getValue()) {
-			DatabaseOperation operation = annotation.getType();
-			org.dbunit.operation.DatabaseOperation dbUnitDatabaseOperation = getDbUnitDatabaseOperation(testContext,
-					operation, lastOperation);
-			IDataSet dataSet = loadDataset(testContext, dataSetLocation);
-			if (dataSet != null) {
-				if (logger.isDebugEnabled()) {
-					logger.debug("Executing " + (isSetup ? "Setup" : "Teardown") + " of @DatabaseTest using "
-							+ operation + " on " + dataSetLocation);
+		for (AnnotationAttributes annotation : annotations) {
+			for (String dataSetLocation : annotation.getValue()) {
+				DatabaseOperation operation = annotation.getType();
+				org.dbunit.operation.DatabaseOperation dbUnitDatabaseOperation = getDbUnitDatabaseOperation(
+						testContext, operation, lastOperation);
+				IDataSet dataSet = loadDataset(testContext, dataSetLocation);
+				if (dataSet != null) {
+					if (logger.isDebugEnabled()) {
+						logger.debug("Executing " + (isSetup ? "Setup" : "Teardown") + " of @DatabaseTest using "
+								+ operation + " on " + dataSetLocation);
+					}
+					dbUnitDatabaseOperation.execute(connection, dataSet);
+					lastOperation = operation;
 				}
-				dbUnitDatabaseOperation.execute(connection, dataSet);
-				lastOperation = operation;
 			}
 		}
 	}
@@ -176,8 +183,12 @@ class DbUnitRunner {
 			return this.value;
 		}
 
-		public static <T extends Annotation> AnnotationAttributes get(T annotation) {
-			return new AnnotationAttributes(annotation);
+		public static <T extends Annotation> Collection<AnnotationAttributes> get(Collection<T> annotations) {
+			List<AnnotationAttributes> annotationAttributes = new ArrayList<AnnotationAttributes>();
+			for (T annotation : annotations) {
+				annotationAttributes.add(new AnnotationAttributes(annotation));
+			}
+			return annotationAttributes;
 		}
 	}
 }

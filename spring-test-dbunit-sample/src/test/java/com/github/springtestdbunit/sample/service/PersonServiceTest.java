@@ -20,14 +20,13 @@ import com.github.springtestdbunit.sample.entity.Person;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
-@DatabaseSetup("sampleData.xml")
-@ExpectedDatabase("sampleData.xml")
 public class PersonServiceTest {
 
 	@Autowired
 	private PersonService personService;
 
 	@Test
+	@DatabaseSetup("sampleData.xml")
 	public void testFind() throws Exception {
 		List<Person> personList = this.personService.find("hil");
 		assertEquals(1, personList.size());
@@ -35,6 +34,7 @@ public class PersonServiceTest {
 	}
 
 	@Test
+	@DatabaseSetup("sampleData.xml")
 	@ExpectedDatabase("expectedData.xml")
 	public void testRemove() throws Exception {
 		this.personService.remove(1);

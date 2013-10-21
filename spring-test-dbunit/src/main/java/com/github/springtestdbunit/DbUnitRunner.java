@@ -64,7 +64,7 @@ class DbUnitRunner {
 	 */
 	public void afterTestMethod(DbUnitTestContext testContext) throws Exception {
 		try {
-			verifyExpected(testContext, getAnnotations(testContext, ExpectedDatabase.class));
+			verifyExpected(testContext, getLastAnnotation(testContext, ExpectedDatabase.class));
 			Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
 			try {
 				setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
@@ -81,6 +81,14 @@ class DbUnitRunner {
 		}
 	}
 
+	private ExpectedDatabase getLastAnnotation(DbUnitTestContext testContext, Class<ExpectedDatabase> annotationType) {
+		ExpectedDatabase annotation = AnnotationUtils.findAnnotation(testContext.getTestMethod(), annotationType);
+		if (annotation == null) {
+			annotation = AnnotationUtils.findAnnotation(testContext.getTestClass(), annotationType);
+		}
+		return annotation;
+	}
+
 	private <T extends Annotation> Collection<T> getAnnotations(DbUnitTestContext testContext, Class<T> annotationType) {
 		List<T> annotations = new ArrayList<T>();
 		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestClass(), annotationType));
@@ -94,8 +102,7 @@ class DbUnitRunner {
 		}
 	}
 
-	private void verifyExpected(DbUnitTestContext testContext, Collection<ExpectedDatabase> annotations)
-			throws Exception {
+	private void verifyExpected(DbUnitTestContext testContext, ExpectedDatabase annotation) throws Exception {
 		if (testContext.getTestException() != null) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Skipping @DatabaseTest expectation due to test exception "
@@ -103,9 +110,9 @@ class DbUnitRunner {
 			}
 			return;
 		}
-		IDatabaseConnection connection = testContext.getConnection();
-		IDataSet actualDataSet = connection.createDataSet();
-		for (ExpectedDatabase annotation : annotations) {
+		if (annotation != null) {
+			IDatabaseConnection connection = testContext.getConnection();
+			IDataSet actualDataSet = connection.createDataSet();
 			IDataSet expectedDataSet = loadDataset(testContext, annotation.value());
 			if (expectedDataSet != null) {
 				if (logger.isDebugEnabled()) {

@@ -77,7 +77,7 @@ It is also possible to reference specific resource locations, for example:
 
     @DatabaseSetup("/META-INF/dbtest/sampleData.xml")
 
-By default setup will perform a operation, this means that all data from tables referenced in the DataSet XML will be removed before inserting new rows.  The standard DBUnit operations are supported using type attribute.  See the JavaDocs for full details.
+By default setup will perform a CLEAN_INSERT operation, this means that all data from tables referenced in the DataSet XML will be removed before inserting new rows.  The standard DBUnit operations are supported using type attribute.  See the JavaDocs for full details.
 
 
 TearDown

@@ -33,6 +33,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.annotation.ExpectedQuery;
 import com.github.springtestdbunit.assertion.DatabaseAssertion;
 import com.github.springtestdbunit.dataset.DataSetLoader;
 
@@ -64,6 +65,7 @@ class DbUnitRunner {
 	 */
 	public void afterTestMethod(DbUnitTestContext testContext) throws Exception {
 		try {
+		    verifyExpectedQuery(testContext, getAnnotations(testContext, ExpectedQuery.class));
 			verifyExpected(testContext, getAnnotations(testContext, ExpectedDatabase.class));
 			Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
 			try {
@@ -94,6 +96,30 @@ class DbUnitRunner {
 		}
 	}
 
+    private void verifyExpectedQuery(DbUnitTestContext testContext,
+                                Collection<ExpectedQuery> annotations) throws Exception {
+        if(testContext.getTestException() != null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Skipping @DatabaseTest expectation due to test exception " +
+                             testContext.getTestException().getClass());
+            }
+            return;
+        }
+        IDatabaseConnection connection = testContext.getConnection();
+        for(ExpectedQuery annotation : annotations) {
+            IDataSet expectedDataSet = loadDataset(testContext, annotation.value());
+            String sqlQuery = annotation.sqlQuery();
+            String tableName = annotation.tableName();
+            if(expectedDataSet != null) {
+                if(logger.isDebugEnabled()) {
+                    logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
+                }
+                DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
+                assertion.assertEqualsByQuery(expectedDataSet, connection, sqlQuery, tableName);
+            }
+        }
+    }	
+	
 	private void verifyExpected(DbUnitTestContext testContext, Collection<ExpectedDatabase> annotations)
 			throws Exception {
 		if (testContext.getTestException() != null) {

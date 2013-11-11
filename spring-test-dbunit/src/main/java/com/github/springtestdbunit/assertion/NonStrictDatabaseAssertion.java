@@ -15,11 +15,13 @@
  */
 package com.github.springtestdbunit.assertion;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.dbunit.Assertion;
 import org.dbunit.DatabaseUnitException;
+import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.Column;
 import org.dbunit.dataset.Columns;
 import org.dbunit.dataset.DataSetException;
@@ -46,6 +48,14 @@ class NonStrictDatabaseAssertion implements DatabaseAssertion {
 		}
 	}
 
+    public void assertEqualsByQuery(IDataSet expectedDataSet, IDatabaseConnection connection,
+                                    String sqlQuery, String tableName) throws DatabaseUnitException, SQLException {
+        ITable expectedTable = expectedDataSet.getTable(tableName);
+        ITable actualTable = connection.createQueryTable(tableName, sqlQuery);
+        String[] ignoredColumns = getColumnsToIgnore(expectedTable.getTableMetaData(), actualTable.getTableMetaData());
+        Assertion.assertEqualsIgnoreCols(expectedTable, actualTable, ignoredColumns);
+    }
+	
 	private String[] getColumnsToIgnore(ITableMetaData expectedMetaData, ITableMetaData actualMetaData)
 			throws DataSetException {
 		Column[] notSpecifiedInExpected = Columns.getColumnDiff(expectedMetaData, actualMetaData).getActual();
@@ -55,4 +65,5 @@ class NonStrictDatabaseAssertion implements DatabaseAssertion {
 		}
 		return result.toArray(new String[result.size()]);
 	}
+
 }

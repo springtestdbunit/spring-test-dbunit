@@ -15,9 +15,13 @@
  */
 package com.github.springtestdbunit.assertion;
 
+import java.sql.SQLException;
+
 import org.dbunit.Assertion;
 import org.dbunit.DatabaseUnitException;
+import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ITable;
 
 /**
  * Default database assertion strategy which uses DbUnit {@link Assertion#assertEquals(IDataSet, IDataSet)}.
@@ -32,4 +36,15 @@ class DefaultDatabaseAssertion implements DatabaseAssertion {
 	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException {
 		Assertion.assertEquals(expectedDataSet, actualDataSet);
 	}
+	
+	/**
+	 * Uses DbUnit {@link Assertion#assertEquals(ITable, ITable)}.
+	 */
+    public void assertEqualsByQuery(IDataSet expectedDataSet, IDatabaseConnection connection,
+                                    String sqlQuery, String tableName) throws DatabaseUnitException, SQLException {
+        ITable expectedTable = expectedDataSet.getTable(tableName);
+        ITable actualTable = connection.createQueryTable(tableName, sqlQuery);
+        Assertion.assertEquals(expectedTable, actualTable);
+    }
+    
 }

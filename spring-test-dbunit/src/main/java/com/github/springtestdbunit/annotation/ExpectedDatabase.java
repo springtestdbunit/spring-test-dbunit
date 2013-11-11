@@ -49,7 +49,21 @@ public @interface ExpectedDatabase {
 
 	/**
 	 * Database assertion mode to use. Default is {@link DatabaseAssertionMode#DEFAULT}.
-	 * @return Database assertion mode to use.
+	 * @return Database assertion mode to use
 	 */
 	DatabaseAssertionMode assertionMode() default DatabaseAssertionMode.DEFAULT;
+
+	/**
+	 * Optional table name that can be used to limit the comparison to a specific table.
+	 * @return the table name
+	 */
+	String table() default "";
+
+	/**
+	 * Optional SQL to retrieve the actual subset of the table rows from the database. NOTE: a {@link #table() table
+	 * name} must also be specified when using a query.
+	 * @return the SQL Query
+	 */
+	String query() default "";
+
 }

@@ -15,7 +15,10 @@
  */
 package com.github.springtestdbunit.assertion;
 
+import java.sql.SQLException;
+
 import org.dbunit.DatabaseUnitException;
+import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 
 /**
@@ -33,4 +36,15 @@ public interface DatabaseAssertion {
 	 */
 	void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException;
 
+	/**
+	 * Assert that the table from the dataset and the table generated from the sql query are conceptually equal.
+	 * 
+	 * @param expectedDataSet the expected dataset
+	 * @param connection the IDatabaseConnection
+	 * @param sqlQuery query that is used to generate the actual table data to be compared.
+	 * @param tableName name of the table that is compared.
+	 * @throws DatabaseUnitException if the tables data are not equal.
+	 * @throws SQLException 
+	 */
+	void assertEqualsByQuery(IDataSet expectedDataSet, IDatabaseConnection connection, String sqlQuery, String tableName) throws DatabaseUnitException, SQLException;
 }

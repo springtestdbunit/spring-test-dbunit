@@ -1,6 +1,6 @@
 package com.github.springtestdbunit.sample.service;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 

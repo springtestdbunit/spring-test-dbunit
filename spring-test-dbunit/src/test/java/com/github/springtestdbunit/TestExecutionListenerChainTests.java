@@ -16,7 +16,7 @@
 
 package com.github.springtestdbunit;
 
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.io.IOError;

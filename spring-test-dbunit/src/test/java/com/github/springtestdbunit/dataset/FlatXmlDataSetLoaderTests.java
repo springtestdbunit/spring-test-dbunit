@@ -16,8 +16,7 @@
 
 package com.github.springtestdbunit.dataset;
 
-import static junit.framework.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import org.dbunit.dataset.IDataSet;
 import org.junit.Before;

@@ -18,11 +18,13 @@ package com.github.springtestdbunit.assertion;
 
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ITable;
 
 /**
  * Database assertion strategy interface.
  * 
  * @author Mario Zagar
+ * @author Sunitha Rajarathnam
  */
 public interface DatabaseAssertion {
 
@@ -33,5 +35,13 @@ public interface DatabaseAssertion {
 	 * @throws DatabaseUnitException if the datasets are not equal
 	 */
 	void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException;
+
+	/**
+	 * Assert that the specified {@link IDataSet dataSets} are conceptually equal.
+	 * @param expectedTable the expected table
+	 * @param actualTable the actual table
+	 * @throws DatabaseUnitException if the tables are not equal
+	 */
+	void assertEquals(ITable expectedTable, ITable actualTable) throws DatabaseUnitException;
 
 }

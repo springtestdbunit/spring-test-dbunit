@@ -26,6 +26,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ITable;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -43,6 +44,7 @@ import com.github.springtestdbunit.dataset.DataSetLoader;
  * 
  * @author Phillip Webb
  * @author Mario Zagar
+ * @author Sunitha Rajarathnam
  */
 class DbUnitRunner {
 
@@ -105,15 +107,28 @@ class DbUnitRunner {
 			return;
 		}
 		IDatabaseConnection connection = testContext.getConnection();
-		IDataSet actualDataSet = connection.createDataSet();
 		for (ExpectedDatabase annotation : annotations) {
+			String query = annotation.query();
+			String table = annotation.table();
 			IDataSet expectedDataSet = loadDataset(testContext, annotation.value());
 			if (expectedDataSet != null) {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
 				}
 				DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
-				assertion.assertEquals(expectedDataSet, actualDataSet);
+				if (StringUtils.hasLength(query)) {
+					Assert.hasLength(table, "The table name must be specified when using a SQL query");
+					ITable expectedTable = expectedDataSet.getTable(table);
+					ITable actualTable = connection.createQueryTable(table, query);
+					assertion.assertEquals(expectedTable, actualTable);
+				} else if (StringUtils.hasLength(table)) {
+					ITable actualTable = connection.createTable(table);
+					ITable expectedTable = expectedDataSet.getTable(table);
+					assertion.assertEquals(expectedTable, actualTable);
+				} else {
+					IDataSet actualDataSet = connection.createDataSet();
+					assertion.assertEquals(expectedDataSet, actualDataSet);
+				}
 			}
 		}
 	}

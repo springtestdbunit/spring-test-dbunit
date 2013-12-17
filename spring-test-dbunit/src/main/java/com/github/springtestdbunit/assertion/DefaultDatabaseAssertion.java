@@ -19,18 +19,22 @@ package com.github.springtestdbunit.assertion;
 import org.dbunit.Assertion;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ITable;
 
 /**
  * Default database assertion strategy which uses DbUnit {@link Assertion#assertEquals(IDataSet, IDataSet)}.
  * 
  * @author Mario Zagar
+ * @author Sunitha Rajarathnam
  */
 class DefaultDatabaseAssertion implements DatabaseAssertion {
 
-	/**
-	 * Uses DbUnit {@link Assertion#assertEquals(IDataSet, IDataSet)}.
-	 */
 	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException {
 		Assertion.assertEquals(expectedDataSet, actualDataSet);
 	}
+
+	public void assertEquals(ITable expectedTable, ITable actualTable) throws DatabaseUnitException {
+		Assertion.assertEquals(expectedTable, actualTable);
+	}
+
 }

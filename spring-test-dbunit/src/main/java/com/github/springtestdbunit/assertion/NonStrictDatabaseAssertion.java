@@ -33,18 +33,22 @@ import org.dbunit.dataset.ITableMetaData;
  * specified in expected data set but possibly exist in actual data set.
  * 
  * @author Mario Zagar
+ * @author Sunitha Rajarathnam
  */
 class NonStrictDatabaseAssertion implements DatabaseAssertion {
 
 	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException {
-		if (expectedDataSet != actualDataSet) {
-			for (String tableName : expectedDataSet.getTableNames()) {
-				ITable expected = expectedDataSet.getTable(tableName);
-				ITable actual = actualDataSet.getTable(tableName);
-				String[] ignoredColumns = getColumnsToIgnore(expected.getTableMetaData(), actual.getTableMetaData());
-				Assertion.assertEqualsIgnoreCols(expected, actual, ignoredColumns);
-			}
+		for (String tableName : expectedDataSet.getTableNames()) {
+			ITable expected = expectedDataSet.getTable(tableName);
+			ITable actual = actualDataSet.getTable(tableName);
+			String[] ignoredColumns = getColumnsToIgnore(expected.getTableMetaData(), actual.getTableMetaData());
+			Assertion.assertEqualsIgnoreCols(expected, actual, ignoredColumns);
 		}
+	}
+
+	public void assertEquals(ITable expectedTable, ITable actualTable) throws DatabaseUnitException {
+		String[] ignoredColumns = getColumnsToIgnore(expectedTable.getTableMetaData(), actualTable.getTableMetaData());
+		Assertion.assertEqualsIgnoreCols(expectedTable, actualTable, ignoredColumns);
 	}
 
 	private String[] getColumnsToIgnore(ITableMetaData expectedMetaData, ITableMetaData actualMetaData)
@@ -56,4 +60,5 @@ class NonStrictDatabaseAssertion implements DatabaseAssertion {
 		}
 		return result.toArray(new String[result.size()]);
 	}
+
 }

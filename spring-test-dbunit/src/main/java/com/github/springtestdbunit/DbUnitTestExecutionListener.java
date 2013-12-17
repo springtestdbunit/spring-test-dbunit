@@ -24,11 +24,13 @@ import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dbunit.database.IDatabaseConnection;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.Conventions;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.util.Assert;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -84,11 +86,13 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			logger.debug("Preparing test instance " + testContext.getTestClass() + " for DBUnit");
 		}
 
+		DbUnitTestContextAdapter dbUnitTestContext = new DbUnitTestContextAdapter(testContext);
+
 		String databaseConnectionBeanName = null;
 		Class<? extends DataSetLoader> dataSetLoaderClass = FlatXmlDataSetLoader.class;
 		Class<? extends DatabaseOperationLookup> databaseOperationLookupClass = DefaultDatabaseOperationLookup.class;
 
-		DbUnitConfiguration configuration = testContext.getTestClass().getAnnotation(DbUnitConfiguration.class);
+		DbUnitConfiguration configuration = dbUnitTestContext.getTestClass().getAnnotation(DbUnitConfiguration.class);
 		if (configuration != null) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Using @DbUnitConfiguration configuration");
@@ -99,19 +103,19 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		}
 
 		if (!StringUtils.hasLength(databaseConnectionBeanName)) {
-			databaseConnectionBeanName = getDatabaseConnectionUsingCommonBeanNames(testContext);
+			databaseConnectionBeanName = getDatabaseConnectionUsingCommonBeanNames(dbUnitTestContext);
 		}
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("DBUnit tests will run using databaseConnection \"" + databaseConnectionBeanName
 					+ "\", datasets will be loaded using " + dataSetLoaderClass);
 		}
-		prepareDatabaseConnection(testContext, databaseConnectionBeanName);
-		prepareDataSetLoader(testContext, dataSetLoaderClass);
-		prepareDatabaseOperationLookup(testContext, databaseOperationLookupClass);
+		prepareDatabaseConnection(dbUnitTestContext, databaseConnectionBeanName);
+		prepareDataSetLoader(dbUnitTestContext, dataSetLoaderClass);
+		prepareDatabaseOperationLookup(dbUnitTestContext, databaseOperationLookupClass);
 	}
 
-	private String getDatabaseConnectionUsingCommonBeanNames(TestContext testContext) {
+	private String getDatabaseConnectionUsingCommonBeanNames(DbUnitTestContextAdapter testContext) {
 		for (String beanName : COMMON_DATABASE_CONNECTION_BEAN_NAMES) {
 			if (testContext.getApplicationContext().containsBean(beanName)) {
 				return beanName;
@@ -122,7 +126,8 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 						+ Arrays.asList(COMMON_DATABASE_CONNECTION_BEAN_NAMES));
 	}
 
-	private void prepareDatabaseConnection(TestContext testContext, String databaseConnectionBeanName) throws Exception {
+	private void prepareDatabaseConnection(DbUnitTestContextAdapter testContext, String databaseConnectionBeanName)
+			throws Exception {
 		Object databaseConnection = testContext.getApplicationContext().getBean(databaseConnectionBeanName);
 		if (databaseConnection instanceof DataSource) {
 			databaseConnection = DatabaseDataSourceConnectionFactoryBean.newConnection((DataSource) databaseConnection);
@@ -131,7 +136,8 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		testContext.setAttribute(CONNECTION_ATTRIBUTE, databaseConnection);
 	}
 
-	private void prepareDataSetLoader(TestContext testContext, Class<? extends DataSetLoader> dataSetLoaderClass) {
+	private void prepareDataSetLoader(DbUnitTestContextAdapter testContext,
+			Class<? extends DataSetLoader> dataSetLoaderClass) {
 		try {
 			testContext.setAttribute(DATA_SET_LOADER_ATTRIBUTE, dataSetLoaderClass.newInstance());
 		} catch (Exception e) {
@@ -139,7 +145,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		}
 	}
 
-	private void prepareDatabaseOperationLookup(TestContext testContext,
+	private void prepareDatabaseOperationLookup(DbUnitTestContextAdapter testContext,
 			Class<? extends DatabaseOperationLookup> databaseOperationLookupClass) {
 		try {
 			testContext.setAttribute(DATABASE_OPERATION_LOOKUP_ATTRIBUTE, databaseOperationLookupClass.newInstance());
@@ -159,7 +165,30 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		runner.afterTestMethod(new DbUnitTestContextAdapter(testContext));
 	}
 
+	/**
+	 * Adapter class to convert Spring's {@link TestContext} to a {@link DbUnitTestContext}. Since Spring 4.0 change the
+	 * TestContext class from a class to an interface this method uses reflection.
+	 */
 	private static class DbUnitTestContextAdapter implements DbUnitTestContext {
+
+		private static final Method GET_TEST_CLASS;
+		private static final Method GET_TEST_METHOD;
+		private static final Method GET_TEST_EXCEPTION;
+		private static final Method GET_APPLICATION_CONTEXT;
+		private static final Method GET_ATTRIBUTE;
+		private static final Method SET_ATTRIBUTE;
+		static {
+			try {
+				GET_TEST_CLASS = TestContext.class.getMethod("getTestClass");
+				GET_TEST_METHOD = TestContext.class.getMethod("getTestMethod");
+				GET_TEST_EXCEPTION = TestContext.class.getMethod("getTestException");
+				GET_APPLICATION_CONTEXT = TestContext.class.getMethod("getApplicationContext");
+				GET_ATTRIBUTE = TestContext.class.getMethod("getAttribute", String.class);
+				SET_ATTRIBUTE = TestContext.class.getMethod("setAttribute", String.class, Object.class);
+			} catch (Exception ex) {
+				throw new IllegalStateException(ex);
+			}
+		}
 
 		private TestContext testContext;
 
@@ -168,27 +197,40 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		}
 
 		public IDatabaseConnection getConnection() {
-			return (IDatabaseConnection) this.testContext.getAttribute(CONNECTION_ATTRIBUTE);
+			return (IDatabaseConnection) getAttribute(CONNECTION_ATTRIBUTE);
 		}
 
 		public DataSetLoader getDataSetLoader() {
-			return (DataSetLoader) this.testContext.getAttribute(DATA_SET_LOADER_ATTRIBUTE);
+			return (DataSetLoader) getAttribute(DATA_SET_LOADER_ATTRIBUTE);
 		}
 
 		public DatabaseOperationLookup getDatbaseOperationLookup() {
-			return (DatabaseOperationLookup) this.testContext.getAttribute(DATABASE_OPERATION_LOOKUP_ATTRIBUTE);
+			return (DatabaseOperationLookup) getAttribute(DATABASE_OPERATION_LOOKUP_ATTRIBUTE);
 		}
 
 		public Class<?> getTestClass() {
-			return this.testContext.getTestClass();
+			return (Class<?>) ReflectionUtils.invokeMethod(GET_TEST_CLASS, this.testContext);
 		}
 
 		public Method getTestMethod() {
-			return this.testContext.getTestMethod();
+			return (Method) ReflectionUtils.invokeMethod(GET_TEST_METHOD, this.testContext);
 		}
 
 		public Throwable getTestException() {
-			return this.testContext.getTestException();
+			return (Throwable) ReflectionUtils.invokeMethod(GET_TEST_EXCEPTION, this.testContext);
 		}
+
+		public ApplicationContext getApplicationContext() {
+			return (ApplicationContext) ReflectionUtils.invokeMethod(GET_APPLICATION_CONTEXT, this.testContext);
+		}
+
+		public Object getAttribute(String name) {
+			return ReflectionUtils.invokeMethod(GET_ATTRIBUTE, this.testContext, name);
+		}
+
+		public void setAttribute(String name, Object value) {
+			ReflectionUtils.invokeMethod(SET_ATTRIBUTE, this.testContext, name, value);
+		}
+
 	}
 }

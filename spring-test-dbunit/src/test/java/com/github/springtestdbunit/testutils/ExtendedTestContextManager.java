@@ -18,6 +18,7 @@ package com.github.springtestdbunit.testutils;
 
 import java.lang.reflect.Constructor;
 
+import org.springframework.test.annotation.DirtiesContext.HierarchyMode;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestContextManager;
 
@@ -32,7 +33,7 @@ public class ExtendedTestContextManager extends TestContextManager {
 
 	public ExtendedTestContextManager(Class<?> testClass) throws Exception {
 		super(testClass);
-		getTestContext().markApplicationContextDirty();
+		getTestContext().markApplicationContextDirty(HierarchyMode.CURRENT_LEVEL);
 		Constructor<?> constructor = testClass.getDeclaredConstructor();
 		constructor.setAccessible(true);
 		this.testInstance = constructor.newInstance();

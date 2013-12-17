@@ -5,13 +5,11 @@ Introduction
 
 Spring DBUnit provides integration between the Spring testing framework and the popular DBUnit project.  It allows you to setup and teardown database tables using simple annotations as well as checking expected table contents once a test completes.
 
-The project can be configured to run DBUnit tests either using a Spring TestExecutionListener or a JUnit @Rule.  Using a JUnit @Rule allows for easier configuration but is only available if you are using JUnit 4.7 or above.
+The project can be configured to run DBUnit tests using a Spring TestExecutionListener.
 
 
-Configuration using a Spring TestExecutionListener
-==================================================
-
-NOTE: This section should be followed when configuring DBUnit tests to run using a Spring TestExecutionListener.  See below if you want to configure DBUnit tests using a JUnit @Rule.
+Configuration
+=============
 
 To have Spring process DBUnit annotations you must first configure your tests to use the DbUnitTestExecutionListener class.  To do this you need to use the Spring @TestExecutionListeners annotation.  Generally, as well as DbUnitTestExecutionListener, you will also want to include the standard Spring listeners as well.  Here are the annotations for a typical JUnit 4 test:
 
@@ -34,26 +32,6 @@ In order to access the database, Spring DBUnit requires a bean to be registered 
     </bean>
 
 Once you have configured the DbUnitTestExecutionListener and provided the bean to access you database you can use the DBUnit annotations.
-
-
-Configuration using a JUnit @Rule
-=================================
-
-NOTE: JUnit @Rule configuration is not currently working with Spring 3.1 (https://jira.springsource.org/browse/SPR-9232), until this issue is resolved please use the TestExecutionListener.
-
-This section should be followed when configuring DBUnit tests to run using a JUnit 4.7+ @Rule.   See above if you want to configure DBUnit tests using a Spring TestExecutionListener.
-
-To have JUnit process DBUnit annotation you must configure your tests to use the DbUnitRule @Rule.  To do this you need to use the JUnit @Rule annotation in conjunction with the DbUnitRule class.
-
-    @Rule
-    public DbUnitRule dbUnit = new DbUnitRule();
-
-You will also need to ensure that your test class provides access to a DataSource or IDatabaseConnection.  You can either use the setDataSource or setDatabaseConnection methods on the rule or, more commonly, inject a datasource to a private field of your test.
-
-    @Autowired
-    private DataSource dataSource;
-
-Once your rule is defined you can use the DBUnit annotations.
 
 
 Setup and TearDown
@@ -105,7 +83,7 @@ Note:  If you are using this annotation in conjunction with a @Transactional tes
 Transactions
 ============
 
-If you have configured DBUnit tests to run using the are DbUnitTestExecutionListener and are also using the TransactionalTestExecutionListener you may experience problems with transactions not being started before your data is setup, or being rolled back before expected results can be verified.  In order to support @Transactional tests with DBUnit you should use the TransactionDbUnitTestExecutionListener class.  
+If you have configured DBUnit tests to run using the are DbUnitTestExecutionListener and are also using the TransactionalTestExecutionListener you may experience problems with transactions not being started before your data is setup, or being rolled back before expected results can be verified.  In order to support @Transactional tests with DBUnit you should use the TransactionDbUnitTestExecutionListener class.
 
 
 Here are the annotations for a typical JUnit 4 test:
@@ -123,9 +101,7 @@ Transactions start before @DatabaseSetup and end after @DatabaseTearDown and @Ex
 Advanced configuration of the DbUnitTestExecutionListener
 =========================================================
 
-NOTE: This section only applies when you are using the DbUnitTestExecutionListener.  See below if you are using a JUnit @Rule.
-
-The @DbUnitConfiguration annotation can be used if you need to configure advanced options for DBUnit.  
+The @DbUnitConfiguration annotation can be used if you need to configure advanced options for DBUnit.
 
 The databaseConnection attribute allows you to specify a specific bean name from the Spring Context that contains the database connection.   When not specified the names or can be used.  The bean must be either an IDatabaseConnection or a DataSource.
 
@@ -134,25 +110,15 @@ The dataSetLoader attribute allows you to specify a custom loader that will be u
 The databaseOperationLookup attribute allows you to specify a custom lookup strategy for DBUnit database operations (see below).
 
 
-Advanced configuration of the DbUnitRule
-========================================
-
-NOTE: This section only applies when you are using the DBUnitRule JUnit @Rule.  See above if you are using the DbUnitTestExecutionListener.
-
-The DBUnitRule JUnit rule will inspect private fields of your test class in order to configure itself.  If your test includes either a DataSource field or an IDatabaseConnection then this will be used to obtain a database connection.  You can also include a DataSetLoader field if you want to use a custom loader when reading datasets and a custom DatabaseOperationLookup (see below).
-
-If you need more fine-grain control you can also call the setter methods directly on the rule.
-
-
 Custom IDatabaseConnections
 ===========================
 
 In some situations you may need to create an IDatabaseConnection with a specific DBUnit configuration.  Unfortunately, the standard DBUnit DatabaseConfig class cannot be easily using with Spring.  In order to overcome this limitation, the DatabaseConfigBean provides an alternative method to configure a connection; with  standard getter/setter access provided for all configuration options.  The DatabaseDataSourceConnectionFactoryBean accepts a configuration property and should be used to construct the final connection.  Here is a typical example:
- 
+
     <bean id="dbUnitDatabaseConfig" class="com.github.springtestdbunit.bean.DatabaseConfigBean">
     	<property name="skipOracleRecyclebinTables" value="true"/>
     </bean>
-	
+
     <bean id="dbUnitDatabaseConnection" class="com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean">
     	<property name="databaseConfig" ref="dbUnitDatabaseConfig"/>
     </bean>

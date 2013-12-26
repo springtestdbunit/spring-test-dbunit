@@ -46,6 +46,10 @@
 			<name>Mario Zagar</name>
 			<url>https://github.com/mzagar</url>
 		</developer>
+        <developer>
+            <name>Ivica Obestar</name>
+            <url>https://github.com/iobestar</url>
+        </developer>
 	</developers>
 	<build>
 		<plugins>

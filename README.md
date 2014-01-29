@@ -14,14 +14,13 @@ class. To do this you need to use the Spring `@TestExecutionListeners` annotatio
 `DbUnitTestExecutionListener`, you will also want to include the standard Spring listeners as well. Here are the
 annotations for a typical JUnit 4 test:
 
-```java
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
-		DirtiesContextTestExecutionListener.class,
-		TransactionalTestExecutionListener.class,
-		DbUnitTestExecutionListener.class })
-```
+    @RunWith(SpringJUnit4ClassRunner.class)
+    @ContextConfiguration
+    @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+    		DirtiesContextTestExecutionListener.class,
+     		TransactionalTestExecutionListener.class,
+    		DbUnitTestExecutionListener.class })
+
 
 See the Spring JavaDocs for details of the standard listeners.
 
@@ -30,14 +29,12 @@ default a bean named or can be used (see the Advanced Configuration section belo
 The bean can reference either a `IDatabaseConnection` or more typically a standard Java `DataSource`. Here is a typical
 configuration for accessing an in-memory hypersonic database:
 
-```xml
-<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-	<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
-	<property name="url" value="jdbc:hsqldb:mem:paging" />
-	<property name="username" value="sa" />
-	<property name="password" value="" />
-</bean>
-```
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+    	<property name="url" value="jdbc:hsqldb:mem:paging" />
+    	<property name="username" value="sa" />
+    	<property name="password" value="" />
+    </bean>
 
 Once you have configured the `DbUnitTestExecutionListener` and provided the bean to access you database you can use the
 DBUnit annotations.
@@ -63,15 +60,11 @@ formats (see below).
 Here is a typical setup annotation. In this case a file named `sampleData.xml` is contained in the same package as the
 test class.
 
-```java
-@DatabaseSetup("sampleData.xml")
-```
+    @DatabaseSetup("sampleData.xml")
 
 It is also possible to reference specific resource locations, for example:
 
-```java
-@DatabaseSetup("/META-INF/dbtest/sampleData.xml")
-```
+    @DatabaseSetup("/META-INF/dbtest/sampleData.xml")
 
 By default setup will perform a `CLEAN_INSERT` operation, this means that all data from tables referenced in the
 DataSet  XML will be removed before inserting new rows. The standard DBUnit operations are supported using type
@@ -97,9 +90,8 @@ single test method or a class. When applied at the class level verification occu
 The `@ExpectedDatabase` annotation takes a value attribute that references the DataSet file used to verify results.
 Here is a typical example:
 
-```java
-@ExpectedDatabase("expectedData.xml")
-```
+    @ExpectedDatabase("expectedData.xml")
+
 
 The `@ExpectedDatabase` annotation supports two different modes. `DatabaseAssertionMode.DEFAULT` operates as any
 standard DbUnit test, performing a complete compare of the expected and actual datasets.
@@ -121,14 +113,12 @@ DBUnit you should use the `TransactionDbUnitTestExecutionListener` class.
 
 Here are the annotations for a typical JUnit 4 test:
 
-```java
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
-@Transactional
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
-		DirtiesContextTestExecutionListener.class,
-		TransactionDbUnitTestExecutionListener.class })
-```
+    @RunWith(SpringJUnit4ClassRunner.class)
+    @ContextConfiguration
+    @Transactional
+    @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+    		DirtiesContextTestExecutionListener.class,
+    		TransactionDbUnitTestExecutionListener.class })
 
 Transactions start before `@DatabaseSetup` and end after `@DatabaseTearDown` and `@ExpectedDatabase`.
 
@@ -155,15 +145,12 @@ the `DatabaseConfigBean` provides an alternative method to configure a connectio
 provided for all configuration options. The `DatabaseDataSourceConnectionFactoryBean` accepts a configuration property
 and should be used to construct the final connection. Here is a typical example:
 
-```xml
-<bean id="dbUnitDatabaseConfig" class="com.github.springtestdbunit.bean.DatabaseConfigBean">
-	<property name="skipOracleRecyclebinTables" value="true"/>
-</bean>
-
-<bean id="dbUnitDatabaseConnection" class="com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean">
-	<property name="databaseConfig" ref="dbUnitDatabaseConfig"/>
-</bean>
-```
+    <bean id="dbUnitDatabaseConfig" class="com.github.springtestdbunit.bean.DatabaseConfigBean">
+    	<property name="skipOracleRecyclebinTables" value="true"/>
+    </bean>
+    <bean id="dbUnitDatabaseConnection" class="com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean">
+    	<property name="databaseConfig" ref="dbUnitDatabaseConfig"/>
+    </bean>
 
 NOTE: In most circumstances the username and password properties should not be set on the
 `DatabaseDataSourceConnectionFactoryBean`. These properties will cause DBUnit to start a new transaction and may cause
@@ -179,13 +166,11 @@ provides a convenient base class for most loaders.
 
 Here is an example loader that reads data from a CSV formatted file.
 
-```java
-public class CsvDataSetLoader extends AbstractDataSetLoader {
-	protected IDataSet createDataSet(Resource resource) throws Exception {
-		return new CsvURLDataSet(resource.getURL());
-	}
-}
-```
+    public class CsvDataSetLoader extends AbstractDataSetLoader {
+    	protected IDataSet createDataSet(Resource resource) throws Exception {
+    		return new CsvURLDataSet(resource.getURL());
+    	}
+    }
 
 See above for details of how to configure a test class to use the loader.
 

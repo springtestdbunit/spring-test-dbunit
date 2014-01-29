@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -8,7 +7,7 @@
 	</parent>
 	<groupId>com.github.springtestdbunit</groupId>
 	<artifactId>spring-test-dbunit</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>1.1.0</version>
 	<packaging>jar</packaging>
 	<name>Spring Test DBUnit</name>
 	<description>Integration between the Spring testing framework and DBUnit</description>
@@ -60,8 +59,7 @@
 						</goals>
 						<configuration>
 							<tasks>
-								<copy file="../README.md" tofile="src/site/markdown/index.md"
-									overwrite="true" />
+								<copy file="../README.md" tofile="src/site/markdown/index.md" overwrite="true" />
 							</tasks>
 						</configuration>
 					</execution>
@@ -73,12 +71,9 @@
 						</goals>
 						<configuration>
 							<tasks>
-								<replace file="${project.build.directory}/site/index.html"
-									token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Spring-Test DBUnit&lt;/title&gt;" />
-								<replace file="${project.build.directory}/site/faq.html"
-									token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Frequently Asked Questions&lt;/title&gt;" />
-								<replace file="${project.build.directory}/site/sample.html"
-									token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Quick Start Example&lt;/title&gt;" />
+								<replace file="${project.build.directory}/site/index.html" token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Spring-Test DBUnit&lt;/title&gt;" />
+								<replace file="${project.build.directory}/site/faq.html" token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Frequently Asked Questions&lt;/title&gt;" />
+								<replace file="${project.build.directory}/site/sample.html" token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Quick Start Example&lt;/title&gt;" />
 							</tasks>
 						</configuration>
 					</execution>

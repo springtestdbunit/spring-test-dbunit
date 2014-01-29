@@ -1,14 +1,9 @@
 com.github.springtestdbunit
 com.github.springtestdbunit.bean
 com.github.springtestdbunit.dataset
-com.github.springtestdbunit.dbunitrule
-com.github.springtestdbunit.dbunitrule.expected
-com.github.springtestdbunit.dbunitrule.setup
-com.github.springtestdbunit.dbunitrule.teardown
-com.github.springtestdbunit.dbunittestexecutionlistener
-com.github.springtestdbunit.dbunittestexecutionlistener.expected
-com.github.springtestdbunit.dbunittestexecutionlistener.setup
-com.github.springtestdbunit.dbunittestexecutionlistener.teardown
 com.github.springtestdbunit.entity
+com.github.springtestdbunit.expected
 com.github.springtestdbunit.operation
+com.github.springtestdbunit.setup
+com.github.springtestdbunit.teardown
 com.github.springtestdbunit.testutils

@@ -140,7 +140,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.0</version>
+				<version>3.3</version>
 				<dependencies>
 					<dependency>
 						<groupId>net.ju-n.maven.doxia</groupId>
@@ -218,7 +218,7 @@
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
-				<version>0.5</version>
+				<version>0.9</version>
 				<configuration>
 					<message>Creating site for ${project.version}</message>
 				</configuration>

@@ -22,6 +22,7 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
  * Database assertion modes which determine {@link ExpectedDatabase} behaviour.
  * 
  * @author Mario Zagar
+ * @author Mehmet Aslan
  */
 public enum DatabaseAssertionMode {
 
@@ -40,7 +41,20 @@ public enum DatabaseAssertionMode {
 	 * rows.</li>
 	 * </ul>
 	 */
-	NON_STRICT(new NonStrictDatabaseAssertion());
+	NON_STRICT(new NonStrictDatabaseAssertion()),
+	
+	/**
+	 * Allows specifying only specific columns and tables in expected data set and ignoring row orders in expected and
+	 * actual data set. Unspecified tables and columns are ignored. Row orders in expected and actual data sets are
+	 * ignored. </p> <strong>Notes:</strong>
+	 * <ul>
+	 * <li>Expected row order does not need to match order in actual data set.</li>
+	 * <li>Specified columns must match in all rows, e.g. specifying 'column1' value without 'column2' value in one row
+	 * and only 'column2' value in another is not allowed - both 'column1' and 'column2' values must be specified in all
+	 * rows.</li>
+	 * </ul>
+	 */
+	NON_STRICT_UNORDERED(new NonStrictUnorderedDatabaseAssertion());
 
 	private DatabaseAssertion databaseAssertion;
 

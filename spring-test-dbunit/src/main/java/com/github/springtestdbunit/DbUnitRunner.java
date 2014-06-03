@@ -18,6 +18,7 @@ package com.github.springtestdbunit;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -34,17 +35,22 @@ import org.springframework.util.StringUtils;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
+import com.github.springtestdbunit.annotation.ExpectedCompositeDatabase;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertion;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
+import com.github.springtestdbunit.dataset.CompositeDataSetLoader;
 import com.github.springtestdbunit.dataset.DataSetLoader;
 
 /**
  * Internal delegate class used to run tests with support for {@link DatabaseSetup &#064;DatabaseSetup},
- * {@link DatabaseTearDown &#064;DatabaseTearDown} and {@link ExpectedDatabase &#064;ExpectedDatabase} annotations.
+ * {@link DatabaseTearDown &#064;DatabaseTearDown}, {@link ExpectedDatabase &#064;ExpectedDatabase} and
+ * {@link ExpectedCompositeDatabase &#064;ExpectedCompositeDatabase} annotations.
  * 
  * @author Phillip Webb
  * @author Mario Zagar
  * @author Sunitha Rajarathnam
+ * @author Vseslav Suvorov
  */
 class DbUnitRunner {
 
@@ -67,7 +73,8 @@ class DbUnitRunner {
 	 */
 	public void afterTestMethod(DbUnitTestContext testContext) throws Exception {
 		try {
-			verifyExpected(testContext, getAnnotations(testContext, ExpectedDatabase.class));
+			verifyExpected(testContext, new ExpectedDatabaseAccessor());
+			verifyExpected(testContext, new ExpectedCompositeDatabaseAccessor());
 			Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
 			try {
 				setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
@@ -84,21 +91,22 @@ class DbUnitRunner {
 		}
 	}
 
-	private <T extends Annotation> Collection<T> getAnnotations(DbUnitTestContext testContext, Class<T> annotationType) {
+	private static <T extends Annotation> Collection<T> getAnnotations(DbUnitTestContext testContext,
+			Class<T> annotationType) {
 		List<T> annotations = new ArrayList<T>();
 		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestClass(), annotationType));
 		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestMethod(), annotationType));
 		return annotations;
 	}
 
-	private <T extends Annotation> void addAnnotationToList(List<T> annotations, T annotation) {
+	private static <T extends Annotation> void addAnnotationToList(List<T> annotations, T annotation) {
 		if (annotation != null) {
 			annotations.add(annotation);
 		}
 	}
-
-	private void verifyExpected(DbUnitTestContext testContext, Collection<ExpectedDatabase> annotations)
-			throws Exception {
+	
+	private <T extends Annotation> void verifyExpected(DbUnitTestContext testContext,
+			ExpectedAnnotationAccessor<T> expectedAccessor) throws Exception {
 		if (testContext.getTestException() != null) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Skipping @DatabaseTest expectation due to test exception "
@@ -107,15 +115,16 @@ class DbUnitRunner {
 			return;
 		}
 		IDatabaseConnection connection = testContext.getConnection();
-		for (ExpectedDatabase annotation : annotations) {
-			String query = annotation.query();
-			String table = annotation.table();
-			IDataSet expectedDataSet = loadDataset(testContext, annotation.value());
+		for (T annotation : expectedAccessor.getAnnotations(testContext)) {
+			String query = expectedAccessor.query(annotation);
+			String table = expectedAccessor.table(annotation);
+			IDataSet expectedDataSet = expectedAccessor.loadDataset(testContext, annotation);
 			if (expectedDataSet != null) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
+					logger.debug("Veriftying @DatabaseTest expectation using "
+							+ expectedAccessor.valueAsString(annotation));
 				}
-				DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
+				DatabaseAssertion assertion = expectedAccessor.assertionMode(annotation).getDatabaseAssertion();
 				if (StringUtils.hasLength(query)) {
 					Assert.hasLength(table, "The table name must be specified when using a SQL query");
 					ITable expectedTable = expectedDataSet.getTable(table);
@@ -133,12 +142,29 @@ class DbUnitRunner {
 		}
 	}
 
-	private IDataSet loadDataset(DbUnitTestContext testContext, String dataSetLocation) throws Exception {
+	private static IDataSet loadDataset(DbUnitTestContext testContext, String dataSetLocation) throws Exception {
 		DataSetLoader dataSetLoader = testContext.getDataSetLoader();
 		if (StringUtils.hasLength(dataSetLocation)) {
 			IDataSet dataSet = dataSetLoader.loadDataSet(testContext.getTestClass(), dataSetLocation);
 			Assert.notNull(dataSet,
 					"Unable to load dataset from \"" + dataSetLocation + "\" using " + dataSetLoader.getClass());
+			return dataSet;
+		}
+		return null;
+	}
+
+	private static IDataSet loadDataset(DbUnitTestContext testContext, String[] dataSetLocations,
+			boolean combine, boolean caseSensitiveTableNames) throws Exception {
+		DataSetLoader dataSetLoader = testContext.getDataSetLoader();
+		Assert.isInstanceOf(CompositeDataSetLoader.class, dataSetLoader,
+				"Invalid data set loader is specified: ");
+		CompositeDataSetLoader compositeDataSetLoader = (CompositeDataSetLoader) dataSetLoader;
+		if (dataSetLocations.length > 0) {
+			IDataSet dataSet = compositeDataSetLoader.loadDataSet(testContext.getTestClass(), dataSetLocations,
+					combine, caseSensitiveTableNames);
+			Assert.notNull(dataSet,
+					"Unable to load dataset from \"" + Arrays.toString(dataSetLocations)
+							+ "\" using " + dataSetLoader.getClass());
 			return dataSet;
 		}
 		return null;
@@ -173,7 +199,7 @@ class DbUnitRunner {
 		}
 		org.dbunit.operation.DatabaseOperation databaseOperation = testContext.getDatbaseOperationLookup().get(
 				operation);
-		Assert.state(databaseOperation != null, "The databse operation " + operation + " is not supported");
+		Assert.state(databaseOperation != null, "The database operation " + operation + " is not supported");
 		return databaseOperation;
 	}
 
@@ -205,6 +231,78 @@ class DbUnitRunner {
 				annotationAttributes.add(new AnnotationAttributes(annotation));
 			}
 			return annotationAttributes;
+		}
+	}
+	
+	private interface ExpectedAnnotationAccessor<T extends Annotation> {
+		
+		Collection<T> getAnnotations(DbUnitTestContext testContext);
+
+		String valueAsString(T annotation);
+		
+		IDataSet loadDataset(DbUnitTestContext testContext, T annotation) throws Exception;
+		
+		DatabaseAssertionMode assertionMode(T annotation);
+		
+		String table(T annotation);
+		
+		String query(T annotation);
+	}
+	
+	private static class ExpectedDatabaseAccessor implements ExpectedAnnotationAccessor<ExpectedDatabase> {
+
+		public Collection<ExpectedDatabase> getAnnotations(DbUnitTestContext testContext) {
+			return DbUnitRunner.getAnnotations(testContext, ExpectedDatabase.class);
+		}
+
+		public String valueAsString(ExpectedDatabase annotation) {
+			return annotation.value();
+		}
+
+		public IDataSet loadDataset(DbUnitTestContext testContext, ExpectedDatabase annotation) throws Exception {
+			return DbUnitRunner.loadDataset(testContext, annotation.value());
+		}
+
+		public DatabaseAssertionMode assertionMode(ExpectedDatabase annotation) {
+			return annotation.assertionMode();
+		}
+
+		public String table(ExpectedDatabase annotation) {
+			return annotation.table();
+		}
+
+		public String query(ExpectedDatabase annotation) {
+			return annotation.query();
+		}
+	}
+	
+	private static class ExpectedCompositeDatabaseAccessor implements
+			ExpectedAnnotationAccessor<ExpectedCompositeDatabase> {
+
+		public Collection<ExpectedCompositeDatabase> getAnnotations(DbUnitTestContext testContext) {
+			return DbUnitRunner.getAnnotations(testContext, ExpectedCompositeDatabase.class);
+		}
+
+		public String valueAsString(ExpectedCompositeDatabase annotation) {
+			return Arrays.toString(annotation.value());
+		}
+
+		public IDataSet loadDataset(DbUnitTestContext testContext, ExpectedCompositeDatabase annotation)
+				throws Exception {
+			return DbUnitRunner.loadDataset(testContext, annotation.value(), annotation.combine(),
+					annotation.caseSensitiveTableNames());
+		}
+
+		public DatabaseAssertionMode assertionMode(ExpectedCompositeDatabase annotation) {
+			return annotation.assertionMode();
+		}
+
+		public String table(ExpectedCompositeDatabase annotation) {
+			return annotation.table();
+		}
+
+		public String query(ExpectedCompositeDatabase annotation) {
+			return annotation.query();
 		}
 	}
 }

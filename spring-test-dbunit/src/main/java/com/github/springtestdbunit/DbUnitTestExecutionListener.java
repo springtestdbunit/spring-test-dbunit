@@ -36,6 +36,7 @@ import org.springframework.util.StringUtils;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
+import com.github.springtestdbunit.annotation.ExpectedCompositeDatabase;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
 import com.github.springtestdbunit.dataset.DataSetLoader;
@@ -45,7 +46,8 @@ import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
 
 /**
  * <code>TestExecutionListener</code> which provides support for {@link DatabaseSetup &#064;DatabaseSetup},
- * {@link DatabaseTearDown &#064;DatabaseTearDown} and {@link ExpectedDatabase &#064;ExpectedDatabase} annotations.
+ * {@link DatabaseTearDown &#064;DatabaseTearDown}, {@link ExpectedDatabase &#064;ExpectedDatabase} and
+ * {@link ExpectedCompositeDatabase &#064;ExpectedCompositeDatabase} annotations.
  * <p>
  * A bean named "<tt>dbUnitDatabaseConnection</tt>" or "<tt>dataSource</tt>" is expected in the
  * <tt>ApplicationContext</tt> associated with the test. This bean can contain either a {@link IDatabaseConnection} or a

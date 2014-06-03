@@ -18,6 +18,7 @@ package com.github.springtestdbunit.dataset;
 
 import static org.junit.Assert.*;
 
+import org.dbunit.Assertion;
 import org.dbunit.dataset.IDataSet;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,5 +54,13 @@ public class FlatXmlDataSetLoaderTests {
 	public void shouldReturnNullOnMissingFile() throws Exception {
 		IDataSet dataset = this.loader.loadDataSet(this.testContext.getTestClass(), "doesnotexist.xml");
 		assertNull(dataset);
+	}
+	
+	@Test
+	public void shouldLoadCompositeDataSet() throws Exception {
+		String[] locations = new String[] {"part1.xml", "part2.xml"};
+		IDataSet dataset = this.loader.loadDataSet(this.testContext.getTestClass(), locations, true, false);
+		IDataSet expectedDataSet = this.loader.loadDataSet(this.testContext.getTestClass(), "composite.xml");
+		Assertion.assertEquals(expectedDataSet, dataset);
 	}
 }

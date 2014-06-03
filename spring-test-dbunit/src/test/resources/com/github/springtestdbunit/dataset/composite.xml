@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<table1 column1="1"/>
+	<table2 column2="2"/>
+	<table2 column2="A"/>
+	<table3 column3="B"/>
+</dataset>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<Sample id="1"/>
+	<Sample id="2" name="test"/>
+	<Sample id="3" name="[NULL]"/>
+</dataset>

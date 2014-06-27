@@ -33,6 +33,7 @@ public class FlatXmlDataSetLoader extends AbstractDataSetLoader {
 	@Override
 	protected IDataSet createDataSet(Resource resource) throws Exception {
 		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+		builder.setColumnSensing(true);
 		InputStream inputStream = resource.getInputStream();
 		try {
 			return builder.build(inputStream);

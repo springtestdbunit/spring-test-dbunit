@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
+ * Class that populates OtherSampleEntity table for imitation of dirty state of database
  * Created by oleksii on 02.08.2014.
  */
 public class OtherEntityInitializer implements InitializingBean {

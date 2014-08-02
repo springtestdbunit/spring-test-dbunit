@@ -56,7 +56,8 @@ public class CleanInsertSetupOnMethodTest {
     @Test
     @DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = {"/META-INF/db/insert.xml", "/META-INF/db/insert_Other.xml"})
     public void testSeveralSetupFiles() throws Exception {
+        //OtherSampleEntity is populated using OtherEntityInitializer class imitating dirty state of the table
         List<OtherSampleEntity> list = entityManager.createQuery("from OtherSampleEntity", OtherSampleEntity.class).getResultList();
-        assertEquals(1, list.size());
+        assertEquals("OtherSampleEntity table must be cleaned up using @DatabaseSetup second file", 1, list.size());
     }
 }

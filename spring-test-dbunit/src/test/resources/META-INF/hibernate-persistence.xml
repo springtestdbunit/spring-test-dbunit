@@ -6,6 +6,7 @@
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>com.github.springtestdbunit.entity.SampleEntity</class>
+		<class>com.github.springtestdbunit.entity.OtherSampleEntity</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />

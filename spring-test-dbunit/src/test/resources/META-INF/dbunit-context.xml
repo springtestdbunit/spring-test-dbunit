@@ -11,6 +11,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="entityAssert" class="com.github.springtestdbunit.entity.EntityAssert"/>
+	<bean id="otherEntityAssert" class="com.github.springtestdbunit.entity.OtherEntityAssert"/>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

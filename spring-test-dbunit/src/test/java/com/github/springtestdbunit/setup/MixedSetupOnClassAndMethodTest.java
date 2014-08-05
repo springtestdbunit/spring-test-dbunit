@@ -41,7 +41,7 @@ public class MixedSetupOnClassAndMethodTest {
 	private EntityAssert entityAssert;
 
 	@Test
-	@DatabaseSetup("/META-INF/db/insert2.xml")
+	@DatabaseSetup(value = "/META-INF/db/insert2.xml", type = DatabaseOperation.INSERT)
 	public void testInsert() throws Exception {
 		this.entityAssert.assertValues("fromDbUnit", "fromDbUnit2");
 	}

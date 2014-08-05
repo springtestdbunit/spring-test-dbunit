@@ -16,6 +16,7 @@
 
 package com.github.springtestdbunit.teardown;
 
+import com.github.springtestdbunit.annotation.DatabaseOperation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class MixedTearDownOnClassAndMethodTest {
 	private EntityAssert entityAssert;
 
 	@Test
-	@DatabaseTearDown("/META-INF/db/insert2.xml")
+	@DatabaseTearDown(value = "/META-INF/db/insert2.xml", type = DatabaseOperation.INSERT)
 	public void testInsert() throws Exception {
 		this.entityAssert.assertValues("existing1", "existing2");
 	}

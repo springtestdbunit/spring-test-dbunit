@@ -8,10 +8,10 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="entityAssert" class="com.github.springtestdbunit.entity.EntityAssert"/>
-    <bean id="entityInitializer" class="com.github.springtestdbunit.testutils.OtherEntityInitializer" />
+	<bean id="otherEntityAssert" class="com.github.springtestdbunit.entity.OtherEntityAssert"/>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

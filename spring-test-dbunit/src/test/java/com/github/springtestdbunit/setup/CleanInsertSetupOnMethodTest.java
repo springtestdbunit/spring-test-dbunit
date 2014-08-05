@@ -20,7 +20,7 @@ import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.entity.EntityAssert;
-import com.github.springtestdbunit.entity.OtherSampleEntity;
+import com.github.springtestdbunit.entity.OtherEntityAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +30,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/dbunit-context.xml")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class })
@@ -44,8 +38,8 @@ public class CleanInsertSetupOnMethodTest {
 
 	@Autowired
 	private EntityAssert entityAssert;
-    @PersistenceContext
-    EntityManager entityManager;
+    @Autowired
+    private OtherEntityAssert otherEntityAssert;
 
 	@Test
     @DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = "/META-INF/db/insert.xml")
@@ -56,8 +50,8 @@ public class CleanInsertSetupOnMethodTest {
     @Test
     @DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = {"/META-INF/db/insert.xml", "/META-INF/db/insert_Other.xml"})
     public void testSeveralSetupFiles() throws Exception {
-        //OtherSampleEntity is populated using OtherEntityInitializer class imitating dirty state of the table
-        List<OtherSampleEntity> list = entityManager.createQuery("from OtherSampleEntity", OtherSampleEntity.class).getResultList();
-        assertEquals("OtherSampleEntity table must be cleaned up using @DatabaseSetup second file", 1, list.size());
+        this.entityAssert.assertValues("fromDbUnit");
+        //OtherSampleEntity is populated using import.sql imitating dirty state of the table
+        this.otherEntityAssert.assertValues("fromDbUnit");
     }
 }

@@ -16,6 +16,11 @@
 
 package com.github.springtestdbunit.setup;
 
+import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseOperation;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.entity.EntityAssert;
+import com.github.springtestdbunit.entity.OtherEntityAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,23 +30,28 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
-import com.github.springtestdbunit.annotation.DatabaseOperation;
-import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.entity.EntityAssert;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/dbunit-context.xml")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class })
-@DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = "/META-INF/db/insert.xml")
 @Transactional
 public class CleanInsertSetupOnMethodTest {
 
 	@Autowired
 	private EntityAssert entityAssert;
+    @Autowired
+    private OtherEntityAssert otherEntityAssert;
 
 	@Test
-	public void test() throws Exception {
+    @DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = "/META-INF/db/insert.xml")
+    public void test() throws Exception {
 		this.entityAssert.assertValues("fromDbUnit");
 	}
+
+    @Test
+    @DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = {"/META-INF/db/insert.xml", "/META-INF/db/insert_Other.xml"})
+    public void testSeveralSetupFiles() throws Exception {
+        this.entityAssert.assertValues("fromDbUnit");
+        //OtherSampleEntity is populated using import.sql imitating dirty state of the table
+        this.otherEntityAssert.assertValues("fromDbUnit");
+    }
 }

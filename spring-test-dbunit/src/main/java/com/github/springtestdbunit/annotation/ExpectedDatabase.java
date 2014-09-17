@@ -66,4 +66,10 @@ public @interface ExpectedDatabase {
 	 */
 	String query() default "";
 
+	/**
+	 * If this expectation overrides any others that have been defined at a higher level. Defaults to {@code true}
+	 * @return if this annotation overrides any others
+	 */
+	boolean override() default true;
+
 }

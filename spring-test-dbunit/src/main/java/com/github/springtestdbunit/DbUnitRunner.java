@@ -86,7 +86,7 @@ class DbUnitRunner {
 		}
 	}
 
-	private <T extends Annotation> Collection<T> getAnnotations(DbUnitTestContext testContext, Class<T> annotationType) {
+	private <T extends Annotation> List<T> getAnnotations(DbUnitTestContext testContext, Class<T> annotationType) {
 		List<T> annotations = new ArrayList<T>();
 		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestClass(), annotationType));
 		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestMethod(), annotationType));
@@ -99,8 +99,7 @@ class DbUnitRunner {
 		}
 	}
 
-	private void verifyExpected(DbUnitTestContext testContext, Collection<ExpectedDatabase> annotations)
-			throws Exception {
+	private void verifyExpected(DbUnitTestContext testContext, List<ExpectedDatabase> annotations) throws Exception {
 		if (testContext.getTestException() != null) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Skipping @DatabaseTest expectation due to test exception "
@@ -109,7 +108,8 @@ class DbUnitRunner {
 			return;
 		}
 		IDatabaseConnection connection = testContext.getConnection();
-		for (ExpectedDatabase annotation : annotations) {
+		for (int i = annotations.size() - 1; i >= 0; i--) {
+			ExpectedDatabase annotation = annotations.get(i);
 			String query = annotation.query();
 			String table = annotation.table();
 			IDataSet expectedDataSet = loadDataset(testContext, annotation.value());
@@ -132,7 +132,12 @@ class DbUnitRunner {
 					assertion.assertEquals(expectedDataSet, actualDataSet);
 				}
 			}
+			if (annotation.override()) {
+				// No need to test any more
+				return;
+			}
 		}
+
 	}
 
 	private void setupOrTeardown(DbUnitTestContext testContext, boolean isSetup,

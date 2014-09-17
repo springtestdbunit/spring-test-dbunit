@@ -69,16 +69,19 @@ class DbUnitRunner {
 	 */
 	public void afterTestMethod(DbUnitTestContext testContext) throws Exception {
 		try {
-			verifyExpected(testContext, getAnnotations(testContext, ExpectedDatabase.class));
-			Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
 			try {
-				setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
-			} catch (RuntimeException e) {
-				if (testContext.getTestException() == null) {
-					throw e;
-				}
-				if (logger.isWarnEnabled()) {
-					logger.warn("Unable to throw database cleanup exception due to existing test error", e);
+				verifyExpected(testContext, getAnnotations(testContext, ExpectedDatabase.class));
+			} finally {
+				Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
+				try {
+					setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
+				} catch (RuntimeException e) {
+					if (testContext.getTestException() == null) {
+						throw e;
+					}
+					if (logger.isWarnEnabled()) {
+						logger.warn("Unable to throw database cleanup exception due to existing test error", e);
+					}
 				}
 			}
 		} finally {

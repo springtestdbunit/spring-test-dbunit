@@ -25,6 +25,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.entity.EntityAssert;
 import com.github.springtestdbunit.testutils.AfterTearDownDbUnitTestExecutionListener;
@@ -41,7 +42,7 @@ public class MixedTearDownOnClassAndMethodTest {
 	private EntityAssert entityAssert;
 
 	@Test
-	@DatabaseTearDown("/META-INF/db/insert2.xml")
+	@DatabaseTearDown(value = "/META-INF/db/insert2.xml", type = DatabaseOperation.INSERT)
 	public void testInsert() throws Exception {
 		this.entityAssert.assertValues("existing1", "existing2");
 	}

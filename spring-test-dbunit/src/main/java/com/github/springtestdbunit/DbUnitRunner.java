@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -41,10 +42,11 @@ import com.github.springtestdbunit.dataset.DataSetLoader;
 /**
  * Internal delegate class used to run tests with support for {@link DatabaseSetup &#064;DatabaseSetup},
  * {@link DatabaseTearDown &#064;DatabaseTearDown} and {@link ExpectedDatabase &#064;ExpectedDatabase} annotations.
- * 
+ *
  * @author Phillip Webb
  * @author Mario Zagar
  * @author Sunitha Rajarathnam
+ * @author Oleksii Lomako
  */
 class DbUnitRunner {
 
@@ -133,6 +135,33 @@ class DbUnitRunner {
 		}
 	}
 
+	private void setupOrTeardown(DbUnitTestContext testContext, boolean isSetup,
+			Collection<AnnotationAttributes> annotations) throws Exception {
+		IDatabaseConnection connection = testContext.getConnection();
+		for (AnnotationAttributes annotation : annotations) {
+			List<IDataSet> datasets = loadDataSets(testContext, annotation);
+			DatabaseOperation operation = annotation.getType();
+			org.dbunit.operation.DatabaseOperation dbUnitOperation = getDbUnitDatabaseOperation(testContext, operation);
+			if (!datasets.isEmpty()) {
+				if (logger.isDebugEnabled()) {
+					logger.debug("Executing " + (isSetup ? "Setup" : "Teardown") + " of @DatabaseTest using "
+							+ operation + " on " + datasets.toString());
+				}
+				IDataSet dataSet = new CompositeDataSet(datasets.toArray(new IDataSet[datasets.size()]));
+				dbUnitOperation.execute(connection, dataSet);
+			}
+		}
+	}
+
+	private List<IDataSet> loadDataSets(DbUnitTestContext testContext, AnnotationAttributes annotation)
+			throws Exception {
+		List<IDataSet> datasets = new ArrayList<IDataSet>();
+		for (String dataSetLocation : annotation.getValue()) {
+			datasets.add(loadDataset(testContext, dataSetLocation));
+		}
+		return datasets;
+	}
+
 	private IDataSet loadDataset(DbUnitTestContext testContext, String dataSetLocation) throws Exception {
 		DataSetLoader dataSetLoader = testContext.getDataSetLoader();
 		if (StringUtils.hasLength(dataSetLocation)) {
@@ -144,36 +173,11 @@ class DbUnitRunner {
 		return null;
 	}
 
-	private void setupOrTeardown(DbUnitTestContext testContext, boolean isSetup,
-			Collection<AnnotationAttributes> annotations) throws Exception {
-		IDatabaseConnection connection = testContext.getConnection();
-		DatabaseOperation lastOperation = null;
-		for (AnnotationAttributes annotation : annotations) {
-			for (String dataSetLocation : annotation.getValue()) {
-				DatabaseOperation operation = annotation.getType();
-				org.dbunit.operation.DatabaseOperation dbUnitDatabaseOperation = getDbUnitDatabaseOperation(
-						testContext, operation, lastOperation);
-				IDataSet dataSet = loadDataset(testContext, dataSetLocation);
-				if (dataSet != null) {
-					if (logger.isDebugEnabled()) {
-						logger.debug("Executing " + (isSetup ? "Setup" : "Teardown") + " of @DatabaseTest using "
-								+ operation + " on " + dataSetLocation);
-					}
-					dbUnitDatabaseOperation.execute(connection, dataSet);
-					lastOperation = operation;
-				}
-			}
-		}
-	}
-
 	private org.dbunit.operation.DatabaseOperation getDbUnitDatabaseOperation(DbUnitTestContext testContext,
-			DatabaseOperation operation, DatabaseOperation lastOperation) {
-		if ((operation == DatabaseOperation.CLEAN_INSERT) && (lastOperation == DatabaseOperation.CLEAN_INSERT)) {
-			operation = DatabaseOperation.INSERT;
-		}
+			DatabaseOperation operation) {
 		org.dbunit.operation.DatabaseOperation databaseOperation = testContext.getDatbaseOperationLookup().get(
 				operation);
-		Assert.state(databaseOperation != null, "The databse operation " + operation + " is not supported");
+		Assert.state(databaseOperation != null, "The database operation " + operation + " is not supported");
 		return databaseOperation;
 	}
 

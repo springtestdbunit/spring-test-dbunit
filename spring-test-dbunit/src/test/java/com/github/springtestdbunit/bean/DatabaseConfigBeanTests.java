@@ -36,7 +36,7 @@ import org.springframework.beans.BeanWrapperImpl;
 
 /**
  * Tests for {@link DatabaseConfigBean}.
- * 
+ *
  * @author Phillip Webb
  */
 public class DatabaseConfigBeanTests {

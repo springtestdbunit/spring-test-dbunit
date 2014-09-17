@@ -28,9 +28,9 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 /**
  * Test annotation that can be used to assert that a database is in given state after tests have run.
- * 
+ *
  * @see DbUnitTestExecutionListener
- * 
+ *
  * @author Phillip Webb
  * @author Mario Zagar
  */

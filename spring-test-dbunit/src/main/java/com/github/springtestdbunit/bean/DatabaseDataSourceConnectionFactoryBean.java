@@ -29,7 +29,7 @@ import org.springframework.util.Assert;
  * A {@link FactoryBean} that can be used to create a {@link #setTransactionAware transaction} aware
  * {@link DatabaseDataSourceConnection} using the specified {@link #setDataSource dataSource}. Additional configuration
  * is also supported using {@link #setDatabaseConfig(DatabaseConfigBean)}.
- * 
+ *
  * @author Phillip Webb
  */
 public class DatabaseDataSourceConnectionFactoryBean implements FactoryBean<DatabaseDataSourceConnection> {
@@ -112,7 +112,7 @@ public class DatabaseDataSourceConnectionFactoryBean implements FactoryBean<Data
 	/**
 	 * Set an optional {@link DatabaseConfigBean configuration} that will be applied to the newly created
 	 * {@link DatabaseDataSourceConnection}
-	 * 
+	 *
 	 * @param databaseConfig the database configuration or <tt>null</tt> if no additional configuration is required.
 	 */
 	public void setDatabaseConfig(DatabaseConfigBean databaseConfig) {

@@ -30,12 +30,12 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 /**
  * Test annotation which indicates how to put a database into a know state before tests are run. This annotation can be
  * placed on a class or on methods. When placed on a class the setup is applied before each test methods is executed.
- * 
+ *
  * @see DatabaseTearDown
  * @see ExpectedDatabase
  * @see DbUnitConfiguration
  * @see DbUnitTestExecutionListener
- * 
+ *
  * @author Phillip Webb
  */
 @Documented

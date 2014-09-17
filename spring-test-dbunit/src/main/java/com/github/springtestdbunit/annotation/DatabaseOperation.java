@@ -18,10 +18,10 @@ package com.github.springtestdbunit.annotation;
 
 /**
  * Database test operations that can be performed to configure database tables.
- * 
+ *
  * @see DatabaseSetup
  * @see DatabaseTearDown
- * 
+ *
  * @author Phillip Webb
  */
 public enum DatabaseOperation {

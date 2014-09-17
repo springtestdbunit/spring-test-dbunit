@@ -26,7 +26,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Special {@link SpringJUnit4ClassRunner} that ensures {@link NotSwallowedException} gets reported.
- * 
+ *
  * @author Phillip Webb
  */
 public class MustNotSwallowSpringJUnit4ClassRunner extends SpringJUnit4ClassRunner {

@@ -36,7 +36,7 @@ import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
 
 /**
  * Annotation that can be used to configure {@link DbUnitTestExecutionListener}.
- * 
+ *
  * @see DbUnitTestExecutionListener
  * @author Phillip Webb
  */

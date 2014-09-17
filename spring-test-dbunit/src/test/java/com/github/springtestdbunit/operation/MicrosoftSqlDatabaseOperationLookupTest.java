@@ -25,7 +25,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 
 /**
  * Tests for {@link MicrosoftSqlDatabaseOperationLookup}.
- * 
+ *
  * @author Phillip Webb
  */
 public class MicrosoftSqlDatabaseOperationLookupTest {

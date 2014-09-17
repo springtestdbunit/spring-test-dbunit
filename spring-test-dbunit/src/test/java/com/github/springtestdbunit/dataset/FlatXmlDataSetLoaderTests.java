@@ -27,7 +27,7 @@ import com.github.springtestdbunit.testutils.ExtendedTestContextManager;
 
 /**
  * Tests for {@link FlatXmlDataSetLoader}.
- * 
+ *
  * @author Phillip Webb
  */
 public class FlatXmlDataSetLoaderTests {

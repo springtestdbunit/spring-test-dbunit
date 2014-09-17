@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
  * A bean representation of the DB unit {@link DatabaseConfig} class. This bean allows the database configuration from
  * spring using standard property arguments. The configuration from this bean can be {@link #apply applied} to an
  * existing {@link DatabaseConfig}.
- * 
+ *
  * @author Phillip Webb
  */
 public class DatabaseConfigBean {

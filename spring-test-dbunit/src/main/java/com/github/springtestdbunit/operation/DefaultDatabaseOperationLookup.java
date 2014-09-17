@@ -23,7 +23,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 
 /**
  * Default implementation of {@link DatabaseOperationLookup}.
- * 
+ *
  * @author Phillip Webb
  */
 public class DefaultDatabaseOperationLookup implements DatabaseOperationLookup {

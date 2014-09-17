@@ -22,7 +22,7 @@ import org.dbunit.dataset.ITable;
 
 /**
  * Database assertion strategy interface.
- * 
+ *
  * @author Mario Zagar
  * @author Sunitha Rajarathnam
  */

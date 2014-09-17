@@ -24,7 +24,7 @@ import org.springframework.test.context.TestContextManager;
 
 /**
  * Extended version of the {@link TestContextManager} that can be used when writing tests.
- * 
+ *
  * @author Phillip Webb
  */
 public class ExtendedTestContextManager extends TestContextManager {

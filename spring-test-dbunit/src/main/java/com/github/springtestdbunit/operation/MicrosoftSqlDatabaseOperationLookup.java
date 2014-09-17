@@ -25,7 +25,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 
 /**
  * Microsoft SQL Server implementation of {@link DatabaseOperationLookup}.
- * 
+ *
  * @author Phillip Webb
  */
 public class MicrosoftSqlDatabaseOperationLookup extends DefaultDatabaseOperationLookup {

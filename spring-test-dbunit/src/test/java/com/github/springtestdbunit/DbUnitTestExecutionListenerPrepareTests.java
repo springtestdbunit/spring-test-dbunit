@@ -42,7 +42,7 @@ import com.github.springtestdbunit.testutils.ExtendedTestContextManager;
 
 /**
  * Tests for {@link DbUnitTestExecutionListener} prepare method.
- * 
+ *
  * @author Phillip Webb
  */
 public class DbUnitTestExecutionListenerPrepareTests {

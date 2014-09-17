@@ -32,7 +32,7 @@ import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 
 /**
  * Tests for {@link DatabaseDataSourceConnectionFactoryBean}.
- * 
+ *
  * @author Phillip Webb
  */
 public class DatabaseDataSourceConnectionFactoryBeanTests {

@@ -20,7 +20,7 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 
 /**
  * Database assertion modes which determine {@link ExpectedDatabase} behaviour.
- * 
+ *
  * @author Mario Zagar
  */
 public enum DatabaseAssertionMode {

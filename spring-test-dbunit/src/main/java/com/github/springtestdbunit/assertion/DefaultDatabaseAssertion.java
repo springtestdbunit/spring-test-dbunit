@@ -23,7 +23,7 @@ import org.dbunit.dataset.ITable;
 
 /**
  * Default database assertion strategy which uses DbUnit {@link Assertion#assertEquals(IDataSet, IDataSet)}.
- * 
+ *
  * @author Mario Zagar
  * @author Sunitha Rajarathnam
  */

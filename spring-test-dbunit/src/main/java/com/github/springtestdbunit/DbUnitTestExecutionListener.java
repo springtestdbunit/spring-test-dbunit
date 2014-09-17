@@ -57,9 +57,9 @@ import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
  * <p>
  * If you are running this listener in combination with the {@link TransactionalTestExecutionListener} then consider
  * using {@link TransactionDbUnitTestExecutionListener} instead.
- * 
+ *
  * @see TransactionDbUnitTestExecutionListener
- * 
+ *
  * @author Phillip Webb
  */
 public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {

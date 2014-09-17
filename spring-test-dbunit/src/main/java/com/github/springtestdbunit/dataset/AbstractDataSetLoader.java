@@ -25,9 +25,9 @@ import org.springframework.core.io.ResourceLoader;
  * Abstract data set loader, which provides a basis for concrete implementations of the {@link DataSetLoader} strategy.
  * Provides a <em>Template Method</em> based approach for {@link #loadDataSet(Class, String) loading} data using a
  * Spring {@link #getResourceLoader resource loader}.
- * 
+ *
  * @author Phillip Webb
- * 
+ *
  * @see #getResourceLoader
  * @see #getResourceLocations
  * @see #createDataSet(Resource)
@@ -41,7 +41,7 @@ public abstract class AbstractDataSetLoader implements DataSetLoader {
 	 * {@link ResourceLoader} returned from {@link #getResourceLoader}.
 	 * <p>
 	 * If no resource can be found then <tt>null</tt> will be returned.
-	 * 
+	 *
 	 * @see #createDataSet(Resource)
 	 * @see com.github.springtestdbunit.dataset.DataSetLoader#loadDataSet(Class, String) java.lang.String)
 	 */

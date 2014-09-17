@@ -24,7 +24,7 @@ import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 /**
  * An extension of {@link TransactionDbUnitTestExecutionListener} that ensures that a test method does not swallow
  * exceptions.
- * 
+ *
  * @author Phillip Webb
  */
 public class MustNoSwallowTestExecutionListener extends TransactionDbUnitTestExecutionListener {

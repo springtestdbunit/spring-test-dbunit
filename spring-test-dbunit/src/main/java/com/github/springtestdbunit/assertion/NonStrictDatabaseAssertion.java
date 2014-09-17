@@ -31,7 +31,7 @@ import org.dbunit.dataset.ITableMetaData;
 /**
  * Implements non-strict database assertion strategy : compares data sets ignoring all tables and columns which are not
  * specified in expected data set but possibly exist in actual data set.
- * 
+ *
  * @author Mario Zagar
  * @author Sunitha Rajarathnam
  */

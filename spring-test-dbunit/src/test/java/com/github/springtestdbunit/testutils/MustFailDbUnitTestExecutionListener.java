@@ -23,7 +23,7 @@ import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 
 /**
  * An extension of {@link TransactionDbUnitTestExecutionListener} that ensures that a test method has failed.
- * 
+ *
  * @author Phillip Webb
  */
 public class MustFailDbUnitTestExecutionListener extends TransactionDbUnitTestExecutionListener {

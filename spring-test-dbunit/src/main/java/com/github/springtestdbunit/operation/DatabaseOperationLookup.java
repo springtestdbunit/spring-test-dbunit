@@ -21,7 +21,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 /**
  * Strategy used to lookup a DBUnit {@link org.dbunit.operation.DatabaseOperation Database Operation} from a
  * {@link DatabaseOperation enum value}.
- * 
+ *
  * @author Phillip Webb
  * @see DefaultDatabaseOperationLookup
  * @see MicrosoftSqlDatabaseOperationLookup

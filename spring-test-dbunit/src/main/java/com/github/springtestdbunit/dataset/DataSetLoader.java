@@ -22,9 +22,9 @@ import org.dbunit.dataset.IDataSet;
  * Strategy interface for {@link #loadDataSet loading} a {@link IDataSet dataset}.
  * <p>
  * Concrete implementations must provide a <code>public</code> no-args constructor.
- * 
+ *
  * @author Phillip Webb
- * 
+ *
  * @see FlatXmlDataSetLoader
  */
 public interface DataSetLoader {

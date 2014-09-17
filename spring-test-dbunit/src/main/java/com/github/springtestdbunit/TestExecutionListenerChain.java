@@ -33,7 +33,7 @@ import org.springframework.test.context.TestExecutionListener;
  * <p>
  * For example, a typical call on a chain containing items "a" and "b" would be: <code>a.beforeTestMethod</code>,
  * <code>b.beforeTestMethod</code>, <code>b.afterTestMethod</code>, <code>a.afterTestMethod</code>.
- * 
+ *
  * @author Phillip Webb
  */
 public abstract class TestExecutionListenerChain implements TestExecutionListener {

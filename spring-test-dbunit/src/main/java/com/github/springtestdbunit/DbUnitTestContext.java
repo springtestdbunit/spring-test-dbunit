@@ -26,7 +26,7 @@ import com.github.springtestdbunit.operation.DatabaseOperationLookup;
 
 /**
  * Provides context for the {@link DbUnitRunner}.
- * 
+ *
  * @author Phillip Webb
  */
 interface DbUnitTestContext {

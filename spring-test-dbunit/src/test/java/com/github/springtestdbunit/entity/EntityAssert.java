@@ -35,7 +35,7 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * Bean that can be used to assert the {@link SampleEntity#getValue() values} from {@link SampleEntity entities}
  * contained in the database.
- * 
+ *
  * @author Phillip Webb
  */
 public class EntityAssert implements InitializingBean {

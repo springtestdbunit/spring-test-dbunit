@@ -139,8 +139,16 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 	private void prepareDataSetLoader(DbUnitTestContextAdapter testContext,
 			Class<? extends DataSetLoader> dataSetLoaderClass) {
 		try {
-			testContext.setAttribute(DATA_SET_LOADER_ATTRIBUTE, dataSetLoaderClass.newInstance());
-		} catch (Exception e) {
+            String[] dataSetLoaderBeanNames = testContext.getApplicationContext().getBeanNamesForType(dataSetLoaderClass);
+            int dataSetLoaderBeansCount = dataSetLoaderBeanNames.length;
+            if(dataSetLoaderBeansCount > 1) throw new IllegalStateException("No unique bean for type " + dataSetLoaderClass);
+            if(dataSetLoaderBeansCount == 1){
+                DataSetLoader dataSetLoader = testContext.getApplicationContext().getBean(dataSetLoaderClass);
+                testContext.setAttribute(DATA_SET_LOADER_ATTRIBUTE, dataSetLoader);
+                return;
+            }
+            testContext.setAttribute(DATA_SET_LOADER_ATTRIBUTE, dataSetLoaderClass.newInstance());
+        } catch (Exception e) {
 			throw new IllegalArgumentException("Unable to create data set loader instance for " + dataSetLoaderClass, e);
 		}
 	}

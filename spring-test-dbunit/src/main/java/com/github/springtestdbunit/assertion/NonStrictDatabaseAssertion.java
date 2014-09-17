@@ -39,10 +39,9 @@ class NonStrictDatabaseAssertion implements DatabaseAssertion {
 
 	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException {
 		for (String tableName : expectedDataSet.getTableNames()) {
-			ITable expected = expectedDataSet.getTable(tableName);
-			ITable actual = actualDataSet.getTable(tableName);
-			String[] ignoredColumns = getColumnsToIgnore(expected.getTableMetaData(), actual.getTableMetaData());
-			Assertion.assertEqualsIgnoreCols(expected, actual, ignoredColumns);
+			ITable expectedTable = expectedDataSet.getTable(tableName);
+			ITable actualTable = actualDataSet.getTable(tableName);
+			assertEquals(expectedTable, actualTable);
 		}
 	}
 
@@ -51,7 +50,7 @@ class NonStrictDatabaseAssertion implements DatabaseAssertion {
 		Assertion.assertEqualsIgnoreCols(expectedTable, actualTable, ignoredColumns);
 	}
 
-	private String[] getColumnsToIgnore(ITableMetaData expectedMetaData, ITableMetaData actualMetaData)
+	protected String[] getColumnsToIgnore(ITableMetaData expectedMetaData, ITableMetaData actualMetaData)
 			throws DataSetException {
 		Column[] notSpecifiedInExpected = Columns.getColumnDiff(expectedMetaData, actualMetaData).getActual();
 		List<String> result = new LinkedList<String>();

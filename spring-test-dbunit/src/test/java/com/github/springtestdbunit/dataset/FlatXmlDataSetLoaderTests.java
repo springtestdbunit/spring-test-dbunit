@@ -44,6 +44,13 @@ public class FlatXmlDataSetLoaderTests {
 	}
 
 	@Test
+	public void shouldSenseColumns() throws Exception {
+		IDataSet dataset = this.loader.loadDataSet(this.testContext.getTestClass(), "test-column-sensing.xml");
+		assertEquals(null, dataset.getTable("Sample").getValue(0, "name"));
+		assertEquals("test", dataset.getTable("Sample").getValue(1, "name"));
+	}
+
+	@Test
 	public void shouldLoadFromRelativeFile() throws Exception {
 		IDataSet dataset = this.loader.loadDataSet(this.testContext.getTestClass(), "test.xml");
 		assertEquals("Sample", dataset.getTableNames()[0]);

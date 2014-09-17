@@ -61,6 +61,13 @@ public @interface DbUnitConfiguration {
 	Class<? extends DataSetLoader> dataSetLoader() default FlatXmlDataSetLoader.class;
 
 	/**
+	 * Returns the name of the bean that will be used to load {@link IDataSet} resources. The specified bean must
+	 * implement {@link DataSetLoader}.
+	 * @return the data set loader bean name
+	 */
+	String dataSetLoaderBean() default "";
+
+	/**
 	 * Returns the class that will be used to lookup DBUnit databse operations. The specific class must implement
 	 * {@link DatabaseOperationLookup} and must have a default constructor.
 	 * @return the database operation lookup

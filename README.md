@@ -131,7 +131,9 @@ The databaseConnection attribute allows you to specify a specific bean name from
 database connection. When not specified the names or can be used. The bean must be either an `IDatabaseConnection`
 or a `DataSource`.
 
-The `dataSetLoader` attribute allows you to specify a custom loader that will be used when reading datasets (see below).
+The `dataSetLoader` or `dataSetLoaderBean` attribute allows you to specify a custom loader that will be used when
+reading datasets (see below). If no specific loader is specified a `dbUnitDataSetLoader` bean will be used from the
+`ApplicationContext` (or if no such bean exists, the `FlatXmlDataSetLoader` will be used).
 
 The `databaseOperationLookup` attribute allows you to specify a custom lookup strategy for DBUnit database operations
 (see below).

@@ -18,6 +18,7 @@ package com.github.springtestdbunit;
 
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import javax.sql.DataSource;
@@ -60,9 +61,11 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		DbUnitTestExecutionListenerPrepareTests.applicationContextThreadLocal.set(this.applicationContext);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void addBean(String beanName, Object bean) {
 		given(this.applicationContext.containsBean(beanName)).willReturn(true);
 		given(this.applicationContext.getBean(beanName)).willReturn(bean);
+		given(this.applicationContext.getBean(eq(beanName), (Class) any())).willReturn(bean);
 	}
 
 	@Test
@@ -95,6 +98,7 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		addBean("dataSource", this.dataSource);
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(testClass);
 		testContextManager.prepareTestInstance();
+		verify(this.applicationContext).containsBean("dbUnitDataSetLoader");
 		verify(this.applicationContext).containsBean("dbUnitDatabaseConnection");
 		verify(this.applicationContext).containsBean("dataSource");
 		verify(this.applicationContext).getBean("dataSource");
@@ -164,8 +168,14 @@ public class DbUnitTestExecutionListenerPrepareTests {
 	}
 
 	@Test
-	public void shouldSupportCustomLookup() throws Exception {
-
+	public void shouldSupportCustomLoaderBean() throws Exception {
+		addBean("dataSource", this.dataSource);
+		addBean("dbUnitDataSetLoader", new CustomDataSetLoader());
+		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(EmptyDbUnitConfiguration.class);
+		testContextManager.prepareTestInstance();
+		assertEquals(CustomDataSetLoader.class,
+				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE)
+						.getClass());
 	}
 
 	private static class LocalApplicationContextLoader implements ContextLoader {
@@ -219,4 +229,5 @@ public class DbUnitTestExecutionListenerPrepareTests {
 	private static class NonCreatableDataSetLoader {
 
 	}
+
 }

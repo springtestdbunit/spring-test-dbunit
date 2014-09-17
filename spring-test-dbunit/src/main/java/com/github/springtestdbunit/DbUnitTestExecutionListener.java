@@ -68,6 +68,8 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 	private static final String[] COMMON_DATABASE_CONNECTION_BEAN_NAMES = { "dbUnitDatabaseConnection", "dataSource" };
 
+	private static final String DATA_SET_LOADER_BEAN_NAME = "dbUnitDataSetLoader";
+
 	protected static final String CONNECTION_ATTRIBUTE = Conventions.getQualifiedAttributeName(
 			DbUnitTestExecutionListener.class, "connection");
 
@@ -89,6 +91,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		DbUnitTestContextAdapter dbUnitTestContext = new DbUnitTestContextAdapter(testContext);
 
 		String databaseConnectionBeanName = null;
+		String dataSetLoaderBeanName = null;
 		Class<? extends DataSetLoader> dataSetLoaderClass = FlatXmlDataSetLoader.class;
 		Class<? extends DatabaseOperationLookup> databaseOperationLookupClass = DefaultDatabaseOperationLookup.class;
 
@@ -99,6 +102,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			}
 			databaseConnectionBeanName = configuration.databaseConnection();
 			dataSetLoaderClass = configuration.dataSetLoader();
+			dataSetLoaderBeanName = configuration.dataSetLoaderBean();
 			databaseOperationLookupClass = configuration.databaseOperationLookup();
 		}
 
@@ -106,12 +110,21 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			databaseConnectionBeanName = getDatabaseConnectionUsingCommonBeanNames(dbUnitTestContext);
 		}
 
+		if (!StringUtils.hasLength(dataSetLoaderBeanName)) {
+			if (dbUnitTestContext.getApplicationContext().containsBean(DATA_SET_LOADER_BEAN_NAME)) {
+				dataSetLoaderBeanName = DATA_SET_LOADER_BEAN_NAME;
+			}
+		}
+
 		if (logger.isDebugEnabled()) {
-			logger.debug("DBUnit tests will run using databaseConnection \"" + databaseConnectionBeanName
-					+ "\", datasets will be loaded using " + dataSetLoaderClass);
+			logger.debug("DBUnit tests will run using databaseConnection \""
+					+ databaseConnectionBeanName
+					+ "\", datasets will be loaded using "
+					+ (StringUtils.hasLength(databaseConnectionBeanName) ? "'" + databaseConnectionBeanName + "'"
+							: dataSetLoaderClass));
 		}
 		prepareDatabaseConnection(dbUnitTestContext, databaseConnectionBeanName);
-		prepareDataSetLoader(dbUnitTestContext, dataSetLoaderClass);
+		prepareDataSetLoader(dbUnitTestContext, dataSetLoaderBeanName, dataSetLoaderClass);
 		prepareDatabaseOperationLookup(dbUnitTestContext, databaseOperationLookupClass);
 	}
 
@@ -136,12 +149,18 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		testContext.setAttribute(CONNECTION_ATTRIBUTE, databaseConnection);
 	}
 
-	private void prepareDataSetLoader(DbUnitTestContextAdapter testContext,
+	private void prepareDataSetLoader(DbUnitTestContextAdapter testContext, String beanName,
 			Class<? extends DataSetLoader> dataSetLoaderClass) {
-		try {
-			testContext.setAttribute(DATA_SET_LOADER_ATTRIBUTE, dataSetLoaderClass.newInstance());
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Unable to create data set loader instance for " + dataSetLoaderClass, e);
+		if (StringUtils.hasLength(beanName)) {
+			testContext.setAttribute(DATA_SET_LOADER_ATTRIBUTE,
+					testContext.getApplicationContext().getBean(beanName, DataSetLoader.class));
+		} else {
+			try {
+				testContext.setAttribute(DATA_SET_LOADER_ATTRIBUTE, dataSetLoaderClass.newInstance());
+			} catch (Exception e) {
+				throw new IllegalArgumentException("Unable to create data set loader instance for "
+						+ dataSetLoaderClass, e);
+			}
 		}
 	}
 

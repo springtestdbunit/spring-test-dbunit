@@ -19,6 +19,7 @@ package com.github.springtestdbunit.dataset;
 import java.io.InputStream;
 
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.springframework.core.io.Resource;
@@ -33,9 +34,14 @@ public class FlatXmlDataSetLoader extends AbstractDataSetLoader {
 	@Override
 	protected IDataSet createDataSet(Resource resource) throws Exception {
 		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+		builder.setColumnSensing(true);
 		InputStream inputStream = resource.getInputStream();
 		try {
-			return builder.build(inputStream);
+			FlatXmlDataSet flatXmlDataSet= builder.build(inputStream);
+			ReplacementDataSet dataSet = new ReplacementDataSet(flatXmlDataSet); 
+			dataSet.setStrictReplacement(true);
+			dataSet.addReplacementObject("[NULL]", null);
+			return dataSet;
 		} finally {
 			inputStream.close();
 		}

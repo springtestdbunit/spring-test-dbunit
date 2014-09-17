@@ -19,6 +19,7 @@ package com.github.springtestdbunit.dataset;
 import static org.junit.Assert.*;
 
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.context.TestContext;
@@ -43,6 +44,18 @@ public class FlatXmlDataSetLoaderTests {
 		this.testContext = manager.accessTestContext();
 	}
 
+	@Test
+	public void shouldLoadMissingColumn() throws Exception {
+		IDataSet dataset = this.loader.loadDataSet(this.testContext.getTestClass(), "test_null_missing_column.xml");
+		assertEquals("test", dataset.getTable("Sample").getValue(1, "name"));
+	}
+	
+	@Test
+	public void shouldLoadNullValue() throws Exception {
+		IDataSet dataset = this.loader.loadDataSet(this.testContext.getTestClass(), "test_null_missing_column.xml");
+		assertEquals(null, dataset.getTable("Sample").getValue(0, "name"));
+	}
+	
 	@Test
 	public void shouldLoadFromRelativeFile() throws Exception {
 		IDataSet dataset = this.loader.loadDataSet(this.testContext.getTestClass(), "test.xml");

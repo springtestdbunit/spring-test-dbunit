@@ -7,7 +7,7 @@
 	<name>Spring Test DBUnit Sample</name>
 	<properties>
 		<spring.version>3.2.6.RELEASE</spring.version>
-		<hibernate.core.version>4.2.8.Final</hibernate.core.version>
+		<hibernate.core.version>4.3.6.Final</hibernate.core.version>
 	</properties>
 	<build>
 		<plugins>
@@ -81,13 +81,13 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
+			<version>1.7.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.5</version>
+			<version>1.7.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

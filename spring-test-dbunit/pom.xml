@@ -34,7 +34,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.5</java.version>
-		<spring.version>4.0.0.RELEASE</spring.version>
+		<spring.version>4.1.0.RELEASE</spring.version>
 	</properties>
 	<developers>
 		<developer>
@@ -283,13 +283,13 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.2.8.Final</version>
+			<version>4.3.6.Final</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.3.1</version>
+			<version>2.3.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -302,13 +302,13 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
+			<version>1.7.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.5</version>
+			<version>1.7.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

@@ -78,21 +78,15 @@ This project will be built using Apache Maven.  Here is the complete POM file wi
 			<dependency>
 				<groupId>org.dbunit</groupId>
 				<artifactId>dbunit</artifactId>
-				<version>2.4.8</version>
+				<version>2.5.0</version>
 				<type>jar</type>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.github.springtestdbunit</groupId>
 				<artifactId>spring-test-dbunit</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>1.1.0</version>
 				<scope>test</scope?
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.5.2</version>
-				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>

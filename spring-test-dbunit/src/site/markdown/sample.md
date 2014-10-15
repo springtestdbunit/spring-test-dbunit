@@ -86,7 +86,7 @@ This project will be built using Apache Maven.  Here is the complete POM file wi
 				<groupId>com.github.springtestdbunit</groupId>
 				<artifactId>spring-test-dbunit</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
-				<scope>test</scope?
+				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>

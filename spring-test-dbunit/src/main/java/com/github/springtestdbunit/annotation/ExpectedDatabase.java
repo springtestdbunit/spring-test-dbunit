@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.github.springtestdbunit.annotation;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -41,7 +42,15 @@ import com.github.springtestdbunit.dataset.DataSetModifier;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE, ElementType.METHOD })
+@Repeatable(ExpectedDatabases.class)
 public @interface ExpectedDatabase {
+
+	/**
+	 * The name of the connection that should be used when verifying data. Can refer to a connection specified in
+	 * {@link DbUnitConfiguration @DbUnitConfiguration} or left blank to use the default connection.
+	 * @return the connection
+	 */
+	String connection() default "";
 
 	/**
 	 * Provides the location of the dataset that will be used to test the database.

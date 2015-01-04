@@ -35,7 +35,7 @@ interface DbUnitTestContext {
 	 * Returns the {@link IDatabaseConnection} that should be used when performing database setup and teardown.
 	 * @return The connection
 	 */
-	IDatabaseConnection getConnection();
+	DatabaseConnections getConnections();
 
 	/**
 	 * Returns the {@link DataSetLoader} that should be used to load {@link IDataSet}s.

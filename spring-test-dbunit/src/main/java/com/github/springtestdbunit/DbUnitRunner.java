@@ -34,8 +34,11 @@ import org.springframework.util.StringUtils;
 
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseSetups;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
+import com.github.springtestdbunit.annotation.DatabaseTearDowns;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.annotation.ExpectedDatabases;
 import com.github.springtestdbunit.assertion.DatabaseAssertion;
 import com.github.springtestdbunit.dataset.DataSetLoader;
 import com.github.springtestdbunit.dataset.DataSetModifier;
@@ -59,7 +62,7 @@ class DbUnitRunner {
 	 * @throws Exception
 	 */
 	public void beforeTestMethod(DbUnitTestContext testContext) throws Exception {
-		Collection<DatabaseSetup> annotations = getAnnotations(testContext, DatabaseSetup.class);
+		Collection<DatabaseSetup> annotations = getAnnotations(testContext, DatabaseSetups.class, DatabaseSetup.class);
 		setupOrTeardown(testContext, true, AnnotationAttributes.get(annotations));
 	}
 
@@ -71,9 +74,11 @@ class DbUnitRunner {
 	public void afterTestMethod(DbUnitTestContext testContext) throws Exception {
 		try {
 			try {
-				verifyExpected(testContext, getAnnotations(testContext, ExpectedDatabase.class));
+				verifyExpected(testContext,
+						getAnnotations(testContext, ExpectedDatabases.class, ExpectedDatabase.class));
 			} finally {
-				Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
+				Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDowns.class,
+						DatabaseTearDown.class);
 				try {
 					setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
 				} catch (RuntimeException ex) {
@@ -86,20 +91,36 @@ class DbUnitRunner {
 				}
 			}
 		} finally {
-			testContext.getConnection().close();
+			testContext.getConnections().closeAll();
 		}
 	}
 
-	private <T extends Annotation> List<T> getAnnotations(DbUnitTestContext testContext, Class<T> annotationType) {
+	private <T extends Annotation> List<T> getAnnotations(DbUnitTestContext testContext,
+			Class<? extends Annotation> containerType, Class<T> type) {
 		List<T> annotations = new ArrayList<T>();
-		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestClass(), annotationType));
-		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestMethod(), annotationType));
+		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestClass(), type));
+		addRepeatableAnnotationsToList(annotations,
+				AnnotationUtils.findAnnotation(testContext.getTestClass(), containerType));
+		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestMethod(), type));
+		addRepeatableAnnotationsToList(annotations,
+				AnnotationUtils.findAnnotation(testContext.getTestMethod(), containerType));
 		return annotations;
 	}
 
 	private <T extends Annotation> void addAnnotationToList(List<T> annotations, T annotation) {
 		if (annotation != null) {
 			annotations.add(annotation);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T extends Annotation> void addRepeatableAnnotationsToList(List<T> annotations,
+			Annotation annotationContainer) {
+		if (annotationContainer != null) {
+			T[] value = (T[]) AnnotationUtils.getValue(annotationContainer);
+			for (T annotation : value) {
+				annotations.add(annotation);
+			}
 		}
 	}
 
@@ -111,13 +132,14 @@ class DbUnitRunner {
 			}
 			return;
 		}
-		IDatabaseConnection connection = testContext.getConnection();
+		DatabaseConnections connections = testContext.getConnections();
 		DataSetModifier modifier = getModifier(testContext, annotations);
 		for (int i = annotations.size() - 1; i >= 0; i--) {
 			ExpectedDatabase annotation = annotations.get(i);
 			String query = annotation.query();
 			String table = annotation.table();
 			IDataSet expectedDataSet = loadDataset(testContext, annotation.value(), modifier);
+			IDatabaseConnection connection = connections.get(annotation.connection());
 			if (expectedDataSet != null) {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
@@ -157,7 +179,7 @@ class DbUnitRunner {
 
 	private void setupOrTeardown(DbUnitTestContext testContext, boolean isSetup,
 			Collection<AnnotationAttributes> annotations) throws Exception {
-		IDatabaseConnection connection = testContext.getConnection();
+		DatabaseConnections connections = testContext.getConnections();
 		for (AnnotationAttributes annotation : annotations) {
 			List<IDataSet> datasets = loadDataSets(testContext, annotation);
 			DatabaseOperation operation = annotation.getType();
@@ -167,6 +189,7 @@ class DbUnitRunner {
 					logger.debug("Executing " + (isSetup ? "Setup" : "Teardown") + " of @DatabaseTest using "
 							+ operation + " on " + datasets.toString());
 				}
+				IDatabaseConnection connection = connections.get(annotation.getConnection());
 				IDataSet dataSet = new CompositeDataSet(datasets.toArray(new IDataSet[datasets.size()]));
 				dbUnitOperation.execute(connection, dataSet);
 			}
@@ -205,9 +228,11 @@ class DbUnitRunner {
 
 	private static class AnnotationAttributes {
 
-		private DatabaseOperation type;
+		private final DatabaseOperation type;
 
-		private String[] value;
+		private final String[] value;
+
+		private final String connection;
 
 		public AnnotationAttributes(Annotation annotation) {
 			Assert.state((annotation instanceof DatabaseSetup) || (annotation instanceof DatabaseTearDown),
@@ -215,6 +240,7 @@ class DbUnitRunner {
 			Map<String, Object> attributes = AnnotationUtils.getAnnotationAttributes(annotation);
 			this.type = (DatabaseOperation) attributes.get("type");
 			this.value = (String[]) attributes.get("value");
+			this.connection = (String) attributes.get("connection");
 		}
 
 		public DatabaseOperation getType() {
@@ -223,6 +249,10 @@ class DbUnitRunner {
 
 		public String[] getValue() {
 			return this.value;
+		}
+
+		public String getConnection() {
+			return this.connection;
 		}
 
 		public static <T extends Annotation> Collection<AnnotationAttributes> get(Collection<T> annotations) {

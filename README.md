@@ -24,10 +24,10 @@ annotations for a typical JUnit 4 test:
 
 See the Spring JavaDocs for details of the standard listeners.
 
-In order to access the database, Spring DBUnit requires a bean to be registered in you test context XML file. By
-default a bean named or can be used (see the Advanced Configuration section below if you need to use another name).
-The bean can reference either a `IDatabaseConnection` or more typically a standard Java `DataSource`. Here is a typical
-configuration for accessing an in-memory hypersonic database:
+In order to access the database, Spring DBUnit requires a bean to be registered in your test context. By default a bean
+named `dbUnitDatabaseConnection` or `dataSource` can be used (see the Advanced Configuration section below if you need
+to use another name). The bean can reference either a `IDatabaseConnection` or more typically a standard Java
+`DataSource`. Here is a typical XML configuration for accessing an in-memory hypersonic database:
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     	<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
@@ -139,6 +139,57 @@ The `databaseOperationLookup` attribute allows you to specify a custom lookup st
 (see below).
 
 
+Working with multiple connections
+=================================
+It is possible to configure Spring Test DBUnit to work with multiple connections within the same test. First declare
+multiple `DataSource` or `IDatabaseConnection` beans in your application context. For example, here is XML configuration
+for two in-memory databases:
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+    	<property name="url" value="jdbc:hsqldb:mem:paging" />
+    	<property name="username" value="sa" />
+    	<property name="password" value="" />
+    </bean>
+    <bean id="customerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+    	<property name="url" value="jdbc:hsqldb:mem:customers" />
+    	<property name="username" value="sa" />
+    	<property name="password" value="" />
+    </bean>
+
+You then need to use the `@DbUnitConfiguration` on your test to link to the connections:
+
+    @DbUnitConfiguration(databaseConnection={"dataSource", "customerDataSource"})
+
+The `@DatabaseSetup`, `@DatabaseTearDown` and `@ExpectedDatabase` annotations all have a `connection` attribute which
+can be used if you need to target a specific connection. If you don't specify a `connection` the first
+`databaseConnection` from `@DbUnitConfiguration` will be used ("dataSource" in the example above).
+
+Spring Test DBUnit Annotations are repeatable so if you are using Java 8+ you can use several with the same test. For
+example:
+
+    @Test
+    @DatabaseSetup(value = "insert.xml")
+	@DatabaseSetup(connection="customerDataSource", value="insert-custs.xml")
+	public void testInsert() throws Exception {
+		// Inserts "insert.xml" into dataSource and "insert-custs.xml" into customerDataSource
+    	// ...
+    }
+
+If you are using an earlier version of Java you will need to use one of the wrapper annotations:
+
+    @Test
+    @DatabaseSetups({
+    	@DatabaseSetup(value = "insert.xml")
+    	@DatabaseSetup(connection="customerDataSource", value="insert-custs.xml")
+	})
+	public void testInsert() throws Exception {
+		// Inserts "insert.xml" into dataSource and "insert-custs.xml" into customerDataSource
+    	// ...
+    }
+
+
 Custom IDatabaseConnections
 ===========================
 In some situations you may need to create an `IDatabaseConnection` with a specific DBUnit configuration. Unfortunately,
@@ -175,6 +226,7 @@ Here is an example loader that reads data from a CSV formatted file.
     }
 
 See above for details of how to configure a test class to use the loader.
+
 
 Custom DBUnit Database Operations
 =================================

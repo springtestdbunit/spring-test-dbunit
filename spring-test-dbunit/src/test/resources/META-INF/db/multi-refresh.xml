@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<Second id="100" value="replacedFromDbUnitSecondConnection" />
+	<Second id="1000" value="addedFromDbUnitSecondConnection" />
+</dataset>

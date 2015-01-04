@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,11 +47,12 @@ import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
 public @interface DbUnitConfiguration {
 
 	/**
-	 * Returns the name of a spring bean will be used to access a {@link IDatabaseConnection}. The referenced bean can
-	 * either be a instance of {@link IDatabaseConnection} or a {@link DataSource}.
+	 * Returns the names of the spring beans which will be used to access {@link IDatabaseConnection
+	 * IDatabaseConnections}. The referenced beans can either be a instance of {@link IDatabaseConnection} or a
+	 * {@link DataSource}.
 	 * @return the bean name of the database connection
 	 */
-	String databaseConnection() default "";
+	String[] databaseConnection() default "";
 
 	/**
 	 * Returns the class that will be used to load {@link IDataSet} resources. The specified class must implement

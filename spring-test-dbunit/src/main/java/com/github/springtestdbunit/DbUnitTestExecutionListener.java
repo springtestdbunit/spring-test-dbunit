@@ -30,6 +30,7 @@ import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.util.Assert;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -90,7 +91,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Preparing test instance " + testContext.getTestClass() + " for DBUnit");
 		}
-		String databaseConnectionBeanName = null;
+		String[] databaseConnectionBeanNames = null;
 		String dataSetLoaderBeanName = null;
 		Class<? extends DataSetLoader> dataSetLoaderClass = FlatXmlDataSetLoader.class;
 		Class<? extends DatabaseOperationLookup> databaseOperationLookupClass = DefaultDatabaseOperationLookup.class;
@@ -100,14 +101,14 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Using @DbUnitConfiguration configuration");
 			}
-			databaseConnectionBeanName = configuration.databaseConnection();
+			databaseConnectionBeanNames = configuration.databaseConnection();
 			dataSetLoaderClass = configuration.dataSetLoader();
 			dataSetLoaderBeanName = configuration.dataSetLoaderBean();
 			databaseOperationLookupClass = configuration.databaseOperationLookup();
 		}
 
-		if (!StringUtils.hasLength(databaseConnectionBeanName)) {
-			databaseConnectionBeanName = getDatabaseConnectionUsingCommonBeanNames(testContext);
+		if (ObjectUtils.isEmpty(databaseConnectionBeanNames)) {
+			databaseConnectionBeanNames = new String[] { getDatabaseConnectionUsingCommonBeanNames(testContext) };
 		}
 
 		if (!StringUtils.hasLength(dataSetLoaderBeanName)) {
@@ -118,12 +119,12 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("DBUnit tests will run using databaseConnection \""
-					+ databaseConnectionBeanName
+					+ StringUtils.arrayToCommaDelimitedString(databaseConnectionBeanNames)
 					+ "\", datasets will be loaded using "
-					+ (StringUtils.hasLength(databaseConnectionBeanName) ? "'" + databaseConnectionBeanName + "'"
+					+ (StringUtils.hasLength(dataSetLoaderBeanName) ? "'" + dataSetLoaderBeanName + "'"
 							: dataSetLoaderClass));
 		}
-		prepareDatabaseConnection(testContext, databaseConnectionBeanName);
+		prepareDatabaseConnection(testContext, databaseConnectionBeanNames);
 		prepareDataSetLoader(testContext, dataSetLoaderBeanName, dataSetLoaderClass);
 		prepareDatabaseOperationLookup(testContext, databaseOperationLookupClass);
 	}
@@ -139,14 +140,19 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 						+ Arrays.asList(COMMON_DATABASE_CONNECTION_BEAN_NAMES));
 	}
 
-	private void prepareDatabaseConnection(DbUnitTestContextAdapter testContext, String databaseConnectionBeanName)
+	private void prepareDatabaseConnection(DbUnitTestContextAdapter testContext, String[] connectionBeanNames)
 			throws Exception {
-		Object databaseConnection = testContext.getApplicationContext().getBean(databaseConnectionBeanName);
-		if (databaseConnection instanceof DataSource) {
-			databaseConnection = DatabaseDataSourceConnectionFactoryBean.newConnection((DataSource) databaseConnection);
+		IDatabaseConnection[] connections = new IDatabaseConnection[connectionBeanNames.length];
+		for (int i = 0; i < connectionBeanNames.length; i++) {
+			Object databaseConnection = testContext.getApplicationContext().getBean(connectionBeanNames[i]);
+			if (databaseConnection instanceof DataSource) {
+				databaseConnection = DatabaseDataSourceConnectionFactoryBean
+						.newConnection((DataSource) databaseConnection);
+			}
+			Assert.isInstanceOf(IDatabaseConnection.class, databaseConnection);
+			connections[i] = (IDatabaseConnection) databaseConnection;
 		}
-		Assert.isInstanceOf(IDatabaseConnection.class, databaseConnection);
-		testContext.setAttribute(CONNECTION_ATTRIBUTE, databaseConnection);
+		testContext.setAttribute(CONNECTION_ATTRIBUTE, new DatabaseConnections(connectionBeanNames, connections));
 	}
 
 	private void prepareDataSetLoader(DbUnitTestContextAdapter testContext, String beanName,
@@ -217,8 +223,8 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			this.testContext = testContext;
 		}
 
-		public IDatabaseConnection getConnection() {
-			return (IDatabaseConnection) getAttribute(CONNECTION_ATTRIBUTE);
+		public DatabaseConnections getConnections() {
+			return (DatabaseConnections) getAttribute(CONNECTION_ATTRIBUTE);
 		}
 
 		public DataSetLoader getDataSetLoader() {

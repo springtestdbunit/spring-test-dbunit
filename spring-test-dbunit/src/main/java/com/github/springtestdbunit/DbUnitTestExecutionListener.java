@@ -191,6 +191,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 	private static class DbUnitTestContextAdapter implements DbUnitTestContext {
 
 		private static final Method GET_TEST_CLASS;
+		private static final Method GET_TEST_INSTANCE;
 		private static final Method GET_TEST_METHOD;
 		private static final Method GET_TEST_EXCEPTION;
 		private static final Method GET_APPLICATION_CONTEXT;
@@ -199,6 +200,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		static {
 			try {
 				GET_TEST_CLASS = TestContext.class.getMethod("getTestClass");
+				GET_TEST_INSTANCE = TestContext.class.getMethod("getTestInstance");
 				GET_TEST_METHOD = TestContext.class.getMethod("getTestMethod");
 				GET_TEST_EXCEPTION = TestContext.class.getMethod("getTestException");
 				GET_APPLICATION_CONTEXT = TestContext.class.getMethod("getApplicationContext");
@@ -233,6 +235,10 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 		public Method getTestMethod() {
 			return (Method) ReflectionUtils.invokeMethod(GET_TEST_METHOD, this.testContext);
+		}
+
+		public Object getTestInstance() {
+			return ReflectionUtils.invokeMethod(GET_TEST_INSTANCE, this.testContext);
 		}
 
 		public Throwable getTestException() {

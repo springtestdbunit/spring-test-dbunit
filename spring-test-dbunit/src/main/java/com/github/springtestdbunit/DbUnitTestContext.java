@@ -56,6 +56,12 @@ interface DbUnitTestContext {
 	Class<?> getTestClass();
 
 	/**
+	 * Returns the instance that is under test.
+	 * @return The instance under test
+	 */
+	Object getTestInstance();
+
+	/**
 	 * Returns the method that is under test.
 	 * @return The method under test
 	 */

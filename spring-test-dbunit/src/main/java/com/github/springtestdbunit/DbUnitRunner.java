@@ -38,6 +38,7 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertion;
 import com.github.springtestdbunit.dataset.DataSetLoader;
+import com.github.springtestdbunit.dataset.DataSetModifier;
 
 /**
  * Internal delegate class used to run tests with support for {@link DatabaseSetup &#064;DatabaseSetup},
@@ -111,11 +112,12 @@ class DbUnitRunner {
 			return;
 		}
 		IDatabaseConnection connection = testContext.getConnection();
+		DataSetModifier modifier = getModifier(testContext, annotations);
 		for (int i = annotations.size() - 1; i >= 0; i--) {
 			ExpectedDatabase annotation = annotations.get(i);
 			String query = annotation.query();
 			String table = annotation.table();
-			IDataSet expectedDataSet = loadDataset(testContext, annotation.value());
+			IDataSet expectedDataSet = loadDataset(testContext, annotation.value(), modifier);
 			if (expectedDataSet != null) {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
@@ -143,6 +145,16 @@ class DbUnitRunner {
 
 	}
 
+	private DataSetModifier getModifier(DbUnitTestContext testContext, List<ExpectedDatabase> annotations) {
+		DataSetModifiers modifiers = new DataSetModifiers();
+		for (ExpectedDatabase annotation : annotations) {
+			for (Class<? extends DataSetModifier> modifierClass : annotation.modifiers()) {
+				modifiers.add(testContext.getTestInstance(), modifierClass);
+			}
+		}
+		return modifiers;
+	}
+
 	private void setupOrTeardown(DbUnitTestContext testContext, boolean isSetup,
 			Collection<AnnotationAttributes> annotations) throws Exception {
 		IDatabaseConnection connection = testContext.getConnection();
@@ -165,15 +177,17 @@ class DbUnitRunner {
 			throws Exception {
 		List<IDataSet> datasets = new ArrayList<IDataSet>();
 		for (String dataSetLocation : annotation.getValue()) {
-			datasets.add(loadDataset(testContext, dataSetLocation));
+			datasets.add(loadDataset(testContext, dataSetLocation, DataSetModifier.NONE));
 		}
 		return datasets;
 	}
 
-	private IDataSet loadDataset(DbUnitTestContext testContext, String dataSetLocation) throws Exception {
+	private IDataSet loadDataset(DbUnitTestContext testContext, String dataSetLocation, DataSetModifier modifier)
+			throws Exception {
 		DataSetLoader dataSetLoader = testContext.getDataSetLoader();
 		if (StringUtils.hasLength(dataSetLocation)) {
 			IDataSet dataSet = dataSetLoader.loadDataSet(testContext.getTestClass(), dataSetLocation);
+			dataSet = modifier.modify(dataSet);
 			Assert.notNull(dataSet,
 					"Unable to load dataset from \"" + dataSetLocation + "\" using " + dataSetLoader.getClass());
 			return dataSet;

@@ -23,8 +23,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.dbunit.dataset.IDataSet;
+
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
+import com.github.springtestdbunit.dataset.DataSetModifier;
 
 /**
  * Test annotation that can be used to assert that a database is in given state after tests have run.
@@ -45,7 +48,7 @@ public @interface ExpectedDatabase {
 	 * @return The dataset locations
 	 * @see DbUnitConfiguration#dataSetLoader()
 	 */
-	String value();
+	String value() default "";
 
 	/**
 	 * Database assertion mode to use. Default is {@link DatabaseAssertionMode#DEFAULT}.
@@ -71,5 +74,12 @@ public @interface ExpectedDatabase {
 	 * @return if this annotation overrides any others
 	 */
 	boolean override() default true;
+
+	/**
+	 * A set of {@link DataSetModifier} that will be applied to the {@link IDataSet} before it is used. Can refer to a
+	 * static or inner class of the test.
+	 * @return the modifiers to apply
+	 */
+	Class<? extends DataSetModifier>[] modifiers() default {};
 
 }

@@ -17,6 +17,7 @@
 package com.github.springtestdbunit.dataset;
 
 import java.io.InputStream;
+import java.net.URL;
 
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
@@ -34,6 +35,23 @@ public class FlatXmlDataSetLoader extends AbstractDataSetLoader {
 	protected IDataSet createDataSet(Resource resource) throws Exception {
 		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
 		builder.setColumnSensing(true);
+		return buildDataSet(builder, resource);
+	}
+
+	private IDataSet buildDataSet(FlatXmlDataSetBuilder builder, Resource resource) throws Exception {
+		try {
+			// Prefer URL loading if possible so that DTDs can be resolved
+			return buildDataSetFromUrl(builder, resource.getURL());
+		} catch (Exception ex) {
+			return buildDataSetFromStream(builder, resource);
+		}
+	}
+
+	private IDataSet buildDataSetFromUrl(FlatXmlDataSetBuilder builder, URL url) throws Exception {
+		return builder.build(url);
+	}
+
+	private IDataSet buildDataSetFromStream(FlatXmlDataSetBuilder builder, Resource resource) throws Exception {
 		InputStream inputStream = resource.getInputStream();
 		try {
 			return builder.build(inputStream);

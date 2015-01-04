@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,6 +50,7 @@ public class DatabaseConfigBeanTests {
 	private DatabaseConfig defaultConfig = new DatabaseConfig();
 
 	private DatabaseConfigBean configBean;
+
 	private BeanWrapper configBeanWrapper;
 
 	@Before
@@ -68,8 +69,8 @@ public class DatabaseConfigBeanTests {
 		try {
 			this.configBean.setDatatypeFactory(null);
 			fail();
-		} catch (IllegalArgumentException e) {
-			assertEquals("dataTypeFactory cannot be null", e.getMessage());
+		} catch (IllegalArgumentException ex) {
+			assertEquals("dataTypeFactory cannot be null", ex.getMessage());
 		}
 	}
 
@@ -164,4 +165,5 @@ public class DatabaseConfigBeanTests {
 				appliedConfig.getProperty(databaseConfigProperty));
 
 	}
+
 }

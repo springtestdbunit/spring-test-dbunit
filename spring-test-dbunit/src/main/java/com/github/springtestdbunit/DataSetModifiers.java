@@ -49,8 +49,8 @@ class DataSetModifiers implements DataSetModifier {
 			} else {
 				add(modifierClass.getDeclaredConstructor(enclosingClass), testInstance);
 			}
-		} catch (Exception e) {
-			throw new IllegalStateException(e);
+		} catch (Exception ex) {
+			throw new IllegalStateException(ex);
 		}
 	}
 

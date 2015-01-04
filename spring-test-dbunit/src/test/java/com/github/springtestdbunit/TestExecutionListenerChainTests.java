@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,9 +39,13 @@ import org.springframework.test.context.support.AbstractTestExecutionListener;
 public class TestExecutionListenerChainTests {
 
 	private InOrder ordered;
+
 	private TestExecutionListenerChain chain;
+
 	private TestContext testContext;
+
 	private TestExecutionListener l1;
+
 	private TestExecutionListener l2;
 
 	@Before
@@ -87,9 +91,9 @@ public class TestExecutionListenerChainTests {
 				};
 			};
 			fail();
-		} catch (IllegalStateException e) {
+		} catch (IllegalStateException ex) {
 			assertEquals("Unable to create chain for classes [class com.github.springtestdbunit."
-					+ "TestExecutionListenerChainTests$InvalidTestListener]", e.getMessage());
+					+ "TestExecutionListenerChainTests$InvalidTestListener]", ex.getMessage());
 		}
 	}
 

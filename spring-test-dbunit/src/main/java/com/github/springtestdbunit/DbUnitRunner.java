@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,12 +76,12 @@ class DbUnitRunner {
 				Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDown.class);
 				try {
 					setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
-				} catch (RuntimeException e) {
+				} catch (RuntimeException ex) {
 					if (testContext.getTestException() == null) {
-						throw e;
+						throw ex;
 					}
 					if (logger.isWarnEnabled()) {
-						logger.warn("Unable to throw database cleanup exception due to existing test error", e);
+						logger.warn("Unable to throw database cleanup exception due to existing test error", ex);
 					}
 				}
 			}
@@ -232,5 +232,7 @@ class DbUnitRunner {
 			}
 			return annotationAttributes;
 		}
+
 	}
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,10 +35,15 @@ import org.springframework.util.Assert;
 public class DatabaseDataSourceConnectionFactoryBean implements FactoryBean<DatabaseDataSourceConnection> {
 
 	private DataSource dataSource;
+
 	private boolean transactionAware = true;
+
 	private String username;
+
 	private String password;
+
 	private String schema;
+
 	private DatabaseConfigBean databaseConfig;
 
 	public DatabaseDataSourceConnectionFactoryBean() {
@@ -137,8 +142,9 @@ public class DatabaseDataSourceConnectionFactoryBean implements FactoryBean<Data
 	public static IDatabaseConnection newConnection(DataSource dataSource) {
 		try {
 			return (new DatabaseDataSourceConnectionFactoryBean(dataSource)).getObject();
-		} catch (Exception e) {
-			throw new IllegalStateException(e);
+		} catch (Exception ex) {
+			throw new IllegalStateException(ex);
 		}
 	}
+
 }

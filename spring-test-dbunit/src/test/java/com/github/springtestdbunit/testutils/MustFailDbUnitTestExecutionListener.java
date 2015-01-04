@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,13 +30,13 @@ public class MustFailDbUnitTestExecutionListener extends TransactionDbUnitTestEx
 
 	@Override
 	public void afterTestMethod(TestContext testContext) throws Exception {
-		Throwable ex = null;
+		Throwable caught = null;
 		try {
 			super.afterTestMethod(testContext);
-		} catch (Throwable e) {
-			ex = e;
+		} catch (Throwable ex) {
+			caught = ex;
 		}
-		Assert.assertNotNull("Test did not fail", ex);
+		Assert.assertNotNull("Test did not fail", caught);
 	}
 
 }

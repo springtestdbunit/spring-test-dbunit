@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -157,9 +157,9 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		} else {
 			try {
 				testContext.setAttribute(DATA_SET_LOADER_ATTRIBUTE, dataSetLoaderClass.newInstance());
-			} catch (Exception e) {
+			} catch (Exception ex) {
 				throw new IllegalArgumentException("Unable to create data set loader instance for "
-						+ dataSetLoaderClass, e);
+						+ dataSetLoaderClass, ex);
 			}
 		}
 	}
@@ -168,9 +168,9 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			Class<? extends DatabaseOperationLookup> databaseOperationLookupClass) {
 		try {
 			testContext.setAttribute(DATABASE_OPERATION_LOOKUP_ATTRIBUTE, databaseOperationLookupClass.newInstance());
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			throw new IllegalArgumentException("Unable to create database operation lookup instance for "
-					+ databaseOperationLookupClass, e);
+					+ databaseOperationLookupClass, ex);
 		}
 	}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,8 +49,11 @@ import com.github.springtestdbunit.testutils.ExtendedTestContextManager;
 public class DbUnitTestExecutionListenerPrepareTests {
 
 	private static ThreadLocal<ApplicationContext> applicationContextThreadLocal = new ThreadLocal<ApplicationContext>();
+
 	private ApplicationContext applicationContext;
+
 	private IDatabaseConnection databaseConnection;
+
 	private DataSource dataSource;
 
 	@Before
@@ -120,8 +123,8 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(NoDbUnitConfiguration.class);
 		try {
 			testContextManager.prepareTestInstance();
-		} catch (IllegalStateException e) {
-			assertTrue(e.getMessage().startsWith("Unable to find a DB Unit database connection"));
+		} catch (IllegalStateException ex) {
+			assertTrue(ex.getMessage().startsWith("Unable to find a DB Unit database connection"));
 		}
 	}
 
@@ -131,9 +134,9 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(NoDbUnitConfiguration.class);
 		try {
 			testContextManager.prepareTestInstance();
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException ex) {
 			assertEquals("Object of class [java.lang.Integer] must be an instance of interface "
-					+ "org.dbunit.database.IDatabaseConnection", e.getMessage());
+					+ "org.dbunit.database.IDatabaseConnection", ex.getMessage());
 		}
 	}
 
@@ -160,10 +163,10 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(NonCreatableDataSetLoader.class);
 		try {
 			testContextManager.prepareTestInstance();
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException ex) {
 			assertEquals("Unable to create data set loader instance for class "
 					+ "com.github.springtestdbunit.DbUnitTestExecutionListenerPrepareTests$"
-					+ "AbstractCustomDataSetLoader", e.getMessage());
+					+ "AbstractCustomDataSetLoader", ex.getMessage());
 		}
 	}
 

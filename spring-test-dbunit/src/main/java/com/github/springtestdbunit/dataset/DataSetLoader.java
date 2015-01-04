@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,4 +38,5 @@ public interface DataSetLoader {
 	 * @throws Exception If the {@link IDataSet dataset} cannot be loaded
 	 */
 	public IDataSet loadDataSet(Class<?> testClass, String location) throws Exception;
+
 }

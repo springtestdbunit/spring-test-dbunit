@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +39,7 @@ import org.springframework.test.context.TestExecutionListener;
 public abstract class TestExecutionListenerChain implements TestExecutionListener {
 
 	private List<TestExecutionListener> chain;
+
 	private List<TestExecutionListener> reverseChain;
 
 	public TestExecutionListenerChain() {
@@ -66,8 +67,8 @@ public abstract class TestExecutionListenerChain implements TestExecutionListene
 				chain.add((TestExecutionListener) chainClasses[i].newInstance());
 			}
 			return chain;
-		} catch (Exception e) {
-			throw new IllegalStateException("Unable to create chain for classes " + Arrays.asList(chainClasses), e);
+		} catch (Exception ex) {
+			throw new IllegalStateException("Unable to create chain for classes " + Arrays.asList(chainClasses), ex);
 		}
 	}
 
@@ -120,23 +121,24 @@ public abstract class TestExecutionListenerChain implements TestExecutionListene
 	}
 
 	private void runChain(Iterator<TestExecutionListener> iterator, Call call) throws Exception {
-		Throwable ex = null;
+		Throwable lastException = null;
 		while (iterator.hasNext()) {
 			try {
 				call.call(iterator.next());
-			} catch (Throwable e) {
-				ex = e;
+			} catch (Throwable ex) {
+				lastException = ex;
 			}
 		}
-		if (ex != null) {
-			if (ex instanceof Exception) {
-				throw (Exception) ex;
+		if (lastException != null) {
+			if (lastException instanceof Exception) {
+				throw (Exception) lastException;
 			}
-			throw new Exception(ex);
+			throw new Exception(lastException);
 		}
 	}
 
 	private static interface Call {
 		public void call(TestExecutionListener listener) throws Exception;
 	}
+
 }

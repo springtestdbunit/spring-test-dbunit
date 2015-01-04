@@ -36,4 +36,5 @@ public class ReplacementDataSetLoaderTests {
 		assertEquals(1, table.getRowCount());
 		assertNull(table.getValue(0, "value"));
 	}
+
 }

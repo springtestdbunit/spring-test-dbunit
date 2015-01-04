@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2013 the original author or authors
+ * Copyright 2002-2015 the original author or authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +39,7 @@ public class CleanInsertSetupOnMethodTest {
 
 	@Autowired
 	private EntityAssert entityAssert;
+
 	@Autowired
 	private OtherEntityAssert otherEntityAssert;
 
@@ -56,4 +57,5 @@ public class CleanInsertSetupOnMethodTest {
 		// OtherSampleEntity is populated using import.sql imitating dirty state of the table
 		this.otherEntityAssert.assertValues("fromDbUnit");
 	}
+
 }

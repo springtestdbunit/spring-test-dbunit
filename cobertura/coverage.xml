@@ -1,428 +1,690 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.709832134292566" branch-rate="0.5816326530612245" lines-covered="296" lines-valid="417" branches-covered="57" branches-valid="98" complexity="1.626086956521739" version="1.9.4.1" timestamp="1391025302655">
+<coverage line-rate="0.6948818897637795" branch-rate="0.5671641791044776" lines-covered="353" lines-valid="508" branches-covered="76" branches-valid="134" complexity="1.676056338028169" version="1.9.4.1" timestamp="1420757256023">
 	<sources>
-		<source>/Users/pwebb/projects/spring-test-dbunit/code/spring-test-dbunit/src/main/java</source>
 		<source>--source</source>
+		<source>/Users/pwebb/projects/spring-test-dbunit/code/spring-test-dbunit/src/main/java</source>
 	</sources>
 	<packages>
-		<package name="com.github.springtestdbunit" line-rate="0.8874458874458875" branch-rate="0.6764705882352942" complexity="1.9056603773584906">
+		<package name="com.github.springtestdbunit" line-rate="0.8633333333333333" branch-rate="0.63" complexity="2.0303030303030303">
 			<classes>
-				<class name="com.github.springtestdbunit.DbUnitRunner" filename="com/github/springtestdbunit/DbUnitRunner.java" line-rate="0.8607594936708861" branch-rate="0.6578947368421053" complexity="3.0">
+				<class name="com.github.springtestdbunit.DataSetModifiers" filename="com/github/springtestdbunit/DataSetModifiers.java" line-rate="0.8823529411764706" branch-rate="0.8333333333333334" complexity="2.6666666666666665">
 					<methods>
-						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="51" hits="8" branch="false"/>
-							</lines>
-						</method>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="49" hits="8" branch="false"/>
+								<line number="33" hits="68" branch="false"/>
+								<line number="35" hits="68" branch="false"/>
 							</lines>
 						</method>
-						<method name="addAnnotationToList" signature="(Ljava/util/List;Ljava/lang/annotation/Annotation;)V" line-rate="1.0" branch-rate="1.0">
+						<method name="add" signature="(Ljava/lang/Object;Ljava/lang/Class;)V" line-rate="0.75" branch-rate="0.75">
 							<lines>
-								<line number="95" hits="1328" branch="true" condition-coverage="100% (2/2)">
+								<line number="46" hits="4" branch="false"/>
+								<line number="47" hits="4" branch="true" condition-coverage="75% (3/4)">
 									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="96" hits="256" branch="false"/>
-								<line number="98" hits="1328" branch="false"/>
-							</lines>
-						</method>
-						<method name="afterTestMethod" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;)V" line-rate="0.5833333333333334" branch-rate="0.0">
-							<lines>
-								<line number="70" hits="232" branch="false"/>
-								<line number="71" hits="200" branch="false"/>
-								<line number="73" hits="200" branch="false"/>
-								<line number="74" hits="200" branch="false"/>
-								<line number="75" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="76" hits="0" branch="false"/>
-								<line number="78" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="79" hits="0" branch="false"/>
-								<line number="82" hits="0" branch="false"/>
-								<line number="83" hits="232" branch="false"/>
-								<line number="84" hits="32" branch="false"/>
-								<line number="85" hits="200" branch="false"/>
-							</lines>
-						</method>
-						<method name="beforeTestMethod" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;)V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="59" hits="232" branch="false"/>
-								<line number="60" hits="232" branch="false"/>
-								<line number="61" hits="232" branch="false"/>
-							</lines>
-						</method>
-						<method name="getAnnotations" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;Ljava/lang/Class;)Ljava/util/Collection;" line-rate="1.0" branch-rate="1.0">
-							<lines>
-								<line number="88" hits="664" branch="false"/>
-								<line number="89" hits="664" branch="false"/>
-								<line number="90" hits="664" branch="false"/>
-								<line number="91" hits="664" branch="false"/>
-							</lines>
-						</method>
-						<method name="getDbUnitDatabaseOperation" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;Lcom/github/springtestdbunit/annotation/DatabaseOperation;Lcom/github/springtestdbunit/annotation/DatabaseOperation;)Lorg/dbunit/operation/DatabaseOperation;" line-rate="1.0" branch-rate="0.8333333333333334">
-							<lines>
-								<line number="171" hits="192" branch="true" condition-coverage="100% (4/4)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
+										<condition number="0" type="jump" coverage="50%"/>
 										<condition number="1" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="172" hits="32" branch="false"/>
-								<line number="174" hits="384" branch="false"/>
-								<line number="175" hits="192" branch="false"/>
-								<line number="176" hits="192" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="177" hits="192" branch="false"/>
+								<line number="48" hits="2" branch="false"/>
+								<line number="50" hits="2" branch="false"/>
+								<line number="52" hits="0" branch="false"/>
+								<line number="53" hits="0" branch="false"/>
+								<line number="54" hits="4" branch="false"/>
+								<line number="55" hits="4" branch="false"/>
 							</lines>
 						</method>
-						<method name="loadDataset" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;Ljava/lang/String;)Lorg/dbunit/dataset/IDataSet;" line-rate="0.8571428571428571" branch-rate="0.5">
+						<method name="add" signature="(Ljava/lang/reflect/Constructor;[Ljava/lang/Object;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="137" hits="264" branch="false"/>
-								<line number="138" hits="264" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="139" hits="264" branch="false"/>
-								<line number="140" hits="528" branch="false"/>
-								<line number="141" hits="264" branch="false"/>
-								<line number="142" hits="264" branch="false"/>
-								<line number="144" hits="0" branch="false"/>
+								<line number="58" hits="4" branch="false"/>
+								<line number="59" hits="4" branch="false"/>
+								<line number="60" hits="4" branch="false"/>
 							</lines>
 						</method>
-						<method name="setupOrTeardown" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;ZLjava/util/Collection;)V" line-rate="0.8666666666666667" branch-rate="0.6">
+						<method name="modify" signature="(Lorg/dbunit/dataset/IDataSet;)Lorg/dbunit/dataset/IDataSet;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="149" hits="432" branch="false"/>
-								<line number="150" hits="432" branch="false"/>
-								<line number="151" hits="1040" branch="true" condition-coverage="100% (2/2)">
+								<line number="38" hits="30" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="152" hits="368" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="153" hits="192" branch="false"/>
-								<line number="154" hits="384" branch="false"/>
-								<line number="155" hits="192" branch="false"/>
-								<line number="156" hits="192" branch="false"/>
-								<line number="157" hits="192" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="158" hits="192" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="159" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="160" hits="0" branch="false"/>
-								<line number="162" hits="192" branch="false"/>
-								<line number="163" hits="192" branch="false"/>
-								<line number="167" hits="432" branch="false"/>
-							</lines>
-						</method>
-						<method name="verifyExpected" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;Ljava/util/Collection;)V" line-rate="0.8888888888888888" branch-rate="0.7857142857142857">
-							<lines>
-								<line number="102" hits="232" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="103" hits="8" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="104" hits="0" branch="false"/>
-								<line number="105" hits="0" branch="false"/>
-								<line number="107" hits="8" branch="false"/>
-								<line number="109" hits="224" branch="false"/>
-								<line number="110" hits="488" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="111" hits="72" branch="false"/>
-								<line number="112" hits="72" branch="false"/>
-								<line number="113" hits="72" branch="false"/>
-								<line number="114" hits="72" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="115" hits="72" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
-								<line number="116" hits="0" branch="false"/>
-								<line number="118" hits="72" branch="false"/>
-								<line number="119" hits="72" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="120" hits="32" branch="false"/>
-								<line number="121" hits="32" branch="false"/>
-								<line number="122" hits="32" branch="false"/>
-								<line number="123" hits="32" branch="false"/>
-								<line number="124" hits="16" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="125" hits="8" branch="false"/>
-								<line number="126" hits="8" branch="false"/>
-								<line number="127" hits="8" branch="false"/>
-								<line number="128" hits="8" branch="false"/>
-								<line number="129" hits="32" branch="false"/>
-								<line number="130" hits="32" branch="false"/>
-								<line number="134" hits="192" branch="false"/>
+								<line number="39" hits="4" branch="false"/>
+								<line number="40" hits="4" branch="false"/>
+								<line number="41" hits="30" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="49" hits="8" branch="false"/>
-						<line number="51" hits="8" branch="false"/>
-						<line number="59" hits="232" branch="false"/>
-						<line number="60" hits="232" branch="false"/>
-						<line number="61" hits="232" branch="false"/>
-						<line number="70" hits="232" branch="false"/>
-						<line number="71" hits="200" branch="false"/>
-						<line number="73" hits="200" branch="false"/>
-						<line number="74" hits="200" branch="false"/>
-						<line number="75" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="76" hits="0" branch="false"/>
-						<line number="78" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="79" hits="0" branch="false"/>
-						<line number="82" hits="0" branch="false"/>
-						<line number="83" hits="232" branch="false"/>
-						<line number="84" hits="32" branch="false"/>
-						<line number="85" hits="200" branch="false"/>
-						<line number="88" hits="664" branch="false"/>
-						<line number="89" hits="664" branch="false"/>
-						<line number="90" hits="664" branch="false"/>
-						<line number="91" hits="664" branch="false"/>
-						<line number="95" hits="1328" branch="true" condition-coverage="100% (2/2)">
+						<line number="33" hits="68" branch="false"/>
+						<line number="35" hits="68" branch="false"/>
+						<line number="38" hits="30" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="96" hits="256" branch="false"/>
-						<line number="98" hits="1328" branch="false"/>
-						<line number="102" hits="232" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="103" hits="8" branch="true" condition-coverage="50% (1/2)">
+						<line number="39" hits="4" branch="false"/>
+						<line number="40" hits="4" branch="false"/>
+						<line number="41" hits="30" branch="false"/>
+						<line number="46" hits="4" branch="false"/>
+						<line number="47" hits="4" branch="true" condition-coverage="75% (3/4)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="104" hits="0" branch="false"/>
-						<line number="105" hits="0" branch="false"/>
-						<line number="107" hits="8" branch="false"/>
-						<line number="109" hits="224" branch="false"/>
-						<line number="110" hits="488" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="111" hits="72" branch="false"/>
-						<line number="112" hits="72" branch="false"/>
-						<line number="113" hits="72" branch="false"/>
-						<line number="114" hits="72" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="115" hits="72" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="116" hits="0" branch="false"/>
-						<line number="118" hits="72" branch="false"/>
-						<line number="119" hits="72" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="120" hits="32" branch="false"/>
-						<line number="121" hits="32" branch="false"/>
-						<line number="122" hits="32" branch="false"/>
-						<line number="123" hits="32" branch="false"/>
-						<line number="124" hits="16" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="125" hits="8" branch="false"/>
-						<line number="126" hits="8" branch="false"/>
-						<line number="127" hits="8" branch="false"/>
-						<line number="128" hits="8" branch="false"/>
-						<line number="129" hits="32" branch="false"/>
-						<line number="130" hits="32" branch="false"/>
-						<line number="134" hits="192" branch="false"/>
-						<line number="137" hits="264" branch="false"/>
-						<line number="138" hits="264" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="139" hits="264" branch="false"/>
-						<line number="140" hits="528" branch="false"/>
-						<line number="141" hits="264" branch="false"/>
-						<line number="142" hits="264" branch="false"/>
-						<line number="144" hits="0" branch="false"/>
-						<line number="149" hits="432" branch="false"/>
-						<line number="150" hits="432" branch="false"/>
-						<line number="151" hits="1040" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="152" hits="368" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="153" hits="192" branch="false"/>
-						<line number="154" hits="384" branch="false"/>
-						<line number="155" hits="192" branch="false"/>
-						<line number="156" hits="192" branch="false"/>
-						<line number="157" hits="192" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="158" hits="192" branch="true" condition-coverage="50% (1/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="50%"/>
-							</conditions>
-						</line>
-						<line number="159" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="160" hits="0" branch="false"/>
-						<line number="162" hits="192" branch="false"/>
-						<line number="163" hits="192" branch="false"/>
-						<line number="167" hits="432" branch="false"/>
-						<line number="171" hits="192" branch="true" condition-coverage="100% (4/4)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
 								<condition number="1" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="172" hits="32" branch="false"/>
-						<line number="174" hits="384" branch="false"/>
-						<line number="175" hits="192" branch="false"/>
-						<line number="176" hits="192" branch="true" condition-coverage="50% (1/2)">
+						<line number="48" hits="2" branch="false"/>
+						<line number="50" hits="2" branch="false"/>
+						<line number="52" hits="0" branch="false"/>
+						<line number="53" hits="0" branch="false"/>
+						<line number="54" hits="4" branch="false"/>
+						<line number="55" hits="4" branch="false"/>
+						<line number="58" hits="4" branch="false"/>
+						<line number="59" hits="4" branch="false"/>
+						<line number="60" hits="4" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.github.springtestdbunit.DatabaseConnections" filename="com/github/springtestdbunit/DatabaseConnections.java" line-rate="0.75" branch-rate="0.4" complexity="3.3333333333333335">
+					<methods>
+						<method name="&lt;init&gt;" signature="([Ljava/lang/String;[Lorg/dbunit/database/IDatabaseConnection;)V" line-rate="1.0" branch-rate="0.5">
+							<lines>
+								<line number="36" hits="70" branch="false"/>
+								<line number="37" hits="70" branch="false"/>
+								<line number="38" hits="70" branch="false"/>
+								<line number="39" hits="70" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="40" hits="70" branch="false"/>
+								<line number="41" hits="70" branch="false"/>
+								<line number="42" hits="70" branch="false"/>
+							</lines>
+						</method>
+						<method name="closeAll" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="45" hits="140" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="46" hits="70" branch="false"/>
+								<line number="48" hits="70" branch="false"/>
+							</lines>
+						</method>
+						<method name="get" signature="(Ljava/lang/String;)Lorg/dbunit/database/IDatabaseConnection;" line-rate="0.3333333333333333" branch-rate="0.16666666666666666">
+							<lines>
+								<line number="51" hits="76" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="52" hits="76" branch="false"/>
+								<line number="54" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="55" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="56" hits="0" branch="false"/>
+								<line number="59" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="36" hits="70" branch="false"/>
+						<line number="37" hits="70" branch="false"/>
+						<line number="38" hits="70" branch="false"/>
+						<line number="39" hits="70" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="177" hits="192" branch="false"/>
+						<line number="40" hits="70" branch="false"/>
+						<line number="41" hits="70" branch="false"/>
+						<line number="42" hits="70" branch="false"/>
+						<line number="45" hits="140" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="46" hits="70" branch="false"/>
+						<line number="48" hits="70" branch="false"/>
+						<line number="51" hits="76" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="52" hits="76" branch="false"/>
+						<line number="54" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="55" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="56" hits="0" branch="false"/>
+						<line number="59" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="com.github.springtestdbunit.DbUnitRunner$AnnotationAttributes" filename="com/github/springtestdbunit/DbUnitRunner.java" line-rate="1.0" branch-rate="0.8333333333333334" complexity="3.0">
+				<class name="com.github.springtestdbunit.DbUnitRunner" filename="com/github/springtestdbunit/DbUnitRunner.java" line-rate="0.8640776699029126" branch-rate="0.6363636363636364" complexity="2.6875">
+					<methods>
+						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="57" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="55" hits="2" branch="false"/>
+								<line number="229" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="addAnnotationToList" signature="(Ljava/util/List;Ljava/lang/annotation/Annotation;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="111" hits="420" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="112" hits="82" branch="false"/>
+								<line number="114" hits="420" branch="false"/>
+							</lines>
+						</method>
+						<method name="addRepeatableAnnotationsToList" signature="(Ljava/util/List;Ljava/lang/annotation/Annotation;)V" line-rate="0.4" branch-rate="0.25">
+							<lines>
+								<line number="119" hits="420" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="120" hits="0" branch="false"/>
+								<line number="121" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="122" hits="0" branch="false"/>
+								<line number="125" hits="420" branch="false"/>
+							</lines>
+						</method>
+						<method name="afterTestMethod" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;)V" line-rate="0.6428571428571429" branch-rate="0.0">
+							<lines>
+								<line number="77" hits="140" branch="false"/>
+								<line number="78" hits="70" branch="false"/>
+								<line number="80" hits="70" branch="false"/>
+								<line number="83" hits="70" branch="false"/>
+								<line number="84" hits="0" branch="false"/>
+								<line number="85" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="86" hits="0" branch="false"/>
+								<line number="88" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="89" hits="0" branch="false"/>
+								<line number="91" hits="70" branch="false"/>
+								<line number="92" hits="70" branch="false"/>
+								<line number="94" hits="70" branch="false"/>
+								<line number="95" hits="60" branch="false"/>
+								<line number="96" hits="60" branch="false"/>
+							</lines>
+						</method>
+						<method name="beforeTestMethod" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="65" hits="70" branch="false"/>
+								<line number="66" hits="70" branch="false"/>
+								<line number="67" hits="70" branch="false"/>
+							</lines>
+						</method>
+						<method name="getAnnotations" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;Ljava/lang/Class;Ljava/lang/Class;)Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="100" hits="210" branch="false"/>
+								<line number="101" hits="210" branch="false"/>
+								<line number="102" hits="420" branch="false"/>
+								<line number="103" hits="210" branch="false"/>
+								<line number="104" hits="210" branch="false"/>
+								<line number="105" hits="420" branch="false"/>
+								<line number="106" hits="210" branch="false"/>
+								<line number="107" hits="210" branch="false"/>
+							</lines>
+						</method>
+						<method name="getDbUnitDatabaseOperation" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;Lcom/github/springtestdbunit/annotation/DatabaseOperation;)Lorg/dbunit/operation/DatabaseOperation;" line-rate="1.0" branch-rate="0.5">
+							<lines>
+								<line number="223" hits="46" branch="false"/>
+								<line number="225" hits="46" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="226" hits="46" branch="false"/>
+							</lines>
+						</method>
+						<method name="getModifier" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;Ljava/util/List;)Lcom/github/springtestdbunit/dataset/DataSetModifier;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="171" hits="68" branch="false"/>
+								<line number="172" hits="68" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="173" hits="38" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="174" hits="4" branch="false"/>
+								<line number="176" hits="34" branch="false"/>
+								<line number="177" hits="68" branch="false"/>
+							</lines>
+						</method>
+						<method name="loadDataSets" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;Lcom/github/springtestdbunit/DbUnitRunner$AnnotationAttributes;)Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="201" hits="46" branch="false"/>
+								<line number="202" hits="98" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="203" hits="52" branch="false"/>
+								<line number="205" hits="46" branch="false"/>
+							</lines>
+						</method>
+						<method name="loadDataset" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;Ljava/lang/String;Lcom/github/springtestdbunit/dataset/DataSetModifier;)Lorg/dbunit/dataset/IDataSet;" line-rate="0.875" branch-rate="0.5">
+							<lines>
+								<line number="210" hits="82" branch="false"/>
+								<line number="211" hits="82" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="212" hits="82" branch="false"/>
+								<line number="213" hits="82" branch="false"/>
+								<line number="214" hits="164" branch="false"/>
+								<line number="215" hits="82" branch="false"/>
+								<line number="216" hits="82" branch="false"/>
+								<line number="218" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="setupOrTeardown" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;ZLjava/util/Collection;)V" line-rate="0.8571428571428571" branch-rate="0.5">
+							<lines>
+								<line number="182" hits="140" branch="false"/>
+								<line number="183" hits="140" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="184" hits="46" branch="false"/>
+								<line number="185" hits="46" branch="false"/>
+								<line number="186" hits="46" branch="false"/>
+								<line number="187" hits="46" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="188" hits="46" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="189" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="190" hits="0" branch="false"/>
+								<line number="192" hits="46" branch="false"/>
+								<line number="193" hits="46" branch="false"/>
+								<line number="194" hits="46" branch="false"/>
+								<line number="196" hits="46" branch="false"/>
+								<line number="197" hits="140" branch="false"/>
+							</lines>
+						</method>
+						<method name="verifyExpected" signature="(Lcom/github/springtestdbunit/DbUnitTestContext;Ljava/util/List;)V" line-rate="0.90625" branch-rate="0.8125">
+							<lines>
+								<line number="128" hits="70" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="129" hits="2" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="130" hits="0" branch="false"/>
+								<line number="131" hits="0" branch="false"/>
+								<line number="133" hits="2" branch="false"/>
+								<line number="135" hits="68" branch="false"/>
+								<line number="136" hits="68" branch="false"/>
+								<line number="137" hits="70" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="138" hits="30" branch="false"/>
+								<line number="139" hits="30" branch="false"/>
+								<line number="140" hits="30" branch="false"/>
+								<line number="141" hits="30" branch="false"/>
+								<line number="142" hits="30" branch="false"/>
+								<line number="143" hits="30" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="144" hits="30" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="145" hits="0" branch="false"/>
+								<line number="147" hits="30" branch="false"/>
+								<line number="148" hits="30" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="149" hits="10" branch="false"/>
+								<line number="150" hits="10" branch="false"/>
+								<line number="151" hits="10" branch="false"/>
+								<line number="152" hits="10" branch="false"/>
+								<line number="153" hits="6" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="154" hits="2" branch="false"/>
+								<line number="155" hits="2" branch="false"/>
+								<line number="156" hits="2" branch="false"/>
+								<line number="157" hits="2" branch="false"/>
+								<line number="158" hits="18" branch="false"/>
+								<line number="159" hits="18" branch="false"/>
+								<line number="162" hits="20" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="164" hits="18" branch="false"/>
+								<line number="168" hits="40" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="55" hits="2" branch="false"/>
+						<line number="57" hits="2" branch="false"/>
+						<line number="65" hits="70" branch="false"/>
+						<line number="66" hits="70" branch="false"/>
+						<line number="67" hits="70" branch="false"/>
+						<line number="77" hits="140" branch="false"/>
+						<line number="78" hits="70" branch="false"/>
+						<line number="80" hits="70" branch="false"/>
+						<line number="83" hits="70" branch="false"/>
+						<line number="84" hits="0" branch="false"/>
+						<line number="85" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="86" hits="0" branch="false"/>
+						<line number="88" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="89" hits="0" branch="false"/>
+						<line number="91" hits="70" branch="false"/>
+						<line number="92" hits="70" branch="false"/>
+						<line number="94" hits="70" branch="false"/>
+						<line number="95" hits="60" branch="false"/>
+						<line number="96" hits="60" branch="false"/>
+						<line number="100" hits="210" branch="false"/>
+						<line number="101" hits="210" branch="false"/>
+						<line number="102" hits="420" branch="false"/>
+						<line number="103" hits="210" branch="false"/>
+						<line number="104" hits="210" branch="false"/>
+						<line number="105" hits="420" branch="false"/>
+						<line number="106" hits="210" branch="false"/>
+						<line number="107" hits="210" branch="false"/>
+						<line number="111" hits="420" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="112" hits="82" branch="false"/>
+						<line number="114" hits="420" branch="false"/>
+						<line number="119" hits="420" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="120" hits="0" branch="false"/>
+						<line number="121" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="122" hits="0" branch="false"/>
+						<line number="125" hits="420" branch="false"/>
+						<line number="128" hits="70" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="129" hits="2" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="130" hits="0" branch="false"/>
+						<line number="131" hits="0" branch="false"/>
+						<line number="133" hits="2" branch="false"/>
+						<line number="135" hits="68" branch="false"/>
+						<line number="136" hits="68" branch="false"/>
+						<line number="137" hits="70" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="138" hits="30" branch="false"/>
+						<line number="139" hits="30" branch="false"/>
+						<line number="140" hits="30" branch="false"/>
+						<line number="141" hits="30" branch="false"/>
+						<line number="142" hits="30" branch="false"/>
+						<line number="143" hits="30" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="144" hits="30" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="145" hits="0" branch="false"/>
+						<line number="147" hits="30" branch="false"/>
+						<line number="148" hits="30" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="149" hits="10" branch="false"/>
+						<line number="150" hits="10" branch="false"/>
+						<line number="151" hits="10" branch="false"/>
+						<line number="152" hits="10" branch="false"/>
+						<line number="153" hits="6" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="154" hits="2" branch="false"/>
+						<line number="155" hits="2" branch="false"/>
+						<line number="156" hits="2" branch="false"/>
+						<line number="157" hits="2" branch="false"/>
+						<line number="158" hits="18" branch="false"/>
+						<line number="159" hits="18" branch="false"/>
+						<line number="162" hits="20" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="164" hits="18" branch="false"/>
+						<line number="168" hits="40" branch="false"/>
+						<line number="171" hits="68" branch="false"/>
+						<line number="172" hits="68" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="173" hits="38" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="174" hits="4" branch="false"/>
+						<line number="176" hits="34" branch="false"/>
+						<line number="177" hits="68" branch="false"/>
+						<line number="182" hits="140" branch="false"/>
+						<line number="183" hits="140" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="184" hits="46" branch="false"/>
+						<line number="185" hits="46" branch="false"/>
+						<line number="186" hits="46" branch="false"/>
+						<line number="187" hits="46" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="188" hits="46" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="189" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="190" hits="0" branch="false"/>
+						<line number="192" hits="46" branch="false"/>
+						<line number="193" hits="46" branch="false"/>
+						<line number="194" hits="46" branch="false"/>
+						<line number="196" hits="46" branch="false"/>
+						<line number="197" hits="140" branch="false"/>
+						<line number="201" hits="46" branch="false"/>
+						<line number="202" hits="98" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="203" hits="52" branch="false"/>
+						<line number="205" hits="46" branch="false"/>
+						<line number="210" hits="82" branch="false"/>
+						<line number="211" hits="82" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="212" hits="82" branch="false"/>
+						<line number="213" hits="82" branch="false"/>
+						<line number="214" hits="164" branch="false"/>
+						<line number="215" hits="82" branch="false"/>
+						<line number="216" hits="82" branch="false"/>
+						<line number="218" hits="0" branch="false"/>
+						<line number="223" hits="46" branch="false"/>
+						<line number="225" hits="46" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="226" hits="46" branch="false"/>
+						<line number="229" hits="2" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.github.springtestdbunit.DbUnitRunner$AnnotationAttributes" filename="com/github/springtestdbunit/DbUnitRunner.java" line-rate="1.0" branch-rate="0.8333333333333334" complexity="2.6875">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ljava/lang/annotation/Annotation;)V" line-rate="1.0" branch-rate="0.75">
 							<lines>
-								<line number="186" hits="176" branch="false"/>
-								<line number="187" hits="352" branch="true" condition-coverage="75% (3/4)">
+								<line number="237" hits="46" branch="false"/>
+								<line number="238" hits="46" branch="true" condition-coverage="75% (3/4)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 										<condition number="1" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="188" hits="176" branch="false"/>
-								<line number="189" hits="176" branch="false"/>
-								<line number="190" hits="176" branch="false"/>
-								<line number="191" hits="176" branch="false"/>
-								<line number="192" hits="176" branch="false"/>
+								<line number="240" hits="46" branch="false"/>
+								<line number="241" hits="46" branch="false"/>
+								<line number="242" hits="46" branch="false"/>
+								<line number="243" hits="46" branch="false"/>
+								<line number="244" hits="46" branch="false"/>
 							</lines>
 						</method>
 						<method name="get" signature="(Ljava/util/Collection;)Ljava/util/Collection;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="203" hits="432" branch="false"/>
-								<line number="204" hits="1040" branch="true" condition-coverage="100% (2/2)">
+								<line number="259" hits="140" branch="false"/>
+								<line number="260" hits="140" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="205" hits="176" branch="false"/>
-								<line number="207" hits="432" branch="false"/>
+								<line number="261" hits="46" branch="false"/>
+								<line number="262" hits="46" branch="false"/>
+								<line number="263" hits="140" branch="false"/>
+							</lines>
+						</method>
+						<method name="getConnection" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="255" hits="46" branch="false"/>
 							</lines>
 						</method>
 						<method name="getType" signature="()Lcom/github/springtestdbunit/annotation/DatabaseOperation;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="195" hits="192" branch="false"/>
+								<line number="247" hits="46" branch="false"/>
 							</lines>
 						</method>
 						<method name="getValue" signature="()[Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="199" hits="176" branch="false"/>
+								<line number="251" hits="46" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="186" hits="176" branch="false"/>
-						<line number="187" hits="352" branch="true" condition-coverage="75% (3/4)">
+						<line number="237" hits="46" branch="false"/>
+						<line number="238" hits="46" branch="true" condition-coverage="75% (3/4)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 								<condition number="1" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="188" hits="176" branch="false"/>
-						<line number="189" hits="176" branch="false"/>
-						<line number="190" hits="176" branch="false"/>
-						<line number="191" hits="176" branch="false"/>
-						<line number="192" hits="176" branch="false"/>
-						<line number="195" hits="192" branch="false"/>
-						<line number="199" hits="176" branch="false"/>
-						<line number="203" hits="432" branch="false"/>
-						<line number="204" hits="1040" branch="true" condition-coverage="100% (2/2)">
+						<line number="240" hits="46" branch="false"/>
+						<line number="241" hits="46" branch="false"/>
+						<line number="242" hits="46" branch="false"/>
+						<line number="243" hits="46" branch="false"/>
+						<line number="244" hits="46" branch="false"/>
+						<line number="247" hits="46" branch="false"/>
+						<line number="251" hits="46" branch="false"/>
+						<line number="255" hits="46" branch="false"/>
+						<line number="259" hits="140" branch="false"/>
+						<line number="260" hits="140" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="205" hits="176" branch="false"/>
-						<line number="207" hits="432" branch="false"/>
+						<line number="261" hits="46" branch="false"/>
+						<line number="262" hits="46" branch="false"/>
+						<line number="263" hits="140" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.DbUnitTestContext" filename="com/github/springtestdbunit/DbUnitTestContext.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
@@ -431,578 +693,648 @@
 					<lines>
 					</lines>
 				</class>
-				<class name="com.github.springtestdbunit.DbUnitTestExecutionListener" filename="com/github/springtestdbunit/DbUnitTestExecutionListener.java" line-rate="0.7543859649122807" branch-rate="0.5" complexity="1.8235294117647058">
+				<class name="com.github.springtestdbunit.DbUnitTestExecutionListener" filename="com/github/springtestdbunit/DbUnitTestExecutionListener.java" line-rate="0.7246376811594203" branch-rate="0.5" complexity="2.0">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="67" hits="8" branch="false"/>
-								<line number="69" hits="8" branch="false"/>
-								<line number="71" hits="8" branch="false"/>
-								<line number="72" hits="8" branch="false"/>
-								<line number="74" hits="8" branch="false"/>
-								<line number="75" hits="8" branch="false"/>
-								<line number="77" hits="8" branch="false"/>
-								<line number="78" hits="8" branch="false"/>
-								<line number="80" hits="8" branch="false"/>
+								<line number="68" hits="2" branch="false"/>
+								<line number="70" hits="2" branch="false"/>
+								<line number="74" hits="2" branch="false"/>
+								<line number="77" hits="2" branch="false"/>
+								<line number="80" hits="2" branch="false"/>
+								<line number="83" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="65" hits="224" branch="false"/>
+								<line number="66" hits="66" branch="false"/>
+								<line number="197" hits="66" branch="false"/>
 							</lines>
 						</method>
 						<method name="afterTestMethod" signature="(Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="165" hits="232" branch="false"/>
-								<line number="166" hits="200" branch="false"/>
+								<line number="190" hits="70" branch="false"/>
+								<line number="191" hits="60" branch="false"/>
 							</lines>
 						</method>
 						<method name="beforeTestMethod" signature="(Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="160" hits="232" branch="false"/>
-								<line number="161" hits="232" branch="false"/>
+								<line number="185" hits="70" branch="false"/>
+								<line number="186" hits="70" branch="false"/>
 							</lines>
 						</method>
-						<method name="getDatabaseConnectionUsingCommonBeanNames" signature="(Lcom/github/springtestdbunit/DbUnitTestExecutionListener$DbUnitTestContextAdapter;)Ljava/lang/String;" line-rate="0.5" branch-rate="0.75">
+						<method name="getDatabaseConnectionUsingCommonBeanNames" signature="(Lcom/github/springtestdbunit/DbUnitTestExecutionListener$DbUnitTestContextAdapter;)Ljava/lang/String;" line-rate="0.6" branch-rate="0.75">
 							<lines>
-								<line number="119" hits="464" branch="true" condition-coverage="50% (1/2)">
+								<line number="133" hits="140" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="120" hits="464" branch="true" condition-coverage="100% (2/2)">
+								<line number="134" hits="140" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="121" hits="232" branch="false"/>
-								<line number="124" hits="0" branch="false"/>
-								<line number="125" hits="0" branch="false"/>
-								<line number="126" hits="0" branch="false"/>
+								<line number="135" hits="70" branch="false"/>
+								<line number="138" hits="0" branch="false"/>
+								<line number="140" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="prepareDataSetLoader" signature="(Lcom/github/springtestdbunit/DbUnitTestExecutionListener$DbUnitTestContextAdapter;Ljava/lang/Class;)V" line-rate="0.75" branch-rate="1.0">
+						<method name="prepareDataSetLoader" signature="(Lcom/github/springtestdbunit/DbUnitTestExecutionListener$DbUnitTestContextAdapter;Ljava/lang/String;Ljava/lang/Class;)V" line-rate="0.5" branch-rate="0.5">
 							<lines>
-								<line number="142" hits="232" branch="false"/>
-								<line number="143" hits="232" branch="false"/>
-								<line number="144" hits="0" branch="false"/>
-								<line number="146" hits="232" branch="false"/>
-							</lines>
-						</method>
-						<method name="prepareDatabaseConnection" signature="(Lcom/github/springtestdbunit/DbUnitTestExecutionListener$DbUnitTestContextAdapter;Ljava/lang/String;)V" line-rate="1.0" branch-rate="0.5">
-							<lines>
-								<line number="131" hits="232" branch="false"/>
-								<line number="132" hits="232" branch="true" condition-coverage="50% (1/2)">
+								<line number="160" hits="70" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="133" hits="232" branch="false"/>
-								<line number="135" hits="232" branch="false"/>
-								<line number="136" hits="232" branch="false"/>
-								<line number="137" hits="232" branch="false"/>
+								<line number="161" hits="0" branch="false"/>
+								<line number="162" hits="0" branch="false"/>
+								<line number="165" hits="70" branch="false"/>
+								<line number="166" hits="0" branch="false"/>
+								<line number="167" hits="0" branch="false"/>
+								<line number="169" hits="70" branch="false"/>
+								<line number="171" hits="70" branch="false"/>
+							</lines>
+						</method>
+						<method name="prepareDatabaseConnection" signature="(Lcom/github/springtestdbunit/DbUnitTestExecutionListener$DbUnitTestContextAdapter;[Ljava/lang/String;)V" line-rate="1.0" branch-rate="0.75">
+							<lines>
+								<line number="145" hits="70" branch="false"/>
+								<line number="146" hits="140" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="147" hits="70" branch="false"/>
+								<line number="148" hits="70" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="149" hits="70" branch="false"/>
+								<line number="150" hits="70" branch="false"/>
+								<line number="152" hits="70" branch="false"/>
+								<line number="153" hits="70" branch="false"/>
+								<line number="155" hits="70" branch="false"/>
+								<line number="156" hits="70" branch="false"/>
 							</lines>
 						</method>
 						<method name="prepareDatabaseOperationLookup" signature="(Lcom/github/springtestdbunit/DbUnitTestExecutionListener$DbUnitTestContextAdapter;Ljava/lang/Class;)V" line-rate="0.6" branch-rate="1.0">
 							<lines>
-								<line number="151" hits="232" branch="false"/>
-								<line number="152" hits="232" branch="false"/>
-								<line number="153" hits="0" branch="false"/>
-								<line number="154" hits="0" branch="false"/>
-								<line number="156" hits="232" branch="false"/>
+								<line number="176" hits="70" branch="false"/>
+								<line number="177" hits="0" branch="false"/>
+								<line number="178" hits="0" branch="false"/>
+								<line number="180" hits="70" branch="false"/>
+								<line number="181" hits="70" branch="false"/>
 							</lines>
 						</method>
-						<method name="prepareTestInstance" signature="(Lorg/springframework/test/context/TestContext;)V" line-rate="0.6363636363636364" branch-rate="0.4">
+						<method name="prepareTestInstance" signature="(Lcom/github/springtestdbunit/DbUnitTestExecutionListener$DbUnitTestContextAdapter;)V" line-rate="0.5925925925925926" branch-rate="0.375">
 							<lines>
-								<line number="85" hits="232" branch="true" condition-coverage="50% (1/2)">
+								<line number="91" hits="70" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="86" hits="0" branch="false"/>
-								<line number="89" hits="232" branch="false"/>
-								<line number="91" hits="232" branch="false"/>
-								<line number="92" hits="232" branch="false"/>
-								<line number="93" hits="232" branch="false"/>
-								<line number="95" hits="232" branch="false"/>
-								<line number="96" hits="232" branch="true" condition-coverage="50% (1/2)">
+								<line number="92" hits="0" branch="false"/>
+								<line number="94" hits="70" branch="false"/>
+								<line number="95" hits="70" branch="false"/>
+								<line number="96" hits="70" branch="false"/>
+								<line number="97" hits="70" branch="false"/>
+								<line number="99" hits="70" branch="false"/>
+								<line number="100" hits="70" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="97" hits="0" branch="true" condition-coverage="0% (0/2)">
+								<line number="101" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="98" hits="0" branch="false"/>
-								<line number="100" hits="0" branch="false"/>
-								<line number="101" hits="0" branch="false"/>
 								<line number="102" hits="0" branch="false"/>
-								<line number="105" hits="232" branch="true" condition-coverage="50% (1/2)">
+								<line number="104" hits="0" branch="false"/>
+								<line number="105" hits="0" branch="false"/>
+								<line number="106" hits="0" branch="false"/>
+								<line number="107" hits="0" branch="false"/>
+								<line number="110" hits="70" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="106" hits="232" branch="false"/>
-								<line number="109" hits="232" branch="true" condition-coverage="50% (1/2)">
+								<line number="111" hits="70" branch="false"/>
+								<line number="114" hits="70" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="110" hits="0" branch="false"/>
-								<line number="111" hits="0" branch="false"/>
-								<line number="113" hits="232" branch="false"/>
-								<line number="114" hits="232" branch="false"/>
-								<line number="115" hits="232" branch="false"/>
-								<line number="116" hits="232" branch="false"/>
+								<line number="115" hits="70" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="116" hits="0" branch="false"/>
+								<line number="120" hits="70" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="121" hits="0" branch="false"/>
+								<line number="122" hits="0" branch="false"/>
+								<line number="124" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="127" hits="70" branch="false"/>
+								<line number="128" hits="70" branch="false"/>
+								<line number="129" hits="70" branch="false"/>
+								<line number="130" hits="70" branch="false"/>
+							</lines>
+						</method>
+						<method name="prepareTestInstance" signature="(Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="87" hits="70" branch="false"/>
+								<line number="88" hits="70" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="65" hits="224" branch="false"/>
-						<line number="67" hits="8" branch="false"/>
-						<line number="69" hits="8" branch="false"/>
-						<line number="71" hits="8" branch="false"/>
-						<line number="72" hits="8" branch="false"/>
-						<line number="74" hits="8" branch="false"/>
-						<line number="75" hits="8" branch="false"/>
-						<line number="77" hits="8" branch="false"/>
-						<line number="78" hits="8" branch="false"/>
-						<line number="80" hits="8" branch="false"/>
-						<line number="85" hits="232" branch="true" condition-coverage="50% (1/2)">
+						<line number="66" hits="66" branch="false"/>
+						<line number="68" hits="2" branch="false"/>
+						<line number="70" hits="2" branch="false"/>
+						<line number="74" hits="2" branch="false"/>
+						<line number="77" hits="2" branch="false"/>
+						<line number="80" hits="2" branch="false"/>
+						<line number="83" hits="2" branch="false"/>
+						<line number="87" hits="70" branch="false"/>
+						<line number="88" hits="70" branch="false"/>
+						<line number="91" hits="70" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="86" hits="0" branch="false"/>
-						<line number="89" hits="232" branch="false"/>
-						<line number="91" hits="232" branch="false"/>
-						<line number="92" hits="232" branch="false"/>
-						<line number="93" hits="232" branch="false"/>
-						<line number="95" hits="232" branch="false"/>
-						<line number="96" hits="232" branch="true" condition-coverage="50% (1/2)">
+						<line number="92" hits="0" branch="false"/>
+						<line number="94" hits="70" branch="false"/>
+						<line number="95" hits="70" branch="false"/>
+						<line number="96" hits="70" branch="false"/>
+						<line number="97" hits="70" branch="false"/>
+						<line number="99" hits="70" branch="false"/>
+						<line number="100" hits="70" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="97" hits="0" branch="true" condition-coverage="0% (0/2)">
+						<line number="101" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="98" hits="0" branch="false"/>
-						<line number="100" hits="0" branch="false"/>
-						<line number="101" hits="0" branch="false"/>
 						<line number="102" hits="0" branch="false"/>
-						<line number="105" hits="232" branch="true" condition-coverage="50% (1/2)">
+						<line number="104" hits="0" branch="false"/>
+						<line number="105" hits="0" branch="false"/>
+						<line number="106" hits="0" branch="false"/>
+						<line number="107" hits="0" branch="false"/>
+						<line number="110" hits="70" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="106" hits="232" branch="false"/>
-						<line number="109" hits="232" branch="true" condition-coverage="50% (1/2)">
+						<line number="111" hits="70" branch="false"/>
+						<line number="114" hits="70" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="110" hits="0" branch="false"/>
-						<line number="111" hits="0" branch="false"/>
-						<line number="113" hits="232" branch="false"/>
-						<line number="114" hits="232" branch="false"/>
-						<line number="115" hits="232" branch="false"/>
-						<line number="116" hits="232" branch="false"/>
-						<line number="119" hits="464" branch="true" condition-coverage="50% (1/2)">
+						<line number="115" hits="70" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="120" hits="464" branch="true" condition-coverage="100% (2/2)">
+						<line number="116" hits="0" branch="false"/>
+						<line number="120" hits="70" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="121" hits="0" branch="false"/>
+						<line number="122" hits="0" branch="false"/>
+						<line number="124" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="127" hits="70" branch="false"/>
+						<line number="128" hits="70" branch="false"/>
+						<line number="129" hits="70" branch="false"/>
+						<line number="130" hits="70" branch="false"/>
+						<line number="133" hits="140" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="134" hits="140" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="121" hits="232" branch="false"/>
-						<line number="124" hits="0" branch="false"/>
-						<line number="125" hits="0" branch="false"/>
-						<line number="126" hits="0" branch="false"/>
-						<line number="131" hits="232" branch="false"/>
-						<line number="132" hits="232" branch="true" condition-coverage="50% (1/2)">
+						<line number="135" hits="70" branch="false"/>
+						<line number="138" hits="0" branch="false"/>
+						<line number="140" hits="0" branch="false"/>
+						<line number="145" hits="70" branch="false"/>
+						<line number="146" hits="140" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="147" hits="70" branch="false"/>
+						<line number="148" hits="70" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="133" hits="232" branch="false"/>
-						<line number="135" hits="232" branch="false"/>
-						<line number="136" hits="232" branch="false"/>
-						<line number="137" hits="232" branch="false"/>
-						<line number="142" hits="232" branch="false"/>
-						<line number="143" hits="232" branch="false"/>
-						<line number="144" hits="0" branch="false"/>
-						<line number="146" hits="232" branch="false"/>
-						<line number="151" hits="232" branch="false"/>
-						<line number="152" hits="232" branch="false"/>
-						<line number="153" hits="0" branch="false"/>
-						<line number="154" hits="0" branch="false"/>
-						<line number="156" hits="232" branch="false"/>
-						<line number="160" hits="232" branch="false"/>
-						<line number="161" hits="232" branch="false"/>
-						<line number="165" hits="232" branch="false"/>
-						<line number="166" hits="200" branch="false"/>
+						<line number="149" hits="70" branch="false"/>
+						<line number="150" hits="70" branch="false"/>
+						<line number="152" hits="70" branch="false"/>
+						<line number="153" hits="70" branch="false"/>
+						<line number="155" hits="70" branch="false"/>
+						<line number="156" hits="70" branch="false"/>
+						<line number="160" hits="70" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="161" hits="0" branch="false"/>
+						<line number="162" hits="0" branch="false"/>
+						<line number="165" hits="70" branch="false"/>
+						<line number="166" hits="0" branch="false"/>
+						<line number="167" hits="0" branch="false"/>
+						<line number="169" hits="70" branch="false"/>
+						<line number="171" hits="70" branch="false"/>
+						<line number="176" hits="70" branch="false"/>
+						<line number="177" hits="0" branch="false"/>
+						<line number="178" hits="0" branch="false"/>
+						<line number="180" hits="70" branch="false"/>
+						<line number="181" hits="70" branch="false"/>
+						<line number="185" hits="70" branch="false"/>
+						<line number="186" hits="70" branch="false"/>
+						<line number="190" hits="70" branch="false"/>
+						<line number="191" hits="60" branch="false"/>
+						<line number="197" hits="66" branch="false"/>
 					</lines>
 				</class>
-				<class name="com.github.springtestdbunit.DbUnitTestExecutionListener$DbUnitTestContextAdapter" filename="com/github/springtestdbunit/DbUnitTestExecutionListener.java" line-rate="0.9545454545454546" branch-rate="1.0" complexity="1.8235294117647058">
+				<class name="com.github.springtestdbunit.DbUnitTestExecutionListener$DbUnitTestContextAdapter" filename="com/github/springtestdbunit/DbUnitTestExecutionListener.java" line-rate="0.92" branch-rate="1.0" complexity="2.0">
 					<methods>
-						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.8888888888888888" branch-rate="1.0">
+						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.8181818181818182" branch-rate="1.0">
 							<lines>
-								<line number="182" hits="8" branch="false"/>
-								<line number="183" hits="8" branch="false"/>
-								<line number="184" hits="8" branch="false"/>
-								<line number="185" hits="8" branch="false"/>
-								<line number="186" hits="8" branch="false"/>
-								<line number="187" hits="8" branch="false"/>
-								<line number="188" hits="8" branch="false"/>
-								<line number="189" hits="0" branch="false"/>
-								<line number="191" hits="8" branch="false"/>
+								<line number="208" hits="2" branch="false"/>
+								<line number="209" hits="2" branch="false"/>
+								<line number="210" hits="2" branch="false"/>
+								<line number="211" hits="2" branch="false"/>
+								<line number="212" hits="2" branch="false"/>
+								<line number="213" hits="2" branch="false"/>
+								<line number="214" hits="2" branch="false"/>
+								<line number="215" hits="0" branch="false"/>
+								<line number="216" hits="0" branch="false"/>
+								<line number="217" hits="2" branch="false"/>
+								<line number="218" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="(Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="195" hits="696" branch="false"/>
-								<line number="196" hits="696" branch="false"/>
-								<line number="197" hits="696" branch="false"/>
+								<line number="222" hits="210" branch="false"/>
+								<line number="223" hits="210" branch="false"/>
+								<line number="224" hits="210" branch="false"/>
 							</lines>
 						</method>
 						<method name="getApplicationContext" signature="()Lorg/springframework/context/ApplicationContext;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="224" hits="696" branch="false"/>
+								<line number="255" hits="280" branch="false"/>
 							</lines>
 						</method>
 						<method name="getAttribute" signature="(Ljava/lang/String;)Ljava/lang/Object;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="228" hits="1344" branch="false"/>
+								<line number="259" hits="406" branch="false"/>
 							</lines>
 						</method>
-						<method name="getConnection" signature="()Lorg/dbunit/database/IDatabaseConnection;" line-rate="1.0" branch-rate="1.0">
+						<method name="getConnections" signature="()Lcom/github/springtestdbunit/DatabaseConnections;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="200" hits="888" branch="false"/>
+								<line number="227" hits="278" branch="false"/>
 							</lines>
 						</method>
 						<method name="getDataSetLoader" signature="()Lcom/github/springtestdbunit/dataset/DataSetLoader;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="204" hits="264" branch="false"/>
+								<line number="231" hits="82" branch="false"/>
 							</lines>
 						</method>
 						<method name="getDatbaseOperationLookup" signature="()Lcom/github/springtestdbunit/operation/DatabaseOperationLookup;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="208" hits="192" branch="false"/>
+								<line number="235" hits="46" branch="false"/>
 							</lines>
 						</method>
 						<method name="getTestClass" signature="()Ljava/lang/Class;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="212" hits="1160" branch="false"/>
+								<line number="239" hits="572" branch="false"/>
 							</lines>
 						</method>
 						<method name="getTestException" signature="()Ljava/lang/Throwable;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="220" hits="232" branch="false"/>
+								<line number="251" hits="70" branch="false"/>
+							</lines>
+						</method>
+						<method name="getTestInstance" signature="()Ljava/lang/Object;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="247" hits="4" branch="false"/>
 							</lines>
 						</method>
 						<method name="getTestMethod" signature="()Ljava/lang/reflect/Method;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="216" hits="664" branch="false"/>
+								<line number="243" hits="420" branch="false"/>
 							</lines>
 						</method>
 						<method name="setAttribute" signature="(Ljava/lang/String;Ljava/lang/Object;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="232" hits="696" branch="false"/>
-								<line number="233" hits="696" branch="false"/>
+								<line number="263" hits="210" branch="false"/>
+								<line number="264" hits="210" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="182" hits="8" branch="false"/>
-						<line number="183" hits="8" branch="false"/>
-						<line number="184" hits="8" branch="false"/>
-						<line number="185" hits="8" branch="false"/>
-						<line number="186" hits="8" branch="false"/>
-						<line number="187" hits="8" branch="false"/>
-						<line number="188" hits="8" branch="false"/>
-						<line number="189" hits="0" branch="false"/>
-						<line number="191" hits="8" branch="false"/>
-						<line number="195" hits="696" branch="false"/>
-						<line number="196" hits="696" branch="false"/>
-						<line number="197" hits="696" branch="false"/>
-						<line number="200" hits="888" branch="false"/>
-						<line number="204" hits="264" branch="false"/>
-						<line number="208" hits="192" branch="false"/>
-						<line number="212" hits="1160" branch="false"/>
-						<line number="216" hits="664" branch="false"/>
-						<line number="220" hits="232" branch="false"/>
-						<line number="224" hits="696" branch="false"/>
-						<line number="228" hits="1344" branch="false"/>
-						<line number="232" hits="696" branch="false"/>
-						<line number="233" hits="696" branch="false"/>
+						<line number="208" hits="2" branch="false"/>
+						<line number="209" hits="2" branch="false"/>
+						<line number="210" hits="2" branch="false"/>
+						<line number="211" hits="2" branch="false"/>
+						<line number="212" hits="2" branch="false"/>
+						<line number="213" hits="2" branch="false"/>
+						<line number="214" hits="2" branch="false"/>
+						<line number="215" hits="0" branch="false"/>
+						<line number="216" hits="0" branch="false"/>
+						<line number="217" hits="2" branch="false"/>
+						<line number="218" hits="2" branch="false"/>
+						<line number="222" hits="210" branch="false"/>
+						<line number="223" hits="210" branch="false"/>
+						<line number="224" hits="210" branch="false"/>
+						<line number="227" hits="278" branch="false"/>
+						<line number="231" hits="82" branch="false"/>
+						<line number="235" hits="46" branch="false"/>
+						<line number="239" hits="572" branch="false"/>
+						<line number="243" hits="420" branch="false"/>
+						<line number="247" hits="4" branch="false"/>
+						<line number="251" hits="70" branch="false"/>
+						<line number="255" hits="280" branch="false"/>
+						<line number="259" hits="406" branch="false"/>
+						<line number="263" hits="210" branch="false"/>
+						<line number="264" hits="210" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.TestExecutionListenerChain" filename="com/github/springtestdbunit/TestExecutionListenerChain.java" line-rate="1.0" branch-rate="1.0" complexity="1.588235294117647">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="44" hits="272" branch="false"/>
-								<line number="45" hits="272" branch="false"/>
-								<line number="46" hits="264" branch="false"/>
-								<line number="47" hits="264" branch="false"/>
-								<line number="48" hits="264" branch="false"/>
+								<line number="45" hits="70" branch="false"/>
+								<line number="46" hits="70" branch="false"/>
+								<line number="47" hits="68" branch="false"/>
+								<line number="48" hits="68" branch="false"/>
+								<line number="49" hits="68" branch="false"/>
 							</lines>
 						</method>
 						<method name="afterTestClass" signature="(Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="107" hits="200" branch="false"/>
-								<line number="112" hits="192" branch="false"/>
+								<line number="108" hits="52" branch="false"/>
+								<line number="113" hits="50" branch="false"/>
 							</lines>
 						</method>
 						<method name="afterTestMethod" signature="(Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="99" hits="208" branch="false"/>
-								<line number="104" hits="168" branch="false"/>
+								<line number="100" hits="56" branch="false"/>
+								<line number="105" hits="44" branch="false"/>
 							</lines>
 						</method>
 						<method name="backwards" signature="(Lcom/github/springtestdbunit/TestExecutionListenerChain$Call;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="119" hits="408" branch="false"/>
-								<line number="120" hits="360" branch="false"/>
+								<line number="120" hits="108" branch="false"/>
+								<line number="121" hits="94" branch="false"/>
 							</lines>
 						</method>
 						<method name="beforeTestClass" signature="(Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="75" hits="192" branch="false"/>
-								<line number="80" hits="192" branch="false"/>
+								<line number="76" hits="50" branch="false"/>
+								<line number="81" hits="50" branch="false"/>
 							</lines>
 						</method>
 						<method name="beforeTestMethod" signature="(Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="91" hits="200" branch="false"/>
-								<line number="96" hits="200" branch="false"/>
+								<line number="92" hits="54" branch="false"/>
+								<line number="97" hits="54" branch="false"/>
 							</lines>
 						</method>
 						<method name="createChain" signature="()Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="62" hits="208" branch="false"/>
-								<line number="64" hits="208" branch="false"/>
-								<line number="65" hits="624" branch="true" condition-coverage="100% (2/2)">
+								<line number="63" hits="54" branch="false"/>
+								<line number="65" hits="54" branch="false"/>
+								<line number="66" hits="162" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="66" hits="424" branch="false"/>
-								<line number="68" hits="200" branch="false"/>
-								<line number="69" hits="8" branch="false"/>
-								<line number="70" hits="8" branch="false"/>
+								<line number="67" hits="110" branch="false"/>
+								<line number="69" hits="52" branch="false"/>
+								<line number="70" hits="2" branch="false"/>
+								<line number="71" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="forwards" signature="(Lcom/github/springtestdbunit/TestExecutionListenerChain$Call;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="115" hits="592" branch="false"/>
-								<line number="116" hits="592" branch="false"/>
+								<line number="116" hits="158" branch="false"/>
+								<line number="117" hits="158" branch="false"/>
 							</lines>
 						</method>
 						<method name="prepareTestInstance" signature="(Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="83" hits="200" branch="false"/>
-								<line number="88" hits="200" branch="false"/>
+								<line number="84" hits="54" branch="false"/>
+								<line number="89" hits="54" branch="false"/>
 							</lines>
 						</method>
 						<method name="runChain" signature="(Ljava/util/Iterator;Lcom/github/springtestdbunit/TestExecutionListenerChain$Call;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="123" hits="1000" branch="false"/>
-								<line number="124" hits="4080" branch="true" condition-coverage="100% (2/2)">
+								<line number="124" hits="266" branch="false"/>
+								<line number="125" hits="818" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="126" hits="2080" branch="false"/>
-								<line number="127" hits="2032" branch="false"/>
-								<line number="128" hits="48" branch="false"/>
-								<line number="131" hits="1000" branch="true" condition-coverage="100% (2/2)">
+								<line number="127" hits="552" branch="false"/>
+								<line number="128" hits="14" branch="false"/>
+								<line number="129" hits="14" branch="false"/>
+								<line number="130" hits="552" branch="false"/>
+								<line number="132" hits="266" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="132" hits="48" branch="true" condition-coverage="100% (2/2)">
+								<line number="133" hits="14" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="133" hits="8" branch="false"/>
-								<line number="135" hits="40" branch="false"/>
-								<line number="137" hits="952" branch="false"/>
+								<line number="134" hits="2" branch="false"/>
+								<line number="136" hits="12" branch="false"/>
+								<line number="138" hits="252" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="44" hits="272" branch="false"/>
-						<line number="45" hits="272" branch="false"/>
-						<line number="46" hits="264" branch="false"/>
-						<line number="47" hits="264" branch="false"/>
-						<line number="48" hits="264" branch="false"/>
-						<line number="62" hits="208" branch="false"/>
-						<line number="64" hits="208" branch="false"/>
-						<line number="65" hits="624" branch="true" condition-coverage="100% (2/2)">
+						<line number="45" hits="70" branch="false"/>
+						<line number="46" hits="70" branch="false"/>
+						<line number="47" hits="68" branch="false"/>
+						<line number="48" hits="68" branch="false"/>
+						<line number="49" hits="68" branch="false"/>
+						<line number="63" hits="54" branch="false"/>
+						<line number="65" hits="54" branch="false"/>
+						<line number="66" hits="162" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="66" hits="424" branch="false"/>
-						<line number="68" hits="200" branch="false"/>
-						<line number="69" hits="8" branch="false"/>
-						<line number="70" hits="8" branch="false"/>
-						<line number="75" hits="192" branch="false"/>
-						<line number="80" hits="192" branch="false"/>
-						<line number="83" hits="200" branch="false"/>
-						<line number="88" hits="200" branch="false"/>
-						<line number="91" hits="200" branch="false"/>
-						<line number="96" hits="200" branch="false"/>
-						<line number="99" hits="208" branch="false"/>
-						<line number="104" hits="168" branch="false"/>
-						<line number="107" hits="200" branch="false"/>
-						<line number="112" hits="192" branch="false"/>
-						<line number="115" hits="592" branch="false"/>
-						<line number="116" hits="592" branch="false"/>
-						<line number="119" hits="408" branch="false"/>
-						<line number="120" hits="360" branch="false"/>
-						<line number="123" hits="1000" branch="false"/>
-						<line number="124" hits="4080" branch="true" condition-coverage="100% (2/2)">
+						<line number="67" hits="110" branch="false"/>
+						<line number="69" hits="52" branch="false"/>
+						<line number="70" hits="2" branch="false"/>
+						<line number="71" hits="2" branch="false"/>
+						<line number="76" hits="50" branch="false"/>
+						<line number="81" hits="50" branch="false"/>
+						<line number="84" hits="54" branch="false"/>
+						<line number="89" hits="54" branch="false"/>
+						<line number="92" hits="54" branch="false"/>
+						<line number="97" hits="54" branch="false"/>
+						<line number="100" hits="56" branch="false"/>
+						<line number="105" hits="44" branch="false"/>
+						<line number="108" hits="52" branch="false"/>
+						<line number="113" hits="50" branch="false"/>
+						<line number="116" hits="158" branch="false"/>
+						<line number="117" hits="158" branch="false"/>
+						<line number="120" hits="108" branch="false"/>
+						<line number="121" hits="94" branch="false"/>
+						<line number="124" hits="266" branch="false"/>
+						<line number="125" hits="818" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="126" hits="2080" branch="false"/>
-						<line number="127" hits="2032" branch="false"/>
-						<line number="128" hits="48" branch="false"/>
-						<line number="131" hits="1000" branch="true" condition-coverage="100% (2/2)">
+						<line number="127" hits="552" branch="false"/>
+						<line number="128" hits="14" branch="false"/>
+						<line number="129" hits="14" branch="false"/>
+						<line number="130" hits="552" branch="false"/>
+						<line number="132" hits="266" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="132" hits="48" branch="true" condition-coverage="100% (2/2)">
+						<line number="133" hits="14" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="133" hits="8" branch="false"/>
-						<line number="135" hits="40" branch="false"/>
-						<line number="137" hits="952" branch="false"/>
+						<line number="134" hits="2" branch="false"/>
+						<line number="136" hits="12" branch="false"/>
+						<line number="138" hits="252" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.TestExecutionListenerChain$1" filename="com/github/springtestdbunit/TestExecutionListenerChain.java" line-rate="1.0" branch-rate="1.0" complexity="1.588235294117647">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Lcom/github/springtestdbunit/TestExecutionListenerChain;Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="1" hits="192" branch="false"/>
-								<line number="75" hits="192" branch="false"/>
+								<line number="76" hits="50" branch="false"/>
 							</lines>
 						</method>
 						<method name="call" signature="(Lorg/springframework/test/context/TestExecutionListener;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="77" hits="400" branch="false"/>
-								<line number="78" hits="400" branch="false"/>
+								<line number="78" hits="104" branch="false"/>
+								<line number="79" hits="104" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="1" hits="192" branch="false"/>
-						<line number="75" hits="192" branch="false"/>
-						<line number="77" hits="400" branch="false"/>
-						<line number="78" hits="400" branch="false"/>
+						<line number="76" hits="50" branch="false"/>
+						<line number="78" hits="104" branch="false"/>
+						<line number="79" hits="104" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.TestExecutionListenerChain$2" filename="com/github/springtestdbunit/TestExecutionListenerChain.java" line-rate="1.0" branch-rate="1.0" complexity="1.588235294117647">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Lcom/github/springtestdbunit/TestExecutionListenerChain;Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="1" hits="200" branch="false"/>
-								<line number="83" hits="200" branch="false"/>
+								<line number="84" hits="54" branch="false"/>
 							</lines>
 						</method>
 						<method name="call" signature="(Lorg/springframework/test/context/TestExecutionListener;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="85" hits="416" branch="false"/>
-								<line number="86" hits="416" branch="false"/>
+								<line number="86" hits="112" branch="false"/>
+								<line number="87" hits="112" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="1" hits="200" branch="false"/>
-						<line number="83" hits="200" branch="false"/>
-						<line number="85" hits="416" branch="false"/>
-						<line number="86" hits="416" branch="false"/>
+						<line number="84" hits="54" branch="false"/>
+						<line number="86" hits="112" branch="false"/>
+						<line number="87" hits="112" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.TestExecutionListenerChain$3" filename="com/github/springtestdbunit/TestExecutionListenerChain.java" line-rate="1.0" branch-rate="1.0" complexity="1.588235294117647">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Lcom/github/springtestdbunit/TestExecutionListenerChain;Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="1" hits="200" branch="false"/>
-								<line number="91" hits="200" branch="false"/>
+								<line number="92" hits="54" branch="false"/>
 							</lines>
 						</method>
 						<method name="call" signature="(Lorg/springframework/test/context/TestExecutionListener;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="93" hits="416" branch="false"/>
-								<line number="94" hits="416" branch="false"/>
+								<line number="94" hits="112" branch="false"/>
+								<line number="95" hits="112" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="1" hits="200" branch="false"/>
-						<line number="91" hits="200" branch="false"/>
-						<line number="93" hits="416" branch="false"/>
-						<line number="94" hits="416" branch="false"/>
+						<line number="92" hits="54" branch="false"/>
+						<line number="94" hits="112" branch="false"/>
+						<line number="95" hits="112" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.TestExecutionListenerChain$4" filename="com/github/springtestdbunit/TestExecutionListenerChain.java" line-rate="1.0" branch-rate="1.0" complexity="1.588235294117647">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Lcom/github/springtestdbunit/TestExecutionListenerChain;Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="1" hits="208" branch="false"/>
-								<line number="99" hits="208" branch="false"/>
+								<line number="100" hits="56" branch="false"/>
 							</lines>
 						</method>
 						<method name="call" signature="(Lorg/springframework/test/context/TestExecutionListener;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="101" hits="432" branch="false"/>
-								<line number="102" hits="392" branch="false"/>
+								<line number="102" hits="116" branch="false"/>
+								<line number="103" hits="104" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="1" hits="208" branch="false"/>
-						<line number="99" hits="208" branch="false"/>
-						<line number="101" hits="432" branch="false"/>
-						<line number="102" hits="392" branch="false"/>
+						<line number="100" hits="56" branch="false"/>
+						<line number="102" hits="116" branch="false"/>
+						<line number="103" hits="104" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.TestExecutionListenerChain$5" filename="com/github/springtestdbunit/TestExecutionListenerChain.java" line-rate="1.0" branch-rate="1.0" complexity="1.588235294117647">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Lcom/github/springtestdbunit/TestExecutionListenerChain;Lorg/springframework/test/context/TestContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="1" hits="200" branch="false"/>
-								<line number="107" hits="200" branch="false"/>
+								<line number="108" hits="52" branch="false"/>
 							</lines>
 						</method>
 						<method name="call" signature="(Lorg/springframework/test/context/TestExecutionListener;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="109" hits="416" branch="false"/>
-								<line number="110" hits="408" branch="false"/>
+								<line number="110" hits="108" branch="false"/>
+								<line number="111" hits="106" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="1" hits="200" branch="false"/>
-						<line number="107" hits="200" branch="false"/>
-						<line number="109" hits="416" branch="false"/>
-						<line number="110" hits="408" branch="false"/>
+						<line number="108" hits="52" branch="false"/>
+						<line number="110" hits="108" branch="false"/>
+						<line number="111" hits="106" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.TestExecutionListenerChain$Call" filename="com/github/springtestdbunit/TestExecutionListenerChain.java" line-rate="1.0" branch-rate="1.0" complexity="1.588235294117647">
@@ -1015,26 +1347,24 @@
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="39" hits="16" branch="false"/>
-								<line number="40" hits="16" branch="false"/>
+								<line number="39" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="37" hits="168" branch="false"/>
+								<line number="37" hits="44" branch="false"/>
 							</lines>
 						</method>
 						<method name="getChain" signature="()[Ljava/lang/Class;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="44" hits="168" branch="false"/>
+								<line number="44" hits="44" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="37" hits="168" branch="false"/>
-						<line number="39" hits="16" branch="false"/>
-						<line number="40" hits="16" branch="false"/>
-						<line number="44" hits="168" branch="false"/>
+						<line number="37" hits="44" branch="false"/>
+						<line number="39" hits="2" branch="false"/>
+						<line number="44" hits="44" branch="false"/>
 					</lines>
 				</class>
 			</classes>
@@ -1045,30 +1375,22 @@
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="29" hits="8" branch="false"/>
-								<line number="32" hits="8" branch="false"/>
-								<line number="34" hits="8" branch="false"/>
-								<line number="37" hits="8" branch="false"/>
-								<line number="39" hits="8" branch="false"/>
-								<line number="43" hits="8" branch="false"/>
-								<line number="45" hits="8" branch="false"/>
-								<line number="48" hits="8" branch="false"/>
-								<line number="50" hits="8" branch="false"/>
-								<line number="55" hits="8" branch="false"/>
-								<line number="57" hits="8" branch="false"/>
-								<line number="63" hits="8" branch="false"/>
-								<line number="65" hits="8" branch="false"/>
-								<line number="69" hits="8" branch="false"/>
+								<line number="27" hits="18" branch="false"/>
+								<line number="32" hits="2" branch="false"/>
+								<line number="37" hits="2" branch="false"/>
+								<line number="43" hits="2" branch="false"/>
+								<line number="48" hits="2" branch="false"/>
+								<line number="55" hits="2" branch="false"/>
+								<line number="63" hits="2" branch="false"/>
+								<line number="69" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="(Ljava/lang/String;I)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="27" hits="64" branch="false"/>
 							</lines>
 						</method>
 						<method name="valueOf" signature="(Ljava/lang/String;)Lcom/github/springtestdbunit/annotation/DatabaseOperation;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="1" hits="8" branch="false"/>
 							</lines>
 						</method>
 						<method name="values" signature="()[Lcom/github/springtestdbunit/annotation/DatabaseOperation;" line-rate="1.0" branch-rate="1.0">
@@ -1077,22 +1399,14 @@
 						</method>
 					</methods>
 					<lines>
-						<line number="1" hits="8" branch="false"/>
-						<line number="27" hits="64" branch="false"/>
-						<line number="29" hits="8" branch="false"/>
-						<line number="32" hits="8" branch="false"/>
-						<line number="34" hits="8" branch="false"/>
-						<line number="37" hits="8" branch="false"/>
-						<line number="39" hits="8" branch="false"/>
-						<line number="43" hits="8" branch="false"/>
-						<line number="45" hits="8" branch="false"/>
-						<line number="48" hits="8" branch="false"/>
-						<line number="50" hits="8" branch="false"/>
-						<line number="55" hits="8" branch="false"/>
-						<line number="57" hits="8" branch="false"/>
-						<line number="63" hits="8" branch="false"/>
-						<line number="65" hits="8" branch="false"/>
-						<line number="69" hits="8" branch="false"/>
+						<line number="27" hits="18" branch="false"/>
+						<line number="32" hits="2" branch="false"/>
+						<line number="37" hits="2" branch="false"/>
+						<line number="43" hits="2" branch="false"/>
+						<line number="48" hits="2" branch="false"/>
+						<line number="55" hits="2" branch="false"/>
+						<line number="63" hits="2" branch="false"/>
+						<line number="69" hits="2" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.annotation.DatabaseSetup" filename="com/github/springtestdbunit/annotation/DatabaseSetup.java" line-rate="1.0" branch-rate="1.0" complexity="0.0">
@@ -1101,7 +1415,19 @@
 					<lines>
 					</lines>
 				</class>
+				<class name="com.github.springtestdbunit.annotation.DatabaseSetups" filename="com/github/springtestdbunit/annotation/DatabaseSetups.java" line-rate="1.0" branch-rate="1.0" complexity="0.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
 				<class name="com.github.springtestdbunit.annotation.DatabaseTearDown" filename="com/github/springtestdbunit/annotation/DatabaseTearDown.java" line-rate="1.0" branch-rate="1.0" complexity="0.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
+				<class name="com.github.springtestdbunit.annotation.DatabaseTearDowns" filename="com/github/springtestdbunit/annotation/DatabaseTearDowns.java" line-rate="1.0" branch-rate="1.0" complexity="0.0">
 					<methods>
 					</methods>
 					<lines>
@@ -1119,9 +1445,15 @@
 					<lines>
 					</lines>
 				</class>
+				<class name="com.github.springtestdbunit.annotation.ExpectedDatabases" filename="com/github/springtestdbunit/annotation/ExpectedDatabases.java" line-rate="1.0" branch-rate="1.0" complexity="0.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
 			</classes>
 		</package>
-		<package name="com.github.springtestdbunit.assertion" line-rate="0.9666666666666667" branch-rate="1.0" complexity="1.2222222222222223">
+		<package name="com.github.springtestdbunit.assertion" line-rate="0.9696969696969697" branch-rate="1.0" complexity="1.2">
 			<classes>
 				<class name="com.github.springtestdbunit.assertion.DatabaseAssertion" filename="com/github/springtestdbunit/assertion/DatabaseAssertion.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
 					<methods>
@@ -1133,28 +1465,26 @@
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="26" hits="8" branch="false"/>
-								<line number="28" hits="8" branch="false"/>
-								<line number="31" hits="8" branch="false"/>
-								<line number="33" hits="8" branch="false"/>
-								<line number="43" hits="8" branch="false"/>
+								<line number="27" hits="4" branch="false"/>
+								<line number="32" hits="2" branch="false"/>
+								<line number="46" hits="2" branch="false"/>
+								<line number="61" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="(Ljava/lang/String;ILcom/github/springtestdbunit/assertion/DatabaseAssertion;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="47" hits="16" branch="false"/>
-								<line number="48" hits="16" branch="false"/>
-								<line number="49" hits="16" branch="false"/>
+								<line number="65" hits="6" branch="false"/>
+								<line number="66" hits="6" branch="false"/>
+								<line number="67" hits="6" branch="false"/>
 							</lines>
 						</method>
 						<method name="getDatabaseAssertion" signature="()Lcom/github/springtestdbunit/assertion/DatabaseAssertion;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="52" hits="72" branch="false"/>
+								<line number="70" hits="30" branch="false"/>
 							</lines>
 						</method>
 						<method name="valueOf" signature="(Ljava/lang/String;)Lcom/github/springtestdbunit/assertion/DatabaseAssertionMode;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="1" hits="8" branch="false"/>
 							</lines>
 						</method>
 						<method name="values" signature="()[Lcom/github/springtestdbunit/assertion/DatabaseAssertionMode;" line-rate="1.0" branch-rate="1.0">
@@ -1163,117 +1493,139 @@
 						</method>
 					</methods>
 					<lines>
-						<line number="1" hits="8" branch="false"/>
-						<line number="26" hits="8" branch="false"/>
-						<line number="28" hits="8" branch="false"/>
-						<line number="31" hits="8" branch="false"/>
-						<line number="33" hits="8" branch="false"/>
-						<line number="43" hits="8" branch="false"/>
-						<line number="47" hits="16" branch="false"/>
-						<line number="48" hits="16" branch="false"/>
-						<line number="49" hits="16" branch="false"/>
-						<line number="52" hits="72" branch="false"/>
+						<line number="27" hits="4" branch="false"/>
+						<line number="32" hits="2" branch="false"/>
+						<line number="46" hits="2" branch="false"/>
+						<line number="61" hits="2" branch="false"/>
+						<line number="65" hits="6" branch="false"/>
+						<line number="66" hits="6" branch="false"/>
+						<line number="67" hits="6" branch="false"/>
+						<line number="70" hits="30" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.assertion.DefaultDatabaseAssertion" filename="com/github/springtestdbunit/assertion/DefaultDatabaseAssertion.java" line-rate="0.8" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="30" hits="8" branch="false"/>
+								<line number="30" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="assertEquals" signature="(Lorg/dbunit/dataset/IDataSet;Lorg/dbunit/dataset/IDataSet;)V" line-rate="0.5" branch-rate="1.0">
 							<lines>
-								<line number="33" hits="16" branch="false"/>
+								<line number="33" hits="6" branch="false"/>
 								<line number="34" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="assertEquals" signature="(Lorg/dbunit/dataset/ITable;Lorg/dbunit/dataset/ITable;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="37" hits="16" branch="false"/>
-								<line number="38" hits="8" branch="false"/>
+								<line number="37" hits="6" branch="false"/>
+								<line number="38" hits="4" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="30" hits="8" branch="false"/>
-						<line number="33" hits="16" branch="false"/>
+						<line number="30" hits="2" branch="false"/>
+						<line number="33" hits="6" branch="false"/>
 						<line number="34" hits="0" branch="false"/>
-						<line number="37" hits="16" branch="false"/>
-						<line number="38" hits="8" branch="false"/>
+						<line number="37" hits="6" branch="false"/>
+						<line number="38" hits="4" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.assertion.NonStrictDatabaseAssertion" filename="com/github/springtestdbunit/assertion/NonStrictDatabaseAssertion.java" line-rate="1.0" branch-rate="1.0" complexity="1.6666666666666667">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="38" hits="8" branch="false"/>
+								<line number="38" hits="4" branch="false"/>
 							</lines>
 						</method>
 						<method name="assertEquals" signature="(Lorg/dbunit/dataset/IDataSet;Lorg/dbunit/dataset/IDataSet;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="41" hits="32" branch="true" condition-coverage="100% (2/2)">
+								<line number="41" hits="24" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="42" hits="16" branch="false"/>
-								<line number="43" hits="16" branch="false"/>
-								<line number="44" hits="16" branch="false"/>
-								<line number="45" hits="16" branch="false"/>
-								<line number="47" hits="16" branch="false"/>
+								<line number="42" hits="12" branch="false"/>
+								<line number="43" hits="12" branch="false"/>
+								<line number="44" hits="12" branch="false"/>
+								<line number="46" hits="12" branch="false"/>
 							</lines>
 						</method>
 						<method name="assertEquals" signature="(Lorg/dbunit/dataset/ITable;Lorg/dbunit/dataset/ITable;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="50" hits="24" branch="false"/>
-								<line number="51" hits="24" branch="false"/>
-								<line number="52" hits="16" branch="false"/>
+								<line number="49" hits="18" branch="false"/>
+								<line number="50" hits="18" branch="false"/>
+								<line number="51" hits="16" branch="false"/>
 							</lines>
 						</method>
 						<method name="getColumnsToIgnore" signature="(Lorg/dbunit/dataset/ITableMetaData;Lorg/dbunit/dataset/ITableMetaData;)[Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="56" hits="40" branch="false"/>
-								<line number="57" hits="40" branch="false"/>
-								<line number="58" hits="80" branch="true" condition-coverage="100% (2/2)">
+								<line number="55" hits="18" branch="false"/>
+								<line number="56" hits="18" branch="false"/>
+								<line number="57" hits="36" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="59" hits="40" branch="false"/>
-								<line number="61" hits="40" branch="false"/>
+								<line number="58" hits="18" branch="false"/>
+								<line number="60" hits="18" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="38" hits="8" branch="false"/>
-						<line number="41" hits="32" branch="true" condition-coverage="100% (2/2)">
+						<line number="38" hits="4" branch="false"/>
+						<line number="41" hits="24" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="42" hits="16" branch="false"/>
-						<line number="43" hits="16" branch="false"/>
-						<line number="44" hits="16" branch="false"/>
-						<line number="45" hits="16" branch="false"/>
-						<line number="47" hits="16" branch="false"/>
-						<line number="50" hits="24" branch="false"/>
-						<line number="51" hits="24" branch="false"/>
-						<line number="52" hits="16" branch="false"/>
-						<line number="56" hits="40" branch="false"/>
-						<line number="57" hits="40" branch="false"/>
-						<line number="58" hits="80" branch="true" condition-coverage="100% (2/2)">
+						<line number="42" hits="12" branch="false"/>
+						<line number="43" hits="12" branch="false"/>
+						<line number="44" hits="12" branch="false"/>
+						<line number="46" hits="12" branch="false"/>
+						<line number="49" hits="18" branch="false"/>
+						<line number="50" hits="18" branch="false"/>
+						<line number="51" hits="16" branch="false"/>
+						<line number="55" hits="18" branch="false"/>
+						<line number="56" hits="18" branch="false"/>
+						<line number="57" hits="36" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="59" hits="40" branch="false"/>
-						<line number="61" hits="40" branch="false"/>
+						<line number="58" hits="18" branch="false"/>
+						<line number="60" hits="18" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.github.springtestdbunit.assertion.NonStrictUnorderedDatabaseAssertion" filename="com/github/springtestdbunit/assertion/NonStrictUnorderedDatabaseAssertion.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="33" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="assertEquals" signature="(Lorg/dbunit/dataset/ITable;Lorg/dbunit/dataset/ITable;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="37" hits="4" branch="false"/>
+								<line number="38" hits="4" branch="false"/>
+								<line number="39" hits="4" branch="false"/>
+								<line number="40" hits="4" branch="false"/>
+								<line number="41" hits="4" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="33" hits="2" branch="false"/>
+						<line number="37" hits="4" branch="false"/>
+						<line number="38" hits="4" branch="false"/>
+						<line number="39" hits="4" branch="false"/>
+						<line number="40" hits="4" branch="false"/>
+						<line number="41" hits="4" branch="false"/>
 					</lines>
 				</class>
 			</classes>
 		</package>
-		<package name="com.github.springtestdbunit.bean" line-rate="0.11650485436893204" branch-rate="0.15" complexity="1.3636363636363635">
+		<package name="com.github.springtestdbunit.bean" line-rate="0.12121212121212122" branch-rate="0.15" complexity="1.3636363636363635">
 			<classes>
 				<class name="com.github.springtestdbunit.bean.DatabaseConfigBean" filename="com/github/springtestdbunit/bean/DatabaseConfigBean.java" line-rate="0.0" branch-rate="0.0" complexity="1.2903225806451613">
 					<methods>
@@ -1371,7 +1723,6 @@
 						<method name="getResultsetTableFactory" signature="()Lorg/dbunit/database/IResultSetTableFactory;" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="74" hits="0" branch="false"/>
-								<line number="75" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getSkipOracleRecyclebinTables" signature="()Ljava/lang/Boolean;" line-rate="0.0" branch-rate="1.0">
@@ -1404,7 +1755,6 @@
 						<method name="setCaseSensitiveTableNames" signature="(Ljava/lang/Boolean;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="228" hits="0" branch="false"/>
-								<line number="229" hits="0" branch="false"/>
 								<line number="230" hits="0" branch="false"/>
 							</lines>
 						</method>
@@ -1452,7 +1802,6 @@
 										<condition number="0" type="jump" coverage="0%"/>
 									</conditions>
 								</line>
-								<line number="328" hits="0" branch="false"/>
 								<line number="329" hits="0" branch="true" condition-coverage="0% (0/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
@@ -1484,7 +1833,6 @@
 						<method name="setSkipOracleRecyclebinTables" signature="(Ljava/lang/Boolean;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="301" hits="0" branch="false"/>
-								<line number="302" hits="0" branch="false"/>
 								<line number="303" hits="0" branch="false"/>
 							</lines>
 						</method>
@@ -1512,7 +1860,6 @@
 						<line number="65" hits="0" branch="false"/>
 						<line number="66" hits="0" branch="false"/>
 						<line number="74" hits="0" branch="false"/>
-						<line number="75" hits="0" branch="false"/>
 						<line number="84" hits="0" branch="false"/>
 						<line number="85" hits="0" branch="false"/>
 						<line number="93" hits="0" branch="false"/>
@@ -1538,7 +1885,6 @@
 						<line number="211" hits="0" branch="false"/>
 						<line number="219" hits="0" branch="false"/>
 						<line number="228" hits="0" branch="false"/>
-						<line number="229" hits="0" branch="false"/>
 						<line number="230" hits="0" branch="false"/>
 						<line number="238" hits="0" branch="false"/>
 						<line number="247" hits="0" branch="false"/>
@@ -1551,7 +1897,6 @@
 						<line number="284" hits="0" branch="false"/>
 						<line number="292" hits="0" branch="false"/>
 						<line number="301" hits="0" branch="false"/>
-						<line number="302" hits="0" branch="false"/>
 						<line number="303" hits="0" branch="false"/>
 						<line number="313" hits="0" branch="false"/>
 						<line number="314" hits="0" branch="false"/>
@@ -1562,7 +1907,6 @@
 								<condition number="0" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="328" hits="0" branch="false"/>
 						<line number="329" hits="0" branch="true" condition-coverage="0% (0/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
@@ -1599,210 +1943,210 @@
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="45" hits="0" branch="false"/>
-								<line number="46" hits="0" branch="false"/>
+								<line number="50" hits="0" branch="false"/>
+								<line number="51" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="(Ljavax/sql/DataSource;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="38" hits="232" branch="false"/>
-								<line number="49" hits="232" branch="false"/>
-								<line number="50" hits="232" branch="false"/>
-								<line number="51" hits="232" branch="false"/>
+								<line number="39" hits="70" branch="false"/>
+								<line number="54" hits="70" branch="false"/>
+								<line number="55" hits="70" branch="false"/>
+								<line number="56" hits="70" branch="false"/>
 							</lines>
 						</method>
 						<method name="getObject" signature="()Ljava/lang/Object;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="1" hits="0" branch="false"/>
+								<line number="35" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getObject" signature="()Lorg/dbunit/database/DatabaseDataSourceConnection;" line-rate="0.8333333333333334" branch-rate="0.5">
 							<lines>
-								<line number="54" hits="232" branch="false"/>
-								<line number="55" hits="464" branch="false"/>
-								<line number="56" hits="232" branch="false"/>
-								<line number="57" hits="232" branch="true" condition-coverage="50% (1/2)">
+								<line number="59" hits="70" branch="false"/>
+								<line number="60" hits="70" branch="false"/>
+								<line number="61" hits="70" branch="false"/>
+								<line number="62" hits="70" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="58" hits="0" branch="false"/>
-								<line number="60" hits="232" branch="false"/>
+								<line number="63" hits="0" branch="false"/>
+								<line number="65" hits="70" branch="false"/>
 							</lines>
 						</method>
 						<method name="getObjectType" signature="()Ljava/lang/Class;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="71" hits="0" branch="false"/>
+								<line number="76" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="isSingleton" signature="()Z" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="75" hits="0" branch="false"/>
+								<line number="80" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="makeTransactionAware" signature="(Ljavax/sql/DataSource;)Ljavax/sql/DataSource;" line-rate="0.6666666666666666" branch-rate="0.5">
 							<lines>
-								<line number="64" hits="232" branch="true" condition-coverage="50% (2/4)">
+								<line number="69" hits="70" branch="true" condition-coverage="50% (2/4)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 										<condition number="1" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="65" hits="0" branch="false"/>
-								<line number="67" hits="232" branch="false"/>
+								<line number="70" hits="0" branch="false"/>
+								<line number="72" hits="70" branch="false"/>
 							</lines>
 						</method>
 						<method name="newConnection" signature="(Ljavax/sql/DataSource;)Lorg/dbunit/database/IDatabaseConnection;" line-rate="0.3333333333333333" branch-rate="1.0">
 							<lines>
-								<line number="139" hits="232" branch="false"/>
-								<line number="140" hits="0" branch="false"/>
-								<line number="141" hits="0" branch="false"/>
+								<line number="144" hits="70" branch="false"/>
+								<line number="145" hits="0" branch="false"/>
+								<line number="146" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="setDataSource" signature="(Ljavax/sql/DataSource;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="84" hits="0" branch="false"/>
-								<line number="85" hits="0" branch="false"/>
-								<line number="86" hits="0" branch="false"/>
+								<line number="89" hits="0" branch="false"/>
+								<line number="90" hits="0" branch="false"/>
+								<line number="91" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="setDatabaseConfig" signature="(Lcom/github/springtestdbunit/bean/DatabaseConfigBean;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="119" hits="0" branch="false"/>
-								<line number="120" hits="0" branch="false"/>
+								<line number="124" hits="0" branch="false"/>
+								<line number="125" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="setPassword" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="101" hits="0" branch="false"/>
-								<line number="102" hits="0" branch="false"/>
+								<line number="106" hits="0" branch="false"/>
+								<line number="107" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="setSchema" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="109" hits="0" branch="false"/>
-								<line number="110" hits="0" branch="false"/>
+								<line number="114" hits="0" branch="false"/>
+								<line number="115" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="setTransactionAware" signature="(Z)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="128" hits="0" branch="false"/>
-								<line number="129" hits="0" branch="false"/>
+								<line number="133" hits="0" branch="false"/>
+								<line number="134" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="setUsername" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="93" hits="0" branch="false"/>
-								<line number="94" hits="0" branch="false"/>
+								<line number="98" hits="0" branch="false"/>
+								<line number="99" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="1" hits="0" branch="false"/>
-						<line number="38" hits="232" branch="false"/>
-						<line number="45" hits="0" branch="false"/>
-						<line number="46" hits="0" branch="false"/>
-						<line number="49" hits="232" branch="false"/>
-						<line number="50" hits="232" branch="false"/>
-						<line number="51" hits="232" branch="false"/>
-						<line number="54" hits="232" branch="false"/>
-						<line number="55" hits="464" branch="false"/>
-						<line number="56" hits="232" branch="false"/>
-						<line number="57" hits="232" branch="true" condition-coverage="50% (1/2)">
+						<line number="35" hits="0" branch="false"/>
+						<line number="39" hits="70" branch="false"/>
+						<line number="50" hits="0" branch="false"/>
+						<line number="51" hits="0" branch="false"/>
+						<line number="54" hits="70" branch="false"/>
+						<line number="55" hits="70" branch="false"/>
+						<line number="56" hits="70" branch="false"/>
+						<line number="59" hits="70" branch="false"/>
+						<line number="60" hits="70" branch="false"/>
+						<line number="61" hits="70" branch="false"/>
+						<line number="62" hits="70" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="58" hits="0" branch="false"/>
-						<line number="60" hits="232" branch="false"/>
-						<line number="64" hits="232" branch="true" condition-coverage="50% (2/4)">
+						<line number="63" hits="0" branch="false"/>
+						<line number="65" hits="70" branch="false"/>
+						<line number="69" hits="70" branch="true" condition-coverage="50% (2/4)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 								<condition number="1" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="65" hits="0" branch="false"/>
-						<line number="67" hits="232" branch="false"/>
-						<line number="71" hits="0" branch="false"/>
-						<line number="75" hits="0" branch="false"/>
-						<line number="84" hits="0" branch="false"/>
-						<line number="85" hits="0" branch="false"/>
-						<line number="86" hits="0" branch="false"/>
-						<line number="93" hits="0" branch="false"/>
-						<line number="94" hits="0" branch="false"/>
-						<line number="101" hits="0" branch="false"/>
-						<line number="102" hits="0" branch="false"/>
-						<line number="109" hits="0" branch="false"/>
-						<line number="110" hits="0" branch="false"/>
-						<line number="119" hits="0" branch="false"/>
-						<line number="120" hits="0" branch="false"/>
-						<line number="128" hits="0" branch="false"/>
-						<line number="129" hits="0" branch="false"/>
-						<line number="139" hits="232" branch="false"/>
-						<line number="140" hits="0" branch="false"/>
-						<line number="141" hits="0" branch="false"/>
+						<line number="70" hits="0" branch="false"/>
+						<line number="72" hits="70" branch="false"/>
+						<line number="76" hits="0" branch="false"/>
+						<line number="80" hits="0" branch="false"/>
+						<line number="89" hits="0" branch="false"/>
+						<line number="90" hits="0" branch="false"/>
+						<line number="91" hits="0" branch="false"/>
+						<line number="98" hits="0" branch="false"/>
+						<line number="99" hits="0" branch="false"/>
+						<line number="106" hits="0" branch="false"/>
+						<line number="107" hits="0" branch="false"/>
+						<line number="114" hits="0" branch="false"/>
+						<line number="115" hits="0" branch="false"/>
+						<line number="124" hits="0" branch="false"/>
+						<line number="125" hits="0" branch="false"/>
+						<line number="133" hits="0" branch="false"/>
+						<line number="134" hits="0" branch="false"/>
+						<line number="144" hits="70" branch="false"/>
+						<line number="145" hits="0" branch="false"/>
+						<line number="146" hits="0" branch="false"/>
 					</lines>
 				</class>
 			</classes>
 		</package>
-		<package name="com.github.springtestdbunit.dataset" line-rate="0.8235294117647058" branch-rate="0.5" complexity="1.6666666666666667">
+		<package name="com.github.springtestdbunit.dataset" line-rate="0.4583333333333333" branch-rate="0.5" complexity="1.4210526315789473">
 			<classes>
 				<class name="com.github.springtestdbunit.dataset.AbstractDataSetLoader" filename="com/github/springtestdbunit/dataset/AbstractDataSetLoader.java" line-rate="0.9" branch-rate="0.5" complexity="1.75">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="35" hits="232" branch="false"/>
+								<line number="35" hits="70" branch="false"/>
 							</lines>
 						</method>
 						<method name="getResourceLoader" signature="(Ljava/lang/Class;)Lorg/springframework/core/io/ResourceLoader;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="66" hits="264" branch="false"/>
+								<line number="66" hits="82" branch="false"/>
 							</lines>
 						</method>
 						<method name="getResourceLocations" signature="(Ljava/lang/Class;Ljava/lang/String;)[Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="77" hits="264" branch="false"/>
+								<line number="77" hits="82" branch="false"/>
 							</lines>
 						</method>
 						<method name="loadDataSet" signature="(Ljava/lang/Class;Ljava/lang/String;)Lorg/dbunit/dataset/IDataSet;" line-rate="0.8571428571428571" branch-rate="0.5">
 							<lines>
-								<line number="49" hits="264" branch="false"/>
-								<line number="50" hits="264" branch="false"/>
-								<line number="51" hits="264" branch="true" condition-coverage="50% (1/2)">
+								<line number="49" hits="82" branch="false"/>
+								<line number="50" hits="82" branch="false"/>
+								<line number="51" hits="82" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="52" hits="264" branch="false"/>
-								<line number="53" hits="264" branch="true" condition-coverage="50% (1/2)">
+								<line number="52" hits="82" branch="false"/>
+								<line number="53" hits="82" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="54" hits="264" branch="false"/>
+								<line number="54" hits="82" branch="false"/>
 								<line number="57" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="35" hits="232" branch="false"/>
-						<line number="49" hits="264" branch="false"/>
-						<line number="50" hits="264" branch="false"/>
-						<line number="51" hits="264" branch="true" condition-coverage="50% (1/2)">
+						<line number="35" hits="70" branch="false"/>
+						<line number="49" hits="82" branch="false"/>
+						<line number="50" hits="82" branch="false"/>
+						<line number="51" hits="82" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="52" hits="264" branch="false"/>
-						<line number="53" hits="264" branch="true" condition-coverage="50% (1/2)">
+						<line number="52" hits="82" branch="false"/>
+						<line number="53" hits="82" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="54" hits="264" branch="false"/>
+						<line number="54" hits="82" branch="false"/>
 						<line number="57" hits="0" branch="false"/>
-						<line number="66" hits="264" branch="false"/>
-						<line number="77" hits="264" branch="false"/>
+						<line number="66" hits="82" branch="false"/>
+						<line number="77" hits="82" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.dataset.DataSetLoader" filename="com/github/springtestdbunit/dataset/DataSetLoader.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
@@ -1811,32 +2155,190 @@
 					<lines>
 					</lines>
 				</class>
-				<class name="com.github.springtestdbunit.dataset.FlatXmlDataSetLoader" filename="com/github/springtestdbunit/dataset/FlatXmlDataSetLoader.java" line-rate="0.7142857142857143" branch-rate="1.0" complexity="2.0">
+				<class name="com.github.springtestdbunit.dataset.DataSetModifier" filename="com/github/springtestdbunit/dataset/DataSetModifier.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
+				<class name="com.github.springtestdbunit.dataset.DataSetModifier$1" filename="com/github/springtestdbunit/dataset/DataSetModifier.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="31" hits="232" branch="false"/>
+								<line number="32" hits="2" branch="false"/>
 							</lines>
 						</method>
-						<method name="createDataSet" signature="(Lorg/springframework/core/io/Resource;)Lorg/dbunit/dataset/IDataSet;" line-rate="0.6666666666666666" branch-rate="1.0">
+						<method name="modify" signature="(Lorg/dbunit/dataset/IDataSet;)Lorg/dbunit/dataset/IDataSet;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="35" hits="264" branch="false"/>
-								<line number="36" hits="264" branch="false"/>
-								<line number="38" hits="528" branch="false"/>
-								<line number="39" hits="0" branch="false"/>
-								<line number="40" hits="264" branch="false"/>
-								<line number="41" hits="0" branch="false"/>
+								<line number="35" hits="52" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="31" hits="232" branch="false"/>
-						<line number="35" hits="264" branch="false"/>
-						<line number="36" hits="264" branch="false"/>
-						<line number="38" hits="528" branch="false"/>
-						<line number="39" hits="0" branch="false"/>
-						<line number="40" hits="264" branch="false"/>
+						<line number="32" hits="2" branch="false"/>
+						<line number="35" hits="52" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.github.springtestdbunit.dataset.FlatXmlDataSetLoader" filename="com/github/springtestdbunit/dataset/FlatXmlDataSetLoader.java" line-rate="0.5454545454545454" branch-rate="1.0" complexity="1.75">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="32" hits="70" branch="false"/>
+							</lines>
+						</method>
+						<method name="buildDataSet" signature="(Lorg/dbunit/dataset/xml/FlatXmlDataSetBuilder;Lorg/springframework/core/io/Resource;)Lorg/dbunit/dataset/IDataSet;" line-rate="0.3333333333333333" branch-rate="1.0">
+							<lines>
+								<line number="44" hits="82" branch="false"/>
+								<line number="45" hits="0" branch="false"/>
+								<line number="46" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="buildDataSetFromStream" signature="(Lorg/dbunit/dataset/xml/FlatXmlDataSetBuilder;Lorg/springframework/core/io/Resource;)Lorg/dbunit/dataset/IDataSet;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="55" hits="0" branch="false"/>
+								<line number="57" hits="0" branch="false"/>
+								<line number="59" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="buildDataSetFromUrl" signature="(Lorg/dbunit/dataset/xml/FlatXmlDataSetBuilder;Ljava/net/URL;)Lorg/dbunit/dataset/IDataSet;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="51" hits="82" branch="false"/>
+							</lines>
+						</method>
+						<method name="createDataSet" signature="(Lorg/springframework/core/io/Resource;)Lorg/dbunit/dataset/IDataSet;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="36" hits="82" branch="false"/>
+								<line number="37" hits="82" branch="false"/>
+								<line number="38" hits="82" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="32" hits="70" branch="false"/>
+						<line number="36" hits="82" branch="false"/>
+						<line number="37" hits="82" branch="false"/>
+						<line number="38" hits="82" branch="false"/>
+						<line number="44" hits="82" branch="false"/>
+						<line number="45" hits="0" branch="false"/>
+						<line number="46" hits="0" branch="false"/>
+						<line number="51" hits="82" branch="false"/>
+						<line number="55" hits="0" branch="false"/>
+						<line number="57" hits="0" branch="false"/>
+						<line number="59" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.github.springtestdbunit.dataset.ReplacementDataSetLoader" filename="com/github/springtestdbunit/dataset/ReplacementDataSetLoader.java" line-rate="0.0" branch-rate="0.0" complexity="1.1666666666666667">
+					<methods>
+						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="20" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="33" hits="0" branch="false"/>
+								<line number="34" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Lcom/github/springtestdbunit/dataset/DataSetLoader;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="41" hits="0" branch="false"/>
+								<line number="42" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Lcom/github/springtestdbunit/dataset/DataSetLoader;Ljava/util/Map;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="50" hits="0" branch="false"/>
+								<line number="51" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Lcom/github/springtestdbunit/dataset/DataSetLoader;Ljava/util/Map;Ljava/util/Map;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="61" hits="0" branch="false"/>
+								<line number="62" hits="0" branch="false"/>
+								<line number="63" hits="0" branch="false"/>
+								<line number="64" hits="0" branch="false"/>
+								<line number="65" hits="0" branch="false"/>
+								<line number="66" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="loadDataSet" signature="(Ljava/lang/Class;Ljava/lang/String;)Lorg/dbunit/dataset/IDataSet;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="77" hits="0" branch="false"/>
+								<line number="78" hits="0" branch="false"/>
+								<line number="80" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="unmodifiableMap" signature="(Ljava/util/Map;)Ljava/util/Map;" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="69" hits="0" branch="false"/>
+								<line number="70" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="71" hits="0" branch="false"/>
+								<line number="73" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="20" hits="0" branch="false"/>
+						<line number="33" hits="0" branch="false"/>
+						<line number="34" hits="0" branch="false"/>
 						<line number="41" hits="0" branch="false"/>
+						<line number="42" hits="0" branch="false"/>
+						<line number="50" hits="0" branch="false"/>
+						<line number="51" hits="0" branch="false"/>
+						<line number="61" hits="0" branch="false"/>
+						<line number="62" hits="0" branch="false"/>
+						<line number="63" hits="0" branch="false"/>
+						<line number="64" hits="0" branch="false"/>
+						<line number="65" hits="0" branch="false"/>
+						<line number="66" hits="0" branch="false"/>
+						<line number="69" hits="0" branch="false"/>
+						<line number="70" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="71" hits="0" branch="false"/>
+						<line number="73" hits="0" branch="false"/>
+						<line number="77" hits="0" branch="false"/>
+						<line number="78" hits="0" branch="false"/>
+						<line number="80" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.github.springtestdbunit.dataset.ReplacementDataSetModifier" filename="com/github/springtestdbunit/dataset/ReplacementDataSetModifier.java" line-rate="1.0" branch-rate="1.0" complexity="1.5">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="11" hits="4" branch="false"/>
+							</lines>
+						</method>
+						<method name="modify" signature="(Lorg/dbunit/dataset/IDataSet;)Lorg/dbunit/dataset/IDataSet;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="14" hits="4" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="15" hits="2" branch="false"/>
+								<line number="17" hits="4" branch="false"/>
+								<line number="18" hits="4" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="11" hits="4" branch="false"/>
+						<line number="14" hits="4" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="15" hits="2" branch="false"/>
+						<line number="17" hits="4" branch="false"/>
+						<line number="18" hits="4" branch="false"/>
 					</lines>
 				</class>
 			</classes>
@@ -1853,84 +2355,84 @@
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="33" hits="8" branch="false"/>
-								<line number="34" hits="8" branch="false"/>
-								<line number="35" hits="8" branch="false"/>
-								<line number="36" hits="8" branch="false"/>
-								<line number="37" hits="8" branch="false"/>
-								<line number="38" hits="8" branch="false"/>
-								<line number="39" hits="8" branch="false"/>
-								<line number="40" hits="8" branch="false"/>
-								<line number="41" hits="8" branch="false"/>
+								<line number="33" hits="2" branch="false"/>
+								<line number="34" hits="2" branch="false"/>
+								<line number="35" hits="2" branch="false"/>
+								<line number="36" hits="2" branch="false"/>
+								<line number="37" hits="2" branch="false"/>
+								<line number="38" hits="2" branch="false"/>
+								<line number="39" hits="2" branch="false"/>
+								<line number="40" hits="2" branch="false"/>
+								<line number="41" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="29" hits="248" branch="false"/>
+								<line number="29" hits="74" branch="false"/>
 							</lines>
 						</method>
 						<method name="get" signature="(Lcom/github/springtestdbunit/annotation/DatabaseOperation;)Lorg/dbunit/operation/DatabaseOperation;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="44" hits="280" branch="false"/>
+								<line number="44" hits="68" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="29" hits="248" branch="false"/>
-						<line number="33" hits="8" branch="false"/>
-						<line number="34" hits="8" branch="false"/>
-						<line number="35" hits="8" branch="false"/>
-						<line number="36" hits="8" branch="false"/>
-						<line number="37" hits="8" branch="false"/>
-						<line number="38" hits="8" branch="false"/>
-						<line number="39" hits="8" branch="false"/>
-						<line number="40" hits="8" branch="false"/>
-						<line number="41" hits="8" branch="false"/>
-						<line number="44" hits="280" branch="false"/>
+						<line number="29" hits="74" branch="false"/>
+						<line number="33" hits="2" branch="false"/>
+						<line number="34" hits="2" branch="false"/>
+						<line number="35" hits="2" branch="false"/>
+						<line number="36" hits="2" branch="false"/>
+						<line number="37" hits="2" branch="false"/>
+						<line number="38" hits="2" branch="false"/>
+						<line number="39" hits="2" branch="false"/>
+						<line number="40" hits="2" branch="false"/>
+						<line number="41" hits="2" branch="false"/>
+						<line number="44" hits="68" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.springtestdbunit.operation.MicrosoftSqlDatabaseOperationLookup" filename="com/github/springtestdbunit/operation/MicrosoftSqlDatabaseOperationLookup.java" line-rate="1.0" branch-rate="1.0" complexity="3.0">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="35" hits="8" branch="false"/>
-								<line number="36" hits="8" branch="false"/>
-								<line number="37" hits="8" branch="false"/>
-								<line number="38" hits="8" branch="false"/>
-								<line number="39" hits="8" branch="false"/>
+								<line number="35" hits="2" branch="false"/>
+								<line number="36" hits="2" branch="false"/>
+								<line number="37" hits="2" branch="false"/>
+								<line number="38" hits="2" branch="false"/>
+								<line number="39" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="31" hits="8" branch="false"/>
+								<line number="31" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="get" signature="(Lcom/github/springtestdbunit/annotation/DatabaseOperation;)Lorg/dbunit/operation/DatabaseOperation;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="43" hits="56" branch="true" condition-coverage="100% (2/2)">
+								<line number="43" hits="14" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="44" hits="24" branch="false"/>
-								<line number="46" hits="32" branch="false"/>
+								<line number="44" hits="6" branch="false"/>
+								<line number="46" hits="8" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="31" hits="8" branch="false"/>
-						<line number="35" hits="8" branch="false"/>
-						<line number="36" hits="8" branch="false"/>
-						<line number="37" hits="8" branch="false"/>
-						<line number="38" hits="8" branch="false"/>
-						<line number="39" hits="8" branch="false"/>
-						<line number="43" hits="56" branch="true" condition-coverage="100% (2/2)">
+						<line number="31" hits="2" branch="false"/>
+						<line number="35" hits="2" branch="false"/>
+						<line number="36" hits="2" branch="false"/>
+						<line number="37" hits="2" branch="false"/>
+						<line number="38" hits="2" branch="false"/>
+						<line number="39" hits="2" branch="false"/>
+						<line number="43" hits="14" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="44" hits="24" branch="false"/>
-						<line number="46" hits="32" branch="false"/>
+						<line number="44" hits="6" branch="false"/>
+						<line number="46" hits="8" branch="false"/>
 					</lines>
 				</class>
 			</classes>

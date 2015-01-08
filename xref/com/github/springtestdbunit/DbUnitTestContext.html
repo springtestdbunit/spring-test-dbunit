@@ -9,7 +9,7 @@
 <div id="overview"><a href="../../../../apidocs/com/github/springtestdbunit/DbUnitTestContext.html">View Javadoc</a></div><pre>
 
 <a class="jxr_linenumber" name="1" href="#1">1</a>   <em class="jxr_comment">/*</em>
-<a class="jxr_linenumber" name="2" href="#2">2</a>   <em class="jxr_comment"> * Copyright 2002-2013 the original author or authors</em>
+<a class="jxr_linenumber" name="2" href="#2">2</a>   <em class="jxr_comment"> * Copyright 2002-2015 the original author or authors</em>
 <a class="jxr_linenumber" name="3" href="#3">3</a>   <em class="jxr_comment"> *</em>
 <a class="jxr_linenumber" name="4" href="#4">4</a>   <em class="jxr_comment"> * Licensed under the Apache License, Version 2.0 (the "License");</em>
 <a class="jxr_linenumber" name="5" href="#5">5</a>   <em class="jxr_comment"> * you may not use this file except in compliance with the License.</em>
@@ -36,7 +36,7 @@
 <a class="jxr_linenumber" name="26" href="#26">26</a>  
 <a class="jxr_linenumber" name="27" href="#27">27</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="28" href="#28">28</a>  <em class="jxr_javadoccomment"> * Provides context for the {@link DbUnitRunner}.</em>
-<a class="jxr_linenumber" name="29" href="#29">29</a>  <em class="jxr_javadoccomment"> * </em>
+<a class="jxr_linenumber" name="29" href="#29">29</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="30" href="#30">30</a>  <em class="jxr_javadoccomment"> * @author Phillip Webb</em>
 <a class="jxr_linenumber" name="31" href="#31">31</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="32" href="#32">32</a>  <strong class="jxr_keyword">interface</strong> <a href="../../../com/github/springtestdbunit/DbUnitTestContext.html">DbUnitTestContext</a> {
@@ -45,7 +45,7 @@
 <a class="jxr_linenumber" name="35" href="#35">35</a>  <em class="jxr_javadoccomment">	 * Returns the {@link IDatabaseConnection} that should be used when performing database setup and teardown.</em>
 <a class="jxr_linenumber" name="36" href="#36">36</a>  <em class="jxr_javadoccomment">	 * @return The connection</em>
 <a class="jxr_linenumber" name="37" href="#37">37</a>  <em class="jxr_javadoccomment">	 */</em>
-<a class="jxr_linenumber" name="38" href="#38">38</a>  	IDatabaseConnection getConnection();
+<a class="jxr_linenumber" name="38" href="#38">38</a>  	DatabaseConnections getConnections();
 <a class="jxr_linenumber" name="39" href="#39">39</a>  
 <a class="jxr_linenumber" name="40" href="#40">40</a>  	<em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="41" href="#41">41</a>  <em class="jxr_javadoccomment">	 * Returns the {@link DataSetLoader} that should be used to load {@link IDataSet}s.</em>
@@ -66,17 +66,24 @@
 <a class="jxr_linenumber" name="56" href="#56">56</a>  	Class&lt;?&gt; getTestClass();
 <a class="jxr_linenumber" name="57" href="#57">57</a>  
 <a class="jxr_linenumber" name="58" href="#58">58</a>  	<em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="59" href="#59">59</a>  <em class="jxr_javadoccomment">	 * Returns the method that is under test.</em>
-<a class="jxr_linenumber" name="60" href="#60">60</a>  <em class="jxr_javadoccomment">	 * @return The method under test</em>
+<a class="jxr_linenumber" name="59" href="#59">59</a>  <em class="jxr_javadoccomment">	 * Returns the instance that is under test.</em>
+<a class="jxr_linenumber" name="60" href="#60">60</a>  <em class="jxr_javadoccomment">	 * @return The instance under test</em>
 <a class="jxr_linenumber" name="61" href="#61">61</a>  <em class="jxr_javadoccomment">	 */</em>
-<a class="jxr_linenumber" name="62" href="#62">62</a>  	Method getTestMethod();
+<a class="jxr_linenumber" name="62" href="#62">62</a>  	Object getTestInstance();
 <a class="jxr_linenumber" name="63" href="#63">63</a>  
 <a class="jxr_linenumber" name="64" href="#64">64</a>  	<em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="65" href="#65">65</a>  <em class="jxr_javadoccomment">	 * Returns any exception that was thrown during the test or &lt;tt&gt;null&lt;/tt&gt; if no test exception occurred.</em>
-<a class="jxr_linenumber" name="66" href="#66">66</a>  <em class="jxr_javadoccomment">	 * @return the test exception or &lt;tt&gt;null&lt;/tt&gt;</em>
+<a class="jxr_linenumber" name="65" href="#65">65</a>  <em class="jxr_javadoccomment">	 * Returns the method that is under test.</em>
+<a class="jxr_linenumber" name="66" href="#66">66</a>  <em class="jxr_javadoccomment">	 * @return The method under test</em>
 <a class="jxr_linenumber" name="67" href="#67">67</a>  <em class="jxr_javadoccomment">	 */</em>
-<a class="jxr_linenumber" name="68" href="#68">68</a>  	Throwable getTestException();
-<a class="jxr_linenumber" name="69" href="#69">69</a>  }
+<a class="jxr_linenumber" name="68" href="#68">68</a>  	Method getTestMethod();
+<a class="jxr_linenumber" name="69" href="#69">69</a>  
+<a class="jxr_linenumber" name="70" href="#70">70</a>  	<em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="71" href="#71">71</a>  <em class="jxr_javadoccomment">	 * Returns any exception that was thrown during the test or &lt;tt&gt;null&lt;/tt&gt; if no test exception occurred.</em>
+<a class="jxr_linenumber" name="72" href="#72">72</a>  <em class="jxr_javadoccomment">	 * @return the test exception or &lt;tt&gt;null&lt;/tt&gt;</em>
+<a class="jxr_linenumber" name="73" href="#73">73</a>  <em class="jxr_javadoccomment">	 */</em>
+<a class="jxr_linenumber" name="74" href="#74">74</a>  	Throwable getTestException();
+<a class="jxr_linenumber" name="75" href="#75">75</a>  
+<a class="jxr_linenumber" name="76" href="#76">76</a>  }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

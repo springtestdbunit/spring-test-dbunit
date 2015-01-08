@@ -9,7 +9,7 @@
 <div id="overview"><a href="../../../../../testapidocs/com/github/springtestdbunit/dataset/FlatXmlDataSetLoaderTests.html">View Javadoc</a></div><pre>
 
 <a class="jxr_linenumber" name="1" href="#1">1</a>   <em class="jxr_comment">/*</em>
-<a class="jxr_linenumber" name="2" href="#2">2</a>   <em class="jxr_comment"> * Copyright 2002-2013 the original author or authors</em>
+<a class="jxr_linenumber" name="2" href="#2">2</a>   <em class="jxr_comment"> * Copyright 2002-2015 the original author or authors</em>
 <a class="jxr_linenumber" name="3" href="#3">3</a>   <em class="jxr_comment"> *</em>
 <a class="jxr_linenumber" name="4" href="#4">4</a>   <em class="jxr_comment"> * Licensed under the Apache License, Version 2.0 (the "License");</em>
 <a class="jxr_linenumber" name="5" href="#5">5</a>   <em class="jxr_comment"> * you may not use this file except in compliance with the License.</em>
@@ -37,7 +37,7 @@
 <a class="jxr_linenumber" name="27" href="#27">27</a>  
 <a class="jxr_linenumber" name="28" href="#28">28</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="29" href="#29">29</a>  <em class="jxr_javadoccomment"> * Tests for {@link FlatXmlDataSetLoader}.</em>
-<a class="jxr_linenumber" name="30" href="#30">30</a>  <em class="jxr_javadoccomment"> * </em>
+<a class="jxr_linenumber" name="30" href="#30">30</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="31" href="#31">31</a>  <em class="jxr_javadoccomment"> * @author Phillip Webb</em>
 <a class="jxr_linenumber" name="32" href="#32">32</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="33" href="#33">33</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../com/github/springtestdbunit/dataset/FlatXmlDataSetLoaderTests.html">FlatXmlDataSetLoaderTests</a> {
@@ -54,17 +54,25 @@
 <a class="jxr_linenumber" name="44" href="#44">44</a>  	}
 <a class="jxr_linenumber" name="45" href="#45">45</a>  
 <a class="jxr_linenumber" name="46" href="#46">46</a>  	@Test
-<a class="jxr_linenumber" name="47" href="#47">47</a>  	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> shouldLoadFromRelativeFile() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="48" href="#48">48</a>  		IDataSet dataset = <strong class="jxr_keyword">this</strong>.loader.loadDataSet(<strong class="jxr_keyword">this</strong>.testContext.getTestClass(), <span class="jxr_string">"test.xml"</span>);
-<a class="jxr_linenumber" name="49" href="#49">49</a>  		assertEquals(<span class="jxr_string">"Sample"</span>, dataset.getTableNames()[0]);
-<a class="jxr_linenumber" name="50" href="#50">50</a>  	}
-<a class="jxr_linenumber" name="51" href="#51">51</a>  
-<a class="jxr_linenumber" name="52" href="#52">52</a>  	@Test
-<a class="jxr_linenumber" name="53" href="#53">53</a>  	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> shouldReturnNullOnMissingFile() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="54" href="#54">54</a>  		IDataSet dataset = <strong class="jxr_keyword">this</strong>.loader.loadDataSet(<strong class="jxr_keyword">this</strong>.testContext.getTestClass(), <span class="jxr_string">"doesnotexist.xml"</span>);
-<a class="jxr_linenumber" name="55" href="#55">55</a>  		assertNull(dataset);
-<a class="jxr_linenumber" name="56" href="#56">56</a>  	}
-<a class="jxr_linenumber" name="57" href="#57">57</a>  }
+<a class="jxr_linenumber" name="47" href="#47">47</a>  	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> shouldSenseColumns() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="48" href="#48">48</a>  		IDataSet dataset = <strong class="jxr_keyword">this</strong>.loader.loadDataSet(<strong class="jxr_keyword">this</strong>.testContext.getTestClass(), <span class="jxr_string">"test-column-sensing.xml"</span>);
+<a class="jxr_linenumber" name="49" href="#49">49</a>  		assertEquals(<strong class="jxr_keyword">null</strong>, dataset.getTable(<span class="jxr_string">"Sample"</span>).getValue(0, <span class="jxr_string">"name"</span>));
+<a class="jxr_linenumber" name="50" href="#50">50</a>  		assertEquals(<span class="jxr_string">"test"</span>, dataset.getTable(<span class="jxr_string">"Sample"</span>).getValue(1, <span class="jxr_string">"name"</span>));
+<a class="jxr_linenumber" name="51" href="#51">51</a>  	}
+<a class="jxr_linenumber" name="52" href="#52">52</a>  
+<a class="jxr_linenumber" name="53" href="#53">53</a>  	@Test
+<a class="jxr_linenumber" name="54" href="#54">54</a>  	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> shouldLoadFromRelativeFile() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="55" href="#55">55</a>  		IDataSet dataset = <strong class="jxr_keyword">this</strong>.loader.loadDataSet(<strong class="jxr_keyword">this</strong>.testContext.getTestClass(), <span class="jxr_string">"test.xml"</span>);
+<a class="jxr_linenumber" name="56" href="#56">56</a>  		assertEquals(<span class="jxr_string">"Sample"</span>, dataset.getTableNames()[0]);
+<a class="jxr_linenumber" name="57" href="#57">57</a>  	}
+<a class="jxr_linenumber" name="58" href="#58">58</a>  
+<a class="jxr_linenumber" name="59" href="#59">59</a>  	@Test
+<a class="jxr_linenumber" name="60" href="#60">60</a>  	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> shouldReturnNullOnMissingFile() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="61" href="#61">61</a>  		IDataSet dataset = <strong class="jxr_keyword">this</strong>.loader.loadDataSet(<strong class="jxr_keyword">this</strong>.testContext.getTestClass(), <span class="jxr_string">"doesnotexist.xml"</span>);
+<a class="jxr_linenumber" name="62" href="#62">62</a>  		assertNull(dataset);
+<a class="jxr_linenumber" name="63" href="#63">63</a>  	}
+<a class="jxr_linenumber" name="64" href="#64">64</a>  
+<a class="jxr_linenumber" name="65" href="#65">65</a>  }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

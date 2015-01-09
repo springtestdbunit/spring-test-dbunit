@@ -107,7 +107,8 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			databaseOperationLookupClass = configuration.databaseOperationLookup();
 		}
 
-		if (ObjectUtils.isEmpty(databaseConnectionBeanNames)) {
+		if (ObjectUtils.isEmpty(databaseConnectionBeanNames)
+				|| ((databaseConnectionBeanNames.length == 1) && StringUtils.isEmpty(databaseConnectionBeanNames[0]))) {
 			databaseConnectionBeanNames = new String[] { getDatabaseConnectionUsingCommonBeanNames(testContext) };
 		}
 

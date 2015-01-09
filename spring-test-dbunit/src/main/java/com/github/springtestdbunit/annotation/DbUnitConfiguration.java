@@ -52,7 +52,7 @@ public @interface DbUnitConfiguration {
 	 * {@link DataSource}.
 	 * @return the bean name of the database connection
 	 */
-	String[] databaseConnection() default "";
+	String[] databaseConnection() default {};
 
 	/**
 	 * Returns the class that will be used to load {@link IDataSet} resources. The specified class must implement

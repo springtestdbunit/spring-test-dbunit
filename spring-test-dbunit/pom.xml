@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>com.github.springtestdbunit</groupId>
 	<artifactId>spring-test-dbunit</artifactId>
-	<version>1.2.1-SNAPSHOT</version>
+	<version>1.2.1</version>
 	<packaging>jar</packaging>
 	<name>Spring Test DBUnit</name>
 	<description>Integration between the Spring testing framework and DBUnit</description>
@@ -28,7 +28,7 @@
 		<url>https://github.com/springtestdbunit/spring-test-dbunit</url>
 		<connection>scm:git:git://github.com/springtestdbunit/spring-test-dbunit.git</connection>
 		<developerConnection>scm:git:git@github.com:springtestdbunit/spring-test-dbunit.git</developerConnection>
-	  <tag>HEAD</tag>
+	  <tag>spring-test-dbunit-1.2.1</tag>
   </scm>
 	<prerequisites>
 		<maven>3.0.3</maven>

@@ -82,11 +82,11 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.4.1</version>
+				<version>2.5</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.1</version>
 				<configuration>
 					<compilerVersion>${java.version}</compilerVersion>
 					<source>${java.version}</source>
@@ -96,7 +96,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.7</version>
+				<version>2.8.2</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -116,15 +116,15 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
-				<version>2.3.1</version>
+				<version>2.5.2</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.5</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.2.2</version>
+				<version>2.5</version>
 				<executions>
 					<execution>
 						<id>default</id>
@@ -139,11 +139,11 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.5</version>
+				<version>2.6</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.5</version>
 				<dependencies>
 					<dependency>
 						<groupId>net.ju-n.maven.doxia</groupId>
@@ -155,7 +155,7 @@
 					<reportPlugins>
 						<plugin>
 							<artifactId>maven-javadoc-plugin</artifactId>
-							<version>2.8.1</version>
+							<version>2.9.1</version>
 						</plugin>
 						<plugin>
 							<artifactId>maven-jxr-plugin</artifactId>
@@ -192,11 +192,11 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12</version>
+				<version>2.17</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
+				<version>2.3</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>

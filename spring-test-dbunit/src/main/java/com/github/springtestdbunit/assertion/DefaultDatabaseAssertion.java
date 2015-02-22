@@ -16,10 +16,13 @@
 
 package com.github.springtestdbunit.assertion;
 
+import java.util.List;
+
 import org.dbunit.Assertion;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
+import org.dbunit.dataset.filter.IColumnFilter;
 
 /**
  * Default database assertion strategy which uses DbUnit {@link Assertion#assertEquals(IDataSet, IDataSet)}.
@@ -29,11 +32,13 @@ import org.dbunit.dataset.ITable;
  */
 class DefaultDatabaseAssertion implements DatabaseAssertion {
 
-	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException {
+	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet, List<IColumnFilter> columnFilters)
+			throws DatabaseUnitException {
 		Assertion.assertEquals(expectedDataSet, actualDataSet);
 	}
 
-	public void assertEquals(ITable expectedTable, ITable actualTable) throws DatabaseUnitException {
+	public void assertEquals(ITable expectedTable, ITable actualTable, List<IColumnFilter> columnFilters)
+			throws DatabaseUnitException {
 		Assertion.assertEquals(expectedTable, actualTable);
 	}
 

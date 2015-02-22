@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dataset [
+        <!ELEMENT dataset (SampleEntity)*>
+        <!ELEMENT SampleEntity (#PCDATA)>
+        <!ATTLIST SampleEntity
+                id CDATA #REQUIRED
+                value CDATA #REQUIRED>
+        ]>
+<dataset>
+	<SampleEntity value="existing1" />
+	<SampleEntity value="existing2" />
+</dataset>

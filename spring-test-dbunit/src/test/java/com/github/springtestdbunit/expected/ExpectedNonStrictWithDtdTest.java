@@ -20,6 +20,8 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import com.github.springtestdbunit.entity.EntityAssert;
+import org.dbunit.dataset.Column;
+import org.dbunit.dataset.filter.IColumnFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +36,23 @@ import org.springframework.transaction.annotation.Transactional;
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
 @Transactional
 public class ExpectedNonStrictWithDtdTest {
-
-	@Autowired
-	private EntityAssert entityAssert;
+    @Autowired
+    private EntityAssert entityAssert;
 
 	@Test
-	@ExpectedDatabase(value = "/META-INF/db/expected_nonstrict_with_dtd.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+	@ExpectedDatabase(value = "/META-INF/db/expected_nonstrict_with_dtd.xml",
+			assertionMode = DatabaseAssertionMode.NON_STRICT
+			, columnFilters = { SampleEntityIdExclusionFilter.class }
+	)
 	public void shouldNotFailEvenThoughExpectedTableDoesNotSpecifyAllColumns() {
 		this.entityAssert.assertValues("existing1", "existing2");
 	}
 
+	public static class SampleEntityIdExclusionFilter implements IColumnFilter {
+		public boolean accept(String tableName, Column column) {
+			boolean isExcluded = tableName.equals("SampleEntity") && column.getColumnName().equals("id");
+			return !isExcluded;
+		}
+	}
 }
+

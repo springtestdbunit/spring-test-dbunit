@@ -16,17 +16,12 @@
 
 package com.github.springtestdbunit.assertion;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import org.dbunit.Assertion;
 import org.dbunit.DatabaseUnitException;
-import org.dbunit.dataset.Column;
-import org.dbunit.dataset.Columns;
-import org.dbunit.dataset.DataSetException;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.ITable;
-import org.dbunit.dataset.ITableMetaData;
+import org.dbunit.dataset.*;
+import org.dbunit.dataset.filter.IColumnFilter;
 
 /**
  * Implements non-strict database assertion strategy : compares data sets ignoring all tables and columns which are not
@@ -37,27 +32,51 @@ import org.dbunit.dataset.ITableMetaData;
  */
 class NonStrictDatabaseAssertion implements DatabaseAssertion {
 
-	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException {
+	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet, List<IColumnFilter> columnFilters) throws DatabaseUnitException {
 		for (String tableName : expectedDataSet.getTableNames()) {
 			ITable expectedTable = expectedDataSet.getTable(tableName);
 			ITable actualTable = actualDataSet.getTable(tableName);
-			assertEquals(expectedTable, actualTable);
+			assertEquals(expectedTable, actualTable, columnFilters);
 		}
 	}
 
-	public void assertEquals(ITable expectedTable, ITable actualTable) throws DatabaseUnitException {
-		String[] ignoredColumns = getColumnsToIgnore(expectedTable.getTableMetaData(), actualTable.getTableMetaData());
-		Assertion.assertEqualsIgnoreCols(expectedTable, actualTable, ignoredColumns);
+	public void assertEquals(ITable expectedTable, ITable actualTable, List<IColumnFilter> columnFilters) throws DatabaseUnitException {
+        Set<String> allIgnoredColumns = new LinkedHashSet<String>();
+
+        if (columnFilters.size() == 0) {
+            allIgnoredColumns.addAll(getColumnsToIgnore(expectedTable.getTableMetaData(), actualTable.getTableMetaData()));
+        } else {
+            for(IColumnFilter columnFilter : columnFilters) {
+                FilteredTableMetaData filteredExpectedTableMetaData = new FilteredTableMetaData(expectedTable.getTableMetaData(), columnFilter);
+                allIgnoredColumns.addAll(getColumnsToIgnore(filteredExpectedTableMetaData, actualTable.getTableMetaData()));
+            }
+        }
+
+        Assertion.assertEqualsIgnoreCols(expectedTable, actualTable, allIgnoredColumns.toArray(new String[allIgnoredColumns.size()]));
+
+//        if (parameters.getColumnFilters().size() == 0) {
+//            Set<String> allIgnoredColumns = getColumnsToIgnore(expectedTable.getTableMetaData(), actualTable.getTableMetaData());
+//            Assertion.assertEqualsIgnoreCols(expectedTable, actualTable, allIgnoredColumns.toArray(new String[allIgnoredColumns.size()]));
+//            return;
+//        }
+//
+//        for(IColumnFilter columnFilter : parameters.getColumnFilters()) {
+//            FilteredTableMetaData filteredExpectedTableMetaData = new FilteredTableMetaData(expectedTable.getTableMetaData(), columnFilter);
+//            FilteredTableMetaData filteredActualTableMetaData = new FilteredTableMetaData(actualTable.getTableMetaData(), columnFilter);
+//            ITable filteredExpectedTable = new CompositeTable(filteredExpectedTableMetaData, expectedTable);
+//            ITable filteredActualTable = new CompositeTable(filteredActualTableMetaData, actualTable);
+//            Assertion.assertEquals(filteredExpectedTable, filteredActualTable);
+//        }
 	}
 
-	protected String[] getColumnsToIgnore(ITableMetaData expectedMetaData, ITableMetaData actualMetaData)
+    protected Set<String> getColumnsToIgnore(ITableMetaData expectedMetaData, ITableMetaData actualMetaData)
 			throws DataSetException {
 		Column[] notSpecifiedInExpected = Columns.getColumnDiff(expectedMetaData, actualMetaData).getActual();
-		List<String> result = new LinkedList<String>();
+		Set<String> result = new LinkedHashSet<String>();
 		for (Column column : notSpecifiedInExpected) {
 			result.add(column.getColumnName());
 		}
-		return result.toArray(new String[result.size()]);
+		return result;
 	}
 
 }

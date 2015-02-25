@@ -7,6 +7,6 @@
                 value CDATA #REQUIRED>
         ]>
 <dataset>
-	<SampleEntity value="existing1" />
-	<SampleEntity value="existing2" />
+	<SampleEntity id="this_is_actually_1_but_will_not_be_compared_due_to_specified_IColumnFilter" value="existing1" />
+	<SampleEntity id="this_is_actually_2_but_will_not_be_compared_due_to_specified_IColumnFilter" value="existing2" />
 </dataset>

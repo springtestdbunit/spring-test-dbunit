@@ -53,20 +53,6 @@ class NonStrictDatabaseAssertion implements DatabaseAssertion {
         }
 
         Assertion.assertEqualsIgnoreCols(expectedTable, actualTable, allIgnoredColumns.toArray(new String[allIgnoredColumns.size()]));
-
-//        if (parameters.getColumnFilters().size() == 0) {
-//            Set<String> allIgnoredColumns = getColumnsToIgnore(expectedTable.getTableMetaData(), actualTable.getTableMetaData());
-//            Assertion.assertEqualsIgnoreCols(expectedTable, actualTable, allIgnoredColumns.toArray(new String[allIgnoredColumns.size()]));
-//            return;
-//        }
-//
-//        for(IColumnFilter columnFilter : parameters.getColumnFilters()) {
-//            FilteredTableMetaData filteredExpectedTableMetaData = new FilteredTableMetaData(expectedTable.getTableMetaData(), columnFilter);
-//            FilteredTableMetaData filteredActualTableMetaData = new FilteredTableMetaData(actualTable.getTableMetaData(), columnFilter);
-//            ITable filteredExpectedTable = new CompositeTable(filteredExpectedTableMetaData, expectedTable);
-//            ITable filteredActualTable = new CompositeTable(filteredActualTableMetaData, actualTable);
-//            Assertion.assertEquals(filteredExpectedTable, filteredActualTable);
-//        }
 	}
 
     protected Set<String> getColumnsToIgnore(ITableMetaData expectedMetaData, ITableMetaData actualMetaData)

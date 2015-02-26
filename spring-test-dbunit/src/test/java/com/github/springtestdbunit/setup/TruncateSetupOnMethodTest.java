@@ -45,4 +45,10 @@ public class TruncateSetupOnMethodTest {
 		this.entityAssert.assertValues();
 	}
 
+	@Test
+	@DatabaseSetup(type = DatabaseOperation.TRUNCATE_TABLE)
+	public void testAllTables() throws Exception {
+		this.entityAssert.assertValues();
+	}
+
 }

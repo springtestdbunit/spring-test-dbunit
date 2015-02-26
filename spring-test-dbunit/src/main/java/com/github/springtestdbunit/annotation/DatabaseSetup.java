@@ -66,6 +66,6 @@ public @interface DatabaseSetup {
 	 * @return The dataset locations
 	 * @see DbUnitConfiguration#dataSetLoader()
 	 */
-	String[] value();
+	String[] value() default {};
 
 }

@@ -202,7 +202,15 @@ public class DbUnitRunner {
 		for (String dataSetLocation : annotation.getValue()) {
 			datasets.add(loadDataset(testContext, dataSetLocation, DataSetModifier.NONE));
 		}
+		if (datasets.isEmpty()) {
+			datasets.add(getFullDatabaseDataSet(testContext, annotation.getConnection()));
+		}
 		return datasets;
+	}
+
+	private IDataSet getFullDatabaseDataSet(DbUnitTestContext testContext, String name) throws Exception {
+		IDatabaseConnection connection = testContext.getConnections().get(name);
+		return connection.createDataSet();
 	}
 
 	private IDataSet loadDataset(DbUnitTestContext testContext, String dataSetLocation, DataSetModifier modifier)

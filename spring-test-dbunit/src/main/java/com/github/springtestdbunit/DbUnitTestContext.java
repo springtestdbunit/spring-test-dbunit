@@ -29,7 +29,7 @@ import com.github.springtestdbunit.operation.DatabaseOperationLookup;
  *
  * @author Phillip Webb
  */
-interface DbUnitTestContext {
+public interface DbUnitTestContext {
 
 	/**
 	 * Returns the {@link IDatabaseConnection} that should be used when performing database setup and teardown.

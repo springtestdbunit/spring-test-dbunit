@@ -52,7 +52,7 @@ import com.github.springtestdbunit.dataset.DataSetModifier;
  * @author Sunitha Rajarathnam
  * @author Oleksii Lomako
  */
-class DbUnitRunner {
+public class DbUnitRunner {
 
 	private static final Log logger = LogFactory.getLog(DbUnitTestExecutionListener.class);
 

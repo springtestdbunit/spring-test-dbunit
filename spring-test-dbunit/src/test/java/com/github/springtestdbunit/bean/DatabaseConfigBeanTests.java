@@ -145,6 +145,11 @@ public class DatabaseConfigBeanTests {
 		doTest("skipOracleRecyclebinTables", DatabaseConfig.FEATURE_SKIP_ORACLE_RECYCLEBIN_TABLES, Boolean.FALSE);
 	}
 
+    @Test
+    public void testAllowEmptyFields() {
+        doTest("allowEmptyFields", DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS, Boolean.TRUE);
+    }
+
 	private void doTest(String propertyName, String databaseConfigProperty, Object newValue) {
 		Object initialValue = this.configBeanWrapper.getPropertyValue(propertyName);
 		Object expectedInitialValue = this.defaultConfig.getProperty(databaseConfigProperty);

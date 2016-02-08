@@ -78,7 +78,7 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(NoDbUnitConfiguration.class);
 		testContextManager.prepareTestInstance();
 		DatabaseConnections connections = (DatabaseConnections) testContextManager.getTestContextAttribute(
-			DbUnitTestExecutionListener.CONNECTION_ATTRIBUTE);
+				DbUnitTestExecutionListener.CONNECTION_ATTRIBUTE);
 		assertSame(this.databaseConnection, connections.get(databaseConnectionBeanName));
 		assertEquals(FlatXmlDataSetLoader.class,
 				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE)
@@ -112,12 +112,13 @@ public class DbUnitTestExecutionListenerPrepareTests {
 
 	@Test
 	public void shouldConvertDatasetDatabaseConnection() throws Exception {
-		addBean("dataSource", this.dataSource);
+		String dataSourceBeanName = "dataSource";
+		addBean(dataSourceBeanName, this.dataSource);
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(NoDbUnitConfiguration.class);
 		testContextManager.prepareTestInstance();
 		DatabaseConnections connections = (DatabaseConnections) testContextManager
 				.getTestContextAttribute(DbUnitTestExecutionListener.CONNECTION_ATTRIBUTE);
-		assertEquals(DatabaseDataSourceConnection.class, connections.get("dataSource").getClass());
+		assertEquals(DatabaseDataSourceConnection.class, connections.get(dataSourceBeanName).getClass());
 	}
 
 	@Test
@@ -150,7 +151,7 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		testContextManager.prepareTestInstance();
 		verify(this.applicationContext).getBean(customDatabaseConnectionBeanName);
 		DatabaseConnections connections = (DatabaseConnections) testContextManager.getTestContextAttribute(
-			DbUnitTestExecutionListener.CONNECTION_ATTRIBUTE);
+				DbUnitTestExecutionListener.CONNECTION_ATTRIBUTE);
 		assertSame(this.databaseConnection, connections.get(customDatabaseConnectionBeanName));
 		assertEquals(CustomDataSetLoader.class,
 				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE)

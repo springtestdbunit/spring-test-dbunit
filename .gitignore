@@ -5,3 +5,5 @@ target
 spring-test-dbunit/src/site/markdown/index.md
 bin
 .DS_Store
+*.iml
+.idea

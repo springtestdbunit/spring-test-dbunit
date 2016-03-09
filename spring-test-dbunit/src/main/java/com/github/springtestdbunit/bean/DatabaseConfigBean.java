@@ -303,6 +303,24 @@ public class DatabaseConfigBean {
 	}
 
 	/**
+	 * Gets the allow empty fields database config feature.
+	 * @return the allow empty fields
+	 * @see DatabaseConfig#FEATURE_ALLOW_EMPTY_FIELDS
+	 */
+	public Boolean getAllowEmptyFields() {
+		return (Boolean) getProperty("allowEmptyFields", DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS);
+	}
+
+	/**
+	 * Sets the allow empty fields database config feature.
+	 * @param allowEmptyFields allow empty fields
+	 * @see DatabaseConfig#FEATURE_ALLOW_EMPTY_FIELDS
+	 */
+	public void setAllowEmptyFields(Boolean allowEmptyFields) {
+		setProperty("allowEmptyFields", DatabaseConfig.FEATURE_ALLOW_EMPTY_FIELDS, allowEmptyFields);
+	}
+
+	/**
 	 * Get a property from the underlying database config.
 	 * @param propertyName The name of the attribute
 	 * @param dataConfigPropertyName The data config property name

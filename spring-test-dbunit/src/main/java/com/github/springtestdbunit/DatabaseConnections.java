@@ -27,7 +27,7 @@ import org.springframework.util.StringUtils;
  *
  * @author Phillip Webb
  */
-class DatabaseConnections {
+public class DatabaseConnections {
 
 	private final String[] names;
 

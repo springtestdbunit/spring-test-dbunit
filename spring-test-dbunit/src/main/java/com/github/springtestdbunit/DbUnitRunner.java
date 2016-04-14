@@ -19,6 +19,7 @@ package com.github.springtestdbunit;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
+import org.dbunit.dataset.filter.IColumnFilter;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -139,6 +141,7 @@ public class DbUnitRunner {
 			String query = annotation.query();
 			String table = annotation.table();
 			IDataSet expectedDataSet = loadDataset(testContext, annotation.value(), modifier);
+            List<IColumnFilter> columnFilters = getColumnFilters(annotation);
 			IDatabaseConnection connection = connections.get(annotation.connection());
 			if (expectedDataSet != null) {
 				if (logger.isDebugEnabled()) {
@@ -149,14 +152,14 @@ public class DbUnitRunner {
 					Assert.hasLength(table, "The table name must be specified when using a SQL query");
 					ITable expectedTable = expectedDataSet.getTable(table);
 					ITable actualTable = connection.createQueryTable(table, query);
-					assertion.assertEquals(expectedTable, actualTable);
+					assertion.assertEquals(expectedTable, actualTable, columnFilters);
 				} else if (StringUtils.hasLength(table)) {
 					ITable actualTable = connection.createTable(table);
 					ITable expectedTable = expectedDataSet.getTable(table);
-					assertion.assertEquals(expectedTable, actualTable);
+					assertion.assertEquals(expectedTable, actualTable, columnFilters);
 				} else {
 					IDataSet actualDataSet = connection.createDataSet();
-					assertion.assertEquals(expectedDataSet, actualDataSet);
+					assertion.assertEquals(expectedDataSet, actualDataSet, columnFilters);
 				}
 			}
 			if (annotation.override()) {
@@ -165,6 +168,15 @@ public class DbUnitRunner {
 			}
 		}
 
+	}
+
+	private List<IColumnFilter> getColumnFilters(ExpectedDatabase annotation) throws IllegalAccessException, InstantiationException {
+		Class<? extends IColumnFilter>[] columnFilterClasses = annotation.columnFilters();
+		List<IColumnFilter> columnFilters = new LinkedList<IColumnFilter>();
+		for(Class<? extends IColumnFilter> columnFilterClass : columnFilterClasses) {
+			columnFilters.add(columnFilterClass.newInstance());
+		}
+		return columnFilters;
 	}
 
 	private DataSetModifier getModifier(DbUnitTestContext testContext, List<ExpectedDatabase> annotations) {

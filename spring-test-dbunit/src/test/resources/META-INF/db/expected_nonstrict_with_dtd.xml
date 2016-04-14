@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dataset [
+        <!ELEMENT dataset (SampleEntity)*>
+        <!ELEMENT SampleEntity (#PCDATA)>
+        <!ATTLIST SampleEntity
+                id CDATA #REQUIRED
+                value CDATA #REQUIRED>
+        ]>
+<dataset>
+	<SampleEntity id="this_is_actually_1_but_will_not_be_compared_due_to_specified_IColumnFilter" value="existing1" />
+	<SampleEntity id="this_is_actually_2_but_will_not_be_compared_due_to_specified_IColumnFilter" value="existing2" />
+</dataset>

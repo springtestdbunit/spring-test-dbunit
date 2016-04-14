@@ -19,6 +19,9 @@ package com.github.springtestdbunit.assertion;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
+import org.dbunit.dataset.filter.IColumnFilter;
+
+import java.util.List;
 
 /**
  * Database assertion strategy interface.
@@ -34,7 +37,7 @@ public interface DatabaseAssertion {
 	 * @param actualDataSet the actual dataset
 	 * @throws DatabaseUnitException if the datasets are not equal
 	 */
-	void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet) throws DatabaseUnitException;
+	void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet, List<IColumnFilter> columnFilters) throws DatabaseUnitException;
 
 	/**
 	 * Assert that the specified {@link IDataSet dataSets} are conceptually equal.
@@ -42,6 +45,6 @@ public interface DatabaseAssertion {
 	 * @param actualTable the actual table
 	 * @throws DatabaseUnitException if the tables are not equal
 	 */
-	void assertEquals(ITable expectedTable, ITable actualTable) throws DatabaseUnitException;
+	void assertEquals(ITable expectedTable, ITable actualTable, List<IColumnFilter> columnFilters) throws DatabaseUnitException;
 
 }

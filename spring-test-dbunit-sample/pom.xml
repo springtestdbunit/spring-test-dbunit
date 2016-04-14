@@ -6,7 +6,7 @@
 	<version>1.2.2-SNAPSHOT</version>
 	<name>Spring Test DBUnit Sample</name>
 	<properties>
-		<spring.version>3.2.6.RELEASE</spring.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
 		<hibernate.core.version>4.3.6.Final</hibernate.core.version>
 	</properties>
 	<build>
@@ -68,7 +68,7 @@
 		<dependency>
 			<groupId>org.dbunit</groupId>
 			<artifactId>dbunit</artifactId>
-			<version>2.5.1</version>
+			<version>2.5.2</version>
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
@@ -81,25 +81,25 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.7</version>
+			<version>1.7.21</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.7</version>
+			<version>1.7.21</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.3.1</version>
+			<version>2.3.3</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

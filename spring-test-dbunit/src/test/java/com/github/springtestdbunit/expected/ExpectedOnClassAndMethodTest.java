@@ -16,8 +16,6 @@
 
 package com.github.springtestdbunit.expected;
 
-import javax.sql.DataSource;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +36,6 @@ import com.github.springtestdbunit.entity.EntityAssert;
 @ExpectedDatabase(value = "/META-INF/db/expectedfail.xml")
 @Transactional
 public class ExpectedOnClassAndMethodTest {
-
-	@Autowired
-	private DataSource dataSource;
 
 	@Autowired
 	private EntityAssert entityAssert;

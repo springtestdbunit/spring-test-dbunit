@@ -25,7 +25,7 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.springframework.core.io.Resource;
 
 /**
- * A {@link DataSetLoader data set loader} that can be used to load {@link FlatXmlDataSet xml datasets}
+ * A {@link DataSetLoader data set loader} that can be used to load {@link FlatXmlDataSet FlatXmlDataSets}
  *
  * @author Phillip Webb
  */

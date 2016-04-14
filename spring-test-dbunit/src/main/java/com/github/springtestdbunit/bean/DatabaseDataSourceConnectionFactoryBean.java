@@ -57,12 +57,12 @@ public class DatabaseDataSourceConnectionFactoryBean implements FactoryBean<Data
 
 	public DatabaseDataSourceConnection getObject() throws Exception {
 		Assert.notNull(this.dataSource, "The dataSource is required");
-		DatabaseDataSourceConnection dataSourceConntection = new DatabaseDataSourceConnection(
+		DatabaseDataSourceConnection dataSourceConnection = new DatabaseDataSourceConnection(
 				makeTransactionAware(this.dataSource), this.schema, this.username, this.password);
 		if (this.databaseConfig != null) {
-			this.databaseConfig.apply(dataSourceConntection.getConfig());
+			this.databaseConfig.apply(dataSourceConnection.getConfig());
 		}
-		return dataSourceConntection;
+		return dataSourceConnection;
 	}
 
 	private DataSource makeTransactionAware(DataSource dataSource) {

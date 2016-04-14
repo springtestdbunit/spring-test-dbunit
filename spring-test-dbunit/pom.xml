@@ -29,9 +29,9 @@
 		<connection>scm:git:git://github.com/springtestdbunit/spring-test-dbunit.git</connection>
 		<developerConnection>scm:git:git@github.com:springtestdbunit/spring-test-dbunit.git</developerConnection>
 	  <tag>HEAD</tag>
-  </scm>
+	</scm>
 	<prerequisites>
-		<maven>3.0.3</maven>
+		<maven>3.2.3</maven>
 	</prerequisites>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,6 +52,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
 				<executions>
 					<execution>
 						<id>copy-readme</id>
@@ -84,6 +85,10 @@
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.5</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

@@ -25,6 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.filter.IColumnFilter;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
@@ -91,4 +92,13 @@ public @interface ExpectedDatabase {
 	 */
 	Class<? extends DataSetModifier>[] modifiers() default {};
 
+	/**
+	 * A set of {@link org.dbunit.dataset.filter.IColumnFilter} that will be applied to column comparison when using
+	 * non-strict {@link DatabaseAssertionMode}.
+	 * <p>
+	 * Specify this when you want to use DTD with your expected dataset XML file but want to exclude some columns from
+	 * comparison.
+	 * @return column filters to apply
+	 */
+	Class<? extends IColumnFilter>[] columnFilters() default {};
 }

@@ -17,16 +17,22 @@
 package com.github.springtestdbunit;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.CompositeDataSet;
+import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.filter.IColumnFilter;
@@ -64,7 +70,8 @@ public class DbUnitRunner {
 	 * @throws Exception
 	 */
 	public void beforeTestMethod(DbUnitTestContext testContext) throws Exception {
-		Collection<DatabaseSetup> annotations = getAnnotations(testContext, DatabaseSetups.class, DatabaseSetup.class);
+		Annotations<DatabaseSetup> annotations = Annotations.get(testContext, DatabaseSetups.class,
+				DatabaseSetup.class);
 		setupOrTeardown(testContext, true, AnnotationAttributes.get(annotations));
 	}
 
@@ -77,9 +84,9 @@ public class DbUnitRunner {
 		try {
 			try {
 				verifyExpected(testContext,
-						getAnnotations(testContext, ExpectedDatabases.class, ExpectedDatabase.class));
+						Annotations.get(testContext, ExpectedDatabases.class, ExpectedDatabase.class));
 			} finally {
-				Collection<DatabaseTearDown> annotations = getAnnotations(testContext, DatabaseTearDowns.class,
+				Annotations<DatabaseTearDown> annotations = Annotations.get(testContext, DatabaseTearDowns.class,
 						DatabaseTearDown.class);
 				try {
 					setupOrTeardown(testContext, false, AnnotationAttributes.get(annotations));
@@ -97,36 +104,8 @@ public class DbUnitRunner {
 		}
 	}
 
-	private <T extends Annotation> List<T> getAnnotations(DbUnitTestContext testContext,
-			Class<? extends Annotation> containerType, Class<T> type) {
-		List<T> annotations = new ArrayList<T>();
-		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestClass(), type));
-		addRepeatableAnnotationsToList(annotations,
-				AnnotationUtils.findAnnotation(testContext.getTestClass(), containerType));
-		addAnnotationToList(annotations, AnnotationUtils.findAnnotation(testContext.getTestMethod(), type));
-		addRepeatableAnnotationsToList(annotations,
-				AnnotationUtils.findAnnotation(testContext.getTestMethod(), containerType));
-		return annotations;
-	}
-
-	private <T extends Annotation> void addAnnotationToList(List<T> annotations, T annotation) {
-		if (annotation != null) {
-			annotations.add(annotation);
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	private <T extends Annotation> void addRepeatableAnnotationsToList(List<T> annotations,
-			Annotation annotationContainer) {
-		if (annotationContainer != null) {
-			T[] value = (T[]) AnnotationUtils.getValue(annotationContainer);
-			for (T annotation : value) {
-				annotations.add(annotation);
-			}
-		}
-	}
-
-	private void verifyExpected(DbUnitTestContext testContext, List<ExpectedDatabase> annotations) throws Exception {
+	private void verifyExpected(DbUnitTestContext testContext, Annotations<ExpectedDatabase> annotations)
+			throws Exception {
 		if (testContext.getTestException() != null) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Skipping @DatabaseTest expectation due to test exception "
@@ -136,40 +115,48 @@ public class DbUnitRunner {
 		}
 		DatabaseConnections connections = testContext.getConnections();
 		DataSetModifier modifier = getModifier(testContext, annotations);
-		for (int i = annotations.size() - 1; i >= 0; i--) {
-			ExpectedDatabase annotation = annotations.get(i);
-			String query = annotation.query();
-			String table = annotation.table();
-			IDataSet expectedDataSet = loadDataset(testContext, annotation.value(), modifier);
-			IDatabaseConnection connection = connections.get(annotation.connection());
-			if (expectedDataSet != null) {
-				if (logger.isDebugEnabled()) {
-					logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
-				}
-				DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
-				List<IColumnFilter> columnFilters = getColumnFilters(annotation);
-				if (StringUtils.hasLength(query)) {
-					Assert.hasLength(table, "The table name must be specified when using a SQL query");
-					ITable expectedTable = expectedDataSet.getTable(table);
-					ITable actualTable = connection.createQueryTable(table, query);
-					assertion.assertEquals(expectedTable, actualTable, columnFilters);
-				} else if (StringUtils.hasLength(table)) {
-					ITable actualTable = connection.createTable(table);
-					ITable expectedTable = expectedDataSet.getTable(table);
-					assertion.assertEquals(expectedTable, actualTable, columnFilters);
-				} else {
-					IDataSet actualDataSet = connection.createDataSet();
-					assertion.assertEquals(expectedDataSet, actualDataSet, columnFilters);
-				}
-			}
-			if (annotation.override()) {
-				// No need to test any more
-				return;
+		boolean override = false;
+		for (ExpectedDatabase annotation : annotations.getMethodAnnotations()) {
+			verifyExpected(testContext, connections, modifier, annotation);
+			override |= annotation.override();
+		}
+		if (!override) {
+			for (ExpectedDatabase annotation : annotations.getClassAnnotations()) {
+				verifyExpected(testContext, connections, modifier, annotation);
 			}
 		}
 	}
 
-	private DataSetModifier getModifier(DbUnitTestContext testContext, List<ExpectedDatabase> annotations) {
+	private void verifyExpected(DbUnitTestContext testContext, DatabaseConnections connections,
+			DataSetModifier modifier, ExpectedDatabase annotation)
+					throws Exception, DataSetException, SQLException, DatabaseUnitException {
+		String query = annotation.query();
+		String table = annotation.table();
+		IDataSet expectedDataSet = loadDataset(testContext, annotation.value(), modifier);
+		IDatabaseConnection connection = connections.get(annotation.connection());
+		if (expectedDataSet != null) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
+			}
+			DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
+			List<IColumnFilter> columnFilters = getColumnFilters(annotation);
+			if (StringUtils.hasLength(query)) {
+				Assert.hasLength(table, "The table name must be specified when using a SQL query");
+				ITable expectedTable = expectedDataSet.getTable(table);
+				ITable actualTable = connection.createQueryTable(table, query);
+				assertion.assertEquals(expectedTable, actualTable, columnFilters);
+			} else if (StringUtils.hasLength(table)) {
+				ITable actualTable = connection.createTable(table);
+				ITable expectedTable = expectedDataSet.getTable(table);
+				assertion.assertEquals(expectedTable, actualTable, columnFilters);
+			} else {
+				IDataSet actualDataSet = connection.createDataSet();
+				assertion.assertEquals(expectedDataSet, actualDataSet, columnFilters);
+			}
+		}
+	}
+
+	private DataSetModifier getModifier(DbUnitTestContext testContext, Annotations<ExpectedDatabase> annotations) {
 		DataSetModifiers modifiers = new DataSetModifiers();
 		for (ExpectedDatabase annotation : annotations) {
 			for (Class<? extends DataSetModifier> modifierClass : annotation.modifiers()) {
@@ -274,12 +261,72 @@ public class DbUnitRunner {
 			return this.connection;
 		}
 
-		public static <T extends Annotation> Collection<AnnotationAttributes> get(Collection<T> annotations) {
+		public static <T extends Annotation> Collection<AnnotationAttributes> get(Annotations<T> annotations) {
 			List<AnnotationAttributes> annotationAttributes = new ArrayList<AnnotationAttributes>();
 			for (T annotation : annotations) {
 				annotationAttributes.add(new AnnotationAttributes(annotation));
 			}
 			return annotationAttributes;
+		}
+
+	}
+
+	private static class Annotations<T extends Annotation> implements Iterable<T> {
+
+		private final List<T> classAnnotations;
+
+		private final List<T> methodAnnotations;
+
+		private final List<T> allAnnotations;
+
+		public Annotations(DbUnitTestContext context, Class<? extends Annotation> container, Class<T> annotation) {
+			this.classAnnotations = getAnnotations(context.getTestClass(), container, annotation);
+			this.methodAnnotations = getAnnotations(context.getTestMethod(), container, annotation);
+			List<T> allAnnotations = new ArrayList<T>(this.classAnnotations.size() + this.methodAnnotations.size());
+			allAnnotations.addAll(this.classAnnotations);
+			allAnnotations.addAll(this.methodAnnotations);
+			this.allAnnotations = Collections.unmodifiableList(allAnnotations);
+		}
+
+		private List<T> getAnnotations(AnnotatedElement element, Class<? extends Annotation> container,
+				Class<T> annotation) {
+			List<T> annotations = new ArrayList<T>();
+			addAnnotationToList(annotations, AnnotationUtils.findAnnotation(element, annotation));
+			addRepeatableAnnotationsToList(annotations, AnnotationUtils.findAnnotation(element, container));
+			return Collections.unmodifiableList(annotations);
+		}
+
+		private void addAnnotationToList(List<T> annotations, T annotation) {
+			if (annotation != null) {
+				annotations.add(annotation);
+			}
+		}
+
+		@SuppressWarnings("unchecked")
+		private void addRepeatableAnnotationsToList(List<T> annotations, Annotation container) {
+			if (container != null) {
+				T[] value = (T[]) AnnotationUtils.getValue(container);
+				for (T annotation : value) {
+					annotations.add(annotation);
+				}
+			}
+		}
+
+		public List<T> getClassAnnotations() {
+			return this.classAnnotations;
+		}
+
+		public List<T> getMethodAnnotations() {
+			return this.methodAnnotations;
+		}
+
+		public Iterator<T> iterator() {
+			return this.allAnnotations.iterator();
+		}
+
+		private static <T extends Annotation> Annotations<T> get(DbUnitTestContext testContext,
+				Class<? extends Annotation> container, Class<T> annotation) {
+			return new Annotations<T>(testContext, container, annotation);
 		}
 
 	}

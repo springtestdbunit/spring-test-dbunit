@@ -42,6 +42,7 @@ import org.springframework.beans.BeanWrapperImpl;
 public class DatabaseConfigBeanTests {
 
 	private static final Set<Class<?>> CLASS_COMPARE_ONLY;
+
 	static {
 		CLASS_COMPARE_ONLY = new HashSet<Class<?>>();
 		CLASS_COMPARE_ONLY.add(DefaultMetadataHandler.class);

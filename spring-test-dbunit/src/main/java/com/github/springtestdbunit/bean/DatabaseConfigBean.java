@@ -38,6 +38,7 @@ import org.springframework.util.Assert;
 public class DatabaseConfigBean {
 
 	private static final Map<String, ConfigProperty> CONFIG_PROPERTIES;
+
 	static {
 		CONFIG_PROPERTIES = new HashMap<String, ConfigProperty>();
 		for (ConfigProperty configProperty : DatabaseConfig.ALL_PROPERTIES) {
@@ -289,7 +290,8 @@ public class DatabaseConfigBean {
 	 * @see DatabaseConfig#FEATURE_SKIP_ORACLE_RECYCLEBIN_TABLES
 	 */
 	public Boolean getSkipOracleRecyclebinTables() {
-		return (Boolean) getProperty("skipOracleRecyclebinTables", DatabaseConfig.FEATURE_SKIP_ORACLE_RECYCLEBIN_TABLES);
+		return (Boolean) getProperty("skipOracleRecyclebinTables",
+				DatabaseConfig.FEATURE_SKIP_ORACLE_RECYCLEBIN_TABLES);
 	}
 
 	/**
@@ -324,8 +326,8 @@ public class DatabaseConfigBean {
 	 */
 	private void setProperty(String propertyName, String dataConfigPropertyName, Object value) {
 		ConfigProperty configProperty = CONFIG_PROPERTIES.get(dataConfigPropertyName);
-		Assert.state(configProperty != null, "Unsupported config property " + dataConfigPropertyName + " for "
-				+ propertyName);
+		Assert.state(configProperty != null,
+				"Unsupported config property " + dataConfigPropertyName + " for " + propertyName);
 		if (!configProperty.isNullable()) {
 			Assert.notNull(value, propertyName + " cannot be null");
 		}

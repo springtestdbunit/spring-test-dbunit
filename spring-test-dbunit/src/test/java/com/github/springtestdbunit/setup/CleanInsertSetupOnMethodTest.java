@@ -33,7 +33,8 @@ import com.github.springtestdbunit.entity.OtherEntityAssert;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/dbunit-context.xml")
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+		TransactionDbUnitTestExecutionListener.class })
 @Transactional
 public class CleanInsertSetupOnMethodTest {
 

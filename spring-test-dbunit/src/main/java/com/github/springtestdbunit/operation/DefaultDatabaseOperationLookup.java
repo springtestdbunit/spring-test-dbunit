@@ -29,6 +29,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 public class DefaultDatabaseOperationLookup implements DatabaseOperationLookup {
 
 	private static Map<DatabaseOperation, org.dbunit.operation.DatabaseOperation> OPERATION_LOOKUP;
+
 	static {
 		OPERATION_LOOKUP = new HashMap<DatabaseOperation, org.dbunit.operation.DatabaseOperation>();
 		OPERATION_LOOKUP.put(DatabaseOperation.UPDATE, org.dbunit.operation.DatabaseOperation.UPDATE);

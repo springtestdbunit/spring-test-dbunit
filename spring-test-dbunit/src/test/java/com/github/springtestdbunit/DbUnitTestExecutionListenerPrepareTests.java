@@ -78,13 +78,10 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		testContextManager.prepareTestInstance();
 		assertSame(this.databaseConnection,
 				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.CONNECTION_ATTRIBUTE));
-		assertEquals(FlatXmlDataSetLoader.class,
-				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE)
-						.getClass());
-		assertEquals(
-				DefaultDatabaseOperationLookup.class,
-				testContextManager.getTestContextAttribute(
-						DbUnitTestExecutionListener.DATABASE_OPERATION_LOOKUP_ATTRIBUTE).getClass());
+		assertEquals(FlatXmlDataSetLoader.class, testContextManager
+				.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE).getClass());
+		assertEquals(DefaultDatabaseOperationLookup.class, testContextManager
+				.getTestContextAttribute(DbUnitTestExecutionListener.DATABASE_OPERATION_LOOKUP_ATTRIBUTE).getClass());
 	}
 
 	@Test
@@ -148,13 +145,10 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		verify(this.applicationContext).getBean("customBean");
 		assertSame(this.databaseConnection,
 				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.CONNECTION_ATTRIBUTE));
-		assertEquals(CustomDataSetLoader.class,
-				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE)
-						.getClass());
-		assertEquals(
-				CustomDatabaseOperationLookup.class,
-				testContextManager.getTestContextAttribute(
-						DbUnitTestExecutionListener.DATABASE_OPERATION_LOOKUP_ATTRIBUTE).getClass());
+		assertEquals(CustomDataSetLoader.class, testContextManager
+				.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE).getClass());
+		assertEquals(CustomDatabaseOperationLookup.class, testContextManager
+				.getTestContextAttribute(DbUnitTestExecutionListener.DATABASE_OPERATION_LOOKUP_ATTRIBUTE).getClass());
 	}
 
 	@Test
@@ -176,9 +170,8 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		addBean("dbUnitDataSetLoader", new CustomDataSetLoader());
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(EmptyDbUnitConfiguration.class);
 		testContextManager.prepareTestInstance();
-		assertEquals(CustomDataSetLoader.class,
-				testContextManager.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE)
-						.getClass());
+		assertEquals(CustomDataSetLoader.class, testContextManager
+				.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE).getClass());
 	}
 
 	private static class LocalApplicationContextLoader implements ContextLoader {

@@ -71,14 +71,14 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 	private static final String DATA_SET_LOADER_BEAN_NAME = "dbUnitDataSetLoader";
 
-	protected static final String CONNECTION_ATTRIBUTE = Conventions.getQualifiedAttributeName(
-			DbUnitTestExecutionListener.class, "connection");
+	protected static final String CONNECTION_ATTRIBUTE = Conventions
+			.getQualifiedAttributeName(DbUnitTestExecutionListener.class, "connection");
 
-	protected static final String DATA_SET_LOADER_ATTRIBUTE = Conventions.getQualifiedAttributeName(
-			DbUnitTestExecutionListener.class, "dataSetLoader");
+	protected static final String DATA_SET_LOADER_ATTRIBUTE = Conventions
+			.getQualifiedAttributeName(DbUnitTestExecutionListener.class, "dataSetLoader");
 
-	protected static final String DATABASE_OPERATION_LOOKUP_ATTRIBUTE = Conventions.getQualifiedAttributeName(
-			DbUnitTestExecutionListener.class, "databseOperationLookup");
+	protected static final String DATABASE_OPERATION_LOOKUP_ATTRIBUTE = Conventions
+			.getQualifiedAttributeName(DbUnitTestExecutionListener.class, "databseOperationLookup");
 
 	private static DbUnitRunner runner = new DbUnitRunner();
 
@@ -121,9 +121,8 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		if (logger.isDebugEnabled()) {
 			logger.debug("DBUnit tests will run using databaseConnection \""
 					+ StringUtils.arrayToCommaDelimitedString(databaseConnectionBeanNames)
-					+ "\", datasets will be loaded using "
-					+ (StringUtils.hasLength(dataSetLoaderBeanName) ? "'" + dataSetLoaderBeanName + "'"
-							: dataSetLoaderClass));
+					+ "\", datasets will be loaded using " + (StringUtils.hasLength(dataSetLoaderBeanName)
+							? "'" + dataSetLoaderBeanName + "'" : dataSetLoaderClass));
 		}
 		prepareDatabaseConnection(testContext, databaseConnectionBeanNames);
 		prepareDataSetLoader(testContext, dataSetLoaderBeanName, dataSetLoaderClass);
@@ -165,8 +164,8 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			try {
 				testContext.setAttribute(DATA_SET_LOADER_ATTRIBUTE, dataSetLoaderClass.newInstance());
 			} catch (Exception ex) {
-				throw new IllegalArgumentException("Unable to create data set loader instance for "
-						+ dataSetLoaderClass, ex);
+				throw new IllegalArgumentException(
+						"Unable to create data set loader instance for " + dataSetLoaderClass, ex);
 			}
 		}
 	}
@@ -176,8 +175,8 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		try {
 			testContext.setAttribute(DATABASE_OPERATION_LOOKUP_ATTRIBUTE, databaseOperationLookupClass.newInstance());
 		} catch (Exception ex) {
-			throw new IllegalArgumentException("Unable to create database operation lookup instance for "
-					+ databaseOperationLookupClass, ex);
+			throw new IllegalArgumentException(
+					"Unable to create database operation lookup instance for " + databaseOperationLookupClass, ex);
 		}
 	}
 
@@ -204,6 +203,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		private static final Method GET_APPLICATION_CONTEXT;
 		private static final Method GET_ATTRIBUTE;
 		private static final Method SET_ATTRIBUTE;
+
 		static {
 			try {
 				GET_TEST_CLASS = TestContext.class.getMethod("getTestClass");

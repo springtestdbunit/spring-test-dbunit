@@ -31,6 +31,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 public class MicrosoftSqlDatabaseOperationLookup extends DefaultDatabaseOperationLookup {
 
 	private static Map<DatabaseOperation, org.dbunit.operation.DatabaseOperation> MSSQL_LOOKUP;
+
 	static {
 		MSSQL_LOOKUP = new HashMap<DatabaseOperation, org.dbunit.operation.DatabaseOperation>();
 		MSSQL_LOOKUP.put(DatabaseOperation.INSERT, InsertIdentityOperation.INSERT);

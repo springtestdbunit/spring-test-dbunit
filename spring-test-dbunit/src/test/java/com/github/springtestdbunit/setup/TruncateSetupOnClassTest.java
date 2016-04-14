@@ -32,7 +32,8 @@ import com.github.springtestdbunit.entity.EntityAssert;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/dbunit-context.xml")
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+		TransactionDbUnitTestExecutionListener.class })
 @Transactional
 @DatabaseSetup(type = DatabaseOperation.TRUNCATE_TABLE, value = "/META-INF/db/delete.xml")
 public class TruncateSetupOnClassTest {

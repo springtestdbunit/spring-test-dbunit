@@ -124,10 +124,8 @@ public class DatabaseDataSourceConnectionFactoryBeanTests {
 		this.factoryBean.setDataSource(dataSource);
 		DatabaseDataSourceConnection dataSourceConnection = this.factoryBean.getObject();
 		Connection connection = dataSourceConnection.getConnection();
-		assertTrue(
-				connection.toString() + " is not transaction aware",
-				connection.toString().startsWith(
-						"Transaction-aware proxy for target Connection  from DataSource [Mock for DataSource"));
+		assertTrue(connection.toString() + " is not transaction aware", connection.toString()
+				.startsWith("Transaction-aware proxy for target Connection  from DataSource [Mock for DataSource"));
 	}
 
 	@Test

@@ -44,7 +44,8 @@ import com.github.springtestdbunit.entity.EntityAssert;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/dbunit-context.xml")
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class, })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+		TransactionDbUnitTestExecutionListener.class, })
 @DbUnitConfiguration(databaseConnection = { "dataSource", "dataSource2" })
 @DatabaseSetup("/META-INF/db/insert.xml")
 @DatabaseSetup(connection = "dataSource2", value = "/META-INF/db/multi-insert.xml")

@@ -202,6 +202,9 @@ public class DbUnitRunner {
 		for (String dataSetLocation : annotation.getValue()) {
 			datasets.add(loadDataset(testContext, dataSetLocation, DataSetModifier.NONE));
 		}
+		if (datasets.isEmpty()) {
+			datasets.add(testContext.getConnections().get(annotation.getConnection()).createDataSet());
+		}
 		return datasets;
 	}
 

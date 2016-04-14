@@ -62,6 +62,6 @@ public @interface DatabaseTearDown {
 	 * @return The dataset locations
 	 * @see DbUnitConfiguration#dataSetLoader()
 	 */
-	String[] value();
+	String[] value() default {};
 
 }

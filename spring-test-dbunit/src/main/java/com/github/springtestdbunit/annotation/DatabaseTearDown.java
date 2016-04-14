@@ -58,10 +58,11 @@ public @interface DatabaseTearDown {
 	DatabaseOperation type() default DatabaseOperation.CLEAN_INSERT;
 
 	/**
-	 * Provides the locations of the datasets that will be used to reset the database.
+	 * Provides the locations of the datasets that will be used to reset the database. If no locations are specified the
+	 * full database dataset is used.
 	 * @return The dataset locations
 	 * @see DbUnitConfiguration#dataSetLoader()
 	 */
-	String[] value();
+	String[] value() default {};
 
 }

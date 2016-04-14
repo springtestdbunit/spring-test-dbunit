@@ -39,7 +39,7 @@ import org.springframework.beans.BeanWrapperImpl;
  *
  * @author Phillip Webb
  */
-public class DatabaseConfigBeanTests {
+public class DatabaseConfigBeanTest {
 
 	private static final Set<Class<?>> CLASS_COMPARE_ONLY;
 

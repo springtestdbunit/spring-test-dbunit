@@ -14,7 +14,7 @@ import com.github.springtestdbunit.testutils.ExtendedTestContextManager;
  *
  * @author Phillip Webb
  */
-public class XmlDataSetLoaderTests {
+public class XmlDataSetLoaderTest {
 
 	private TestContext testContext;
 

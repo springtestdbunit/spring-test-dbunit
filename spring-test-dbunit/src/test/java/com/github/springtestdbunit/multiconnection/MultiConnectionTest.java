@@ -50,7 +50,7 @@ import com.github.springtestdbunit.entity.EntityAssert;
 @DatabaseSetup("/META-INF/db/insert.xml")
 @DatabaseSetup(connection = "dataSource2", value = "/META-INF/db/multi-insert.xml")
 @Transactional
-public class MultiConnectionTests {
+public class MultiConnectionTest {
 
 	@Autowired
 	private EntityAssert entityAssert;

@@ -30,7 +30,7 @@ import com.github.springtestdbunit.testutils.ExtendedTestContextManager;
  *
  * @author Phillip Webb
  */
-public class FlatXmlDataSetLoaderTests {
+public class FlatXmlDataSetLoaderTest {
 
 	private TestContext testContext;
 

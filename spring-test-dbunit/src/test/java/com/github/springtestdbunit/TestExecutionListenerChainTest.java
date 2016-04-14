@@ -36,7 +36,7 @@ import org.springframework.test.context.support.AbstractTestExecutionListener;
  *
  * @author Phillip Webb
  */
-public class TestExecutionListenerChainTests {
+public class TestExecutionListenerChainTest {
 
 	private InOrder ordered;
 
@@ -61,7 +61,7 @@ public class TestExecutionListenerChainTests {
 
 			@Override
 			protected List<TestExecutionListener> createChain() {
-				return Arrays.asList(TestExecutionListenerChainTests.this.l1, TestExecutionListenerChainTests.this.l2);
+				return Arrays.asList(TestExecutionListenerChainTest.this.l1, TestExecutionListenerChainTest.this.l2);
 			};
 		};
 		this.testContext = mock(TestContext.class);
@@ -93,7 +93,7 @@ public class TestExecutionListenerChainTests {
 			fail();
 		} catch (IllegalStateException ex) {
 			assertEquals("Unable to create chain for classes [class com.github.springtestdbunit."
-					+ "TestExecutionListenerChainTests$InvalidTestListener]", ex.getMessage());
+					+ "TestExecutionListenerChainTest$InvalidTestListener]", ex.getMessage());
 		}
 	}
 

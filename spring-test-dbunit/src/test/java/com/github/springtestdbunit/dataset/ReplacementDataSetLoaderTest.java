@@ -15,7 +15,7 @@ import com.github.springtestdbunit.testutils.ExtendedTestContextManager;
  *
  * @author Stijn Van Bael
  */
-public class ReplacementDataSetLoaderTests {
+public class ReplacementDataSetLoaderTest {
 
 	private TestContext testContext;
 

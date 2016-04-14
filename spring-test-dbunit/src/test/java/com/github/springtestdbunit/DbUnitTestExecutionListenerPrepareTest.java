@@ -46,7 +46,7 @@ import com.github.springtestdbunit.testutils.ExtendedTestContextManager;
  *
  * @author Phillip Webb
  */
-public class DbUnitTestExecutionListenerPrepareTests {
+public class DbUnitTestExecutionListenerPrepareTest {
 
 	private static ThreadLocal<ApplicationContext> applicationContextThreadLocal = new ThreadLocal<ApplicationContext>();
 
@@ -61,7 +61,7 @@ public class DbUnitTestExecutionListenerPrepareTests {
 		this.applicationContext = mock(ApplicationContext.class);
 		this.databaseConnection = mock(IDatabaseConnection.class);
 		this.dataSource = mock(DataSource.class);
-		DbUnitTestExecutionListenerPrepareTests.applicationContextThreadLocal.set(this.applicationContext);
+		DbUnitTestExecutionListenerPrepareTest.applicationContextThreadLocal.set(this.applicationContext);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -159,7 +159,7 @@ public class DbUnitTestExecutionListenerPrepareTests {
 			testContextManager.prepareTestInstance();
 		} catch (IllegalArgumentException ex) {
 			assertEquals("Unable to create data set loader instance for class "
-					+ "com.github.springtestdbunit.DbUnitTestExecutionListenerPrepareTests$"
+					+ "com.github.springtestdbunit.DbUnitTestExecutionListenerPrepareTest$"
 					+ "AbstractCustomDataSetLoader", ex.getMessage());
 		}
 	}

@@ -35,7 +35,7 @@ import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
  *
  * @author Phillip Webb
  */
-public class DatabaseDataSourceConnectionFactoryBeanTests {
+public class DatabaseDataSourceConnectionFactoryBeanTest {
 
 	private DatabaseDataSourceConnectionFactoryBean factoryBean;
 

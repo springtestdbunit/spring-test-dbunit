@@ -26,7 +26,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
  *
  * @author Phillip Webb
  */
-public class TransactionDbUnitTestExecutionListenerTests {
+public class TransactionDbUnitTestExecutionListenerTest {
 
 	@Test
 	public void shouldRunTransactionsBeforeDbUnit() throws Exception {

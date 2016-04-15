@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.3" timestamp="2015-01-08T15:11:43.015">
-<file name="/Users/pwebb/projects/spring-test-dbunit/code/spring-test-dbunit/src/main/java/com/github/springtestdbunit/DbUnitTestExecutionListener.java">
-<violation beginline="115" endline="117" begincolumn="25" endcolumn="25" rule="CollapsibleIfStatements" ruleset="Basic Rules" package="com.github.springtestdbunit" class="DbUnitTestExecutionListener" method="prepareTestInstance" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#CollapsibleIfStatements" priority="3">
-These nested if statements could be combined
-</violation>
-</file>
-</pmd>

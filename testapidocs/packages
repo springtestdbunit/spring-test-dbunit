@@ -1,0 +1,10 @@
+com.github.springtestdbunit.bean
+com.github.springtestdbunit.dataset
+com.github.springtestdbunit
+com.github.springtestdbunit.entity
+com.github.springtestdbunit.expected
+com.github.springtestdbunit.multiconnection
+com.github.springtestdbunit.operation
+com.github.springtestdbunit.setup
+com.github.springtestdbunit.teardown
+com.github.springtestdbunit.testutils

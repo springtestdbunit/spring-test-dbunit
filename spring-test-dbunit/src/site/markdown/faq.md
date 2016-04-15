@@ -3,9 +3,11 @@
 ## Is there an easy way to specify the Oracle database schema name to use?
 You will need to use a custom dbUnitDatabaseConnection bean if you want to specify a schema.  Something like:
 
-    <bean id="dbUnitDatabaseConnection" class="org.springframework.test.dbunit.bean.DatabaseDataSourceConnectionFactoryBean">
-        <property name="schema" ref="myschema"/>
-    </bean>
+```
+<bean id="dbUnitDatabaseConnection" class="org.springframework.test.dbunit.bean.DatabaseDataSourceConnectionFactoryBean">
+	<property name="schema" ref="myschema"/>
+</bean>
+```
 
 This specified schema will be passed to the org.dbunit.database.DatabaseConnection [constructor](http://www.dbunit.org/apidocs/org/dbunit/database/DatabaseConnection.html#DatabaseConnection%28java.sql.Connection,%20java.lang.String%29).
 
@@ -22,6 +24,7 @@ There are a couple of strategies that you can use:
 2) Use the @DatabaseTearDown annotation on the test class and provide a reset DBUnit XML file.  Creating a reset script can often be difficult if you have foreign key constraints (see
 [this blog post](http://www.andrewspencer.net/2011/solve-foreign-key-problems-in-dbunit-test-data/)).  Any empty table element tells DBUnit to delete all data, so a reset script is generally a list of tables in the order that they can be deleted without causing foreign key constraints, e.g.:
 
-    <address/>
-    <custom/>
-
+```
+<address/>
+<custom/>
+```

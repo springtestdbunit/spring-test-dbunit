@@ -18,6 +18,7 @@ package com.github.springtestdbunit;
 
 import java.lang.reflect.Method;
 
+import com.github.springtestdbunit.assertion.DatabaseAssertion;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 
@@ -48,6 +49,13 @@ public interface DbUnitTestContext {
 	 * @return the database operation lookup
 	 */
 	DatabaseOperationLookup getDatbaseOperationLookup();
+
+	/**
+	 * Returns the {@link DatabaseAssertion} implemented by the bean with the given name.
+	 * @param databaseAssertionBeanName  name of the database assertion bean
+	 * @return  database assertion
+	 */
+	DatabaseAssertion getDatabaseAssertion(String databaseAssertionBeanName);
 
 	/**
 	 * Returns the class that is under test.

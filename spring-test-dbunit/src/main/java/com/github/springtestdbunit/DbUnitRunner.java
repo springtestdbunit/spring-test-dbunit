@@ -138,7 +138,13 @@ public class DbUnitRunner {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
 			}
-			DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
+
+			DatabaseAssertion assertion;
+			if (StringUtils.hasLength(annotation.assertionBean())) {
+				assertion = testContext.getDatabaseAssertion(annotation.assertionBean());
+			} else {
+				assertion = annotation.assertionMode().getDatabaseAssertion();
+			}
 			List<IColumnFilter> columnFilters = getColumnFilters(annotation);
 			if (StringUtils.hasLength(query)) {
 				Assert.hasLength(table, "The table name must be specified when using a SQL query");

@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 import javax.sql.DataSource;
 
+import com.github.springtestdbunit.assertion.DatabaseAssertion;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dbunit.database.IDatabaseConnection;
@@ -234,6 +235,10 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 		public DatabaseOperationLookup getDatbaseOperationLookup() {
 			return (DatabaseOperationLookup) getAttribute(DATABASE_OPERATION_LOOKUP_ATTRIBUTE);
+		}
+
+		public DatabaseAssertion getDatabaseAssertion(String databaseAssertionBeanName) {
+			return testContext.getApplicationContext().getBean(databaseAssertionBeanName, DatabaseAssertion.class);
 		}
 
 		public Class<?> getTestClass() {

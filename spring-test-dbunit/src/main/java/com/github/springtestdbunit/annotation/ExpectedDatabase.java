@@ -24,6 +24,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.github.springtestdbunit.assertion.DatabaseAssertion;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.filter.IColumnFilter;
 
@@ -65,6 +66,14 @@ public @interface ExpectedDatabase {
 	 * @return Database assertion mode to use
 	 */
 	DatabaseAssertionMode assertionMode() default DatabaseAssertionMode.DEFAULT;
+
+	/**
+	 * The name of the database assertion bean to use for comparing datasets.
+	 * This bean must implement the {@link DatabaseAssertion} interface.
+	 * If defined, this supersedes the {@link ExpectedDatabase#assertionMode()} element.
+	 * @return Database assertion bean to use
+	 */
+	String assertionBean() default "";
 
 	/**
 	 * Optional table name that can be used to limit the comparison to a specific table.

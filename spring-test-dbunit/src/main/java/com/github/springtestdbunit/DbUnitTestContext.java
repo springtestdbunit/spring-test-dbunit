@@ -18,6 +18,7 @@ package com.github.springtestdbunit;
 
 import java.lang.reflect.Method;
 
+import com.github.springtestdbunit.assertion.DatabaseAssertionLookup;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 
@@ -42,6 +43,19 @@ public interface DbUnitTestContext {
 	 * @return The dataset loader
 	 */
 	DataSetLoader getDataSetLoader();
+
+	/**
+	 * Returns the {@link DatabaseAssertionLookup} that should be used.
+	 * @return The database assertion factory
+	 */
+	DatabaseAssertionLookup getDatabaseAssertionLookup();
+
+	/**
+	 * Returns the {@link DatabaseAssertionLookup} registered with given bean name.
+	 * @param beanName bean name of the {@link DatabaseAssertionLookup}
+	 * @return The database assertion factory
+	 */
+	DatabaseAssertionLookup getDatabaseAssertionLookup(String beanName);
 
 	/**
 	 * Returns the {@link DatabaseOperationLookup} that should be used to lookup database operations.

@@ -23,6 +23,9 @@ import static org.mockito.Mockito.*;
 
 import javax.sql.DataSource;
 
+import com.github.springtestdbunit.assertion.DatabaseAssertion;
+import com.github.springtestdbunit.assertion.DatabaseAssertionLookup;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
@@ -100,6 +103,7 @@ public class DbUnitTestExecutionListenerPrepareTest {
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(testClass);
 		testContextManager.prepareTestInstance();
 		verify(this.applicationContext).containsBean("dbUnitDataSetLoader");
+		verify(this.applicationContext).containsBean("dbUnitDatabaseAssertionLookup");
 		verify(this.applicationContext).containsBean("dbUnitDatabaseConnection");
 		verify(this.applicationContext).containsBean("dataSource");
 		verify(this.applicationContext).getBean("dataSource");
@@ -136,6 +140,19 @@ public class DbUnitTestExecutionListenerPrepareTest {
 		} catch (IllegalArgumentException ex) {
 			assertEquals("Object of class [java.lang.Integer] must be an instance of interface "
 					+ "org.dbunit.database.IDatabaseConnection", ex.getMessage());
+		}
+	}
+
+	@Test
+	public void shouldFailIfDatabaseAssertionFactoryWrongTypeIsFound() throws Exception {
+		addBean("dataSource", this.dataSource);
+		addBean("dbUnitDatabaseAssertionFactory", new Integer(0));
+		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(NoDbUnitConfiguration.class);
+		try {
+			testContextManager.prepareTestInstance();
+		} catch (IllegalArgumentException ex) {
+			assertEquals("Object of class [java.lang.Integer] must be an instance of interface "
+					+ "com.github.springtestdbunit.assertion.DatabaseAssertionFactory", ex.getMessage());
 		}
 	}
 
@@ -196,6 +213,12 @@ public class DbUnitTestExecutionListenerPrepareTest {
 	public static class CustomDataSetLoader extends AbstractCustomDataSetLoader {
 	}
 
+	public static class CustomDatabaseAssertionLookup implements DatabaseAssertionLookup {
+		public DatabaseAssertion getDatabaseAssertion(DatabaseAssertionMode mode) {
+			return null;
+		}
+	}
+
 	public static class CustomDatabaseOperationLookup implements DatabaseOperationLookup {
 		public org.dbunit.operation.DatabaseOperation get(DatabaseOperation operation) {
 			return null;
@@ -217,7 +240,10 @@ public class DbUnitTestExecutionListenerPrepareTest {
 
 	@ContextConfiguration(loader = LocalApplicationContextLoader.class)
 	@TestExecutionListeners(DbUnitTestExecutionListener.class)
-	@DbUnitConfiguration(databaseConnection = "customBean", dataSetLoader = CustomDataSetLoader.class, databaseOperationLookup = CustomDatabaseOperationLookup.class)
+	@DbUnitConfiguration(databaseConnection = "customBean",
+			dataSetLoader = CustomDataSetLoader.class,
+			databaseAssertionLookup = CustomDatabaseAssertionLookup.class,
+			databaseOperationLookup = CustomDatabaseOperationLookup.class)
 	private static class CustomConfiguration {
 
 	}

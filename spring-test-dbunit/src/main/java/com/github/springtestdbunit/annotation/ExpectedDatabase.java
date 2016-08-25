@@ -24,6 +24,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.github.springtestdbunit.assertion.DatabaseAssertionLookup;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.filter.IColumnFilter;
 
@@ -65,6 +66,12 @@ public @interface ExpectedDatabase {
 	 * @return Database assertion mode to use
 	 */
 	DatabaseAssertionMode assertionMode() default DatabaseAssertionMode.DEFAULT;
+
+	/**
+	 * {@link DatabaseAssertionLookup} bean name to use.
+	 * @return Bean name of the database assertion factory.
+	 */
+	String assertionLookup() default "";
 
 	/**
 	 * Optional table name that can be used to limit the comparison to a specific table.

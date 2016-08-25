@@ -94,7 +94,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<compilerVersion>${java.version}</compilerVersion>
+					<target>${java.version}</target>
 					<source>${java.version}</source>
 					<testSource>1.8</testSource>
 					<testTarget>1.8</testTarget>

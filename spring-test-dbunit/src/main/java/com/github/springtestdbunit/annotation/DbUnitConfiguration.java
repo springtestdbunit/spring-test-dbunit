@@ -25,10 +25,12 @@ import java.lang.annotation.Target;
 
 import javax.sql.DataSource;
 
+import com.github.springtestdbunit.assertion.DefaultDatabaseAssertionLookup;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.assertion.DatabaseAssertionLookup;
 import com.github.springtestdbunit.dataset.DataSetLoader;
 import com.github.springtestdbunit.dataset.FlatXmlDataSetLoader;
 import com.github.springtestdbunit.operation.DatabaseOperationLookup;
@@ -67,6 +69,20 @@ public @interface DbUnitConfiguration {
 	 * @return the data set loader bean name
 	 */
 	String dataSetLoaderBean() default "";
+
+	/**
+	 * Returns the class will be used for database assertion factory. The specified class must implement
+	 * {@link DatabaseAssertionLookup} and must have a default constructor.
+	 * @return the database assertion factory class
+	 */
+	Class<? extends DatabaseAssertionLookup> databaseAssertionLookup() default DefaultDatabaseAssertionLookup.class;
+
+	/**
+	 * Returns the name of the bean that will be used for database assertion factory. The specified bean must
+	 * implement {@link DatabaseAssertionLookup}.
+	 * @return the data set loader bean name
+	 */
+	String databaseAssertionLookupBean() default "";
 
 	/**
 	 * Returns the class that will be used to lookup DBUnit databse operations. The specific class must implement

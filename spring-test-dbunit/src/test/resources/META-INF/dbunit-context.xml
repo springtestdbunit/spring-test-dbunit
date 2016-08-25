@@ -16,6 +16,8 @@
 
 	<bean id="otherEntityAssert" class="com.github.springtestdbunit.entity.OtherEntityAssert"/>
 
+	<bean id="assertAllDatabaseAssertionLookup" class="com.github.springtestdbunit.expected.AssertAllDatabaseAssertionLookup"/>
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />

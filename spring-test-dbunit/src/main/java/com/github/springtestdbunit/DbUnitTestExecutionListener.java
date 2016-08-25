@@ -21,6 +21,8 @@ import java.util.Arrays;
 
 import javax.sql.DataSource;
 
+import com.github.springtestdbunit.assertion.DatabaseAssertionLookup;
+import com.github.springtestdbunit.assertion.DefaultDatabaseAssertionLookup;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dbunit.database.IDatabaseConnection;
@@ -71,11 +73,16 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 	private static final String DATA_SET_LOADER_BEAN_NAME = "dbUnitDataSetLoader";
 
+	private static final String DATABASE_ASSERTION_LOOKUP_BEAN_NAME = "dbUnitDatabaseAssertionLookup";
+
 	protected static final String CONNECTION_ATTRIBUTE = Conventions
 			.getQualifiedAttributeName(DbUnitTestExecutionListener.class, "connection");
 
 	protected static final String DATA_SET_LOADER_ATTRIBUTE = Conventions
 			.getQualifiedAttributeName(DbUnitTestExecutionListener.class, "dataSetLoader");
+
+	protected static final String DATABASE_ASSERTION_LOOKUP_ATTRIBUTE = Conventions
+			.getQualifiedAttributeName(DbUnitTestExecutionListener.class, "databaseAssertionLookup");
 
 	protected static final String DATABASE_OPERATION_LOOKUP_ATTRIBUTE = Conventions
 			.getQualifiedAttributeName(DbUnitTestExecutionListener.class, "databseOperationLookup");
@@ -94,6 +101,8 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		String[] databaseConnectionBeanNames = null;
 		String dataSetLoaderBeanName = null;
 		Class<? extends DataSetLoader> dataSetLoaderClass = FlatXmlDataSetLoader.class;
+		String databaseAssertionLookupBeanName = null;
+		Class<? extends DatabaseAssertionLookup> databaseAssertionLookupClass = DefaultDatabaseAssertionLookup.class;
 		Class<? extends DatabaseOperationLookup> databaseOperationLookupClass = DefaultDatabaseOperationLookup.class;
 
 		DbUnitConfiguration configuration = testContext.getTestClass().getAnnotation(DbUnitConfiguration.class);
@@ -104,6 +113,8 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			databaseConnectionBeanNames = configuration.databaseConnection();
 			dataSetLoaderClass = configuration.dataSetLoader();
 			dataSetLoaderBeanName = configuration.dataSetLoaderBean();
+			databaseAssertionLookupClass = configuration.databaseAssertionLookup();
+			databaseAssertionLookupBeanName = configuration.databaseAssertionLookupBean();
 			databaseOperationLookupClass = configuration.databaseOperationLookup();
 		}
 
@@ -118,6 +129,12 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			}
 		}
 
+		if (!StringUtils.hasLength(databaseAssertionLookupBeanName)) {
+			if (testContext.getApplicationContext().containsBean(DATABASE_ASSERTION_LOOKUP_BEAN_NAME)) {
+				dataSetLoaderBeanName = DATABASE_ASSERTION_LOOKUP_BEAN_NAME;
+			}
+		}
+
 		if (logger.isDebugEnabled()) {
 			logger.debug("DBUnit tests will run using databaseConnection \""
 					+ StringUtils.arrayToCommaDelimitedString(databaseConnectionBeanNames)
@@ -126,6 +143,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		}
 		prepareDatabaseConnection(testContext, databaseConnectionBeanNames);
 		prepareDataSetLoader(testContext, dataSetLoaderBeanName, dataSetLoaderClass);
+		prepareDatabaseAssertionsFactory(testContext, databaseAssertionLookupBeanName, databaseAssertionLookupClass);
 		prepareDatabaseOperationLookup(testContext, databaseOperationLookupClass);
 	}
 
@@ -166,6 +184,21 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			} catch (Exception ex) {
 				throw new IllegalArgumentException(
 						"Unable to create data set loader instance for " + dataSetLoaderClass, ex);
+			}
+		}
+	}
+
+	private void prepareDatabaseAssertionsFactory(DbUnitTestContextAdapter testContext, String beanName,
+												  Class<? extends DatabaseAssertionLookup> databaseAssertionFactoryClass) {
+		if (StringUtils.hasLength(beanName)) {
+			testContext.setAttribute(DATABASE_ASSERTION_LOOKUP_ATTRIBUTE,
+					testContext.getApplicationContext().getBean(beanName, DatabaseAssertionLookup.class));
+		} else {
+			try {
+				testContext.setAttribute(DATABASE_ASSERTION_LOOKUP_ATTRIBUTE, databaseAssertionFactoryClass.newInstance());
+			} catch (Exception ex) {
+				throw new IllegalArgumentException(
+						"Unable to create database assertion factory instance for " + databaseAssertionFactoryClass, ex);
 			}
 		}
 	}
@@ -230,6 +263,14 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 
 		public DataSetLoader getDataSetLoader() {
 			return (DataSetLoader) getAttribute(DATA_SET_LOADER_ATTRIBUTE);
+		}
+
+		public DatabaseAssertionLookup getDatabaseAssertionLookup() {
+			return (DatabaseAssertionLookup) getAttribute(DATABASE_ASSERTION_LOOKUP_ATTRIBUTE);
+		}
+
+		public DatabaseAssertionLookup getDatabaseAssertionLookup(String beanName) {
+			return getApplicationContext().getBean(beanName, DatabaseAssertionLookup.class);
 		}
 
 		public DatabaseOperationLookup getDatbaseOperationLookup() {

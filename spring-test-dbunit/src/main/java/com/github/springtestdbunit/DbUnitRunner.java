@@ -27,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.github.springtestdbunit.assertion.DatabaseAssertionLookup;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dbunit.DatabaseUnitException;
@@ -138,7 +139,13 @@ public class DbUnitRunner {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
 			}
-			DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
+			DatabaseAssertionLookup databaseAssertionLookup;
+			if (StringUtils.hasLength(annotation.assertionLookup())) {
+				databaseAssertionLookup = testContext.getDatabaseAssertionLookup(annotation.assertionLookup());
+			} else {
+				databaseAssertionLookup = testContext.getDatabaseAssertionLookup();
+			}
+			DatabaseAssertion assertion = databaseAssertionLookup.getDatabaseAssertion(annotation.assertionMode());
 			List<IColumnFilter> columnFilters = getColumnFilters(annotation);
 			if (StringUtils.hasLength(query)) {
 				Assert.hasLength(table, "The table name must be specified when using a SQL query");

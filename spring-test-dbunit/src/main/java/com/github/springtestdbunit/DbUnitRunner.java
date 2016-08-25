@@ -132,12 +132,13 @@ public class DbUnitRunner {
 					throws Exception, DataSetException, SQLException, DatabaseUnitException {
 		String query = annotation.query();
 		String table = annotation.table();
-		IDataSet expectedDataSet = loadDataset(testContext, annotation.value(), modifier);
+		List<IDataSet> expectedDataSets = loadDatasets(testContext, annotation.value(), modifier);
 		IDatabaseConnection connection = connections.get(annotation.connection());
-		if (expectedDataSet != null) {
+		if (expectedDataSets.size() > 0) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
 			}
+			IDataSet expectedDataSet = new CompositeDataSet(expectedDataSets.toArray(new IDataSet[expectedDataSets.size()]));
 			DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
 			List<IColumnFilter> columnFilters = getColumnFilters(annotation);
 			if (StringUtils.hasLength(query)) {
@@ -154,6 +155,15 @@ public class DbUnitRunner {
 				assertion.assertEquals(expectedDataSet, actualDataSet, columnFilters);
 			}
 		}
+	}
+
+	private List<IDataSet> loadDatasets(DbUnitTestContext testContext, String[] dataSetLocations, DataSetModifier modifier) throws Exception {
+		List<IDataSet> dataSets = new ArrayList<IDataSet>();
+		for (String dataSetLocation : dataSetLocations) {
+			IDataSet dataSet = loadDataset(testContext, dataSetLocation, modifier);
+			dataSets.add(dataSet);
+		}
+		return dataSets;
 	}
 
 	private DataSetModifier getModifier(DbUnitTestContext testContext, Annotations<ExpectedDatabase> annotations) {

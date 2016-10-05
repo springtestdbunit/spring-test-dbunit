@@ -26,6 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import org.dbunit.database.IDatabaseConnection;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.Conventions;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
@@ -96,7 +97,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 		Class<? extends DataSetLoader> dataSetLoaderClass = FlatXmlDataSetLoader.class;
 		Class<? extends DatabaseOperationLookup> databaseOperationLookupClass = DefaultDatabaseOperationLookup.class;
 
-		DbUnitConfiguration configuration = testContext.getTestClass().getAnnotation(DbUnitConfiguration.class);
+		DbUnitConfiguration configuration = AnnotationUtils.getAnnotation(testContext.getTestClass(), DbUnitConfiguration.class);
 		if (configuration != null) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Using @DbUnitConfiguration configuration");

@@ -21,6 +21,11 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 import javax.sql.DataSource;
 
 import org.dbunit.database.DatabaseDataSourceConnection;
@@ -177,6 +182,16 @@ public class DbUnitTestExecutionListenerPrepareTest {
 				.getTestContextAttribute(DbUnitTestExecutionListener.DATA_SET_LOADER_ATTRIBUTE).getClass());
 	}
 
+	@Test
+	public void shouldSupportMetaAnnotations() throws Exception {
+		addBean("customBean", this.databaseConnection);
+		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(MetaAnnotatedConfiguration.class);
+		testContextManager.prepareTestInstance();
+		DatabaseConnections databaseConnections = (DatabaseConnections) testContextManager
+				.getTestContextAttribute(DbUnitTestExecutionListener.CONNECTION_ATTRIBUTE);
+		assertSame(this.databaseConnection, databaseConnections.get("customBean"));
+	}
+
 	private static class LocalApplicationContextLoader implements ContextLoader {
 		public String[] processLocations(Class<?> clazz, String... locations) {
 			return new String[] {};
@@ -226,6 +241,20 @@ public class DbUnitTestExecutionListenerPrepareTest {
 	@TestExecutionListeners(DbUnitTestExecutionListener.class)
 	@DbUnitConfiguration(dataSetLoader = AbstractCustomDataSetLoader.class)
 	private static class NonCreatableDataSetLoader {
+
+	}
+
+	@ContextConfiguration(loader = LocalApplicationContextLoader.class)
+	@TestExecutionListeners(DbUnitTestExecutionListener.class)
+	@MetaAnnotation
+	private static class MetaAnnotatedConfiguration {
+
+	}
+
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target(ElementType.TYPE)
+	@DbUnitConfiguration(databaseConnection = "customBean")
+	private @interface MetaAnnotation {
 
 	}
 

@@ -54,11 +54,11 @@ public @interface ExpectedDatabase {
 	String connection() default "";
 
 	/**
-	 * Provides the location of the dataset that will be used to test the database.
+	 * Provides the locations of the datasets that will be used to test the database.
 	 * @return The dataset locations
 	 * @see DbUnitConfiguration#dataSetLoader()
 	 */
-	String value() default "";
+	String[] value() default {};
 
 	/**
 	 * Database assertion mode to use. Default is {@link DatabaseAssertionMode#DEFAULT}.

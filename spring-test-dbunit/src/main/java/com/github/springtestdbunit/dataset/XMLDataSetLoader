@@ -1,0 +1,26 @@
+package com.github.springtestdbunit.dataset;
+
+import com.github.springtestdbunit.dataset.AbstractDataSetLoader;
+import java.io.InputStream;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.XmlDataSet;
+import org.springframework.core.io.Resource;
+
+/**
+ * A {@link DataSetLoader data set loader} that can be used to load {@link XmlDataSet xml  datasets}
+ *
+ * @author Jorge Davison
+ */
+public class XMLDataSetLoader extends AbstractDataSetLoader {
+
+  @Override
+  protected IDataSet createDataSet(Resource resource) throws Exception {
+    InputStream inputStream = resource.getInputStream();
+    try {
+      return new XmlDataSet(inputStream);
+    } finally {
+      inputStream.close();
+    }
+  }
+
+}

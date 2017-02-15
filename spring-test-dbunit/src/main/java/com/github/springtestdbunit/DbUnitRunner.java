@@ -17,7 +17,7 @@
 package com.github.springtestdbunit;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -280,15 +280,23 @@ public class DbUnitRunner {
 		private final List<T> allAnnotations;
 
 		public Annotations(DbUnitTestContext context, Class<? extends Annotation> container, Class<T> annotation) {
-			this.classAnnotations = getAnnotations(context.getTestClass(), container, annotation);
-			this.methodAnnotations = getAnnotations(context.getTestMethod(), container, annotation);
+			this.classAnnotations = getClassAnnotations(context.getTestClass(), container, annotation);
+			this.methodAnnotations = getMethodAnnotations(context.getTestMethod(), container, annotation);
 			List<T> allAnnotations = new ArrayList<T>(this.classAnnotations.size() + this.methodAnnotations.size());
 			allAnnotations.addAll(this.classAnnotations);
 			allAnnotations.addAll(this.methodAnnotations);
 			this.allAnnotations = Collections.unmodifiableList(allAnnotations);
 		}
 
-		private List<T> getAnnotations(AnnotatedElement element, Class<? extends Annotation> container,
+		private List<T> getClassAnnotations(Class<?> element, Class<? extends Annotation> container,
+				Class<T> annotation) {
+			List<T> annotations = new ArrayList<T>();
+			addAnnotationToList(annotations, AnnotationUtils.findAnnotation(element, annotation));
+			addRepeatableAnnotationsToList(annotations, AnnotationUtils.findAnnotation(element, container));
+			return Collections.unmodifiableList(annotations);
+		}
+
+		private List<T> getMethodAnnotations(Method element, Class<? extends Annotation> container,
 				Class<T> annotation) {
 			List<T> annotations = new ArrayList<T>();
 			addAnnotationToList(annotations, AnnotationUtils.findAnnotation(element, annotation));

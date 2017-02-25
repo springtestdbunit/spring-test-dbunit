@@ -127,7 +127,7 @@ public class DatabaseConfigBean {
 	 * @see DatabaseConfig#PROPERTY_TABLE_TYPE
 	 */
 	public String[] getTableType() {
-		return (String[]) getProperty("tableTable", DatabaseConfig.PROPERTY_TABLE_TYPE);
+		return (String[]) getProperty("tableType", DatabaseConfig.PROPERTY_TABLE_TYPE);
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class DatabaseConfigBean {
 	 * @see DatabaseConfig#PROPERTY_TABLE_TYPE
 	 */
 	public void setTableType(String[] tableTable) {
-		setProperty("tableTable", DatabaseConfig.PROPERTY_TABLE_TYPE, tableTable);
+		setProperty("tableType", DatabaseConfig.PROPERTY_TABLE_TYPE, tableTable);
 	}
 
 	/**

@@ -235,4 +235,11 @@ In some situations you may need to use custom DBUnit DatabaseOperation classes. 
 interface can be used to create your own lookup strategy if you need support custom operations. A
 `MicrosoftSqlDatabaseOperationLookup` class is provided to support the aforementioned MSSQL operations.
 
-See above for details of how to configure a test class to use the custom lookup.
+See below of how to use the custom lookup in test class:
+
+```
+@SpringBootTest
+@DbUnitConfiguration(databaseOperationLookup = MicrosoftSqlDatabaseOperationLookup.class)
+public class MyTest {}
+```
+

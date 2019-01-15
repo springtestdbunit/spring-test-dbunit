@@ -1,22 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>9</version>
-		<relativePath />
+		<groupId>com.github.springtestdbunit</groupId>
+		<artifactId>spring-test-dbunit-parent</artifactId>
+		<version>1.3.1-SNAPSHOT</version>
 	</parent>
+
 	<groupId>com.github.springtestdbunit</groupId>
 	<artifactId>spring-test-dbunit</artifactId>
-	<version>1.3.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
+
 	<name>Spring Test DBUnit</name>
 	<description>Integration between the Spring testing framework and DBUnit</description>
 	<url>https://springtestdbunit.github.com/spring-test-dbunit</url>
-	<issueManagement>
-		<url>https://github.com/springtestdbunit/spring-test-dbunit/issues</url>
-		<system>GitHub Issues</system>
-	</issueManagement>
+
 	<licenses>
 		<license>
 			<name>Apache 2</name>
@@ -24,20 +25,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	<scm>
-		<url>https://github.com/springtestdbunit/spring-test-dbunit</url>
-		<connection>scm:git:git://github.com/springtestdbunit/spring-test-dbunit.git</connection>
-		<developerConnection>scm:git:git@github.com:springtestdbunit/spring-test-dbunit.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
-	<prerequisites>
-		<maven>3.2.3</maven>
-	</prerequisites>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.5</java.version>
-		<spring.version>4.2.5.RELEASE</spring.version>
-	</properties>
+
 	<developers>
 		<developer>
 			<name>Phillip Webb</name>
@@ -48,65 +36,43 @@
 			<url>https://github.com/mzagar</url>
 		</developer>
 	</developers>
+
+	<scm>
+		<url>https://github.com/springtestdbunit/spring-test-dbunit</url>
+		<connection>scm:git:git://github.com/springtestdbunit/spring-test-dbunit.git</connection>
+		<developerConnection>scm:git:git@github.com:springtestdbunit/spring-test-dbunit.git</developerConnection>
+	</scm>
+
+	<issueManagement>
+		<url>https://github.com/springtestdbunit/spring-test-dbunit/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<id>copy-readme</id>
-						<phase>pre-site</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<copy file="../README.md" tofile="src/site/markdown/index.md" overwrite="true" />
-							</tasks>
-						</configuration>
-					</execution>
-					<execution>
-						<id>fix-page-titles</id>
-						<phase>site</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<replace file="${project.build.directory}/site/index.html" token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Spring-Test DBUnit&lt;/title&gt;" />
-								<replace file="${project.build.directory}/site/faq.html" token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Frequently Asked Questions&lt;/title&gt;" />
-								<replace file="${project.build.directory}/site/sample.html" token="&lt;title&gt;&lt;/title&gt;" value="&lt;title&gt;Quick Start Example&lt;/title&gt;" />
-							</tasks>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.5</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
 				<configuration>
 					<compilerVersion>${java.version}</compilerVersion>
 					<source>${java.version}</source>
-					<testSource>1.8</testSource>
-					<testTarget>1.8</testTarget>
+					<testSource>${java.version}</testSource>
+					<testTarget>${java.version}</testTarget>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8.2</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.9</version>
 				<configuration>
 					<additionalConfig>
 						<file>
@@ -122,22 +88,12 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
-				<version>2.5.2</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.5</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.scm</groupId>
-						<artifactId>maven-scm-provider-gitexe</artifactId>
-						<version>1.9.1</version>
-					</dependency>
-				</dependencies>
 				<executions>
 					<execution>
 						<id>default</id>
@@ -152,18 +108,9 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.5</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.doxia</groupId>
-						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.7</version>
-					</dependency>
-				</dependencies>
 				<configuration>
 					<reportPlugins>
 						<plugin>
@@ -205,11 +152,9 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.17</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.3</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -221,7 +166,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.3</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -234,7 +178,6 @@
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
-				<version>0.12</version>
 				<configuration>
 					<message>Creating site for ${project.version}</message>
 				</configuration>
@@ -254,44 +197,31 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.dbunit</groupId>
 			<artifactId>dbunit</artifactId>
-			<version>2.5.2</version>
-			<type>jar</type>
 			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>${spring.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>${spring.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -299,44 +229,36 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.6.Final</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.3.3</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>1.9.5</version>
-			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.21</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.21</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>${spring.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -105,7 +105,7 @@ configuration. See the section on below.
 
 Transactions
 ============
-If you have configured DBUnit tests to run using the are `DbUnitTestExecutionListener` and are also using the
+If you have configured DBUnit tests to run using the `DbUnitTestExecutionListener` and you are also using the
 `TransactionalTestExecutionListener` you may experience problems with transactions not being started before your data
 is setup, or being rolled back before expected results can be verified. In order to support `@Transactional` tests with
 DBUnit you should use the `TransactionDbUnitTestExecutionListener` class.

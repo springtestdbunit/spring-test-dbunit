@@ -30,9 +30,6 @@
 		<developerConnection>scm:git:git@github.com:springtestdbunit/spring-test-dbunit.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
-	<prerequisites>
-		<maven>3.2.3</maven>
-	</prerequisites>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.5</java.version>

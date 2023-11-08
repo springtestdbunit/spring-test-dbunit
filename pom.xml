@@ -10,7 +10,4 @@
 		<module>spring-test-dbunit</module>
 		<module>spring-test-dbunit-sample</module>
 	</modules>
-	<prerequisites>
-		<maven>3.2.3</maven>
-	</prerequisites>
 </project>

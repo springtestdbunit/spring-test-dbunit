@@ -4,7 +4,7 @@
 	version="2.0">
 	<persistence-unit name="springtestdbunit"
 		transaction-type="RESOURCE_LOCAL">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>com.github.springtestdbunit.entity.SampleEntity</class>
 		<class>com.github.springtestdbunit.entity.OtherSampleEntity</class>
 		<properties>

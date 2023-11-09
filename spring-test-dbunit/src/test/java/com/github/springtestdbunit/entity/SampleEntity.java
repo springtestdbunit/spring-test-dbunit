@@ -16,10 +16,7 @@
 
 package com.github.springtestdbunit.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import org.springframework.core.style.ToStringCreator;
 
@@ -32,10 +29,11 @@ import org.springframework.core.style.ToStringCreator;
 public class SampleEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 
-	@Column
+	@Column(name = "value")
 	private String value;
 
 	public String getValue() {

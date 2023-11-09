@@ -1,9 +1,6 @@
 package com.github.springtestdbunit.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author Oleksii Lomako
@@ -12,10 +9,11 @@ import javax.persistence.Id;
 public class OtherSampleEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
-	@Column
+	@Column(name = "value")
 	private String value;
 
 	public String getValue() {

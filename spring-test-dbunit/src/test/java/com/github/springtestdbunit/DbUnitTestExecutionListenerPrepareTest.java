@@ -18,7 +18,6 @@ package com.github.springtestdbunit;
 
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import javax.sql.DataSource;
@@ -179,7 +178,7 @@ public class DbUnitTestExecutionListenerPrepareTest {
 
 	private static class LocalApplicationContextLoader implements ContextLoader {
 		public String[] processLocations(Class<?> clazz, String... locations) {
-			return new String[] {};
+			return new String[] {"mock"};
 		}
 
 		public ApplicationContext loadContext(String... locations) throws Exception {

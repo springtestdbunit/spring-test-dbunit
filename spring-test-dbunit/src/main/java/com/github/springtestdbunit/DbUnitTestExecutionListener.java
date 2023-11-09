@@ -48,8 +48,8 @@ import com.github.springtestdbunit.operation.DefaultDatabaseOperationLookup;
  * <code>TestExecutionListener</code> which provides support for {@link DatabaseSetup &#064;DatabaseSetup},
  * {@link DatabaseTearDown &#064;DatabaseTearDown} and {@link ExpectedDatabase &#064;ExpectedDatabase} annotations.
  * <p>
- * A bean named "<tt>dbUnitDatabaseConnection</tt>" or "<tt>dataSource</tt>" is expected in the
- * <tt>ApplicationContext</tt> associated with the test. This bean can contain either a {@link IDatabaseConnection} or a
+ * A bean named "<code>dbUnitDatabaseConnection</code>" or "<code>dataSource</code>" is expected in the
+ * <code>ApplicationContext</code> associated with the test. This bean can contain either a {@link IDatabaseConnection} or a
  * {@link DataSource} . A custom bean name can also be specified using the
  * {@link DbUnitConfiguration#databaseConnection() &#064;DbUnitConfiguration} annotation.
  * <p>

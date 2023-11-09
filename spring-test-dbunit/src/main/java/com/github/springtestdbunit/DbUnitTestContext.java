@@ -68,8 +68,8 @@ public interface DbUnitTestContext {
 	Method getTestMethod();
 
 	/**
-	 * Returns any exception that was thrown during the test or <tt>null</tt> if no test exception occurred.
-	 * @return the test exception or <tt>null</tt>
+	 * Returns any exception that was thrown during the test or <code>null</code> if no test exception occurred.
+	 * @return the test exception or <code>null</code>
 	 */
 	Throwable getTestException();
 

@@ -30,11 +30,11 @@ import org.dbunit.dataset.IDataSet;
 public interface DataSetLoader {
 
 	/**
-	 * Load and return {@link IDataSet dataset} from the specified. If the dataset cannot be found <tt>null</tt> may be
+	 * Load and return {@link IDataSet dataset} from the specified. If the dataset cannot be found <code>null</code> may be
 	 * returned.
 	 * @param testClass The class under test
 	 * @param location The location to load
-	 * @return a {@link IDataSet dataset} or <tt>null</tt>
+	 * @return a {@link IDataSet dataset} or <code>null</code>
 	 * @throws Exception If the {@link IDataSet dataset} cannot be loaded
 	 */
 	public IDataSet loadDataSet(Class<?> testClass, String location) throws Exception;

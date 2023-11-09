@@ -35,12 +35,12 @@ import org.springframework.core.io.ResourceLoader;
 public abstract class AbstractDataSetLoader implements DataSetLoader {
 
 	/**
-	 * Loads a {@link IDataSet dataset} from {@link Resource}s obtained from the specified <tt>location</tt>. Each
-	 * <tt>location</tt> can be mapped to a number of potential {@link #getResourceLocations resources}, the first
+	 * Loads a {@link IDataSet dataset} from {@link Resource}s obtained from the specified <code>location</code>. Each
+	 * <code>location</code> can be mapped to a number of potential {@link #getResourceLocations resources}, the first
 	 * resource that {@link Resource#exists() exists} will be used. {@link Resource}s are loaded using the
 	 * {@link ResourceLoader} returned from {@link #getResourceLoader}.
 	 * <p>
-	 * If no resource can be found then <tt>null</tt> will be returned.
+	 * If no resource can be found then <code>null</code> will be returned.
 	 *
 	 * @see #createDataSet(Resource)
 	 * @see com.github.springtestdbunit.dataset.DataSetLoader#loadDataSet(Class, String) java.lang.String)

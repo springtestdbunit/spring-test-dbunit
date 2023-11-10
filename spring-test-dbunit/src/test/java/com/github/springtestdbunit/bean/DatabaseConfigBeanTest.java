@@ -44,11 +44,11 @@ public class DatabaseConfigBeanTest {
 	private static final Set<Class<?>> CLASS_COMPARE_ONLY;
 
 	static {
-		CLASS_COMPARE_ONLY = new HashSet<Class<?>>();
+		CLASS_COMPARE_ONLY = new HashSet<>();
 		CLASS_COMPARE_ONLY.add(DefaultMetadataHandler.class);
 	}
 
-	private DatabaseConfig defaultConfig = new DatabaseConfig();
+	private final DatabaseConfig defaultConfig = new DatabaseConfig();
 
 	private DatabaseConfigBean configBean;
 
@@ -61,12 +61,12 @@ public class DatabaseConfigBeanTest {
 	}
 
 	@Test
-	public void shouldAllowSetOfNonMandatoryFieldToNull() throws Exception {
+	public void shouldAllowSetOfNonMandatoryFieldToNull() {
 		this.configBean.setPrimaryKeyFilter(null);
 	}
 
 	@Test
-	public void shouldFailWhenSetingMandatoryFieldToNull() throws Exception {
+	public void shouldFailWhenSettingMandatoryFieldToNull() {
 		try {
 			this.configBean.setDatatypeFactory(null);
 			fail();
@@ -76,7 +76,7 @@ public class DatabaseConfigBeanTest {
 	}
 
 	@Test
-	public void testStatementFactory() throws Exception {
+	public void testStatementFactory() {
 		doTest("statementFactory", DatabaseConfig.PROPERTY_STATEMENT_FACTORY, mock(IStatementFactory.class));
 	}
 
@@ -108,12 +108,12 @@ public class DatabaseConfigBeanTest {
 
 	@Test
 	public void testBatchSize() {
-		doTest("batchSize", DatabaseConfig.PROPERTY_BATCH_SIZE, new Integer(123));
+		doTest("batchSize", DatabaseConfig.PROPERTY_BATCH_SIZE, 123);
 	}
 
 	@Test
 	public void testFetchSize() {
-		doTest("fetchSize", DatabaseConfig.PROPERTY_FETCH_SIZE, new Integer(123));
+		doTest("fetchSize", DatabaseConfig.PROPERTY_FETCH_SIZE, 123);
 	}
 
 	@Test
@@ -157,7 +157,7 @@ public class DatabaseConfigBeanTest {
 			assertEquals("Initial value is not as expected", initialValue, expectedInitialValue);
 		}
 
-		assertFalse("Unable to test if new value is same as intial value", newValue.equals(initialValue));
+		assertNotEquals("Unable to test if new value is same as initial value", newValue, initialValue);
 		this.configBeanWrapper.setPropertyValue(propertyName, newValue);
 		DatabaseConfig appliedConfig = new DatabaseConfig();
 		this.configBean.apply(appliedConfig);

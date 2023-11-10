@@ -38,13 +38,13 @@ import org.springframework.test.context.TestExecutionListener;
  */
 public abstract class TestExecutionListenerChain implements TestExecutionListener {
 
-	private List<TestExecutionListener> chain;
+	private final List<TestExecutionListener> chain;
 
-	private List<TestExecutionListener> reverseChain;
+	private final List<TestExecutionListener> reverseChain;
 
 	public TestExecutionListenerChain() {
 		this.chain = createChain();
-		this.reverseChain = new ArrayList<TestExecutionListener>(this.chain);
+		this.reverseChain = new ArrayList<>(this.chain);
 		Collections.reverse(this.reverseChain);
 	}
 
@@ -55,16 +55,16 @@ public abstract class TestExecutionListenerChain implements TestExecutionListene
 	protected abstract Class<?>[] getChain();
 
 	/**
-	 * Factory method used to create the chain. By default this method will construct the chain using the classes from
+	 * Factory method used to create the chain. By default, this method will construct the chain using the classes from
 	 * {@link #getChain()}.
 	 * @return The chain
 	 */
 	protected List<TestExecutionListener> createChain() {
 		Class<?>[] chainClasses = getChain();
 		try {
-			List<TestExecutionListener> chain = new ArrayList<TestExecutionListener>(chainClasses.length);
-			for (int i = 0; i < chainClasses.length; i++) {
-				chain.add((TestExecutionListener) chainClasses[i].newInstance());
+			List<TestExecutionListener> chain = new ArrayList<>(chainClasses.length);
+			for (Class<?> clazz : chainClasses) {
+				chain.add((TestExecutionListener) clazz.getDeclaredConstructor().newInstance());
 			}
 			return chain;
 		} catch (Exception ex) {
@@ -73,43 +73,23 @@ public abstract class TestExecutionListenerChain implements TestExecutionListene
 	}
 
 	public void beforeTestClass(final TestContext testContext) throws Exception {
-		forwards(new Call() {
-			public void call(TestExecutionListener listener) throws Exception {
-				listener.beforeTestClass(testContext);
-			}
-		});
+		forwards(listener -> listener.beforeTestClass(testContext));
 	}
 
 	public void prepareTestInstance(final TestContext testContext) throws Exception {
-		forwards(new Call() {
-			public void call(TestExecutionListener listener) throws Exception {
-				listener.prepareTestInstance(testContext);
-			}
-		});
+		forwards(listener -> listener.prepareTestInstance(testContext));
 	}
 
 	public void beforeTestMethod(final TestContext testContext) throws Exception {
-		forwards(new Call() {
-			public void call(TestExecutionListener listener) throws Exception {
-				listener.beforeTestMethod(testContext);
-			}
-		});
+		forwards(listener -> listener.beforeTestMethod(testContext));
 	}
 
 	public void afterTestMethod(final TestContext testContext) throws Exception {
-		backwards(new Call() {
-			public void call(TestExecutionListener listener) throws Exception {
-				listener.afterTestMethod(testContext);
-			}
-		});
+		backwards(listener -> listener.afterTestMethod(testContext));
 	}
 
 	public void afterTestClass(final TestContext testContext) throws Exception {
-		backwards(new Call() {
-			public void call(TestExecutionListener listener) throws Exception {
-				listener.afterTestClass(testContext);
-			}
-		});
+		backwards(listener -> listener.afterTestClass(testContext));
 	}
 
 	private void forwards(Call call) throws Exception {
@@ -137,8 +117,8 @@ public abstract class TestExecutionListenerChain implements TestExecutionListene
 		}
 	}
 
-	private static interface Call {
-		public void call(TestExecutionListener listener) throws Exception;
+	private interface Call {
+		void call(TestExecutionListener listener) throws Exception;
 	}
 
 }

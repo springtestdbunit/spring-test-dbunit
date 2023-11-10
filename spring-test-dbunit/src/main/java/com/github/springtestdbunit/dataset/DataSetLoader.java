@@ -37,6 +37,6 @@ public interface DataSetLoader {
 	 * @return a {@link IDataSet dataset} or <code>null</code>
 	 * @throws Exception If the {@link IDataSet dataset} cannot be loaded
 	 */
-	public IDataSet loadDataSet(Class<?> testClass, String location) throws Exception;
+	IDataSet loadDataSet(Class<?> testClass, String location) throws Exception;
 
 }

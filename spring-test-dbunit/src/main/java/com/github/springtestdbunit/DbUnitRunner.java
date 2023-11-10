@@ -18,21 +18,12 @@ package com.github.springtestdbunit;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.CompositeDataSet;
-import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.filter.IColumnFilter;
@@ -129,14 +120,14 @@ public class DbUnitRunner {
 
 	private void verifyExpected(DbUnitTestContext testContext, DatabaseConnections connections,
 			DataSetModifier modifier, ExpectedDatabase annotation)
-					throws Exception, DataSetException, SQLException, DatabaseUnitException {
+					throws Exception {
 		String query = annotation.query();
 		String table = annotation.table();
 		IDataSet expectedDataSet = loadDataset(testContext, annotation.value(), modifier);
 		IDatabaseConnection connection = connections.get(annotation.connection());
 		if (expectedDataSet != null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Veriftying @DatabaseTest expectation using " + annotation.value());
+				logger.debug("Verifying @DatabaseTest expectation using " + annotation.value());
 			}
 			DatabaseAssertion assertion = annotation.assertionMode().getDatabaseAssertion();
 			List<IColumnFilter> columnFilters = getColumnFilters(annotation);
@@ -176,7 +167,7 @@ public class DbUnitRunner {
 			if (!datasets.isEmpty()) {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Executing " + (isSetup ? "Setup" : "Teardown") + " of @DatabaseTest using "
-							+ operation + " on " + datasets.toString());
+							+ operation + " on " + datasets);
 				}
 				IDatabaseConnection connection = connections.get(annotation.getConnection());
 				IDataSet dataSet = new CompositeDataSet(datasets.toArray(new IDataSet[datasets.size()]));
@@ -187,7 +178,7 @@ public class DbUnitRunner {
 
 	private List<IDataSet> loadDataSets(DbUnitTestContext testContext, AnnotationAttributes annotation)
 			throws Exception {
-		List<IDataSet> datasets = new ArrayList<IDataSet>();
+		List<IDataSet> datasets = new ArrayList<>();
 		for (String dataSetLocation : annotation.getValue()) {
 			datasets.add(loadDataset(testContext, dataSetLocation, DataSetModifier.NONE));
 		}
@@ -217,9 +208,9 @@ public class DbUnitRunner {
 
 	private List<IColumnFilter> getColumnFilters(ExpectedDatabase annotation) throws Exception {
 		Class<? extends IColumnFilter>[] columnFilterClasses = annotation.columnFilters();
-		List<IColumnFilter> columnFilters = new LinkedList<IColumnFilter>();
+		List<IColumnFilter> columnFilters = new LinkedList<>();
 		for (Class<? extends IColumnFilter> columnFilterClass : columnFilterClasses) {
-			columnFilters.add(columnFilterClass.newInstance());
+			columnFilters.add(columnFilterClass.getDeclaredConstructor().newInstance());
 		}
 		return columnFilters;
 	}
@@ -262,7 +253,7 @@ public class DbUnitRunner {
 		}
 
 		public static <T extends Annotation> Collection<AnnotationAttributes> get(Annotations<T> annotations) {
-			List<AnnotationAttributes> annotationAttributes = new ArrayList<AnnotationAttributes>();
+			List<AnnotationAttributes> annotationAttributes = new ArrayList<>();
 			for (T annotation : annotations) {
 				annotationAttributes.add(new AnnotationAttributes(annotation));
 			}
@@ -282,7 +273,7 @@ public class DbUnitRunner {
 		public Annotations(DbUnitTestContext context, Class<? extends Annotation> container, Class<T> annotation) {
 			this.classAnnotations = getAnnotations(context.getTestClass(), container, annotation);
 			this.methodAnnotations = getAnnotations(context.getTestMethod(), container, annotation);
-			List<T> allAnnotations = new ArrayList<T>(this.classAnnotations.size() + this.methodAnnotations.size());
+			List<T> allAnnotations = new ArrayList<>(this.classAnnotations.size() + this.methodAnnotations.size());
 			allAnnotations.addAll(this.classAnnotations);
 			allAnnotations.addAll(this.methodAnnotations);
 			this.allAnnotations = Collections.unmodifiableList(allAnnotations);
@@ -290,7 +281,7 @@ public class DbUnitRunner {
 
 		private List<T> getAnnotations(AnnotatedElement element, Class<? extends Annotation> container,
 				Class<T> annotation) {
-			List<T> annotations = new ArrayList<T>();
+			List<T> annotations = new ArrayList<>();
 			addAnnotationToList(annotations, AnnotationUtils.findAnnotation(element, annotation));
 			addRepeatableAnnotationsToList(annotations, AnnotationUtils.findAnnotation(element, container));
 			return Collections.unmodifiableList(annotations);
@@ -306,9 +297,7 @@ public class DbUnitRunner {
 		private void addRepeatableAnnotationsToList(List<T> annotations, Annotation container) {
 			if (container != null) {
 				T[] value = (T[]) AnnotationUtils.getValue(container);
-				for (T annotation : value) {
-					annotations.add(annotation);
-				}
+				annotations.addAll(Arrays.asList(value));
 			}
 		}
 
@@ -326,7 +315,7 @@ public class DbUnitRunner {
 
 		private static <T extends Annotation> Annotations<T> get(DbUnitTestContext testContext,
 				Class<? extends Annotation> container, Class<T> annotation) {
-			return new Annotations<T>(testContext, container, annotation);
+			return new Annotations<>(testContext, container, annotation);
 		}
 
 	}

@@ -47,7 +47,7 @@ import com.github.springtestdbunit.testutils.ExtendedTestContextManager;
  */
 public class DbUnitTestExecutionListenerPrepareTest {
 
-	private static ThreadLocal<ApplicationContext> applicationContextThreadLocal = new ThreadLocal<ApplicationContext>();
+	private final static ThreadLocal<ApplicationContext> applicationContextThreadLocal = new ThreadLocal<>();
 
 	private ApplicationContext applicationContext;
 
@@ -128,7 +128,7 @@ public class DbUnitTestExecutionListenerPrepareTest {
 
 	@Test
 	public void shouldFailIfDatabaseConnectionOfWrongTypeIsFound() throws Exception {
-		addBean("dbUnitDatabaseConnection", new Integer(0));
+		addBean("dbUnitDatabaseConnection", 0);
 		ExtendedTestContextManager testContextManager = new ExtendedTestContextManager(NoDbUnitConfiguration.class);
 		try {
 			testContextManager.prepareTestInstance();
@@ -181,13 +181,13 @@ public class DbUnitTestExecutionListenerPrepareTest {
 			return new String[] {"mock"};
 		}
 
-		public ApplicationContext loadContext(String... locations) throws Exception {
+		public ApplicationContext loadContext(String... locations) {
 			return applicationContextThreadLocal.get();
 		}
 	}
 
 	public abstract static class AbstractCustomDataSetLoader implements DataSetLoader {
-		public IDataSet loadDataSet(Class<?> testClass, String location) throws Exception {
+		public IDataSet loadDataSet(Class<?> testClass, String location) {
 			return null;
 		}
 	}

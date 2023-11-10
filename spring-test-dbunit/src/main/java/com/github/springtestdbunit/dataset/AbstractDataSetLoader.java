@@ -47,7 +47,7 @@ public abstract class AbstractDataSetLoader implements DataSetLoader {
 	 */
 	public IDataSet loadDataSet(Class<?> testClass, String location) throws Exception {
 		ResourceLoader resourceLoader = getResourceLoader(testClass);
-		String[] resourceLocations = getResourceLocations(testClass, location);
+		String[] resourceLocations = getResourceLocations(location);
 		for (String resourceLocation : resourceLocations) {
 			Resource resource = resourceLoader.getResource(resourceLocation);
 			if (resource.exists()) {
@@ -69,11 +69,10 @@ public abstract class AbstractDataSetLoader implements DataSetLoader {
 	/**
 	 * Get the resource locations that should be considered when attempting to load a dataset from the specified
 	 * location.
-	 * @param testClass The class under test
 	 * @param location The source location
 	 * @return an array of potential resource locations
 	 */
-	protected String[] getResourceLocations(Class<?> testClass, String location) {
+	protected String[] getResourceLocations(String location) {
 		return new String[] { location };
 	}
 

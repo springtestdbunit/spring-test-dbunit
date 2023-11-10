@@ -83,7 +83,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 	private final static DbUnitRunner runner = new DbUnitRunner();
 
 	@Override
-	public void prepareTestInstance(TestContext testContext) throws Exception {
+	public void prepareTestInstance(TestContext testContext) {
 		prepareTestInstance(new DbUnitTestContextAdapter(testContext));
 	}
 
@@ -231,7 +231,7 @@ public class DbUnitTestExecutionListener extends AbstractTestExecutionListener {
 			return (DataSetLoader) getAttribute(DATA_SET_LOADER_ATTRIBUTE);
 		}
 
-		public DatabaseOperationLookup getDatbaseOperationLookup() {
+		public DatabaseOperationLookup getDatabaseOperationLookup() {
 			return (DatabaseOperationLookup) getAttribute(DATABASE_OPERATION_LOOKUP_ATTRIBUTE);
 		}
 

@@ -53,7 +53,7 @@ public class CleanInsertSetupOnMethodTest {
 	@Test
 	@DatabaseSetup(type = DatabaseOperation.CLEAN_INSERT, value = { "/META-INF/db/insert.xml",
 			"/META-INF/db/insert_Other.xml" })
-	public void testSeveralSetupFiles() throws Exception {
+	public void testSeveralSetupFiles() {
 		this.entityAssert.assertValues("fromDbUnit");
 		// OtherSampleEntity is populated using import.sql imitating dirty state of the table
 		this.otherEntityAssert.assertValues("fromDbUnit");

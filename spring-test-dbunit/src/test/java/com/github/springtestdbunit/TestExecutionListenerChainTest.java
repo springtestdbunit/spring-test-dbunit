@@ -62,18 +62,18 @@ public class TestExecutionListenerChainTest {
 			@Override
 			protected List<TestExecutionListener> createChain() {
 				return Arrays.asList(TestExecutionListenerChainTest.this.l1, TestExecutionListenerChainTest.this.l2);
-			};
+			}
 		};
 		this.testContext = mock(TestContext.class);
 	}
 
 	@Test
-	public void shouldCreateChainFromClasses() throws Exception {
+	public void shouldCreateChainFromClasses() {
 		this.chain = new TestExecutionListenerChain() {
 			@Override
 			protected Class<?>[] getChain() {
 				return new Class<?>[] { TestListener1.class, TestListener2.class };
-			};
+			}
 		};
 		List<TestExecutionListener> list = this.chain.createChain();
 		assertEquals(2, list.size());
@@ -82,13 +82,13 @@ public class TestExecutionListenerChainTest {
 	}
 
 	@Test
-	public void shouldNotCreateWithIllegalConstructor() throws Exception {
+	public void shouldNotCreateWithIllegalConstructor() {
 		try {
 			this.chain = new TestExecutionListenerChain() {
 				@Override
 				protected Class<?>[] getChain() {
 					return new Class<?>[] { InvalidTestListener.class };
-				};
+				}
 			};
 			fail();
 		} catch (IllegalStateException ex) {

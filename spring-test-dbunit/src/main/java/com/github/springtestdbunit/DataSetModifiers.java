@@ -32,7 +32,7 @@ import com.github.springtestdbunit.dataset.DataSetModifier;
  */
 class DataSetModifiers implements DataSetModifier {
 
-	private final List<DataSetModifier> modifiers = new ArrayList<DataSetModifier>();
+	private final List<DataSetModifier> modifiers = new ArrayList<>();
 
 	public IDataSet modify(IDataSet dataSet) {
 		for (DataSetModifier modifier : this.modifiers) {

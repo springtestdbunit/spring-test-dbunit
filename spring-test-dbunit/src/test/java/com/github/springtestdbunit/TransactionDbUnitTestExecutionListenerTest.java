@@ -29,7 +29,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 public class TransactionDbUnitTestExecutionListenerTest {
 
 	@Test
-	public void shouldRunTransactionsBeforeDbUnit() throws Exception {
+	public void shouldRunTransactionsBeforeDbUnit() {
 		Class<?>[] chain = new TransactionDbUnitTestExecutionListener().getChain();
 		assertEquals(TransactionalTestExecutionListener.class, chain[0]);
 		assertEquals(DbUnitTestExecutionListener.class, chain[1]);

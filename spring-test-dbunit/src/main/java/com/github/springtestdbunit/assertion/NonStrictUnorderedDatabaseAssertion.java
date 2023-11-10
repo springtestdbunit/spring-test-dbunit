@@ -33,7 +33,7 @@ import org.dbunit.dataset.filter.IColumnFilter;
  * @author Sunitha Rajarathnam
  * @author Mehmet Aslan
  */
-class NonStrictUnorderedDatabaseAssertion extends NonStrictDatabaseAssertion {
+public class NonStrictUnorderedDatabaseAssertion extends NonStrictDatabaseAssertion {
 
 	@Override
 	public void assertEquals(ITable expectedSortedTable, ITable actualSortedTable, List<IColumnFilter> columnFilters)

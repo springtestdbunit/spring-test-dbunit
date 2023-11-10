@@ -45,7 +45,7 @@ public class EntityAssert implements InitializingBean {
 
 	private CriteriaQuery<SampleEntity> criteriaQuery;
 
-	public void afterPropertiesSet() throws Exception {
+	public void afterPropertiesSet() {
 		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
 		this.criteriaQuery = cb.createQuery(SampleEntity.class);
 		Root<SampleEntity> from = this.criteriaQuery.from(SampleEntity.class);
@@ -53,8 +53,8 @@ public class EntityAssert implements InitializingBean {
 	}
 
 	public void assertValues(String... values) {
-		SortedSet<String> expected = new TreeSet<String>(Arrays.asList(values));
-		SortedSet<String> actual = new TreeSet<String>();
+		SortedSet<String> expected = new TreeSet<>(Arrays.asList(values));
+		SortedSet<String> actual = new TreeSet<>();
 		TypedQuery<SampleEntity> query = this.entityManager.createQuery(this.criteriaQuery);
 		List<SampleEntity> results = query.getResultList();
 		for (SampleEntity sampleEntity : results) {

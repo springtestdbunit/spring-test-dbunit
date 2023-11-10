@@ -29,13 +29,7 @@ public interface DataSetModifier {
 	/**
 	 * No-op {@link DataSetModifier}.
 	 */
-	public static final DataSetModifier NONE = new DataSetModifier() {
-
-		public IDataSet modify(IDataSet dataSet) {
-			return dataSet;
-		}
-
-	};
+	DataSetModifier NONE = dataSet -> dataSet;
 
 	/**
 	 * Modify the given {@link IDataSet}, for example by wrapping it with a {@link ReplacementDataSet}.

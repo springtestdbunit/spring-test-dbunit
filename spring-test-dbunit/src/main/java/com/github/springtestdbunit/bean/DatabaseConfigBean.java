@@ -40,13 +40,13 @@ public class DatabaseConfigBean {
 	private static final Map<String, ConfigProperty> CONFIG_PROPERTIES;
 
 	static {
-		CONFIG_PROPERTIES = new HashMap<String, ConfigProperty>();
+		CONFIG_PROPERTIES = new HashMap<>();
 		for (ConfigProperty configProperty : DatabaseConfig.ALL_PROPERTIES) {
 			CONFIG_PROPERTIES.put(configProperty.getProperty(), configProperty);
 		}
 	}
 
-	private DatabaseConfig databaseConfig = new DatabaseConfig();
+	private final DatabaseConfig databaseConfig = new DatabaseConfig();
 
 	/**
 	 * Gets the statement factory database config property.

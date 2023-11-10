@@ -48,7 +48,7 @@ public @interface DbUnitConfiguration {
 
 	/**
 	 * Returns the names of the spring beans which will be used to access {@link IDatabaseConnection
-	 * IDatabaseConnections}. The referenced beans can either be a instance of {@link IDatabaseConnection} or a
+	 * IDatabaseConnections}. The referenced beans can either be an instance of {@link IDatabaseConnection} or a
 	 * {@link DataSource}.
 	 * @return the bean name of the database connection
 	 */
@@ -69,7 +69,7 @@ public @interface DbUnitConfiguration {
 	String dataSetLoaderBean() default "";
 
 	/**
-	 * Returns the class that will be used to lookup DBUnit databse operations. The specific class must implement
+	 * Returns the class that will be used to lookup DBUnit database operations. The specific class must implement
 	 * {@link DatabaseOperationLookup} and must have a default constructor.
 	 * @return the database operation lookup
 	 */

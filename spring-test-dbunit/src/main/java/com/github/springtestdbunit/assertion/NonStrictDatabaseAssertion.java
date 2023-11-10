@@ -38,7 +38,7 @@ import org.dbunit.dataset.filter.IColumnFilter;
  * @author Mario Zagar
  * @author Sunitha Rajarathnam
  */
-class NonStrictDatabaseAssertion implements DatabaseAssertion {
+public class NonStrictDatabaseAssertion implements DatabaseAssertion {
 
 	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet, List<IColumnFilter> columnFilters)
 			throws DatabaseUnitException {
@@ -62,7 +62,7 @@ class NonStrictDatabaseAssertion implements DatabaseAssertion {
 		if (columnFilters.size() == 0) {
 			return getColumnsToIgnore(expectedMetaData, actualMetaData);
 		}
-		Set<String> ignoredColumns = new LinkedHashSet<String>();
+		Set<String> ignoredColumns = new LinkedHashSet<>();
 		for (IColumnFilter filter : columnFilters) {
 			FilteredTableMetaData filteredExpectedMetaData = new FilteredTableMetaData(expectedMetaData, filter);
 			ignoredColumns.addAll(getColumnsToIgnore(filteredExpectedMetaData, actualMetaData));
@@ -73,7 +73,7 @@ class NonStrictDatabaseAssertion implements DatabaseAssertion {
 	protected Set<String> getColumnsToIgnore(ITableMetaData expectedMetaData, ITableMetaData actualMetaData)
 			throws DataSetException {
 		Column[] notSpecifiedInExpected = Columns.getColumnDiff(expectedMetaData, actualMetaData).getActual();
-		Set<String> result = new LinkedHashSet<String>();
+		Set<String> result = new LinkedHashSet<>();
 		for (Column column : notSpecifiedInExpected) {
 			result.add(column.getColumnName());
 		}

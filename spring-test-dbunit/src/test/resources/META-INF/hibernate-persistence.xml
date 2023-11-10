@@ -11,7 +11,6 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" />
 		</properties>
 	</persistence-unit>
 </persistence>

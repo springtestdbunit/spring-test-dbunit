@@ -29,7 +29,7 @@ import org.springframework.test.context.TestContextManager;
  */
 public class ExtendedTestContextManager extends TestContextManager {
 
-	private Object testInstance;
+	private final Object testInstance;
 
 	public ExtendedTestContextManager(Class<?> testClass) throws Exception {
 		super(testClass);

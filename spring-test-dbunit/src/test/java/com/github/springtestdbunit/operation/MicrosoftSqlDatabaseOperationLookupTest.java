@@ -31,7 +31,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 public class MicrosoftSqlDatabaseOperationLookupTest {
 
 	@Test
-	public void shouldLookup() throws Exception {
+	public void shouldLookup() {
 		DefaultDatabaseOperationLookup lookup = new MicrosoftSqlDatabaseOperationLookup();
 		assertSame(org.dbunit.operation.DatabaseOperation.UPDATE, lookup.get(DatabaseOperation.UPDATE));
 		assertSame(InsertIdentityOperation.INSERT, lookup.get(DatabaseOperation.INSERT));

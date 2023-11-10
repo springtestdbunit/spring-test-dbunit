@@ -10,7 +10,7 @@ import org.springframework.util.Assert;
 
 /**
  * A {@link DataSetLoader data set loader} that uses a {@link ReplacementDataSet} to replace specific objects or
- * sub-strings. By default will replace "[null]" with <code>null</code>.
+ * sub-strings. By default, will replace "[null]" with <code>null</code>.
  *
  * @author Stijn Van Bael
  * @author Phillip Webb
@@ -66,7 +66,7 @@ public class ReplacementDataSetLoader implements DataSetLoader {
 	}
 
 	private <K, V> Map<K, V> unmodifiableMap(Map<? extends K, ? extends V> map) {
-		Map<K, V> result = new LinkedHashMap<K, V>();
+		Map<K, V> result = new LinkedHashMap<>();
 		if (map != null) {
 			result.putAll(map);
 		}
@@ -75,9 +75,8 @@ public class ReplacementDataSetLoader implements DataSetLoader {
 
 	public IDataSet loadDataSet(Class<?> testClass, String location) throws Exception {
 		IDataSet dataSet = this.dataSetLoader.loadDataSet(testClass, location);
-		ReplacementDataSet replacementDataSet = new ReplacementDataSet(dataSet, this.objectReplacements,
+		return new ReplacementDataSet(dataSet, this.objectReplacements,
 				this.subStringReplacements);
-		return replacementDataSet;
 	}
 
 }

@@ -47,7 +47,7 @@ public interface DbUnitTestContext {
 	 * Returns the {@link DatabaseOperationLookup} that should be used to lookup database operations.
 	 * @return the database operation lookup
 	 */
-	DatabaseOperationLookup getDatbaseOperationLookup();
+	DatabaseOperationLookup getDatabaseOperationLookup();
 
 	/**
 	 * Returns the class that is under test.

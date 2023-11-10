@@ -48,7 +48,7 @@ public class DeleteAllSetupOnMethodTest {
 
 	@Test
 	@DatabaseSetup(type = DatabaseOperation.DELETE_ALL)
-	public void testAllTables() throws Exception {
+	public void testAllTables() {
 		this.entityAssert.assertValues();
 	}
 

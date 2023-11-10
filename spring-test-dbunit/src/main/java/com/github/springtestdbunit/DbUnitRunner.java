@@ -217,7 +217,7 @@ public class DbUnitRunner {
 
 	private org.dbunit.operation.DatabaseOperation getDbUnitDatabaseOperation(DbUnitTestContext testContext,
 			DatabaseOperation operation) {
-		org.dbunit.operation.DatabaseOperation databaseOperation = testContext.getDatbaseOperationLookup()
+		org.dbunit.operation.DatabaseOperation databaseOperation = testContext.getDatabaseOperationLookup()
 				.get(operation);
 		Assert.state(databaseOperation != null, "The database operation " + operation + " is not supported");
 		return databaseOperation;

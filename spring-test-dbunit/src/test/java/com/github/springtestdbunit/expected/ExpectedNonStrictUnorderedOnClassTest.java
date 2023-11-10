@@ -41,8 +41,7 @@ public class ExpectedNonStrictUnorderedOnClassTest {
 	private EntityAssert entityAssert;
 
 	@Test
-	public void shouldNotFailEvenThoughExpectedTableDoesNotSpecifyAllColumnsAndDoesNotMatchColumnOrders()
-			throws Exception {
+	public void shouldNotFailEvenThoughExpectedTableDoesNotSpecifyAllColumnsAndDoesNotMatchColumnOrders() {
 		this.entityAssert.assertValues("existing1", "existing2");
 	}
 

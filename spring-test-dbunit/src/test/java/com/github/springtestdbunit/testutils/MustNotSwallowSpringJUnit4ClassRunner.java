@@ -16,7 +16,7 @@
 
 package com.github.springtestdbunit.testutils;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aopalliance.intercept.MethodInterceptor;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.InitializationError;
@@ -39,17 +39,15 @@ public class MustNotSwallowSpringJUnit4ClassRunner extends SpringJUnit4ClassRunn
 	public void run(RunNotifier notifier) {
 		AdvisedSupport config = new AdvisedSupport();
 		config.setTarget(notifier);
-		config.addAdvice(new org.aopalliance.intercept.MethodInterceptor() {
-			public Object invoke(MethodInvocation invocation) throws Throwable {
-				if ("fireTestFailure".equals(invocation.getMethod().getName())) {
-					Failure failure = (Failure) invocation.getArguments()[0];
-					if (failure.getException() instanceof NotSwallowedException) {
-						// We expect this
-						return null;
-					}
+		config.addAdvice((MethodInterceptor) invocation -> {
+			if ("fireTestFailure".equals(invocation.getMethod().getName())) {
+				Failure failure = (Failure) invocation.getArguments()[0];
+				if (failure.getException() instanceof NotSwallowedException) {
+					// We expect this
+					return null;
 				}
-				return invocation.proceed();
 			}
+			return invocation.proceed();
 		});
 		DefaultAopProxyFactory aopProxyFactory = new DefaultAopProxyFactory();
 		RunNotifier runNotifierProxy = (RunNotifier) aopProxyFactory.createAopProxy(config).getProxy();

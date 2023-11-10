@@ -30,7 +30,7 @@ import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 public class MustNoSwallowTestExecutionListener extends TransactionDbUnitTestExecutionListener {
 
 	@Override
-	public void afterTestMethod(TestContext testContext) throws Exception {
+	public void afterTestMethod(TestContext testContext) {
 		Assert.assertTrue(testContext.getTestException() instanceof NotSwallowedException);
 		try {
 			super.afterTestMethod(testContext);

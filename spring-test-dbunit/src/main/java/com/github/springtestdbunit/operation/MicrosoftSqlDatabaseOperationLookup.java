@@ -30,10 +30,10 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
  */
 public class MicrosoftSqlDatabaseOperationLookup extends DefaultDatabaseOperationLookup {
 
-	private static Map<DatabaseOperation, org.dbunit.operation.DatabaseOperation> MSSQL_LOOKUP;
+	private final static Map<DatabaseOperation, org.dbunit.operation.DatabaseOperation> MSSQL_LOOKUP;
 
 	static {
-		MSSQL_LOOKUP = new HashMap<DatabaseOperation, org.dbunit.operation.DatabaseOperation>();
+		MSSQL_LOOKUP = new HashMap<>();
 		MSSQL_LOOKUP.put(DatabaseOperation.INSERT, InsertIdentityOperation.INSERT);
 		MSSQL_LOOKUP.put(DatabaseOperation.REFRESH, InsertIdentityOperation.REFRESH);
 		MSSQL_LOOKUP.put(DatabaseOperation.CLEAN_INSERT, InsertIdentityOperation.CLEAN_INSERT);

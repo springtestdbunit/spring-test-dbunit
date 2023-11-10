@@ -35,7 +35,7 @@ public class HibernateImportTest {
 	private EntityAssert entityAssert;
 
 	@Test
-	public void shouldHaveUpdatedData() throws Exception {
+	public void shouldHaveUpdatedData() {
 		this.entityAssert.assertValues("existing1", "existing2");
 	}
 

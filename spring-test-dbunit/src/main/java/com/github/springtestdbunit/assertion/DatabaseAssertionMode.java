@@ -60,7 +60,7 @@ public enum DatabaseAssertionMode {
 	 */
 	NON_STRICT_UNORDERED(new NonStrictUnorderedDatabaseAssertion());
 
-	private DatabaseAssertion databaseAssertion;
+	private final DatabaseAssertion databaseAssertion;
 
 	private DatabaseAssertionMode(DatabaseAssertion databaseAssertion) {
 		this.databaseAssertion = databaseAssertion;

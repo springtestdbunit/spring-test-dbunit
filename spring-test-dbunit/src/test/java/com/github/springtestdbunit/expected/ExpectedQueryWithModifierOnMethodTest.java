@@ -42,7 +42,7 @@ public class ExpectedQueryWithModifierOnMethodTest {
 	public void test() throws Exception {
 	}
 
-	private class InnerModifier extends ReplacementDataSetModifier {
+	private static class InnerModifier extends ReplacementDataSetModifier {
 
 		@Override
 		protected void addReplacements(ReplacementDataSet dataSet) {

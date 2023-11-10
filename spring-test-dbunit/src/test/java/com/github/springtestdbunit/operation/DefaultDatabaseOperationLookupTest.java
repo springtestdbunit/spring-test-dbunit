@@ -30,7 +30,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 public class DefaultDatabaseOperationLookupTest {
 
 	@Test
-	public void shouldLookup() throws Exception {
+	public void shouldLookup() {
 		DefaultDatabaseOperationLookup lookup = new DefaultDatabaseOperationLookup();
 		assertSame(org.dbunit.operation.DatabaseOperation.UPDATE, lookup.get(DatabaseOperation.UPDATE));
 		assertSame(org.dbunit.operation.DatabaseOperation.INSERT, lookup.get(DatabaseOperation.INSERT));

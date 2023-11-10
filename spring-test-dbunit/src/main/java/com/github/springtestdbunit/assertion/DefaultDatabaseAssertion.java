@@ -30,7 +30,7 @@ import org.dbunit.dataset.filter.IColumnFilter;
  * @author Mario Zagar
  * @author Sunitha Rajarathnam
  */
-class DefaultDatabaseAssertion implements DatabaseAssertion {
+public class DefaultDatabaseAssertion implements DatabaseAssertion {
 
 	public void assertEquals(IDataSet expectedDataSet, IDataSet actualDataSet, List<IColumnFilter> columnFilters)
 			throws DatabaseUnitException {

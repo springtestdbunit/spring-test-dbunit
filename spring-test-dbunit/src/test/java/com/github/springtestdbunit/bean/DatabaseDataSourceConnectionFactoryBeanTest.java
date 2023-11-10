@@ -99,12 +99,12 @@ public class DatabaseDataSourceConnectionFactoryBeanTest {
 	}
 
 	@Test
-	public void shouldBeSingleton() throws Exception {
+	public void shouldBeSingleton() {
 		assertTrue(this.factoryBean.isSingleton());
 	}
 
 	@Test
-	public void shouldBeCorrectClass() throws Exception {
+	public void shouldBeCorrectClass() {
 		assertEquals(DatabaseDataSourceConnection.class, this.factoryBean.getObjectType());
 	}
 

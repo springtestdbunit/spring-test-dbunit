@@ -43,7 +43,7 @@ public class MixedTearDownOnClassAndMethodTest {
 
 	@Test
 	@DatabaseTearDown(value = "/META-INF/db/insert2.xml", type = DatabaseOperation.INSERT)
-	public void testInsert() throws Exception {
+	public void testInsert() {
 		this.entityAssert.assertValues("existing1", "existing2");
 	}
 

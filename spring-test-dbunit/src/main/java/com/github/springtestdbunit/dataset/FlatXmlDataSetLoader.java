@@ -52,11 +52,8 @@ public class FlatXmlDataSetLoader extends AbstractDataSetLoader {
 	}
 
 	private IDataSet buildDataSetFromStream(FlatXmlDataSetBuilder builder, Resource resource) throws Exception {
-		InputStream inputStream = resource.getInputStream();
-		try {
+		try (InputStream inputStream = resource.getInputStream()) {
 			return builder.build(inputStream);
-		} finally {
-			inputStream.close();
 		}
 	}
 

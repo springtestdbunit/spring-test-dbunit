@@ -34,14 +34,14 @@ import com.github.springtestdbunit.entity.EntityAssert;
 @ContextConfiguration("/META-INF/dbunit-context.xml")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
 		TransactionDbUnitTestExecutionListener.class })
-@DatabaseSetup(type = DatabaseOperation.REFRESH, value = "/META-INF/db/refresh.xml")
 @Transactional
-public class RefereshSetupOnClassTest {
+public class RefreshSetupOnMethodTest {
 
 	@Autowired
 	private EntityAssert entityAssert;
 
 	@Test
+	@DatabaseSetup(type = DatabaseOperation.REFRESH, value = "/META-INF/db/refresh.xml")
 	public void test() throws Exception {
 		this.entityAssert.assertValues("existing2", "addedFromDbUnit", "replacedFromDbUnit");
 	}
